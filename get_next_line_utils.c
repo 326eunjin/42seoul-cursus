@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:42:35 by ejang             #+#    #+#             */
-/*   Updated: 2022/01/22 02:58:27 by ejang            ###   ########.fr       */
+/*   Updated: 2022/01/22 20:41:00 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	ft_strlcpy(ptr, s1, len1 + 1);
 	ft_strlcpy(ptr + len1, s2, len2 + 1);
+	// backup이 이전에 가리키던 메모리 해제 필요
 	return (ptr);
 }

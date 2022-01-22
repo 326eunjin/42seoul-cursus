@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:42:46 by ejang             #+#    #+#             */
-/*   Updated: 2022/01/22 03:29:10 by ejang            ###   ########.fr       */
+/*   Updated: 2022/01/22 21:02:27 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	char	*split_line(int line_loc, char **backup)
 	(*backup)[line_loc] = '\0';
 	if (!(ret = ft_strdup(*backup)))
 	{
-		free(*backup);
+		free(*backup);//앞에 이남꺼 프리해야하지 않나
 		*backup = 0;
 		return (NULL);
 	}
@@ -43,10 +43,10 @@ static	char	*split_line(int line_loc, char **backup)
 		free(*backup);
 		*backup = 0;
 		return (NULL);
-	}	
+	}
 	free(*backup);
 	*backup = tmp;
-	return (ret);
+	return (ret);//ret는 프리 안해줘도되나?
 }
 
 static	char	*rest(char **backup)
@@ -78,7 +78,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (((size = read(fd, tmp, BUFFER_SIZE)) > 0))
 	{
-		tmp[BUFFER_SIZE] = '\0';
+		tmp[size] = '\0';
 		backup[fd] = ft_strjoin(backup[fd], tmp);
 		if ((line_loc = is_new_line(backup[fd])) >= 0)
 			return (split_line(line_loc, &backup[fd]));

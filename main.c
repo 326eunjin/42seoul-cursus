@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	line = NULL;
-	fd = open(argv[1], O_RDONLY);
+	fd = open("test.txt", O_RDONLY);
 	//fd = 111;
 	while ((line = get_next_line(fd)) != NULL)
 	{
