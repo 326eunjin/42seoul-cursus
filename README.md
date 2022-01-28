@@ -18,7 +18,7 @@ read from a file descriptor."*
     - 파일 디스크립터 테이블
     - 각 프로세스마다 각자의 파일 디스크립터 테이블을 가지고 있음
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a5009e0f-56c8-41db-905a-d72d168a83ce/Untitled.png)
+   ![image](https://user-images.githubusercontent.com/50578785/151483379-bce97640-d767-4498-8c91-f20f03aa2999.png)
     
 - read()
     - [https://badayak.com/4486](https://badayak.com/4486)
