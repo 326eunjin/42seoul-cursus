@@ -71,7 +71,7 @@ read from a file descriptor."*
 
 - 과제 분석
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/473a6573-26fc-4fd2-941a-7ddd2452e9a9/Untitled.png)
+    ![image](https://user-images.githubusercontent.com/50578785/151483438-c2fdca83-a715-4584-9c1e-fa51a02b6e5d.png)
     
     - 반환 값 : 읽은 문장/ 에러나 읽을게 없을 때 : NULL
     - 
