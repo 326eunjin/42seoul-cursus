@@ -6,13 +6,13 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:17:08 by ejang             #+#    #+#             */
-/*   Updated: 2022/02/22 23:10:24 by ejang            ###   ########.fr       */
+/*   Updated: 2022/02/23 00:57:37 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_char(int c)
+int	ft_print_char(char c)
 {
 	write(1, &c, 1);
 	return (1);
@@ -33,8 +33,10 @@ static int	print_format(char ch, va_list ap)
 		len = ft_print_nbr(va_arg(ap, int));
 	else if (ch == 'u')
 		len = ft_print_unnbr(va_arg(ap, unsigned int));
-	else if (ch == 'x' || ch == 'X')
-		len = ft_print_hex2(va_arg(ap, unsigned int), ch);
+	else if (ch == 'x')
+		len = ft_print_hex_lower2(va_arg(ap, unsigned int));
+	else if (ch == 'X')
+		len = ft_print_hex_upper2(va_arg(ap, unsigned int));
 	else if (ch == '%')
 	{
 		write(1, "%", 1);
