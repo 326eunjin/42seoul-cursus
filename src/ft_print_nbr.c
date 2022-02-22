@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 17:15:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/02/22 23:09:51 by ejang            ###   ########.fr       */
+/*   Created: 2022/02/22 18:39:52 by ejang             #+#    #+#             */
+/*   Updated: 2022/02/22 23:10:04 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include "../libft/libft.h"
+int	ft_print_nbr(int nbr)
+{
+	int		len;
+	char	*num;
 
-int		ft_printf(const char *str, ...);
-int		ft_print_str(char *str);
-int		ft_print_nbr(int nbr);
-int		ft_print_unnbr(unsigned int nbr);
-int		ft_print_pointer(unsigned long long pointer);
-int		ft_print_hex2(unsigned int nbr, char ch);
-
-#endif
+	len = 0;
+	num = ft_itoa(nbr);
+	len = ft_print_str(num);
+	free(num);
+	return (len);
+}
