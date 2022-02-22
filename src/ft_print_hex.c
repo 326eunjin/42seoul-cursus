@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:39:52 by ejang             #+#    #+#             */
-/*   Updated: 2022/02/22 23:17:24 by ejang            ###   ########.fr       */
+/*   Updated: 2022/02/23 02:52:54 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ static	char	*ft_print_hex_upper1(unsigned int nbr)
 		temp = nbr % 16 ;
 		nbr = nbr / 16;
 		if (temp > 9)
-			tmp[size] = (temp + 87 - 'a' + 'A');
+			tmp[size] = (temp + 55);
 		else
-			tmp[size] = (temp + '0' - 'a' + 'A');
+			tmp[size] = (temp + '0');
 	}
 	return (tmp);
 }
