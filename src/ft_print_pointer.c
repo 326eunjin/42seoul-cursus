@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:51:26 by ejang             #+#    #+#             */
-/*   Updated: 2022/02/23 00:27:56 by ejang            ###   ########.fr       */
+/*   Updated: 2022/02/23 12:55:53 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static int	ft_sizeptr(unsigned long long nbr)
 int	ft_print_pointer(unsigned long long nbr)
 {
 	ft_putstr_fd("0x", 1);
-	if (nbr < 0)
-	{
-		nbr *= -1;
-		ft_putchar_fd('-', 1);
-	}
+	// if (nbr < 0)
+	// {
+	// 	nbr *= -1;
+	// 	ft_putchar_fd('-', 1);
+	// }
 	ft_putptr(nbr);
 	return (ft_sizeptr(nbr));
 }
