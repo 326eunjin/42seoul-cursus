@@ -18,7 +18,7 @@ int	ft_print_char(char c)
 	return (1);
 }
 
-static int	print_format(char ch, va_list *ap)
+static int	print_format(char ch, va_list ap)
 {
 	int	len;
 
