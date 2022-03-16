@@ -24,19 +24,19 @@ static int	print_format(char ch, va_list *ap)
 
 	len = 0;
 	if (ch == 'c')
-		len = ft_print_char(va_arg(*ap, int));
+		len = ft_print_char(va_arg(ap, int));
 	if (ch == 's')
-		len = ft_print_str(va_arg(*ap, char *));
+		len = ft_print_str(va_arg(ap, char *));
 	else if (ch == 'p')
-		len = ft_print_pointer(va_arg(*ap, unsigned long long));
+		len = ft_print_pointer(va_arg(ap, unsigned long long));
 	else if (ch == 'd' || ch == 'i')
-		len = ft_print_nbr(va_arg(*ap, int));
+		len = ft_print_nbr(va_arg(ap, int));
 	else if (ch == 'u')
-		len = ft_print_unnbr(va_arg(*ap, unsigned int));
+		len = ft_print_unnbr(va_arg(ap, unsigned int));
 	else if (ch == 'x')
-		len = ft_print_hex_lower2(va_arg(*ap, unsigned int));
+		len = ft_print_hex_lower2(va_arg(ap, unsigned int));
 	else if (ch == 'X')
-		len = ft_print_hex_upper2(va_arg(*ap, unsigned int));
+		len = ft_print_hex_upper2(va_arg(ap, unsigned int));
 	else if (ch == '%')
 	{
 		write(1, "%", 1);
@@ -70,7 +70,7 @@ int	ft_printf(const char *str, ...)
 		{
 			if (!is_valid_format(str[i + 1]))
 				return (-1);
-			count += print_format(str[i + 1], &ap);
+			count += print_format(str[i + 1], ap);
 			i += 2;
 		}
 		else
