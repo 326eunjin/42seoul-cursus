@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 21:26:43 by ejang             #+#    #+#             */
-/*   Updated: 2021/07/05 21:42:45 by ejang            ###   ########.fr       */
+/*   Updated: 2022/03/30 21:06:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**ptr;
 	int		count;
-	int		i;
 
-	i = 0;
 	if (!s)
 		return (0);
 	count = get_count(s, c);

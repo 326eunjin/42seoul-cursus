@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 20:08:42 by ejang             #+#    #+#             */
-/*   Updated: 2021/06/27 17:22:52 by ejang            ###   ########.fr       */
+/*   Updated: 2022/03/30 21:05:48 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	char		*dest;
 	const char	*source;
-	size_t		i;
 
 	if (!dst && !src)
 		return (NULL);
 	dest = (char *)dst;
 	source = (const char *)src;
-	i = 0;
 	if (dest <= source)
 	{
 		while (len--)
