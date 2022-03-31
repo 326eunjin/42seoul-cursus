@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 21:25:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/03/31 07:03:40 by ejang            ###   ########.fr       */
+/*   Updated: 2022/03/31 22:11:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,21 @@ void	path_exec(char	*argv, char	**envp)
 	if (!ft_strchr(cmd[0], '/'))
 	{
 		path = find_path(cmd[0], envp);
-		if (!path)
+		if ((access(path, F_OK) == -1) || (path == 0))
 		{
-			while (cmd[++i])
-				free(cmd[i]);
-			free(cmd);
-			perror("ERROR");
+			free(path);
+			free_split(cmd);
 			exit(127);
 		}
+		execve(path, cmd, envp);
+		free(path);
 	}
-	execve(path, cmd, envp);
-	while (cmd[i])
-		free(cmd[i++]);
-	free(cmd);
+	else
+	{
+		execve(path, cmd, envp);
+	}
+	i = 0;
+	free_split(cmd);
 }
 
 void	pipex(int infile, int outfile, char **argv, char **envp)
@@ -79,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 5)
 	{
 		infile = open(argv[1], O_RDONLY);
-		outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC);
+		outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (infile == -1 || outfile == -1)
 			error_handle();
 		pipex(infile, outfile, argv, envp);
