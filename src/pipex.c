@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 21:25:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/03/31 22:11:45 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/01 12:47:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	path_exec(char	*argv, char	**envp)
 {
 	char	*path;
-	int		i;
 	char	**cmd;
 
-	i = 0;
 	cmd = ft_split(argv, ' ');
 	path = cmd[0];
 	if (!ft_strchr(cmd[0], '/'))
@@ -37,7 +35,6 @@ void	path_exec(char	*argv, char	**envp)
 	{
 		execve(path, cmd, envp);
 	}
-	i = 0;
 	free_split(cmd);
 }
 
