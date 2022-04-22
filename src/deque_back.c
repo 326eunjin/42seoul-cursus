@@ -6,17 +6,18 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:36:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 06:12:07 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 15:21:12 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	push_back(t_deque *deque, int data)
+void	push_top(t_deque *deque, int data)
 {
 	t_node	*new;
 
 	new = (t_node *)malloc(sizeof(t_node));
+	new->tmp = 0;
 	new->data = data;
 	if (deque->size == 0)
 	{
@@ -36,12 +37,13 @@ void	push_back(t_deque *deque, int data)
 	}
 }
 
-int	pop_back(t_deque *deque)
+int	pop_top(t_deque *deque)
 {
 	t_node	*del;
 	int		ret;
 
 	ret = 0;
+	del->tmp = 0;
 	del = deque -> rear;
 	if (deque->size == 0)
 		print_pop_push_error(deque);
@@ -59,4 +61,20 @@ int	pop_back(t_deque *deque)
 	free(del);
 	deque->size--;
 	return (ret);
+}
+
+void	rotate(t_deque *deque)
+{
+	int	tmp;
+
+	tmp = pop_top(deque);
+	push_bottom(deque, tmp);
+}
+
+void	reverse_rotate(t_deque *deque)
+{
+	int	tmp;
+
+	tmp = pop_bottom(deque);
+	push_top(deque, tmp);
 }

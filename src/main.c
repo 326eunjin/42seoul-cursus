@@ -6,31 +6,30 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:11:04 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 06:16:57 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 16:14:10 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-// #include <stdio.h>
-// void printDQ(t_deque *DQ) // 기본 출력 문구 및 출력 위치 선정
+#include <stdio.h>
+void printDQ(t_deque *DQ) // 기본 출력 문구 및 출력 위치 선정
 
-// {
+{
 
-// t_node *temp = DQ->front;
+t_node *temp = DQ->rear;
+printf("---위---\n");
 
-// printf("\n DeQue : [");
+while(temp) {
 
-// while(temp) {
+printf("%3d\n", temp->data);
 
-// printf("%3d\n", temp->data);
+temp = temp->llink;
 
-// temp = temp->rlink;
+}
 
-// }
+printf("----아래---\n");
 
-// printf(" ]");
-
-// }
+}
 
 int	main(int argc, char **argv)
 {
@@ -38,7 +37,7 @@ int	main(int argc, char **argv)
 	t_deque	b;
 
 	if (argc < 2)
-		print_error();
+		exit(0);
 	init_stack(&a);
 	parse_argv(&a, argv);
 	if (is_dup(&a) == -1)
@@ -46,17 +45,14 @@ int	main(int argc, char **argv)
 		free_deque(&a);
 		print_error();
 	}
-	printf("no dup\n");
-	if (sort_check(&a) == 1)//정렬된 상태인지 확인 정렬되어있으면 1
+	if (sort_check(&a) == 1)
 	{
 		free_deque(&a);
 		return (0);
 	}
-	//sorting problem and index not changed;
+	printf("not sorted\n");
 	make_index(&a);
 	init_stack(&b);
-	if (a.size < 5)
-		sort_little(&a);//if size is 3 or 5 hand coding
 	push_swap(&a, &b);
 	printDQ(&a);
 	free_deque(&a);

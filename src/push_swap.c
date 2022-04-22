@@ -6,9 +6,16 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 06:03:48 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 06:04:07 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 15:37:36 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
+void	push_swap(t_deque *a, t_deque *b)
+{
+	if (a->size <= 5)
+		sort_little(a, b);
+//	do_push_swap(a, b);
+	
+}

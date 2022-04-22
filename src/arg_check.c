@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:02:10 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 06:10:38 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 06:32:49 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	parse_argv(t_deque *deque, char **argv)
 			num = ft_atoll(arr[j++]);
 			if (num > INT_MAX || num < INT_MIN)
 				print_error();
-			push_front(deque, (int)num);
+			push_bottom(deque, (int)num);
 		}
 		free_split(arr);
 	}

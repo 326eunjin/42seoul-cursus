@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 15:31:40 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 06:13:43 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 15:42:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	init_stack(t_deque *deque)
 	deque->size = 0;
 }
 
-void	push_front(t_deque *deque, int data)
+void	push_bottom(t_deque *deque, int data)
 {
 	t_node	*new;
 
 	new = (t_node *)malloc(sizeof(t_node));
+	new->tmp = 0;
 	new->data = data;
 	if (deque->size == 0)
 	{	
@@ -43,13 +44,14 @@ void	push_front(t_deque *deque, int data)
 	}
 }
 
-int	pop_front(t_deque *deque)
+int	pop_bottom(t_deque *deque)
 {
 	t_node	*del;
 	int		ret;
 
 	ret = 0;
 	del = deque->front;
+	del->tmp = 0;
 	if (deque->size == 0)
 		print_pop_push_error(deque);
 	ret = del->data;
@@ -68,23 +70,21 @@ int	pop_front(t_deque *deque)
 	return (ret);
 }
 
-void	swap(t_deque *a, t_deque *b, int status)
+void	swap(t_deque *deque)
 {
 	int	tmp1;
 	int	tmp2;
 
-	if (status == 0)
-	{
-		tmp1 = pop_back(a);
-		tmp2 = pop_back(a);
-		push_back(a, tmp1);
-		push_back(a, tmp2);
-	}
-	else
-	{
-		tmp1 = pop_back(b);
-		tmp2 = pop_back(b);
-		push_back(b, tmp1);
-		push_back(b, tmp2);
-	}
+	tmp1 = pop_top(deque);
+	tmp2 = pop_top(deque);
+	push_top(deque, tmp1);
+	push_top(deque, tmp2);
+}
+
+void	push(t_deque *deque1, t_deque *deque2)
+{
+	int	tmp;
+
+	tmp = pop_top(deque2);
+	push_top(deque1, tmp);
 }
