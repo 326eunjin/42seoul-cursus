@@ -1,39 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 12:11:04 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 22:14:28 by ejang            ###   ########.fr       */
+/*   Created: 2022/04/22 20:02:47 by ejang             #+#    #+#             */
+/*   Updated: 2022/04/22 22:14:32 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	main(int argc, char **argv)
+int	find_max(t_deque *b)
 {
-	t_deque	a;
-	t_deque	b;
+	int		ret;
+	t_node	*temp;
 
-	if (argc < 2)
-		exit(0);
-	init_deque(&a);
-	parse_argv(&a, argv);
-	if (is_dup(&a) == -1)
+	temp = b->rear;
+	ret = temp->data;
+	while (temp)
 	{
-		free_deque(&a);
-		print_error();
+		if (temp->data > ret)
+			ret = temp->data;
+		temp = temp->llink;
 	}
-	if (sort_check(&a) == 1)
+	return (ret);
+}
+
+int	find_loc(int max, t_deque *deque)
+{
+	int		ret;
+	t_node	*temp;
+
+	temp = deque->front;
+	ret = 0;
+	while (temp)
 	{
-		free_deque(&a);
+		ret++;
+		if (temp->data == max)
+			break ;
+		temp = temp->rlink;
+	}
+	if (ret <= deque->size / 2)
 		return (0);
-	}
-	make_index(&a);
-	init_deque(&b);
-	push_swap(&a, &b);
-	free_deque(&a);
-	free_deque(&b);
+	return (1);
 }

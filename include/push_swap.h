@@ -6,14 +6,12 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:11:39 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 19:30:22 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 22:14:39 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-#include <stdio.h>
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -74,8 +72,8 @@ int			find_loc(int max, t_deque *deque);
 void		move_big_top(t_deque *b);
 
 void		sort_little_three(t_deque *a);
-//void		sort_little_five(t_deque *a, t_deque *b);
-void		sort_little(t_deque *a);
+void		sort_little_five(t_deque *a, t_deque *b);
+void		sort_little(t_deque *a, t_deque *b);
 
 int			sort_check(t_deque *deque);
 void		make_index(t_deque	*deque);

@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:36:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 18:21:35 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 19:53:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	get_top_element(t_deque *deque)
 {
 	int	item;
 
-    if (deque->size == 0)
-		return 0;
-    item = deque->rear->data; 
-    return item; 
+	if (deque->size == 0)
+		return (0);
+	item = deque->rear->data;
+	return (item);
 }
