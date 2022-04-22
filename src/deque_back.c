@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:36:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 15:21:12 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 18:21:35 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	pop_top(t_deque *deque)
 	int		ret;
 
 	ret = 0;
-	del->tmp = 0;
 	del = deque -> rear;
+	del->tmp = 0;
 	if (deque->size == 0)
 		print_pop_push_error(deque);
 	ret = del->data;
@@ -77,4 +77,14 @@ void	reverse_rotate(t_deque *deque)
 
 	tmp = pop_bottom(deque);
 	push_top(deque, tmp);
+}
+
+int	get_top_element(t_deque *deque)
+{
+	int	item;
+
+    if (deque->size == 0)
+		return 0;
+    item = deque->rear->data; 
+    return item; 
 }

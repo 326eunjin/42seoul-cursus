@@ -6,13 +6,13 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 15:31:40 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 15:42:46 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 17:15:17 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-void	init_stack(t_deque *deque)
+#include <stdio.h>
+void	init_deque(t_deque *deque)
 {
 	deque->rear = NULL;
 	deque->front = NULL;
@@ -74,7 +74,6 @@ void	swap(t_deque *deque)
 {
 	int	tmp1;
 	int	tmp2;
-
 	tmp1 = pop_top(deque);
 	tmp2 = pop_top(deque);
 	push_top(deque, tmp1);

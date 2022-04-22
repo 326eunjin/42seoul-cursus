@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:02:10 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 06:32:49 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 19:29:25 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ long	long	ft_atoll(char *str)
 	ret = 0;
 	minus = 1;
 	i = 0;
-	while (str[i] >= 9 && str[i] <= 13 || str[i] == 32)
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{

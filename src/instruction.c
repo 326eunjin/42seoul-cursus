@@ -6,12 +6,12 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 06:50:52 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 15:43:01 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 16:51:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
+#include <stdio.h>
 void	ss(t_deque *a, t_deque *b)
 {
 	swap(a);
@@ -32,6 +32,7 @@ void	rrr(t_deque *a, t_deque *b)
 
 void	instruct(t_deque *a, t_deque *b, char *inst)
 {
+
 	if (ft_strcmp("sa", inst) == 0)
 		swap(a);
 	else if (ft_strcmp("sb", inst) == 0)

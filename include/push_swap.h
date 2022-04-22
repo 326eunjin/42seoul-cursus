@@ -6,12 +6,14 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:11:39 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 16:20:28 by ejang            ###   ########.fr       */
+/*   Updated: 2022/04/22 19:30:22 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+#include <stdio.h>
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -32,7 +34,7 @@ typedef struct s_deque
 {
 	t_node		*front;
 	t_node		*rear;
-	size_t		size;
+	int			size;
 }	t_deque;
 
 int			ft_strcmp(const char *s1, const char *s2);
@@ -45,8 +47,9 @@ void		push_top(t_deque *deque, int data);
 int			pop_top(t_deque *deque);
 void		rotate(t_deque *deque);
 void		reverse_rotate(t_deque *deque);
+int			get_top_element(t_deque *deque);
 
-void		init_stack(t_deque *deque);
+void		init_deque(t_deque *deque);
 void		push_bottom(t_deque *deque, int data);
 int			pop_bottom(t_deque *deque);
 void		swap(t_deque *deque);
@@ -63,10 +66,16 @@ void		rrr(t_deque *a, t_deque *b);
 void		instruct(t_deque *a, t_deque *b, char *inst);
 
 void		push_swap(t_deque *a, t_deque *b);
+int			get_chunk(t_deque *a);
+void		put_a_to_b(t_deque *a, t_deque *b, int chunk);
+void		put_b_to_a(t_deque *a, t_deque *b);
+int			find_max(t_deque *b);
+int			find_loc(int max, t_deque *deque);
+void		move_big_top(t_deque *b);
 
 void		sort_little_three(t_deque *a);
-void		sort_little_five(t_deque *a, t_deque *b);
-void		sort_little(t_deque *a, t_deque *b);
+//void		sort_little_five(t_deque *a, t_deque *b);
+void		sort_little(t_deque *a);
 
 int			sort_check(t_deque *deque);
 void		make_index(t_deque	*deque);
