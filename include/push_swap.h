@@ -6,7 +6,7 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:11:39 by ejang             #+#    #+#             */
-/*   Updated: 2022/04/22 22:14:39 by ejang            ###   ########.fr       */
+/*   Updated: 2022/05/02 13:24:22 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,5 @@ void		sort_little(t_deque *a, t_deque *b);
 int			sort_check(t_deque *deque);
 void		make_index(t_deque	*deque);
 void		make_index_deque(t_deque *deque);
-
-void		printDQ(t_deque *DQ);
 
 #endif
