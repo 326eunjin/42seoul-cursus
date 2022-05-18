@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_fractol.c                                     :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 23:30:18 by ejang             #+#    #+#             */
-/*   Updated: 2022/05/19 02:12:45 by ejang            ###   ########.fr       */
+/*   Created: 2022/05/18 23:35:23 by ejang             #+#    #+#             */
+/*   Updated: 2022/05/19 02:35:38 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
-int init(t_mlx *mlx)
+
+int press_esc_key(int key, void *p)
 {
-	mlx->mlx_ptr = mlx_init();
-    mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, HEIGHT, WIDTH , "fractol");
-    mlx->img.img = mlx_new_image(mlx->mlx_ptr, HEIGHT, WIDTH);//create image
-	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, mlx);
-	return (1);
+    if (key == 53)//in linux it meas esc key
+        exit(0);
+    return 0;
 }
+
+// int zoom_in(int mouse, void *p)
+// {
+
+// }
+
+// int zoom_out(int mouse, void *p)
+// {
+
+// }
