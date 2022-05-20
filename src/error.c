@@ -6,40 +6,63 @@
 /*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 01:25:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/05/19 02:22:30 by ejang            ###   ########.fr       */
+/*   Updated: 2022/05/20 03:55:10 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void print_error(void)
+void	error_check(t_mlx *mlx, int argc, char **argv)
 {
-	ft_putstr_fd("INVALID PARAMETER\n",1);
-	ft_putstr_fd("MANDELBROT SET\n",1);
-	ft_putstr_fd("ex) ./fractol mandelbrot",1);
-	ft_putstr_fd("JULIA SET\n",1);
-	ft_putstr_fd("ex) ./fractol julia -0.7 -0.27014",1);
+	if (argc < 2 || check_status(mlx, argv, argc) == 0)
+	{
+		print_error();
+		exit(0);
+	}
+	if (argc > 2 && check_status(mlx, argv, argc) == 1)
+	{
+		print_error();
+		exit(0);
+	}
+	if (argc != 4 && check_status(mlx, argv, argc) == 2)
+	{
+		print_error();
+		exit(0);
+	}
+}
+
+void	print_error(void)
+{
+	ft_putstr_fd("INVALID PARAMETER\n", 1);
+	ft_putstr_fd("MANDELBROT SET\n", 1);
+	ft_putstr_fd("ex) ./fractol mandelbrot\n", 1);
+	ft_putstr_fd("JULIA SET\n", 1);
+	ft_putstr_fd("format : ./fractol julia float float", 1);
+	ft_putstr_fd("ex) ./fractol julia -0.7 -0.27014", 1);
 	exit(0);
 }
 
-int check_status(t_mlx *mlx, char **argv)
+int	check_status(t_mlx *mlx, char	**argv, int argc)
 {
+	mlx->zoom = 2;
 	mlx->status = 0;
 	mlx->julia_im = 0;
 	mlx->julia_re = 0;
-
-	if (ft_strcmp(argv[1], "mandelbrot") == 0)
+	if (ft_strncmp(argv[1], "mandelbrot", ft_strlen("mandelbrot")) == 0)
 		mlx->status = 1;
-	else if (ft_strcmp(argv[1], "julia") == 0)
+	else if (ft_strncmp(argv[1], "julia", ft_strlen("julia")) == 0)
 	{
 		mlx->status = 2;
-		mlx->julia_re = ft_atod(argv[3]);
-		mlx->julia_im = ft_atod(argv[4]);
+		if (argc == 4)
+		{
+			mlx->julia_re = ft_atod(argv[2]);
+			mlx->julia_im = ft_atod(argv[3]);
+		}
+		else
+		{
+			mlx->julia_re = 0;
+			mlx->julia_im = 0;
+		}
 	}
-	return (0);
+	return (mlx->status);
 }
-
-double	ft_atod(char *str)
-{
-	
-}//ft_atol 사용!
