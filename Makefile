@@ -17,7 +17,7 @@ all: 		${PROG}
 
 ${PROG}:	${OBJS}
 					@make re -C ./libft
-					@$(CC) ${OBJS} -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${PROG}
+					@$(CC) ${OBJS} -Llibft -lft -lmlx -framework OpenGL -framework AppKit -o ${PROG}
 
 clean:
 					@make clean -C ./libft
