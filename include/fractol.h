@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 21:07:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/05/20 11:29:14 by ejang            ###   ########.fr       */
+/*   Updated: 2022/05/20 17:09:26 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_mlx{
 
 int		press_esc_key(int key);
 int		zoom(int key, int x, int y, t_mlx *mlx);
+int		press_x_button(void);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_pixel(t_mlx *mlx);
