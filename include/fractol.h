@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 21:07:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/05/20 17:09:26 by ejang            ###   ########.fr       */
+/*   Updated: 2022/05/20 17:58:05 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		check_status(t_mlx *mlx, char **argv, int argc);
 long	ft_atol(char *str);
 double	ft_atod(char *str);
 double	cal_ret2(int i, char *str);
+void	is_right(char *str);
 
 int		mandelbrot_set(int height_start, int width_start, int iter, t_mlx *mlx);
 int		julia_set(int height_start, int width_start, int iter, t_mlx *mlx);

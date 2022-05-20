@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 01:25:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/05/20 03:55:10 by ejang            ###   ########.fr       */
+/*   Updated: 2022/05/20 17:41:09 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	check_status(t_mlx *mlx, char	**argv, int argc)
 		mlx->status = 2;
 		if (argc == 4)
 		{
+			is_right(argv[2]);
+			is_right(argv[3]);
 			mlx->julia_re = ft_atod(argv[2]);
 			mlx->julia_im = ft_atod(argv[3]);
 		}

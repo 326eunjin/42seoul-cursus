@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang < ejang@student.42seoul.kr>          +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 02:41:53 by ejang             #+#    #+#             */
-/*   Updated: 2022/05/20 02:49:45 by ejang            ###   ########.fr       */
+/*   Updated: 2022/05/20 18:00:29 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,32 @@ double	cal_ret2(int i, char *str)
 	}
 	free(tmp);
 	return (ret_2);
+}
+
+void	is_right(char *str)
+{
+	int	i;
+	int	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == '.')
+			cnt++;
+		i++;
+	}
+	if (cnt != 1)
+		print_error();
+	if (!(str[0] == '-' || (str[0] >= '0' && str[0] <= '9')))
+		print_error();
+	if (str[0] == '-' && (str[1] < '0' || str[1] > '9'))
+		print_error();
+	i = 1;
+	while (str[i])
+	{
+		if (!(str[i] == '.' || (str[i] <= '9' && str[i] >= '0')))
+			print_error();
+		i++;
+	}
 }
