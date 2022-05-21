@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 01:25:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/05/20 17:41:09 by ejang            ###   ########.fr       */
+/*   Updated: 2022/05/21 18:42:09 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_error(void)
 	ft_putstr_fd("MANDELBROT SET\n", 1);
 	ft_putstr_fd("ex) ./fractol mandelbrot\n", 1);
 	ft_putstr_fd("JULIA SET\n", 1);
-	ft_putstr_fd("format : ./fractol julia float float", 1);
+	ft_putstr_fd("format : ./fractol julia float float\n", 1);
 	ft_putstr_fd("ex) ./fractol julia -0.7 -0.27014", 1);
 	exit(0);
 }
