@@ -1,6 +1,6 @@
 PROG	= philo
 
-SRCS 	= philo/src/main.c philo/src/parse.c
+SRCS 	= src/main.c src/error.c src/init.c src/monitor.c src/philo.c src/util.c src/util2.c
 OBJS 	= ${SRCS:.c=.o}
 MAIN	= src/main.c
 

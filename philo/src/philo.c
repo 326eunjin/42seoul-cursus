@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:11:14 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 17:58:47 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 19:43:54 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void *routine(void *arg)
 		if (philo->data->number_must_eat != -1 && is_finished(philo) == TRUE)
 		{
 			pthread_mutex_lock(&(philo->data->end_lock));
-			philo->data->people_cnt++;
+			philo->eat_cnt++;
 			pthread_mutex_unlock(&(philo->data->end_lock));
 		}
 		if (philo_think(philo) == -1)

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 04:12:01 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 18:31:46 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 19:44:27 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	is_all_finished(t_data *data)
 
 	ret = FALSE;
 	pthread_mutex_lock(&(data->end_lock));
+	//printf("%d\n",data->people_cnt);
 	if (data->people_cnt == data->number_of_philo)
 	{
 		data->end_flag = TRUE;

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:48:13 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 06:56:06 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 20:26:51 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void free_philo_end(t_philo* philo)
 	while (i < philo->data->number_of_philo)
 	{
 		pthread_mutex_destroy(&(philo->data->fork[i]));
+		pthread_mutex_destroy(&philo[i].mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&(philo->data->end_lock));
 	pthread_mutex_destroy(&(philo->data->print_lock));
-	pthread_mutex_destroy(&(philo->mutex));
 	free(philo->data->fork);
 	free(philo);
 }
