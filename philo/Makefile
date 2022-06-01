@@ -7,7 +7,7 @@ MAIN	= src/main.c
 HEADER	= -Iincludes
 
 CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror -g
+CFLAGS 	= -Wall -Wextra -Werror -g 
 
 .c.o:		%.o : %.c
 					@gcc ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
