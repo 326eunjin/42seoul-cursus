@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 04:12:01 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 17:07:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 18:31:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void *monitor(void *arg)
 	data = philo->data;
 	while (1)
 	{
+		//printf("monitor id : %d\n",philo->id);
 		if ( i == data -> number_of_philo)
 			i = 0;
 		if (data->number_must_eat != 0 && is_all_finished(data) == TRUE)
@@ -66,6 +67,7 @@ void *monitor(void *arg)
 		if (is_dead_cond(philo, data,i) == TRUE)
 			break;
 		i++;
+		usleep(100);
 	}
 	return (NULL);
 }

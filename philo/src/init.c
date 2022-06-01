@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:04:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 16:59:33 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 19:08:18 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	philo_init(t_data *data, t_philo *philo)//철학자 초기화
 		philo[i].eat_cnt = 0;//몇번 먹었는지
 		philo[i].data = data;
 		philo[i].last_eat_time = get_time();
+		if	(pthread_mutex_init(&philo[i].mutex,NULL)!=0)
+			return (FALSE);
 		i++;
 	}
 	mutex_init(philo);
@@ -74,12 +76,12 @@ int mutex_init(t_philo *philo)//뮤텍스 초기화
 			return (FALSE);
 		i++;
 	}
+	if	(pthread_mutex_init(&(philo->mutex),NULL)!=0)
+		return (FALSE);
 	if (pthread_mutex_init(&(philo->data->print_lock),NULL)!=0)
 		return (FALSE);
-	if (pthread_mutex_init(&(philo->data->end_lock),NULL)!=0)
-		return (FALSE);
-	if (pthread_mutex_init(&(philo->mutex),NULL)!=0)
-		return (FALSE);
+	// if (pthread_mutex_init(&(philo->data->end_lock),NULL)!=0)
+	// 	return (FALSE);
 	return (TRUE);
 }
 
@@ -90,8 +92,6 @@ int	make_thread(t_data *data, t_philo *philo)
 
 	start_time = get_time();
 	i = 0;
-	if (pthread_create(&data->monitor, NULL, monitor, (void *)philo) != 0)
-		return (FALSE);
 	data->start_time = start_time;
 	while (i < data->number_of_philo)
 	{
@@ -104,6 +104,8 @@ int	make_thread(t_data *data, t_philo *philo)
 		}
 		i++;
 	}
+	if (pthread_create(&data->monitor, NULL, monitor, (void *)philo) != 0)
+		return (FALSE);
 	pthread_join(data->monitor, NULL);
 	i = 0;
 	while (i < data->number_of_philo)

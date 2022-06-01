@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:11:14 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 06:53:30 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 17:58:47 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void *routine(void *arg)
 	if (philo->id % 2 == 0)
 		usleep(100);
 	// 2. while (end_flag == FALSE)
-	while (philo->data->end_flag == FALSE)
+	
+	while (is_dead(philo->data)!= -1)
 	{
+		//printf("id : %d\n",philo->id);
 		if (philo_eat(philo) == -1)
 			break;
 		if (philo_sleep(philo) == -1)
@@ -35,6 +37,7 @@ void *routine(void *arg)
 			break;
 		usleep(100);
 	}
+	//printf("after while id %d\n",philo->id);
 	return (NULL);
 } 
 
@@ -51,8 +54,10 @@ int philo_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->data->fork[philo->right]);
 	if (is_dead(philo->data) == 1)
 		print_philo(philo,HAS_FORK);
+	pthread_mutex_lock(&philo->mutex);
 	philo->eat_cnt++;
 	philo->last_eat_time = get_time();
+	pthread_mutex_unlock(&philo->mutex);
 	if (is_dead(philo->data) == 1)
 		print_philo(philo,IS_EATING);
 	msleep(philo->data->time_eat);
