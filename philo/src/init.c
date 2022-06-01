@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:04:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 16:40:15 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 16:59:33 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,6 @@ int	philo_init(t_data *data, t_philo *philo)//철학자 초기화
 {
 	//철학자 수만큼 동적할당
 	int i;
-	philo = (t_philo *)malloc(sizeof(t_philo) * data->number_of_philo);
-	//구조체 배열 
-	if (!philo)//배열 할당 실패시 에러 처리
-		return (FALSE);
 	i = 0;
 	while (i < data->number_of_philo)
 	{
@@ -60,9 +56,7 @@ int	philo_init(t_data *data, t_philo *philo)//철학자 초기화
 		philo[i].last_eat_time = get_time();
 		i++;
 	}
-	printf("%d\n",philo[0].id);
 	mutex_init(philo);
-	printf("%d\n",philo[0].id);
 	return (TRUE);
 }
 
@@ -99,8 +93,6 @@ int	make_thread(t_data *data, t_philo *philo)
 	if (pthread_create(&data->monitor, NULL, monitor, (void *)philo) != 0)
 		return (FALSE);
 	data->start_time = start_time;
-	for (i = 0;i<data->number_of_philo;i++)
-		printf("id %d %d\n",i,philo[i].id);
 	while (i < data->number_of_philo)
 	{
 		philo[i].last_eat_time = start_time;

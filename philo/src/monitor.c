@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 04:12:01 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 06:51:36 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 17:07:11 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ int	is_dead_cond(t_philo *philo, t_data *data, int index)
 	now = get_time();
 	if ( now - philo[index].last_eat_time >= data->time_die)
 	{
+		pthread_mutex_lock(&(data->end_lock));
 		printf("%lld %d %s\n", now - data->start_time, philo[index].id, DIED);
 		data->end_flag = TRUE;
 		pthread_mutex_unlock(&(philo[index].mutex));
+		pthread_mutex_unlock(&(data->end_lock));
 		return (TRUE);
 	}
 	pthread_mutex_unlock(&(philo[index].mutex));

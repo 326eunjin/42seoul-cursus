@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 02:21:14 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 06:43:26 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 17:00:08 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int	is_dead(t_data *data)
 void print_philo(t_philo *philo, char* msg)
 {
 	pthread_mutex_lock(&philo->data->print_lock);
-	printf("%lld %d %s",get_time() - philo->data->start_time, philo->id, msg);
+	printf("%lld %d %s\n",get_time() - philo->data->start_time, philo->id, msg);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
