@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:39:39 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 06:40:47 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 16:39:19 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(int argc, char **argv)
 	parse_init(argc, argv, &data);//data 구조체 초기화
 	if (philo_init(&data,philo) == FALSE)//철학자 초기화
 		return (0);//초기화 실패하면 프로그램 종료
+	printf("%d\n",philo[0].id);
 	if (make_thread(&data, philo) == FALSE)//철학자 스레드 생성
 	{
 		free(philo);
