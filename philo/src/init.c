@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:04:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 19:08:18 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 19:28:19 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int parse_init(int argc, char **argv, t_data *data)//data 초기화
 		while(i<argc)
 		{
 			if(is_correct_input(argv[i]) == -1)
-				init_error();
+				return (init_error());
 			i++;
 		}
 		data->number_of_philo = ft_atoi(argv[1]);
@@ -37,7 +37,7 @@ int parse_init(int argc, char **argv, t_data *data)//data 초기화
 		}
 	}
 	else
-		init_error();
+		return (init_error());
 	return (TRUE);
 }
 
@@ -76,12 +76,10 @@ int mutex_init(t_philo *philo)//뮤텍스 초기화
 			return (FALSE);
 		i++;
 	}
-	if	(pthread_mutex_init(&(philo->mutex),NULL)!=0)
-		return (FALSE);
 	if (pthread_mutex_init(&(philo->data->print_lock),NULL)!=0)
 		return (FALSE);
-	// if (pthread_mutex_init(&(philo->data->end_lock),NULL)!=0)
-	// 	return (FALSE);
+	if (pthread_mutex_init(&(philo->data->end_lock),NULL)!=0)
+		return (FALSE);
 	return (TRUE);
 }
 
