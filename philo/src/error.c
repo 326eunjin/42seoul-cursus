@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:48:13 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 20:26:51 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 20:58:13 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,22 @@ int	init_error(void)
 	return (FALSE);
 }
 
-void free_philo(t_philo *philo, int index)
+void	free_philo(t_philo *philo, int index)
 {
-	int i;
+	int	i;
+
 	i = 0;
-	while(i< index)
+	while (i < index)
 	{
 		pthread_join(philo[i].thread, NULL);
 		i++;
 	}
 }
 
-void free_philo_end(t_philo* philo)
+void	free_philo_end(t_philo *philo)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < philo->data->number_of_philo)
 	{

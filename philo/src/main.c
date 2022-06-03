@@ -6,26 +6,25 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:39:39 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 20:46:54 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 21:45:23 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data data;//argv로 들어온 값 처리하는 구조체
-	t_philo *philo;//철학자 배열
+	t_data	data;
+	t_philo	*philo;
 
 	if (parse_init(argc, argv, &data) == FALSE)
-		return (0);//data 구조체 초기화
+		return (0);
 	philo = (t_philo *)malloc(sizeof(t_philo) * data.number_of_philo);
-	//구조체 배열 
-	if (!philo)//배열 할당 실패시 에러 처리
+	if (!philo)
 		return (FALSE);
-	if (philo_init(&data,philo) == FALSE)//철학자 초기화
-		return (0);//초기화 실패하면 프로그램 종료
-	if (make_thread(&data, philo) == FALSE)//철학자 스레드 생성
+	if (philo_init(&data, philo) == FALSE)
+		return (0);
+	if (make_thread(&data, philo) == FALSE)
 	{
 		free(philo);
 		return (0);

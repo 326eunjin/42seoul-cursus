@@ -7,10 +7,10 @@ MAIN	= src/main.c
 HEADER	= -Iincludes
 
 CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror -g 
+CFLAGS 	= -Wall -Wextra -Werror 
 
 .c.o:		%.o : %.c
-					@gcc ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+					@$(CC) ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
 
 all: 		${PROG}
 

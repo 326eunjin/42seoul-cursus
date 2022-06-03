@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 02:21:14 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 17:00:08 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 21:12:21 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	msleep(int time)
 
 int	is_dead(t_data *data)
 {
-	int ret;
+	int	ret;
 
 	ret = 1;
 	pthread_mutex_lock(&data->end_lock);
@@ -33,9 +33,9 @@ int	is_dead(t_data *data)
 	return (ret);
 }
 
-void print_philo(t_philo *philo, char* msg)
+void	print_philo(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->print_lock);
-	printf("%lld %d %s\n",get_time() - philo->data->start_time, philo->id, msg);
+	printf("%lld %d %s\n", get_time() - philo->data->start_time, philo->id, msg);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }

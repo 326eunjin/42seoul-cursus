@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 04:12:01 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/01 19:44:27 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/01 21:07:28 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 int	is_all_finished(t_data *data)
 {
-	int ret;
+	int	ret;
 
 	ret = FALSE;
 	pthread_mutex_lock(&(data->end_lock));
-	//printf("%d\n",data->people_cnt);
 	if (data->people_cnt == data->number_of_philo)
 	{
 		data->end_flag = TRUE;
@@ -31,12 +30,13 @@ int	is_all_finished(t_data *data)
 
 int	is_dead_cond(t_philo *philo, t_data *data, int index)
 {
-	int ret;
-	long long now;
+	int			ret;
+	long long	now;
+
 	ret = FALSE;
 	pthread_mutex_lock(&(philo[index].mutex));
 	now = get_time();
-	if ( now - philo[index].last_eat_time >= data->time_die)
+	if (now - philo[index].last_eat_time >= data->time_die)
 	{
 		pthread_mutex_lock(&(data->end_lock));
 		printf("%lld %d %s\n", now - data->start_time, philo[index].id, DIED);
@@ -49,24 +49,23 @@ int	is_dead_cond(t_philo *philo, t_data *data, int index)
 	return (FALSE);
 }
 
-void *monitor(void *arg)
+void	*monitor(void *arg)
 {
-	t_philo *philo;
-	t_data *data;
-	int i;
+	t_philo	*philo;
+	t_data	*data;
+	int		i;
 
 	i = 0;
 	philo = (t_philo *)arg;
 	data = philo->data;
 	while (1)
 	{
-		//printf("monitor id : %d\n",philo->id);
-		if ( i == data -> number_of_philo)
+		if (i == data -> number_of_philo)
 			i = 0;
 		if (data->number_must_eat != 0 && is_all_finished(data) == TRUE)
-			break;
-		if (is_dead_cond(philo, data,i) == TRUE)
-			break;
+			break ;
+		if (is_dead_cond(philo, data, i) == TRUE)
+			break ;
 		i++;
 		usleep(100);
 	}
