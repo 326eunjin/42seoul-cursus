@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:42:12 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/06 02:57:33 by jeyoon           ###   ########.fr       */
+/*   Updated: 2022/06/06 03:22:08 by jeyoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 /*
     int parse_cmd(t_cmd_line *cmd_line) : main에서 호출되는 함수. 커맨드라인을 입력받고 cmd_line 구조체를 생성한다.
-    static int token_cnt(t_cmd_line *cmd_line, char *line) : cmd_line.size를 결정하는 함수
+    static int token_cnt(t_cmd_line *cmd_line, char *line) : cmd_line.len을 결정하는 함수
     static int  token_quote(int *idx, char *line) : 따옴표가 있는 토큰의 인덱스 옮겨주기 (따옴표가 짝맞춰 닫히는지도 확인한다.)
 */
 
@@ -75,6 +75,13 @@ int parse_cmd(t_cmd_line *cmd_line)
     if (cmd_line == NULL)
         return (FALSE);
     line = readline("\033[0;36mMinishell>> \033[0m");
+    if (line == NULL)
+    {
+        // *** 디버깅용 프린트 : ctrl - d 입력시 예외처리
+        printf("ctrl - d\n");
+        // *** 끝
+        return (TRUE);
+    }
     add_history(line);
     // *** 디버깅용 프린트 : 입력받은 한 줄 출력
     printf("%s\n", line);
