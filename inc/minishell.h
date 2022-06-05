@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/05 18:29:29 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/05 18:33:18 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+
+# define FALSE 0
+# define TRUE 1
 
 # define CMD 1
 # define OPTION 2
