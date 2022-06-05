@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/05 18:33:18 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/06 02:59:50 by jeyoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,11 @@ struct s_cmd_line // 한 줄에 입력된 명령어 라인에 대한 정보
 	int			len; // 명령어 라인의 총 길이
 	t_cmd_node	*head; // 연결리스트 시작부분
 };
+
+/*
+	*** parse ***
+*/
+
+int parse_cmd(t_cmd_line *cmd_line);
 
 #endif
