@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 11:37:22 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/14 18:40:45 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/21 20:08:42 by ejang             #+#    #+#             */
+/*   Updated: 2021/06/27 17:22:52 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*point_dst;
-	unsigned char	*point_src;
+	char		*dest;
+	const char	*source;
+	size_t		i;
 
-	if (dst == src)
-		return (dst);
-	point_dst = (unsigned char*)dst;
-	point_src = (unsigned char*)src;
-	if (src < dst)
+	if (!dst && !src)
+		return (NULL);
+	dest = (char *)dst;
+	source = (const char *)src;
+	i = 0;
+	if (dest <= source)
 	{
 		while (len--)
-			*(point_dst + len) = *(point_src + len);
+		{
+			*dest++ = *source++;
+		}
 	}
 	else
 	{
+		dest += len;
+		source += len;
 		while (len--)
-			*(point_dst++) = *(point_src++);
+			*(--dest) = *(--source);
 	}
 	return (dst);
 }

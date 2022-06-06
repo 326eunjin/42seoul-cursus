@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 11:35:21 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/12 11:36:20 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/21 21:41:16 by ejang             #+#    #+#             */
+/*   Updated: 2021/07/02 15:44:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char	*point_s1;
-	unsigned char	*point_s2;
+	unsigned char	*tmp1;
+	unsigned char	*tmp2;
 	size_t			i;
 
 	i = 0;
-	point_s1 = (unsigned char*)s1;
-	point_s2 = (unsigned char*)s2;
-	while (i++ < n)
+	tmp1 = (unsigned char *)s1;
+	tmp2 = (unsigned char *)s2;
+	while (i < n)
 	{
-		if (*point_s1 != *point_s2)
-			return (*point_s1 - *point_s2);
-		point_s1++;
-		point_s2++;
+		if (tmp1[i] != tmp2[i])
+			return (tmp1[i] - tmp2[i]);
+		i++;
 	}
 	return (0);
 }

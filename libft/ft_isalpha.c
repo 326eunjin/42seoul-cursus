@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 11:30:37 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/12 12:12:10 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/05/07 17:19:41 by ejang             #+#    #+#             */
+/*   Updated: 2021/06/22 13:46:09 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
+	if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z'))
+		return (c);
+	else
+		return (0);
 }

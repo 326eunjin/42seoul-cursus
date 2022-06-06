@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 11:36:27 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/18 15:20:16 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/21 19:27:23 by ejang             #+#    #+#             */
+/*   Updated: 2021/07/02 16:31:24 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*point_dst;
-	unsigned char	*point_src;
 	size_t			i;
+	char			*dest;
+	const char		*source;
 
-	if (dst == src)
-		return (dst);
-	point_dst = (unsigned char*)dst;
-	point_src = (unsigned char*)src;
+	if (!dst && !src)
+		return (NULL);
+	dest = (char *)dst;
+	source = (const char *)src;
 	i = 0;
 	while (i < n)
 	{
-		*(point_dst + i) = *(point_src + i);
+		dest[i] = source[i];
 		i++;
 	}
 	return (dst);

@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 16:19:39 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/17 16:33:13 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/24 17:06:29 by ejang             #+#    #+#             */
+/*   Updated: 2021/06/26 18:36:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*temp;
+	int		len1;
+	int		len2;
+	char	*ptr;
 
-	if (!s1 && !s2)
+	if (!s1 || !s2)
+		return (0);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	ptr = (char *)malloc(len1 + len2 + 1);
+	if (!ptr)
 		return (NULL);
-	if (s1 && !s2)
-		return (ft_strdup(s1));
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	if (!(temp = (char *)malloc(s1_len + s2_len + 1)))
-		return (NULL);
-	ft_strlcpy(temp, s1, s1_len + 1);
-	ft_strlcat(temp, s2, s1_len + s2_len + 1);
-	return (temp);
+	ft_strlcpy(ptr, s1, len1 + 1);
+	ft_strlcpy(ptr + len1, s2, len2 + 1);
+	return (ptr);
 }

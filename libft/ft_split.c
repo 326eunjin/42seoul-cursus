@@ -3,93 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 16:20:15 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/18 15:01:03 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/26 21:26:43 by ejang             #+#    #+#             */
+/*   Updated: 2021/07/05 21:42:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_cnt_strs(char const *s, char c)
+static	char	**ft_malloc_error(char **ptr, int j)
 {
-	int		i;
-	int		cnt_strs;
+	int	i;
 
 	i = 0;
-	cnt_strs = 0;
-	while (s[i])
+	while (i < j)
 	{
-		if (s[i] != c)
-		{
-			cnt_strs++;
-			while (s[i] && (s[i] != c))
-				i++;
-		}
-		else
-			i++;
-	}
-	return (cnt_strs);
-}
-
-static int	get_str(char **str, int str_len, char c)
-{
-	int		len;
-
-	len = 0;
-	*str += str_len;
-	while (**str && **str == c)
-		(*str)++;
-	while ((*str)[len])
-	{
-		if ((*str)[len] == c)
-			break ;
-		len++;
-	}
-	return (len);
-}
-
-static char	**all_free(char **result)
-{
-	int		i;
-
-	i = 0;
-	while (result[i])
-	{
-		free(result[i]);
-		result[i] = NULL;
+		free(ptr[i]);
+		ptr[i] = 0;
 		i++;
 	}
-	free(result);
-	result = NULL;
+	free(ptr);
+	ptr = 0;
 	return (NULL);
 }
 
-char		**ft_split(char const *s, char c)
+static	int	get_count(char const *s, char c)
 {
-	int		cnt_strs;
-	char	**result;
-	int		i;
-	char	*str;
-	int		str_len;
+	int	i;
+	int	count;
 
-	if (!s)
-		return (NULL);
-	cnt_strs = get_cnt_strs(s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * (cnt_strs + 1))))
-		return (NULL);
 	i = 0;
-	str = (char *)s;
-	str_len = 0;
-	while (i < cnt_strs)
+	count = 0;
+	while (s[i])
 	{
-		str_len = get_str(&str, str_len, c);
-		if (!(result[i] = (char *)malloc(str_len + 1)))
-			return (all_free(result));
-		ft_strlcpy(result[i], str, str_len + 1);
-		i++;
+		if (s[i] != c && s[i])
+		{
+			count++;
+			while (s[i] != c && s[i])
+				i++;
+		}
+		else if (s[i])
+			i++;
 	}
-	result[i] = 0;
-	return (result);
+	return (count);
+}
+
+static	char	**ft_split2(char **ptr, char const *s, char c, int count)
+{
+	int	i;
+	int	j;
+	int	word_len;
+	int	start;
+
+	i = 0;
+	j = -1;
+	while (s[i] && ++j < count)
+	{
+		word_len = 0;
+		while (s[i] == c && s[i])
+			i++;
+		while (s[i] != c && s[i])
+		{
+			i++;
+			word_len++;
+			if (word_len == 1)
+				start = i - 1;
+		}
+		ptr[j] = (char *)malloc((word_len + 1) * sizeof(char));
+		if (!ptr[j])
+			return (ft_malloc_error(ptr, j));
+		ft_strlcpy(ptr[j], (char *)s + start, word_len + 1);
+	}
+	return (ptr);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**ptr;
+	int		count;
+	int		i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	count = get_count(s, c);
+	ptr = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!ptr)
+		return (NULL);
+	ptr[count] = NULL;
+	return (ft_split2(ptr, s, c, count));
 }

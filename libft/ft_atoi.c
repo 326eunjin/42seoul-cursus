@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 11:24:56 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/13 14:45:06 by jeyoon           ###   ########.fr       */
+/*   Updated: 2022/06/06 17:44:17 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			ft_isspace(char c)
+static int	ft_isspace(char c)
 {
 	if (c == ' ' || (c >= 9 && c <= 13))
 		return (1);
@@ -36,7 +36,7 @@ static unsigned int	atonbr(const char *str, int idx)
 	return (nbr);
 }
 
-int					ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	unsigned int	nbr;
 	int				sign;

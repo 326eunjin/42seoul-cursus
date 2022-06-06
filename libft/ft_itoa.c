@@ -3,64 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 16:20:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/18 14:38:12 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/26 21:26:41 by ejang             #+#    #+#             */
+/*   Updated: 2021/07/03 23:46:12 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	unsigned int	ft_abs(int n)
+static	void	ft_make(int len, char *ptr, long long tmp)
 {
-	if (n > 0)
-		return ((unsigned int)n);
-	else
-		return ((unsigned int)(n * -1));
-}
-
-static int				ft_get_len(unsigned int nbr, int sign)
-{
-	int					len;
-
-	len = 0;
-	if (sign == -1)
-		len = 1;
-	if (nbr == 0)
-		return (1);
-	while (nbr)
+	while (len)
 	{
-		nbr /= 10;
-		len++;
-	}
-	return (len);
-}
-
-char					*ft_itoa(int n)
-{
-	int					sign;
-	unsigned int		nbr;
-	int					len;
-	char				*temp;
-
-	sign = 1;
-	if (n < 0)
-		sign = -1;
-	nbr = ft_abs(n);
-	len = ft_get_len(nbr, sign);
-	if (!(temp = (char *)malloc(len + 1)))
-		return (NULL);
-	temp[len--] = '\0';
-	while (len > 0)
-	{
-		temp[len] = '0' + (nbr % 10);
-		nbr /= 10;
+		ptr[len] = tmp % 10 + '0';
+		tmp = tmp / 10;
 		len--;
 	}
-	if (sign == -1)
-		temp[0] = '-';
+}
+
+static	int	get_len(int n)
+{
+	int	i;
+
+	i = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+		i++;
+	while (n)
+	{
+		i++;
+		n = n / 10;
+	}
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	int				len;
+	char			*ptr;
+	long long		tmp;
+
+	len = get_len(n);
+	ptr = (char *)malloc(len + 1);
+	if (!ptr)
+		return (NULL);
+	ptr[len] = 0;
+	if (n < 0)
+	{
+		tmp = (long long)n * -1;
+		ptr[0] = '-';
+		len = len - 1;
+		ft_make(len, ptr, tmp);
+	}
 	else
-		temp[0] = '0' + (nbr % 10);
-	return (temp);
+	{
+		while (len--)
+		{
+			ptr[len] = n % 10 + '0';
+			n = n / 10;
+		}
+	}
+	return (ptr);
 }

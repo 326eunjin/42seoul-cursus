@@ -3,28 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 16:21:45 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/18 11:37:09 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/30 00:14:32 by ejang             #+#    #+#             */
+/*   Updated: 2021/07/05 15:09:21 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static	void	prtostring(int n, int fd)
+{
+	char	c;
+
+	c = n + '0';
+	write(fd, &c, 1);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	long long int	nbr;
-
 	if (fd < 0)
 		return ;
-	nbr = n;
-	if (nbr < 0)
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	if ((n < 10) && (n >= 0))
+		prtostring(n, fd);
+	if (n >= 10)
 	{
-		ft_putchar_fd('-', fd);
-		nbr *= -1;
+		ft_putnbr_fd(n / 10, fd);
+		prtostring(n % 10, fd);
 	}
-	if (nbr >= 10)
-		ft_putnbr_fd(nbr / 10, fd);
-	ft_putchar_fd((nbr % 10) + '0', fd);
+	if (n >= -2147483647 && n < 0)
+	{
+		n = -1 * n;
+		write(fd, "-", 1);
+		if (n < 10 && n >= 0)
+		{
+			prtostring(n, fd);
+			return ;
+		}
+		ft_putnbr_fd(n / 10, fd);
+		prtostring(n % 10, fd);
+	}
 }

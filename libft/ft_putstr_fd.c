@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 16:21:20 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/05/17 06:18:33 by jeyoon           ###   ########.fr       */
+/*   Created: 2021/06/30 00:15:54 by ejang             #+#    #+#             */
+/*   Updated: 2021/07/02 15:39:42 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	len;
+	int	len;
 
-	if (!s || fd < 0)
+	if (fd < 0 || s == NULL)
 		return ;
 	len = ft_strlen(s);
 	write(fd, s, len);
