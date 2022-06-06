@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 21:26:43 by ejang             #+#    #+#             */
-/*   Updated: 2021/07/05 21:42:45 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/06 17:45:57 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	char	**ft_malloc_error(char **ptr, int j)
 	return (NULL);
 }
 
-static	int	get_count(char const *s, char c)
+int	get_count(char const *s, char c)
 {
 	int	i;
 	int	count;
