@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/06 02:59:50 by jeyoon           ###   ########.fr       */
+/*   Updated: 2022/06/06 16:12:52 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
 
 # define FALSE 0
 # define TRUE 1
@@ -53,5 +54,6 @@ struct s_cmd_line // 한 줄에 입력된 명령어 라인에 대한 정보
 */
 
 int parse_cmd(t_cmd_line *cmd_line);
+int  token_list(t_cmd_line *cmd_line, char *line);
 
 #endif
