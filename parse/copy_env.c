@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_pwd.c                                         :+:      :+:    :+:   */
+/*   copy_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/05 16:37:21 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/06 11:11:21 by ejang            ###   ########.fr       */
+/*   Created: 2022/06/06 16:06:07 by ejang             #+#    #+#             */
+/*   Updated: 2022/06/06 16:06:33 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+// #include "libft/libft.h"
 
-void	*func_pwd(void)//현재 작업중인 절대경로 출력
+char **copy_envp(char **envp)
 {
-	char *current_dir = getcwd(NULL, 0);
-	if (current_dir == NULL)//리턴값이 null이니까 free할 필요가 없음.
-	{
-		printf("getcwd() cannot excute in fun_pwd\n");
-		exit(1);
-	}
-	printf("%s\n",current_dir);
-	free(current_dir);
+	int i = -1;
+	int cnt = 0;
+	char **ret;
+	while(envp[++i])
+		cnt++;
+	ret = (char **)malloc(sizeof(char *) * cnt + 1);
+	i = -1;
+	while(envp[++i])
+		ret[i] = ft_substr(envp[i],0,ft_strlen(envp[i]));
+	ret[cnt] = NULL;
+	return (ret);
 }
