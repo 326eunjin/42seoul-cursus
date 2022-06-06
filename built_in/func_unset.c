@@ -6,12 +6,11 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:04:58 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/06 16:03:51 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/06 21:22:25 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-//#include "../libft/libft.h"
 
 int envp_cnt(char **envp)
 {
@@ -65,13 +64,7 @@ void	ft_unset(char **envp, char *str)
 			}
 			envp[cnt - 1] = NULL;
 		}
-		else
-			//do nothing
-			exit(0);
 	}
 	else
-	{
 		printf("error : unset '%s' : not a valid identifier\n",str);
-		exit(1);	
-	}
 }

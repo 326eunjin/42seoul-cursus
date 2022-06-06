@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:37:21 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/06 11:11:21 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/06 21:20:50 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	*func_pwd(void)//현재 작업중인 절대경로 출력
 {
 	char *current_dir = getcwd(NULL, 0);
 	if (current_dir == NULL)//리턴값이 null이니까 free할 필요가 없음.
-	{
 		printf("getcwd() cannot excute in fun_pwd\n");
-		exit(1);
-	}
+	else
+	{
 	printf("%s\n",current_dir);
 	free(current_dir);
+	}
 }
