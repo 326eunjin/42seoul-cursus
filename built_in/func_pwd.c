@@ -6,13 +6,13 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:37:21 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/06 21:20:50 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:51:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	*func_pwd(void)//현재 작업중인 절대경로 출력
+void	func_pwd(void)//현재 작업중인 절대경로 출력
 {
 	char *current_dir = getcwd(NULL, 0);
 	if (current_dir == NULL)//리턴값이 null이니까 free할 필요가 없음.
