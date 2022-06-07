@@ -6,48 +6,48 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:32:02 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 18:45:34 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 21:08:05 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 /*
-    int token_list(t_cmd_line *cmd_line, char *line)    :   토큰을 세어주고 (token_cnt) , 리스트를 만드는 함수
-    static int  make_token_list(t_cmd_line *cmd_line, char *line)    :   cmd_line.len만큼 노드를 할당하고 line에서 토큰을 잘라 연결리스트로 연결하는 함수
-    static char *cut_token(char *line, int *start, int *end)    :   시작지점에서 공백, 혹은 따옴표가 등장하기 전까지의 토큰을 할당해서 반환하는 함수.
-    static void add_token(t_cmd_line *cmd_line, t_cmd_node *new_node, int curr_size)    :   연결리스트 끝에 노드를 추가하는 함수.
+	int token_list(t_cmd_line *cmd_line, char *line)	:	토큰을 세어주고 (token_cnt) , 리스트를 만드는 함수
+	static int  make_token_list(t_cmd_line *cmd_line, char *line)	:	cmd_line.len만큼 노드를 할당하고 line에서 토큰을 잘라 연결리스트로 연결하는 함수
+	static char *cut_token(char *line, int *start, int *end)	:	시작지점에서 공백, 혹은 따옴표가 등장하기 전까지의 토큰을 할당해서 반환하는 함수.
+	static void add_token(t_cmd_line *cmd_line, t_cmd_node *new_node, int curr_size)	:	연결리스트 끝에 노드를 추가하는 함수.
 */
 
 static char *cut_token(char *line, int *start, int *end)
 {
-    char *ret;
+	char *ret;
 
-    *end = *start;
-    // 1-1. 시작지점이 따옴표인 경우
-    if (line[*start] == '"' || line[*start] == '\'')
-    {
-        (*end)++;
-        // 1-2. 끝 부분이 시작지점의 따옴표가 아닌 경우동안 인덱스를 옮긴다. (짝이 안맞는 부분은 앞서서 처리해줬다.)
-        while (line[*end] != line[*start])
-            (*end)++;
-        // 1-3. 시작부분부터 끝 부분까지의 문자열을 새로 잘라 만들어준다.
-        ret = ft_substr(line, *start, (*end - *start + 1));
-        // 1-4. end 인덱스가 부분 문자열에 포함되었으므로 인덱스를 증가시켜준다.
-        *start = *end + 1;
-    }
-    // 2-1. 시작지점이 따옴표가 아닌 경우
-    else
-    {
-        // 2-2. 공백이 등장하기 전까지 인덱스를 옮긴다.
-        while (line[*end] != '\0' && !(line[*end] == ' ' || line[*end] >= 9 && line[*end] <= 13))
-            (*end)++;
-        // 2-3. 시작부분부터 끝 부분 앞까지의 문자열을 새로 잘라 만들어준다.
-        ret = ft_substr(line, *start, (*end - *start));
-        // 2-4. 인덱스를 업데이트시켜준다.
-        *start = *end;
-    }
-    return (ret);
+	*end = *start;
+	// 1-1. 시작지점이 따옴표인 경우
+	if (line[*start] == '"' || line[*start] == '\'')
+	{
+		(*end)++;
+		// 1-2. 끝 부분이 시작지점의 따옴표가 아닌 경우동안 인덱스를 옮긴다. (짝이 안맞는 부분은 앞서서 처리해줬다.)
+		while (line[*end] != line[*start])
+			(*end)++;
+		// 1-3. 시작부분부터 끝 부분까지의 문자열을 새로 잘라 만들어준다.
+		ret = ft_substr(line, *start, (*end - *start + 1));
+		// 1-4. end 인덱스가 부분 문자열에 포함되었으므로 인덱스를 증가시켜준다.
+		*start = *end + 1;
+	}
+	// 2-1. 시작지점이 따옴표가 아닌 경우
+	else
+	{
+		// 2-2. 공백이 등장하기 전까지 인덱스를 옮긴다.
+		while (line[*end] != '\0' && !(line[*end] == ' ' || line[*end] >= 9 && line[*end] <= 13))
+			(*end)++;
+		// 2-3. 시작부분부터 끝 부분 앞까지의 문자열을 새로 잘라 만들어준다.
+		ret = ft_substr(line, *start, (*end - *start));
+		// 2-4. 인덱스를 업데이트시켜준다.
+	*start = *end;
+	}
+	return (ret);
 }
 
 static void add_token(t_cmd_line *cmd_line, t_cmd_node *new_node, int curr_size)
