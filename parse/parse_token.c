@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:32:02 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 15:45:04 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 18:45:34 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void add_token(t_cmd_line *cmd_line, t_cmd_node *new_node, int curr_size)
     }   
 }
 
-static int make_token_list(t_cmd_line *cmd_line, char *line)
+static int make_token_list(t_cmd_line **cmd_line, char *line)
 {
     int first_idx;
     int last_idx;
@@ -77,7 +77,7 @@ static int make_token_list(t_cmd_line *cmd_line, char *line)
 
     size = 0;
     first_idx = 0;
-    while (size < cmd_line->len)
+    while (size < (*cmd_line)->len)
     {
         // 1. 새로운 노드 할당
         this_node = (t_cmd_node *)malloc(sizeof(t_cmd_node));
@@ -96,24 +96,21 @@ static int make_token_list(t_cmd_line *cmd_line, char *line)
             return (FALSE);
         }
         // 4. 연결리스트 끝에 노드를 추가한다.
-        add_token(cmd_line, this_node, size);
+        add_token(*cmd_line, this_node, size);
         size++;
     }
     return (TRUE);
 }
 
-int token_list(t_cmd_line *cmd_line, char *line)
+int token_list(t_cmd_line **cmd_line, char *line)
 {
-    if (token_cnt(cmd_line, line) == FALSE)
+    if (token_cnt(*cmd_line, line) == FALSE)
     {
         // *** 디버깅용 프린트 : 따옴표 덜 닫혔을 경우 error 출력
         printf("error : 따옴표 짝이 맞지 않음\n");
         // *** 끝
         return (FALSE);
     }
-    // *** 디버깅용 프린트 : 공백을 기준으로 한 토큰의 개수 출력
-    printf("%d\n", cmd_line->len);
-    // *** 끝
     if (make_token_list(cmd_line, line) == FALSE)
     {
         // *** 디버깅용 프린트 : 리스트 생성 실패 출력

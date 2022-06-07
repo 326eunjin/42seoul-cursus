@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 16:47:59 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:50:44 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ struct s_cmd_line // 한 줄에 입력된 명령어 라인에 대한 정보
 	*** parse ***
 */
 
-int parse_cmd(t_cmd_line *cmd_line);
-int  token_list(t_cmd_line *cmd_line, char *line);
+int parse_cmd(t_cmd_line **cmd_line);
+int  token_list(t_cmd_line **cmd_line, char *line);
 int  token_cnt(t_cmd_line *cmd_line, char *line);
 void token_analyze(t_cmd_line *cmd_line);
 #endif

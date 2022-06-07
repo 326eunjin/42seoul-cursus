@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:42:12 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 15:54:29 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 18:46:47 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 	int parse_cmd(t_cmd_line *cmd_line) : main에서 호출되는 함수. 커맨드라인을 입력받고 cmd_line 구조체를 생성한다.
 */
 
-int	parse_cmd(t_cmd_line *cmd_line)
+int	parse_cmd(t_cmd_line **cmd_line)
 {
 	char	*line;
 
 	// 1. cmd_line 구조체 동적할당
-	cmd_line = (t_cmd_line *)malloc(sizeof(t_cmd_line));
-	if (cmd_line == NULL)
+	*cmd_line = (t_cmd_line *)malloc(sizeof(t_cmd_line));
+	if (*cmd_line == NULL)
 		return (FALSE);
 	// 2. "한 줄" 읽어들이기
 	line = readline("\033[0;36mMinishell>> \033[0m");
@@ -51,15 +51,7 @@ int	parse_cmd(t_cmd_line *cmd_line)
 		return (FALSE);
 	}
 	// *** 끝
-	token_analyze(cmd_line);
-	//*** 디버깅용 프린트 : 토큰들 한줄에 하나씩 프린트
-	t_cmd_node *curr = cmd_line->head;
-	for(int i = 0; i < cmd_line->len; i++)
-	{
-		printf("token #%d : %s (type : %d)\n", i + 1, curr->cmd, curr->type);
-		curr = curr->next;
-	}
-	// *** 끝
+	token_analyze(*cmd_line);
 	free(line);
 	return (TRUE);
 }
