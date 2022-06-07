@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 16:08:03 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 16:10:15 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ struct s_cmd_line // 한 줄에 입력된 명령어 라인에 대한 정보
 int parse_cmd(t_cmd_line *cmd_line);
 int  token_list(t_cmd_line *cmd_line, char *line);
 int  token_cnt(t_cmd_line *cmd_line, char *line);
-
+void token_analyze(t_cmd_line *cmd_line);
 #endif
