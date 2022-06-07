@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:46:59 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/06 20:11:23 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 20:46:46 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int  token_cnt(t_cmd_line *cmd_line, char *line)
             idx++;
         // 2. 공백으로만 채워진 문자열이었을 경우 함수 종료
         if (line[idx] == '\0')
-            return (TRUE);
+            return (FALSE);
         (cmd_line->len)++;
         // 3-1. 따옴표인 경우 닫힐때까지 하나의 t_cmd_node로 취급한다.
         if (line[idx] == '"' || line[idx] == '\'')
@@ -59,5 +59,7 @@ int  token_cnt(t_cmd_line *cmd_line, char *line)
         while (line[idx] != '\0' && !(line[idx] == ' ' || line[idx] >= 9 && line[idx] <= 13))
             idx++;
     }
+    if (cmd_line->len == 0)
+        return (FALSE);
     return (TRUE);
 }
