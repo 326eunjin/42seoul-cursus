@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/06 20:10:44 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 16:08:03 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define FALSE 0
 # define TRUE 1
 
-# define CMD 1
+# define BUILTIN 1
 # define OPTION 2
 # define ARG 3
 # define PIPE 4
@@ -31,6 +31,8 @@
 # define REDIROUT 6
 # define HEREDOC 7
 # define APPEND 8
+# define DQUOTE 9
+# define QUOTE 10
 
 typedef struct s_cmd_node	t_cmd_node;
 typedef struct s_cmd_line	t_cmd_line;
