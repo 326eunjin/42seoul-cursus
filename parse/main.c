@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 18:47:38 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 18:55:16 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int argc, char **argv, char **envp)
 	    }
 	    // *** 끝
         // 실행부분
+        exe_cmd(cmd_line);
     }
     return (0);
 }

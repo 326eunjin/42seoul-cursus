@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 18:50:44 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 19:29:55 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,24 @@ int parse_cmd(t_cmd_line **cmd_line);
 int  token_list(t_cmd_line **cmd_line, char *line);
 int  token_cnt(t_cmd_line *cmd_line, char *line);
 void token_analyze(t_cmd_line *cmd_line);
+
+
+/*
+	*** utils ***
+*/
+int	ft_strcmp(char *s1, char *s2);
+char **copy_envp(char **envp);
+
+/*
+	*** execute commands ***
+*/
+void    exe_cmd(t_cmd_line *cmd_line);
+
+/*
+	built-in
+*/
+void	func_pwd(t_cmd_line *cmd_line);
+
+
+
 #endif
