@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 16:10:15 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/07 16:47:59 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define APPEND 8
 # define DQUOTE 9
 # define QUOTE 10
+
+extern int	g_exit_status;
 
 typedef struct s_cmd_node	t_cmd_node;
 typedef struct s_cmd_line	t_cmd_line;
