@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/07 22:40:09 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/08 13:26:13 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int	is_right_form(char *str)
 
 	if (ft_isalpha(str[0]) == FALSE && str[0] != '_')// 문자이거나 _
 		return (FALSE);
-	while(str[++i])
+	while(str[++i]!='=')
 	{
-		if (ft_isalnum(str[i]) == FALSE && str[i] != '_' && str[i] != '=')//숫자 문자 _ 가 아니면 
+		if (ft_isalnum(str[i]) == FALSE && str[i] != '_')//숫자 문자 _ 가 아니면 
 			return (FALSE);
 	}
 	return (TRUE);
