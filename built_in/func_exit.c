@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:17:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/07 20:18:38 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/08 14:49:22 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,33 @@ void func_exit(int argc,char **argv)
 	if (argc == 1)
 	{
 		printf("exit\n");
-		exit(g_exit_status);
+		exit(g_state.exit_status);
 	}
 	else if (argc == 2 && first_argv >= -2147483648 && ft_atoi(argv[1]) <= 2147483647)
 	{
 		printf("exit\n");
-		g_exit_status = ft_atoi(argv[1]);
-		if (g_exit_status >= 0)
-			g_exit_status = g_exit_status % 256;
+		g_state.exit_status = ft_atoi(argv[1]);
+		if (g_state.exit_status >= 0)
+			g_state.exit_status = g_state.exit_status % 256;
 		else
 		{
-			g_exit_status *= -1;
-			g_exit_status = 256 - (g_exit_status % 256);
+			g_state.exit_status *= -1;
+			g_state.exit_status = 256 - (g_state.exit_status % 256);
 		}
-		exit(g_exit_status);
+		exit(g_state.exit_status);
 	}
 	else if (argc > 2  && first_argv >= -2147483648 && ft_atoi(argv[1]) <= 2147483647)
 	{
 		printf("exit\n");
 		printf("bash: exit: too many arguments\n");
-		g_exit_status = 1;
+		g_state.exit_status = 1;
 		return ;
 	}
 	else
 	{
 		printf("exit\n");
 		printf("bash: exit: %s: numeric argument required\n",argv[1]);
-		g_exit_status = 255;
-		exit(g_exit_status);
+		g_state.exit_status = 255;
+		exit(g_state.exit_status);
 	}
 }
