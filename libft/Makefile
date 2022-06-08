@@ -6,7 +6,7 @@
 #    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/04 10:13:38 by ejang             #+#    #+#              #
-#    Updated: 2021/07/05 21:41:22 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/08 10:09:51 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,13 @@ endif
 .PHONY:		all bonus clean fclean re
 all:		$(NAME)
 $(NAME):	$(OBJECTS)
-	ar -rc $@ $^
+	@ar -rc $@ $^
 bonus:
 	make WITH_BONUS=1 all
 %.o:	%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 clean:
-	rm -f $(OBJS) $(BOBJS)
+	@rm -f $(OBJS) $(BOBJS)
 fclean:		clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 re:			fclean all
