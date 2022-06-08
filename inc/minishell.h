@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 19:29:55 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/08 14:23:13 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ extern int	g_exit_status;
 
 typedef struct s_cmd_node	t_cmd_node;
 typedef struct s_cmd_line	t_cmd_line;
+typedef struct s_state		t_state;
 
 struct s_cmd_node // 공백을 기준으로 잘린 부분 하나하나의 정보
 {
@@ -52,6 +53,15 @@ struct s_cmd_line // 한 줄에 입력된 명령어 라인에 대한 정보
 	int			len; // 명령어 라인의 총 길이
 	t_cmd_node	*head; // 연결리스트 시작부분
 };
+
+struct s_state//전역변수로 쓸 구조체
+{
+	char			**env;//환경변수
+	int				exit_status;//종료 코드
+	//추가 예정
+}t_state
+
+t_state				g_state;
 
 /*
 	*** parse ***
