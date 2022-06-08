@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 21:06:25 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/08 23:26:51 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int main(int argc, char **argv, char **envp)
 {
 	t_cmd_line *cmd_line;
 	//환경 변수 불러오기
+	//if (is_in_envp("OLDPWD") == -1)
+	//	add_old_pwd(); 만약에 OLDPWD 환경변수 없으면 추가하기
 	while (1)
 	{
 		if (parse_cmd(&cmd_line) == FALSE)
