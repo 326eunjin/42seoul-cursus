@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:37:21 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/07 19:29:40 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/08 15:42:13 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	func_pwd(t_cmd_line *cmd_line)//현재 작업중인 절대경로 출력
 	{
 		printf("%s\n",current_dir);
 		free(current_dir);
+		current_dir = NULL;
 	}
 }
