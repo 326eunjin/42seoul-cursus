@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/08 14:23:13 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/08 14:23:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 # define APPEND 8
 # define DQUOTE 9
 # define QUOTE 10
-
-extern int	g_exit_status;
 
 typedef struct s_cmd_node	t_cmd_node;
 typedef struct s_cmd_line	t_cmd_line;
