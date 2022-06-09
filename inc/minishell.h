@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/08 14:46:12 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/09 17:27:47 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,28 @@
 # define FALSE 0
 # define TRUE 1
 
-# define BUILTIN 1
-# define OPTION 2
-# define ARG 3
-# define PIPE 4
-# define REDIRIN 5
-# define REDIROUT 6
-# define HEREDOC 7
-# define APPEND 8
-# define DQUOTE 9
-# define QUOTE 10
+enum	e_token_type
+{
+	TO_COMMON,
+	TO_REDIRIN,
+	TO_REDIROUT,
+	TO_HEREDOC,
+	TO_APPEND,
+	PIPE,
+	DQUOTE,
+	QUOTE
+};
+
+enum	e_cmd_type
+{
+	COMMON,
+	REDIRIN,
+	REDIROUT,
+	HEREDOC,
+	APPEND,
+	BUILTIN,
+	OPTION
+};
 
 typedef struct s_cmd_node	t_cmd_node;
 typedef struct s_cmd_line	t_cmd_line;
@@ -66,7 +78,7 @@ t_state				g_state;
 */
 
 int parse_cmd(t_cmd_line **cmd_line);
-int  token_list(t_cmd_line **cmd_line, char *line);
+int  token_list(t_cmd_line *cmd_line, char *line);
 int  token_cnt(t_cmd_line *cmd_line, char *line);
 void token_analyze(t_cmd_line *cmd_line);
 
@@ -86,6 +98,7 @@ void    exe_cmd(t_cmd_line *cmd_line);
 	built-in
 */
 void	func_pwd(t_cmd_line *cmd_line);
+
 
 
 
