@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 18:45:36 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/09 19:06:40 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ struct s_cmd_node	//	실행에서 사용되는 가장 작은 단위.
 struct s_cmd_line_list	//	t_cmd_node 연결리스트 배열의 정보
 {
 	int			size;	//	연결리스트 배열의 개수 (파이프로 잘린 영역의 개수)
-	t_cmd_node	**list;	//	연결리스트 배열. 하나의 인자가 하나의 파이프에서 실행되는 단위이다.
+	t_cmd_node	**cmd_head_list;	//	연결리스트 배열. 하나의 인자가 하나의 파이프에서 실행되는 단위이다.
 };
 
 struct s_state//전역변수로 쓸 구조체
