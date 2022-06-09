@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 17:33:10 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/09 17:36:22 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 # define FALSE 0
 # define TRUE 1
+
+// 디버깅용 배열
+extern char *to_types[];
+extern char *cmd_types[];
 
 enum	e_token_type
 {
@@ -85,10 +89,8 @@ t_state				g_state;
 	*** parse ***
 */
 
-int parse_cmd(t_cmd_line **cmd_line);
-int  token_list(t_cmd_line *cmd_line, char *line);
-int  token_cnt(t_cmd_line *cmd_line, char *line);
-void token_analyze(t_cmd_line *cmd_line);
+int	parse_cmd(t_cmd_line_list **cmd_line_list);
+int	make_token_list(t_token_node **token_head, char *line);
 
 
 /*
@@ -100,12 +102,12 @@ char **copy_envp(char **envp);
 /*
 	*** execute commands ***
 */
-void    exe_cmd(t_cmd_line *cmd_line);
+//void    exe_cmd(t_cmd_line *cmd_line);
 
 /*
 	built-in
 */
-void	func_pwd(t_cmd_line *cmd_line);
+//void	func_pwd(t_cmd_line *cmd_line);
 
 
 

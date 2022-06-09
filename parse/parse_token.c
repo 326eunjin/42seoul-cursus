@@ -5,118 +5,129 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 16:32:02 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 21:08:05 by jeyoon           ###   ########seoul.kr  */
+/*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
+/*   Updated: 2022/06/09 17:45:47 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/*
-	int token_list(t_cmd_line *cmd_line, char *line)	:	토큰을 세어주고 (token_cnt) , 리스트를 만드는 함수
-	static int  make_token_list(t_cmd_line *cmd_line, char *line)	:	cmd_line.len만큼 노드를 할당하고 line에서 토큰을 잘라 연결리스트로 연결하는 함수
-	static char *cut_token(char *line, int *start, int *end)	:	시작지점에서 공백, 혹은 따옴표가 등장하기 전까지의 토큰을 할당해서 반환하는 함수.
-	static void add_token(t_cmd_line *cmd_line, t_cmd_node *new_node, int curr_size)	:	연결리스트 끝에 노드를 추가하는 함수.
-*/
-
-static char *cut_token(char *line, int *start, int *end)
+enum e_token_type	get_token_type(char *line, int idx)
 {
-	char *ret;
-
-	*end = *start;
-	// 1-1. 시작지점이 따옴표인 경우
-	if (line[*start] == '"' || line[*start] == '\'')
+	if (line[idx] == '"')
+		return (DQUOTE);
+	else if (line[idx] == '\'')
+		return (QUOTE);
+	else if (line[idx] == '|')
+		return (PIPE);
+	else if (line[idx] == '<')
 	{
-		(*end)++;
-		// 1-2. 끝 부분이 시작지점의 따옴표가 아닌 경우동안 인덱스를 옮긴다. (짝이 안맞는 부분은 앞서서 처리해줬다.)
-		while (line[*end] != line[*start])
-			(*end)++;
-		// 1-3. 시작부분부터 끝 부분까지의 문자열을 새로 잘라 만들어준다.
-		ret = ft_substr(line, *start, (*end - *start + 1));
-		// 1-4. end 인덱스가 부분 문자열에 포함되었으므로 인덱스를 증가시켜준다.
-		*start = *end + 1;
+		if (line[idx + 1] != '\0' && line[idx + 1] == '<')
+			return (TO_HEREDOC);
+		return (TO_REDIRIN);
 	}
-	// 2-1. 시작지점이 따옴표가 아닌 경우
+	else if (line[idx] == '>')
+	{
+		if (line[idx + 1] != '\0' && line[idx + 1] == '>')
+			return (TO_APPEND);
+		return (TO_REDIROUT);
+	}
+	else
+		return (TO_COMMON);
+}
+
+static void	add_token(t_token_node **token_head, t_token_node *new_node)
+{
+	t_token_node	*last_node;
+
+	if (*token_head == NULL)
+		*token_head = new_node;
 	else
 	{
-		// 2-2. 공백이 등장하기 전까지 인덱스를 옮긴다.
-		while (line[*end] != '\0' && !(line[*end] == ' ' || line[*end] >= 9 && line[*end] <= 13))
-			(*end)++;
-		// 2-3. 시작부분부터 끝 부분 앞까지의 문자열을 새로 잘라 만들어준다.
-		ret = ft_substr(line, *start, (*end - *start));
-		// 2-4. 인덱스를 업데이트시켜준다.
-	*start = *end;
+		last_node = *token_head;
+		while (last_node->next != NULL)
+			last_node = last_node->next;
+		last_node->next = new_node;
 	}
-	return (ret);
 }
 
-static void add_token(t_cmd_line *cmd_line, t_cmd_node *new_node, int curr_size)
+int	add_spacial_token(t_token_node **token_head, enum e_token_type type)
 {
-    t_cmd_node *last_node;
+	t_token_node	*this_node;
 
-    // 1. 첫 노드라면 head가 새로운 node를 가리키도록 한다.
-    if (curr_size == 0)
-        cmd_line->head = new_node;
-    // 2. 그 외에는 연결리스트의 끝으로 가서 새 노드를 추가한다.
-    else
-    {
-        last_node = cmd_line->head;
-        while (last_node->next != NULL)
-            last_node = last_node->next;
-        last_node->next = new_node;
-        new_node->prev = last_node;
-    }   
+	this_node = (t_token_node *)malloc(sizeof(t_token_node));
+	if (this_node == NULL)
+		return (FALSE);
+	ft_memset(this_node, 0, sizeof(t_cmd_node));
+	if (type == TO_REDIRIN)
+		this_node->token = ft_strdup("<");
+	else if (type == TO_REDIROUT)
+		this_node->token = ft_strdup(">");
+	else if (type == TO_HEREDOC)
+		this_node->token = ft_strdup("<<");
+	else if (type == TO_APPEND)
+		this_node->token = ft_strdup(">>");
+	else if (type == PIPE)
+		this_node->token = ft_strdup("|");
+	else if (type == DQUOTE)
+		this_node->token = ft_strdup("\"");
+	else if (type == QUOTE)
+		this_node->token = ft_strdup("'");
+	if (this_node->token == NULL)
+		return (FALSE);
+	this_node->type = type;
+	add_token(token_head, this_node);
+	return (TRUE);
 }
 
-static int make_token_list(t_cmd_line **cmd_line, char *line)
+int	add_common_token(t_token_node **token_head, char *line, \
+	int *idx, enum e_token_type type)
 {
-    int first_idx;
-    int last_idx;
-    int size;
-    t_cmd_node *this_node;
+	t_token_node	*this_node;
+	int				start;
 
-    size = 0;
-    first_idx = 0;
-    while (size < (*cmd_line)->len)
-    {
-        // 1. 새로운 노드 할당
-        this_node = (t_cmd_node *)malloc(sizeof(t_cmd_node));
-        if (this_node == NULL)
-            return (FALSE);
-        ft_memset(this_node, 0, sizeof(t_cmd_node));
-        // 2. line에서 공백은 넘어가기
-        while (line[first_idx] == ' ' || line[first_idx] >= 9 && line[first_idx] <= 13)
-            first_idx++;
-        // 3. 가장 처음 등장하는 공백이 아닌 부분에서부터 토큰을 자른다.
-        this_node->cmd = cut_token(line, &first_idx, &last_idx);
-        // 4. cut_token내 ft_substr 함수에서 메모리 할당 문제가 있었을 경우
-        if (this_node->cmd == NULL)
-        {
-            free(this_node);
-            return (FALSE);
-        }
-        // 4. 연결리스트 끝에 노드를 추가한다.
-        add_token(*cmd_line, this_node, size);
-        size++;
-    }
-    return (TRUE);
+	this_node = (t_token_node *)malloc(sizeof(t_token_node));
+	if (this_node == NULL)
+		return (FALSE);
+	ft_memset(this_node, 0, sizeof(t_cmd_node));
+	start = *idx;
+	while (line[*idx] != '\0' && !(line[*idx] == ' ' || \
+		line[*idx] >= 9 && line[*idx] <= 13) && \
+		(get_token_type(line, *idx) == TO_COMMON))
+		(*idx)++;
+	this_node->token = ft_substr(line, start, (*idx - start));
+	if (this_node->token == NULL)
+		return (FALSE);
+	this_node->type = TO_COMMON;
+	add_token(token_head, this_node);
+	return (TRUE);
 }
 
-int token_list(t_cmd_line **cmd_line, char *line)
+int	make_token_list(t_token_node **token_head, char *line)
 {
-    if (token_cnt(*cmd_line, line) == FALSE)
-    {
-        // *** 디버깅용 프린트 : 따옴표 덜 닫혔을 경우 error 출력
-        printf("error : 따옴표 짝이 맞지 않음\n");
-        // *** 끝
-        return (FALSE);
-    }
-    if (make_token_list(cmd_line, line) == FALSE)
-    {
-        // *** 디버깅용 프린트 : 리스트 생성 실패 출력
-        printf("error : malloc 실패\n");
-        // *** 끝
-        return (FALSE);
-    }
-    return (TRUE);
+	int					idx;
+	enum e_token_type	type;
+
+	idx = 0;
+	while (line[idx] != '\0')
+	{
+		while (line[idx] != '\0' && (line[idx] == ' ' || \
+			line[idx] >= 9 && line[idx] <= 13))
+			idx++;
+		if (line[idx] == '\0')
+			return (FALSE);
+		type = get_token_type(line, idx);
+		if (type == TO_APPEND || type == TO_HEREDOC)
+			idx++;
+		if (type != TO_COMMON)
+		{
+			if (add_spacial_token(token_head, type) == FALSE)
+				return (FALSE);
+			idx++;
+		}
+		else
+			if (add_common_token(token_head, line, &idx, type) == FALSE)
+				return (FALSE);
+	}
+	return (TRUE);
 }

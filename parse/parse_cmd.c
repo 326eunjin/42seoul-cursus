@@ -5,53 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/05 16:42:12 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/07 20:44:19 by jeyoon           ###   ########seoul.kr  */
+/*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
+/*   Updated: 2022/06/09 17:45:54 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// test
-#include <stdio.h>
-
-/*
-	int parse_cmd(t_cmd_line *cmd_line) : main에서 호출되는 함수. 커맨드라인을 입력받고 cmd_line 구조체를 생성한다.
-*/
-
-int	parse_cmd(t_cmd_line **cmd_line)
+int	parse_cmd(t_cmd_line_list **cmd_line_list)
 {
-	char	*line;
+	char			*line;
+	t_token_node	*token_head;
 
-	// 1. cmd_line 구조체 동적할당
-	*cmd_line = (t_cmd_line *)malloc(sizeof(t_cmd_line));
-	if (*cmd_line == NULL)
+	*cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
+	if (cmd_line_list == NULL)
 		return (FALSE);
-	// 2. "한 줄" 읽어들이기
+	token_head = NULL;
+	ft_memset(cmd_line_list, 0, sizeof(t_cmd_line_list));
 	line = readline("\033[0;36mMinishell>> \033[0m");
-	// 3. EOF가 입력되었을 경우 (ctrl - d) 처리
 	if (line == NULL)
 	{
-		// *** 디버깅용 프린트 : ctrl - d 입력시 예외처리
-		printf("ctrl - d\n");
-		// *** 끝
+		//free_token_list(token_head);
+		//free_cmd_line_list(cmd_line_list);
 		return (TRUE);
 	}
-	// 3. history에 추가
 	add_history(line);
-	// *** 디버깅용 프린트 : 입력받은 한 줄 출력
-	printf("%s\n", line);
-	// *** 끝
-	// 4. 토큰화만 해 주기 (단순히 잘라서 연결리스트 생성.)
-	if (token_list(cmd_line, line) == FALSE)
+	if (make_token_list(&token_head, line) == FALSE)
 	{
-		// *** 디버깅용 프린트 : 토큰 리스트 생성에서 error
-		printf("error : in 토큰 리스트 생성\n");
-		// *** 끝
+		//free_token_list(token_head);
+		//free_cmd_line_list(cmd_line_list);
 		return (FALSE);
 	}
+	// *** 디버깅용 프린트
+	t_token_node *curr = token_head;
+	while(curr != NULL)
+	{
+		printf("token : %s (type : %s)\n", curr->token, to_types[curr->type]);
+		curr = curr->next;
+	}
 	// *** 끝
-	token_analyze(*cmd_line);
-	free(line);
+	// 3. 토큰 리스트를 돌면서 합칠 수 있는건 합치고, 쪼개야 하는건 쪼개기
+	// if (make_cmd_list(cmd_line_list, token_head) == FALSE)
+	// {
+	// 	//free_token_list(token_head);
+	// 	//free_cmd_line_list(cmd_line_list);
+	// 	return (FALSE);
+	// }
+	// 4. 썼던 토큰 리스트 free
+	//free_token_list(token_head);
+	// 5. true 반환
 	return (TRUE);
 }
