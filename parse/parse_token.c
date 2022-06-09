@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 18:46:40 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/09 19:32:00 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ int	add_spacial_token(t_token_node **token_head, enum e_token_type type)
 	return (TRUE);
 }
 
-int	add_common_token(t_token_node **token_head, char *line, \
-	int *idx, enum e_token_type type)
+int	add_common_token(t_token_node **token_head, char *line, int *idx)
 {
 	t_token_node	*this_node;
 	int				start;
@@ -127,7 +126,7 @@ int	make_token_list(t_token_node **token_head, char *line)
 			idx++;
 		}
 		else
-			if (add_common_token(token_head, line, &idx, type) == FALSE)
+			if (add_common_token(token_head, line, &idx) == FALSE)
 				return (FALSE);
 	}
 	return (TRUE);
