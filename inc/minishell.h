@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 17:27:47 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/09 17:33:10 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,30 @@ enum	e_cmd_type
 	OPTION
 };
 
+typedef struct s_token_node	t_token_node;
 typedef struct s_cmd_node	t_cmd_node;
-typedef struct s_cmd_line	t_cmd_line;
+typedef struct s_cmd_line_list	t_cmd_line_list;
 typedef struct s_state		t_state;
 
-struct s_cmd_node // 공백을 기준으로 잘린 부분 하나하나의 정보
+struct s_token_node	//	공백과 특수문자를 기준으로 잘린 부분 하나하나의 정보
 {
-	int			type; // cmd의 종류
-	char		*cmd; // 실제 입력된 커맨드 
-	t_cmd_node	*prev; // 연결리스트 연결부 (이전)
-	t_cmd_node	*next; // 연결리스트 연결부 (다음)
+	enum e_token_type	type;	//	토큰의 종류
+	char				*token;	//	토큰 내용
+	t_token_node		*next;	//	연결리스트 연결부 (다음)
 };
 
-struct s_cmd_line // 한 줄에 입력된 명령어 라인에 대한 정보
+struct s_cmd_node	//	실행에서 사용되는 가장 작은 단위.
 {
-	int			len; // 명령어 라인의 총 길이
-	t_cmd_node	*head; // 연결리스트 시작부분
+	enum e_cmd_type	type;	//	종류
+	char			*cmd;	//	실제 내용
+	t_cmd_node		*prev;	//	연결리스트 연결부 (이전)
+	t_cmd_node		*next;	//	연결리스트 연결부 (다음)
+};
+
+struct s_cmd_line_list	//	t_cmd_node 연결리스트 배열의 정보
+{
+	int			size;	//	연결리스트 배열의 개수 (파이프로 잘린 영역의 개수)
+	t_cmd_node	**list;	//	연결리스트 배열. 하나의 인자가 하나의 파이프에서 실행되는 단위이다.
 };
 
 struct s_state//전역변수로 쓸 구조체
