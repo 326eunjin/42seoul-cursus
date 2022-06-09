@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 17:45:47 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/09 18:46:40 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	add_token(t_token_node **token_head, t_token_node *new_node)
 		while (last_node->next != NULL)
 			last_node = last_node->next;
 		last_node->next = new_node;
+		new_node->prev = last_node;
 	}
 }
 
