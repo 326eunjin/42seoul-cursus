@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cmd.c                                        :+:      :+:    :+:   */
+/*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 17:45:54 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/09 20:00:36 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 	}
 	// *** 끝
 	// 3. 토큰 리스트를 돌면서 합칠 수 있는건 합치고, 쪼개야 하는건 쪼개기
-	// if (make_cmd_list(cmd_line_list, token_head) == FALSE)
-	// {
-	// 	//free_token_list(token_head);
-	// 	//free_cmd_line_list(cmd_line_list);
-	// 	return (FALSE);
-	// }
+	if (make_cmd_list(cmd_line_list, token_head) == FALSE)
+	{
+		//free_token_list(token_head);
+		//free_cmd_line_list(cmd_line_list);
+		return (FALSE);
+	}
 	// 4. 썼던 토큰 리스트 free
 	//free_token_list(token_head);
 	// 5. true 반환

@@ -6,7 +6,7 @@
 #    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/09 17:41:14 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/06/09 20:00:46 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ BUILTIN_DIR = ./built_in/
 UTIL_DIR = ./util/
 
 LIBFT_SRCS = ft_memset.c ft_substr.c ft_strdup.c ft_strlcpy.c ft_strlen.c
-PARSE_SRCS = main.c parse_cmd.c parse_token.c
+PARSE_SRCS = main.c parse_main.c parse_token.c
 BUILTIN_SRCS = 
 UTIL_SRCS = 
 
