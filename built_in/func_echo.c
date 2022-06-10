@@ -6,10 +6,17 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 17:04:10 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/05 19:53:28 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/10 15:39:20 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-
+void	echo(int flag, char *str)
+//아직 합친게 아니라서 flag가 n 옵션이 있는지 아닌지 확인하는겁니다,,!
+{
+	if (flag == FALSE)
+		printf("%s\n",str);
+	else
+		printf("%s",str);
+}
