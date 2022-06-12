@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/12 22:06:23 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/12 22:54:30 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int has_equal_sign(char *str)//= 등호가 있는지 없는지
 	return (FALSE);
 }
 
-int	is_right_form(char *str)
+int	is_right_form(char *str)//key값만 확인 즉, = 까지 유효한지 확인
 {
 	int i = -1;
 
