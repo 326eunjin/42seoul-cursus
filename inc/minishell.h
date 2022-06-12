@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/12 22:06:55 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/12 23:21:29 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	func_pwd(void);
 void	func_env(void);
 void	func_echo(t_cmd_node *head);
 void	func_export(t_cmd_node *head);
-
-
+void	func_unset(t_cmd_node *head);
+int		is_right_form(char *str);
 
 #endif
