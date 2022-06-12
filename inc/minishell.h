@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 20:48:36 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/12 21:42:53 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ t_state				g_state;
 	*** parse ***
 */
 
-int	parse_cmd(t_cmd_line_list **cmd_line_list);
-int	make_token_list(t_token_node **token_head, char *line);
-int	make_cmd_list(t_cmd_line_list *cmd_line_list, t_token_node *token_head, char *line);
+int		parse_cmd(t_cmd_line_list **cmd_line_list);
+int		make_token_list(t_token_node **token_head, char *line);
+int		make_cmd_list(t_cmd_line_list **cmd_line_list, t_token_node *token_head, char *line);
+int		add_common_cmd(t_cmd_node **cmd_head, char *token, enum e_token_type type);
+void	check_cmd_type(t_cmd_node **cmd_heads, int size);
 
 /*
 	*** utils ***
@@ -103,13 +105,14 @@ char **copy_envp(char **envp);
 /*
 	*** execute commands ***
 */
-//void    exe_cmd(t_cmd_line *cmd_line);
+void	exe_cmd(t_cmd_line_list *cmd_line_list);
 
 /*
 	built-in
 */
-//void	func_pwd(t_cmd_line *cmd_line);
-
+void	func_pwd(void);
+void	func_env(void);
+void	func_echo(t_cmd_node *head);
 
 
 
