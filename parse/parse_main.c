@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 21:11:19 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/12 21:07:39 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 		return (FALSE);
 	}
 	// *** 디버깅용 프린트
-	t_token_node *curr = token_head;
-	while(curr != NULL)
+	t_token_node *curr_token = token_head;
+	while(curr_token != NULL)
 	{
-		printf("token : %s (type : %s)\n", curr->token, to_types[curr->type]);
-		curr = curr->next;
+		printf("token : %s (type : %s)\n", curr_token->token, to_types[curr_token->type]);
+		curr_token = curr_token->next;
 	}
 	// *** 끝
 	// 3. 토큰 리스트를 돌면서 합칠 수 있는건 합치고, 쪼개야 하는건 쪼개기
-	if (make_cmd_list(*cmd_line_list, token_head, line) == FALSE)
+	if (make_cmd_list(cmd_line_list, token_head, line) == FALSE)
 	{
 		//free_token_list(token_head);
 		//free_cmd_line_list(cmd_line_list);

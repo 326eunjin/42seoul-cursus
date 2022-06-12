@@ -6,11 +6,31 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:03:54 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 21:14:59 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/12 21:09:38 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static	int	cut_cmd_line(t_cmd_node **curr_cmd_head, t_token_node **curr_token, char *line)
+{
+	while (*curr_token != NULL && (*curr_token)->type != PIPE)
+	{
+		// if ((*curr_token)->type == DQUOTE || (*curr_token)->type == QUOTE)
+		// 	if (add_quote_cmd(curr_cmd_head, curr_token) == FALSE)
+		// 		return (FALSE);
+		// else if ((*curr_token)->token[0] == '$')
+		// 	if (add_dollar_cmd(curr_cmd_head, curr_token) == FALSE)
+		// 		return (FALSE);
+		// else
+			if (add_common_cmd(curr_cmd_head, (*curr_token)->token, (*curr_token)->type) == FALSE)
+				return (FALSE);
+		*curr_token = (*curr_token)->next;
+	}
+	if ((*curr_token) != NULL)
+		*curr_token = (*curr_token)->next;
+	return (TRUE);
+}
 
 static int	cmd_check(t_cmd_line_list *cmd_line_list, t_token_node *token_head)
 {
@@ -41,13 +61,24 @@ static int	cmd_check(t_cmd_line_list *cmd_line_list, t_token_node *token_head)
 	return (TRUE);
 }
 
-int	make_cmd_list(t_cmd_line_list *cmd_line_list, t_token_node *token_head, char *line)
+int	make_cmd_list(t_cmd_line_list **cmd_line_list, t_token_node *token_head, char *line)
 {
-	if (cmd_check(cmd_line_list, token_head) == FALSE)
+	int				idx;
+	t_token_node	*curr_token;
+	if (cmd_check(*cmd_line_list, token_head) == FALSE)
 		return (FALSE);
-	cmd_line_list->cmd_heads = (t_cmd_node **)malloc(sizeof(t_cmd_node *) * cmd_line_list->size);
-	if (cmd_line_list->cmd_heads == NULL)
+	(*cmd_line_list)->cmd_heads = (t_cmd_node **)malloc(sizeof(t_cmd_node *) * (*cmd_line_list)->size);
+	if ((*cmd_line_list)->cmd_heads == NULL)
 		return (FALSE);
-	printf("cmd_heads_size = %d\n", cmd_line_list->size);
+	ft_memset((*cmd_line_list)->cmd_heads, 0, sizeof(t_cmd_node *) * (*cmd_line_list)->size);
+	idx = 0;
+	curr_token = token_head;
+	while (idx < (*cmd_line_list)->size)
+	{
+		if (cut_cmd_line(&((*cmd_line_list)->cmd_heads[idx]), &curr_token, line) == FALSE)
+			return (FALSE);
+		idx++;
+	}
+	check_cmd_type((*cmd_line_list)->cmd_heads, (*cmd_line_list)->size);
 	return (TRUE);
 }
