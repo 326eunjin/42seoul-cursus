@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/08 15:42:28 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/12 22:06:23 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,48 +96,28 @@ int	is_right_form(char *str)
 	return (TRUE);
 }
 
-void func_export(char *str)
+//void func_export(char *str)
+void	func_export(t_cmd_node *head)
 {
-	char **tmp;
+	//char **tmp;
 	int i = -1;
-	int cnt = 0;
+	//int cnt = 0;
 	int j = -1;
-	tmp = ft_split(str, ' ');//공백 기준으로 자르기
-	cnt = get_count(str,' ');//공백 기준으로 몇개 인지 확인
-	if (cnt == 1)
+	// tmp = ft_split(str, ' ');//공백 기준으로 자르기
+	// cnt = get_count(str,' ');//공백 기준으로 몇개 인지 확인
+	t_cmd_node *curr_node;
+	curr_node = head->next;
+	while(curr_node != NULL)
 	{
-		if (is_right_form(tmp[0]) == FALSE)//ex. export 3=re;
+		if (is_right_form(curr_node->cmd) == FALSE)
+			printf("bash: export: `%s': not a valid identifier\n",curr_node->cmd);
+		else if ((has_equal_sign(curr_node->cmd) == TRUE))
 		{
-			printf("bash: export: `%s': not a valid identifier\n",tmp[0]);
-			free_split(tmp);//free한거 해제
+			if (is_in_envp(curr_node->cmd) != -1)
+				modify_envp(curr_node->cmd, is_in_envp(curr_node->cmd));
+			else// no key
+				g_state.envp = new_export(curr_node->cmd);
 		}
-		else if (has_equal_sign(tmp[0]) == TRUE)//export HI=hi
-		{
-			if (is_in_envp(tmp[0])!= -1)//만약에 key값이 envp에 있다면,
-				modify_envp(tmp[0],is_in_envp(tmp[0]));//value를 변경 시켜줌.
-			else//no key 
-			{
-				g_state.envp = new_export(tmp[0]);//export new variable
-				free_split(tmp);
-			}
-		}
-		else//아무것도 안함. 
-			free_split(tmp);
-	}
-	else//have space in str ex. export hi=HI ejang=EJ
-	{
-		while(++i < cnt)
-		{
-			if(is_right_form(tmp[i]) == FALSE)//ex. 3_e=hehe
-				printf("bash: export: `%s': not a valid identifier\n",tmp[i]);
-			else
-			{
-				if (is_in_envp(tmp[i])!= -1)//환경변수 안에 있다면  
-					modify_envp(tmp[i], is_in_envp(tmp[i]));//추가하지말고 value 값을 변경해줌. 
-				else
-					g_state.envp = new_export(tmp[i]);//환경변수 안에 없으므로 추가해줌. 
-			}
-		}
-		free_split(tmp);
+		curr_node = curr_node->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/12 21:30:44 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/12 22:10:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int main(int argc, char **argv, char **envp)
 
 		//실행부분
 		exe_cmd(cmd_line_list);
+		int i = -1;
+		while(g_state.envp[++i])
+			printf("%s\n",g_state.envp[i]);
 	}
 	//ㄷ ㅏ실행하고 나서 전역 변수 환경변수 복사본 해제해줘야함.
 	return (0);
