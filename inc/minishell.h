@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 16:12:43 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/13 16:58:04 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		parse_cmd(t_cmd_line_list **cmd_line_list);
 int		make_token_list(t_token_node **token_head, char *line);
 int		make_cmd_list(t_cmd_line_list **cmd_line_list, t_token_node *token_head, char *line);
 int		add_common_cmd(t_cmd_node **cmd_head, char *token, enum e_token_type type);
+int		add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr_token);
 void	check_cmd_type(t_cmd_node **cmd_heads, int size);
 
 /*
@@ -121,6 +122,7 @@ int		is_right_form(char *str);
 void	export_str(char *str);
 int		is_in_envp(char *str);
 void	modify_envp(char *str, int loc);
+void	free_split(char **tmp);
 char	*get_value(char *key);
 char	**new_export(char *str);
 char	*get_pwd(void);

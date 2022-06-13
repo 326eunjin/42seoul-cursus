@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 16:14:24 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/13 17:05:35 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ int main(int argc, char **argv, char **envp)
 			}
 			printf("----\n");
 		}
-	// *** 끝
-
+		// *** 끝
 		//실행부분
 		exe_cmd(cmd_line_list);
-		int i = -1;
-		while(g_state.envp[++i])
-			if(ft_strncmp(g_state.envp[i],"OLDPWD",6) == 0 || ft_strncmp(g_state.envp[i],"PWD",3)== 0)
-				printf("%s\n",g_state.envp[i]);
+		// // *** 디버깅용 프린트 (OLDPWD, PWD)
+		// int i = -1;
+		// while(g_state.envp[++i])
+		// 	if(ft_strncmp(g_state.envp[i],"OLDPWD",6) == 0 || ft_strncmp(g_state.envp[i],"PWD",3)== 0)
+		// 		printf("%s\n",g_state.envp[i]);
+		// // *** 끝
 	}
 	//ㄷ ㅏ실행하고 나서 전역 변수 환경변수 복사본 해제해줘야함.
 	return (0);
