@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:03:54 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 16:59:17 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/13 20:58:28 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ static	int	cut_cmd_line(t_cmd_node **curr_cmd_head, t_token_node **curr_token, c
 {
 	while (*curr_token != NULL && (*curr_token)->type != PIPE)
 	{
-		// if ((*curr_token)->type == DQUOTE || (*curr_token)->type == QUOTE)
-		// 	if (add_quote_cmd(curr_cmd_head, curr_token, (*curr_token)->type, line) == FALSE)
-		// 		return (FALSE);
-		if ((*curr_token)->token[0] == '$')
+		if ((*curr_token)->type == DQUOTE || (*curr_token)->type == QUOTE)
+		{
+			if (add_quote_cmd(curr_cmd_head, curr_token, (*curr_token)->type, line) == FALSE)
+				return (FALSE);
+		}
+		else if ((*curr_token)->token[0] == '$')
 		{
 			if (add_dollar_cmd(curr_cmd_head, curr_token) == FALSE)
 				return (FALSE);
