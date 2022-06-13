@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 17:58:08 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/13 21:40:04 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ char **copy_envp(char **envp);
 /*
 	*** execute commands ***
 */
+void	exe_builtin(t_cmd_node	*node);
 void	exe_cmd(t_cmd_line_list *cmd_line_list);
-
 /*
 	built-in
 */
