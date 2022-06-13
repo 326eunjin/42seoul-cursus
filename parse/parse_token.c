@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/09 19:32:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/13 18:19:47 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ enum e_token_type	get_token_type(char *line, int idx)
 		return (TO_COMMON);
 }
 
-static void	add_token(t_token_node **token_head, t_token_node *new_node)
+static int	add_token(t_token_node **token_head, t_token_node *new_node)
 {
 	t_token_node	*last_node;
 
@@ -50,9 +50,10 @@ static void	add_token(t_token_node **token_head, t_token_node *new_node)
 		last_node->next = new_node;
 		new_node->prev = last_node;
 	}
+	return (TRUE);
 }
 
-int	add_spacial_token(t_token_node **token_head, enum e_token_type type)
+int	add_spacial_token(t_token_node **token_head, enum e_token_type type, int idx)
 {
 	t_token_node	*this_node;
 
@@ -77,8 +78,8 @@ int	add_spacial_token(t_token_node **token_head, enum e_token_type type)
 	if (this_node->token == NULL)
 		return (FALSE);
 	this_node->type = type;
-	add_token(token_head, this_node);
-	return (TRUE);
+	this_node->idx = idx;
+	return (add_token(token_head, this_node));
 }
 
 int	add_common_token(t_token_node **token_head, char *line, int *idx)
@@ -99,8 +100,8 @@ int	add_common_token(t_token_node **token_head, char *line, int *idx)
 	if (this_node->token == NULL)
 		return (FALSE);
 	this_node->type = TO_COMMON;
-	add_token(token_head, this_node);
-	return (TRUE);
+	this_node->idx = start;
+	return (add_token(token_head, this_node));
 }
 
 int	make_token_list(t_token_node **token_head, char *line)
@@ -121,7 +122,7 @@ int	make_token_list(t_token_node **token_head, char *line)
 			idx++;
 		if (type != TO_COMMON)
 		{
-			if (add_spacial_token(token_head, type) == FALSE)
+			if (add_spacial_token(token_head, type, idx) == FALSE)
 				return (FALSE);
 			idx++;
 		}

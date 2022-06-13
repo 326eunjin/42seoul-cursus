@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 17:10:07 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/13 18:11:33 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 	t_token_node *curr_token = token_head;
 	while(curr_token != NULL)
 	{
-		printf("token : %s (type : %s)\n", curr_token->token, to_types[curr_token->type]);
+		printf("token : %s (type : %s) (idx : %d)\n", curr_token->token, to_types[curr_token->type], curr_token->idx);
 		curr_token = curr_token->next;
 	}
 	// *** 끝
