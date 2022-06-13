@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/13 15:58:36 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/13 16:26:36 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	is_right_form(char *str)//key값만 확인 즉, = 까지 유효한지 확인
 //void func_export(char *str)
 void	func_export(t_cmd_node *head)
 {
+	int	idx;
 	//char **tmp;
 	int i = -1;
 	//int cnt = 0;
@@ -113,8 +114,9 @@ void	func_export(t_cmd_node *head)
 			printf("bash: export: `%s': not a valid identifier\n",curr_node->cmd);
 		else if ((has_equal_sign(curr_node->cmd) == TRUE))
 		{
-			if (is_in_envp(curr_node->cmd) != -1)
-				modify_envp(curr_node->cmd, is_in_envp(curr_node->cmd));
+			idx = is_in_envp(curr_node->cmd);
+			if (idx != -1)
+				modify_envp(curr_node->cmd, idx);
 			else// no key
 				g_state.envp = new_export(curr_node->cmd);
 		}
