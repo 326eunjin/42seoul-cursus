@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/12 23:21:29 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/13 16:12:43 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,14 @@ void	func_env(void);
 void	func_echo(t_cmd_node *head);
 void	func_export(t_cmd_node *head);
 void	func_unset(t_cmd_node *head);
-int		is_right_form(char *str);
+void	func_cd(t_cmd_node *head);
 
+int		is_right_form(char *str);
+void	export_str(char *str);
+int		is_in_envp(char *str);
+void	modify_envp(char *str, int loc);
+char	*get_value(char *key);
+char	**new_export(char *str);
+char	*get_pwd(void);
+void	add_old_pwd(void);
 #endif
