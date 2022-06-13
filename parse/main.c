@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/12 22:10:46 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/13 16:14:24 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int main(int argc, char **argv, char **envp)
 	t_cmd_line_list *cmd_line_list;
 	g_state.envp = copy_envp(envp);
 	//환경 변수 불러오기
-	// if (is_in_envp("OLDPWD") == -1)
-	// 	add_old_pwd(); 만약에 OLDPWD 환경변수 없으면 추가하기
+	if (is_in_envp("OLDPWD") == -1)
+		add_old_pwd();// 만약에 OLDPWD 환경변수 없으면 추가하기
 	while (1)
 	{
 		if (parse_cmd(&cmd_line_list) == FALSE)
@@ -49,7 +49,8 @@ int main(int argc, char **argv, char **envp)
 		exe_cmd(cmd_line_list);
 		int i = -1;
 		while(g_state.envp[++i])
-			printf("%s\n",g_state.envp[i]);
+			if(ft_strncmp(g_state.envp[i],"OLDPWD",6) == 0 || ft_strncmp(g_state.envp[i],"PWD",3)== 0)
+				printf("%s\n",g_state.envp[i]);
 	}
 	//ㄷ ㅏ실행하고 나서 전역 변수 환경변수 복사본 해제해줘야함.
 	return (0);

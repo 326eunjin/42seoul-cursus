@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/12 23:19:31 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/13 15:47:50 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list)
 			func_export(cmd_line_list->cmd_heads[idx]);
 		if (ft_strcmp(cmd_line_list->cmd_heads[idx]->cmd, "unset") == 0)
 			func_unset(cmd_line_list->cmd_heads[idx]);
+		if (ft_strcmp(cmd_line_list->cmd_heads[idx]->cmd, "cd") == 0)
+			func_cd(cmd_line_list->cmd_heads[idx]);
 		idx++;
 	}
 }
