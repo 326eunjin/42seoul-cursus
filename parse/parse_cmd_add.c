@@ -6,35 +6,13 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:07:42 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 13:57:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 15:28:14 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*replace_dollar(char *str, int idx, char *line)
-{
-	char	**split;
-	char	*ret;
-	char	*name;
-	char	envp_idx;
-
-	if (idx < 1 || line[idx - 1] != '$')
-		return (ft_strdup("$"));
-	if (ft_strcmp(str, "?") == 0)
-		return (ft_itoa(g_state.exit_status));
-	envp_idx = is_in_envp(str);
-	if (envp_idx == -1)
-		return (ft_strdup(""));
-	split = ft_split(g_state.envp[envp_idx], '=');
-	if (split == 0)
-		return (0);
-	ret = ft_strdup(split[1]);
-	free_split(split);
-	return (ret);
-}
-
-void	add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node)
+int	add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node)
 {
 	t_cmd_node	*last_node;
 
@@ -48,6 +26,7 @@ void	add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node)
 		last_node->next = new_node;
 		new_node->prev = last_node;
 	}
+	return (TRUE);
 }
 
 void	join_cmd(t_cmd_node **cmd_head, char *token)

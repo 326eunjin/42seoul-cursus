@@ -6,38 +6,48 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:22:14 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 14:00:14 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 15:38:34 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	need_join(t_token_node *curr_token, char *line, int option)
+static void	join_dquote(t_cmd_node **cmd_head, \
+	t_token_node **curr, char *line)
 {
-	char	c;
+	char		*new_str;
+	t_cmd_node	*last_cmd;
 
-	if (curr_token->idx - 1 > 0)
-		c = line[curr_token->idx - 1];
-	else
-		c = '\0';
-	if (option == 1)
+	*curr = (*curr)->next;
+	new_str = ft_strdup("");
+	make_new_str(&new_str, curr, line);
+	last_cmd = (*cmd_head);
+	while (last_cmd->next != NULL)
+		last_cmd = last_cmd->next;
+	last_cmd->cmd = ft_strjoin(last_cmd->cmd, new_str);
+	free(new_str);
+}
+
+static int	new_dquote(t_cmd_node **cmd_head, \
+	t_token_node **curr, char *line)
+{
+	char		*new_str;
+	t_cmd_node	*new_cmd;
+
+	*curr = (*curr)->next;
+	new_str = ft_strdup("");
+	make_new_str(&new_str, curr, line);
+	new_cmd = (t_cmd_node *)malloc(sizeof(t_cmd_node));
+	if (new_cmd == NULL)
 	{
-		if (c != '\0' && !(c == ' ' || c >= 9 && c <= 13))
-			return (TRUE);
+		free(new_str);
 		return (FALSE);
 	}
-	else if (option == 2)
-	{
-		if (c == '\'' || c == '"' || !(c == ' ' || c >= 9 && c <= 13))
-			return (TRUE);
-		return (FALSE);
-	}
-	else
-	{
-		if (c == '\'' || c == '"')
-			return (TRUE);
-		return (FALSE);
-	}
+	ft_memset(new_cmd, 0, sizeof(t_cmd_node));
+	new_cmd->cmd = new_str;
+	new_cmd->type = COMMON;
+	add_cmd(cmd_head, new_cmd);
+	return (TRUE);
 }
 
 static void	join_quote(t_cmd_node **cmd_head, \
@@ -88,10 +98,21 @@ static int	new_quote(t_cmd_node **cmd_head, \
 int	add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, \
 	enum e_token_type type, char *line)
 {
-	if (need_join(*curr_token, line, 1) == TRUE)
-		join_quote(cmd_head, curr_token, line);
+	if (type == QUOTE)
+	{
+		if (need_join(*curr_token, line, 1) == TRUE)
+			join_quote(cmd_head, curr_token, line);
+		else
+			if (new_quote(cmd_head, curr_token, line) == FALSE)
+				return (FALSE);
+	}
 	else
-		if (new_quote(cmd_head, curr_token, line) == FALSE)
-			return (FALSE);
+	{
+		if (need_join(*curr_token, line, 1) == TRUE)
+			join_dquote(cmd_head, curr_token, line);
+		else
+			if (new_dquote(cmd_head, curr_token, line) == FALSE)
+				return (FALSE);
+	}
 	return (TRUE);
 }

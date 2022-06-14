@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 13:10:27 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 15:38:58 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ struct s_state//전역변수로 쓸 구조체
 	//추가 예정
 };
 
-t_state				g_state;
+t_state		g_state;
 
 /*
 	*** parse ***
@@ -98,15 +98,18 @@ int		make_cmd_list(t_cmd_line_list **cmd_line_list, t_token_node *token_head, ch
 int		add_common_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token_type type, char *line);
 int		add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, char *line);
 int		need_join(t_token_node *curr_token, char *line, int option);
+char	*replace_dollar(char *str, int idx, char *line);
+void	make_new_str(char **new_str, t_token_node **curr, char *line);
 void	check_cmd_type(t_cmd_node **cmd_heads, int size);
 int		add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token_type type, char *line);
-void	add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node);
+int		add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node);
+void	dquote_dollar(char **curr_str, t_token_node **curr, char *line);
 
 /*
 	*** utils ***
 */
-int	ft_strcmp(char *s1, char *s2);
-char **copy_envp(char **envp);
+int		ft_strcmp(char *s1, char *s2);
+char	**copy_envp(char **envp);
 
 /*
 	*** execute commands ***
