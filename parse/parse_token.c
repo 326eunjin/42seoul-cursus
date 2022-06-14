@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 18:19:47 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 12:32:31 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ enum e_token_type	get_token_type(char *line, int idx)
 		return (QUOTE);
 	else if (line[idx] == '|')
 		return (PIPE);
+	else if (line[idx] == '$')
+		return (DOLLAR);
 	else if (line[idx] == '<')
 	{
 		if (line[idx + 1] != '\0' && line[idx + 1] == '<')
@@ -36,19 +38,21 @@ enum e_token_type	get_token_type(char *line, int idx)
 		return (TO_COMMON);
 }
 
-static int	add_token(t_token_node **token_head, t_token_node *new_node)
+static int	add_token(t_token_node **token_head, t_token_node **new_node, enum e_token_type type, int idx)
 {
 	t_token_node	*last_node;
 
+	(*new_node)->type = type;
+	(*new_node)->idx = idx;
 	if (*token_head == NULL)
-		*token_head = new_node;
+		*token_head = *new_node;
 	else
 	{
 		last_node = *token_head;
 		while (last_node->next != NULL)
 			last_node = last_node->next;
-		last_node->next = new_node;
-		new_node->prev = last_node;
+		last_node->next = *new_node;
+		(*new_node)->prev = last_node;
 	}
 	return (TRUE);
 }
@@ -75,11 +79,11 @@ int	add_spacial_token(t_token_node **token_head, enum e_token_type type, int idx
 		this_node->token = ft_strdup("\"");
 	else if (type == QUOTE)
 		this_node->token = ft_strdup("'");
+	else if (type == DOLLAR)
+		this_node->token = ft_strdup("$");
 	if (this_node->token == NULL)
 		return (FALSE);
-	this_node->type = type;
-	this_node->idx = idx;
-	return (add_token(token_head, this_node));
+	return (add_token(token_head, &this_node, type, idx));
 }
 
 int	add_common_token(t_token_node **token_head, char *line, int *idx)
@@ -99,9 +103,7 @@ int	add_common_token(t_token_node **token_head, char *line, int *idx)
 	this_node->token = ft_substr(line, start, (*idx - start));
 	if (this_node->token == NULL)
 		return (FALSE);
-	this_node->type = TO_COMMON;
-	this_node->idx = start;
-	return (add_token(token_head, this_node));
+	return (add_token(token_head, &this_node, TO_COMMON, start));
 }
 
 int	make_token_list(t_token_node **token_head, char *line)

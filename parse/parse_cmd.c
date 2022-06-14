@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:03:54 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 12:06:59 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 13:48:29 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	int	cut_cmd_line(t_cmd_node **curr_cmd_head, t_token_node **curr_token, c
 		}
 		else if ((*curr_token)->token[0] == '$')
 		{
-			if (add_dollar_cmd(curr_cmd_head, curr_token) == FALSE)
+			if (add_dollar_cmd(curr_cmd_head, curr_token, line) == FALSE)
 				return (FALSE);
 		}
 		else

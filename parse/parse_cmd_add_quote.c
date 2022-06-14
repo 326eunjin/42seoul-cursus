@@ -6,13 +6,42 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:22:14 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 12:10:54 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 14:00:14 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	join_quote(t_cmd_node **cmd_head, t_token_node **curr_token, char *line)
+int	need_join(t_token_node *curr_token, char *line, int option)
+{
+	char	c;
+
+	if (curr_token->idx - 1 > 0)
+		c = line[curr_token->idx - 1];
+	else
+		c = '\0';
+	if (option == 1)
+	{
+		if (c != '\0' && !(c == ' ' || c >= 9 && c <= 13))
+			return (TRUE);
+		return (FALSE);
+	}
+	else if (option == 2)
+	{
+		if (c == '\'' || c == '"' || !(c == ' ' || c >= 9 && c <= 13))
+			return (TRUE);
+		return (FALSE);
+	}
+	else
+	{
+		if (c == '\'' || c == '"')
+			return (TRUE);
+		return (FALSE);
+	}
+}
+
+static void	join_quote(t_cmd_node **cmd_head, \
+	t_token_node **curr_token, char *line)
 {
 	int			start;
 	int			end;
@@ -32,7 +61,8 @@ static void	join_quote(t_cmd_node **cmd_head, t_token_node **curr_token, char *l
 	free(new_str);
 }
 
-static int	new_quote(t_cmd_node **cmd_head, t_token_node **curr_token, char *line)
+static int	new_quote(t_cmd_node **cmd_head, \
+	t_token_node **curr_token, char *line)
 {
 	int			start;
 	int			end;
@@ -55,19 +85,13 @@ static int	new_quote(t_cmd_node **cmd_head, t_token_node **curr_token, char *lin
 	return (TRUE);
 }
 
-int	add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token_type type, char *line)
+int	add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, \
+	enum e_token_type type, char *line)
 {
-	char	temp_c;
-
-	if ((*curr_token)->idx - 1 > 0)
-		temp_c = line[(*curr_token)->idx - 1];
-	else
-		temp_c = '\0';
-	if (temp_c != '\0' && !(temp_c == ' ' || temp_c >= 9 && temp_c <= 13))
-		join_quote(cmd_head, curr_token, line);	// 앞쪽에 계속 join해줘야 합니다.
+	if (need_join(*curr_token, line, 1) == TRUE)
+		join_quote(cmd_head, curr_token, line);
 	else
 		if (new_quote(cmd_head, curr_token, line) == FALSE)
-			return (FALSE);	// 계속 새로 만들어진 노드에 넣어줘야 합니다.
+			return (FALSE);
 	return (TRUE);
 }
-
