@@ -6,7 +6,7 @@
 #    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/14 15:05:14 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/06/14 16:07:44 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,16 +30,20 @@ OBJS	=	$(SRCS:.c=.o)
 all	:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-			$(CC) $(CFLAGS) -o $@ $(OBJS)
+			@$(CC) $(CFLAGS) -o $@ $(OBJS)
+			@printf "✅ \033[0;32m$(NAME) was created.\033[0m\n"
 
 %.o	:	%.c
-		$(CC) $(CFLAG) -c $< -o $@
+		@$(CC) $(CFLAG) -c $< -o $@
 
 clean	:
-			rm -rf $(OBJS)
+			@rm -rf $(OBJS)
+			@printf "🚮 Object files were removed.\n"
+
 
 fclean	:	clean
-			rm -rf $(NAME)
+			@rm -rf $(NAME)
+			@printf "🚮 $(NAME) was removed.\n"
 
 re	:	fclean all
 
