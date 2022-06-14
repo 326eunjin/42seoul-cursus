@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:22:14 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 21:39:30 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 12:10:54 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ int	add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token
 	else
 		if (new_quote(cmd_head, curr_token, line) == FALSE)
 			return (FALSE);	// 계속 새로 만들어진 노드에 넣어줘야 합니다.
-	// 만약에 따옴표 뒤에 공백 없이 "다른 녀석"이 붙어온다면. (따옴표일 경우와 따옴표가 아닐 경우를 또 나눠줘야 한다.)
-	// *curr_token = (*curr_token)->next;
-	// temp_c = line[(*curr_token)->idx - 1];
-	// while (temp_c != '\0' && !(temp_c == ' ' || temp_c >= 9 && temp_c <= 13))
-	// 	join_quote(cmd_head, curr_token, line);// 앞쪽에 계속 join해줘야 합니다.
 	return (TRUE);
 }
 

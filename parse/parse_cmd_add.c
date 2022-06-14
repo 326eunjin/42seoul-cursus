@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:07:42 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 17:18:04 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 12:13:00 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ void	add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node)
 	}
 }
 
+void	join_cmd(t_cmd_node **cmd_head, t_token_node **curr_token)
+{
+	t_cmd_node	*last_cmd;
+
+	last_cmd = (*cmd_head);
+	while (last_cmd->next != NULL)
+		last_cmd = last_cmd->next;
+	last_cmd->cmd = ft_strjoin(last_cmd->cmd, (*curr_token)->token);
+}
+
 int	add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr_token)
 {
 	t_cmd_node *new_cmd;
@@ -66,15 +76,25 @@ int	add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr_token)
 	return (TRUE);
 }
 
-int	add_common_cmd(t_cmd_node **cmd_head, char *token, enum e_token_type type)
+int	add_common_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token_type type, char *line)
 {
-	t_cmd_node *new_cmd;
+	t_cmd_node	*new_cmd;
+	char		temp_c;
 
+	if ((*curr_token)->idx - 1 > 0)
+		temp_c = line[(*curr_token)->idx - 1];
+	else
+		temp_c = '\0';
+	if (temp_c == '\'' || temp_c == '"')
+	{
+		join_cmd(cmd_head, curr_token);
+		return (TRUE);
+	}
 	new_cmd = (t_cmd_node *)malloc(sizeof(t_cmd_node));
 	if (new_cmd == NULL)
 		return (FALSE);
 	ft_memset(new_cmd, 0, sizeof(t_cmd_node));
-	new_cmd->cmd = token;
+	new_cmd->cmd = (*curr_token)->token;
 	new_cmd->type = (enum e_cmd_type)type;
 	add_cmd(cmd_head, new_cmd);
 	return (TRUE);

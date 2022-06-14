@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 21:46:21 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/14 12:10:30 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_state				g_state;
 int		parse_cmd(t_cmd_line_list **cmd_line_list);
 int		make_token_list(t_token_node **token_head, char *line);
 int		make_cmd_list(t_cmd_line_list **cmd_line_list, t_token_node *token_head, char *line);
-int		add_common_cmd(t_cmd_node **cmd_head, char *token, enum e_token_type type);
+int	add_common_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token_type type, char *line);
 int		add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr_token);
 void	check_cmd_type(t_cmd_node **cmd_heads, int size);
 int		add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token_type type, char *line);
