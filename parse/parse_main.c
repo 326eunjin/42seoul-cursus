@@ -6,11 +6,26 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/13 18:11:33 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/15 17:45:03 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static int	is_empty_line(char *line)
+{
+	int	idx;
+
+	idx = 0;
+	while (line[idx] != '\0')
+	{
+		if (line[idx] != '\0' && !(line[idx] == ' ' || \
+			line[idx] >= 9 && line[idx] <= 13))
+			return (FALSE);
+		idx++;
+	}
+	return (TRUE);
+}
 
 int	parse_cmd(t_cmd_line_list **cmd_line_list)
 {
@@ -23,15 +38,17 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 	token_head = NULL;
 	ft_memset(*cmd_line_list, 0, sizeof(t_cmd_line_list));
 	line = readline("\033[0;36mMinishell>> \033[0m");
-	if (line == NULL)
+	if (line == NULL || is_empty_line(line) == TRUE)
 	{
+		printf("is empty line\n");
 		//free_token_list(token_head);
 		//free_cmd_line_list(cmd_line_list);
-		return (TRUE);
+		return (FALSE);
 	}
 	add_history(line);
 	if (make_token_list(&token_head, line) == FALSE)
 	{
+		printf("token_error\n");
 		//free_token_list(token_head);
 		//free_cmd_line_list(cmd_line_list);
 		return (FALSE);
