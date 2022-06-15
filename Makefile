@@ -6,12 +6,12 @@
 #    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/14 16:07:44 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/06/15 20:38:51 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-NAME = test_parse
+NAME = mini_test_shell
 CFLAGS	=	-Wall -Wextra -Werror -lreadline -fsanitize=address
 
 LIBFT_DIR = ./libft/
