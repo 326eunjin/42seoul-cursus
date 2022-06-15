@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 12:32:31 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/15 18:48:31 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ enum e_token_type	get_token_type(char *line, int idx)
 		return (TO_COMMON);
 }
 
-static int	add_token(t_token_node **token_head, t_token_node **new_node, enum e_token_type type, int idx)
+static int	add_token(t_token_node **token_head, t_token_node **new_node, \
+	enum e_token_type type, int idx)
 {
 	t_token_node	*last_node;
 
@@ -57,7 +58,8 @@ static int	add_token(t_token_node **token_head, t_token_node **new_node, enum e_
 	return (TRUE);
 }
 
-int	add_spacial_token(t_token_node **token_head, enum e_token_type type, int idx)
+int	add_spacial_token(t_token_node **token_head, \
+	enum e_token_type type, int idx)
 {
 	t_token_node	*this_node;
 
@@ -118,7 +120,7 @@ int	make_token_list(t_token_node **token_head, char *line)
 			line[idx] >= 9 && line[idx] <= 13))
 			idx++;
 		if (line[idx] == '\0')
-			return (FALSE);
+			return (TRUE);
 		type = get_token_type(line, idx);
 		if (type == TO_APPEND || type == TO_HEREDOC)
 			idx++;
