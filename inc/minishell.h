@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 16:36:30 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/15 20:47:44 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ enum	e_cmd_type
 	REDIROUT,
 	HEREDOC,
 	APPEND,
+	REDIRARG,
 	BUILTIN,
 	OPTION
 };
@@ -100,7 +101,7 @@ int		add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, char *line
 int		need_join(t_token_node *curr_token, char *line, int option);
 char	*replace_dollar(char *str, int idx, char *line);
 void	make_new_str(char **new_str, t_token_node **curr, char *line);
-void	check_cmd_type(t_cmd_node **cmd_heads, int size);
+int		check_cmd(t_cmd_node **cmd_heads, int size);
 int		add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, enum e_token_type type, char *line);
 int		add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node);
 void	dquote_dollar(char **curr_str, t_token_node **curr, char *line);
