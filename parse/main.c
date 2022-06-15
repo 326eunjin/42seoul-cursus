@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 12:28:22 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/15 16:37:56 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int main(int argc, char **argv, char **envp)
 		}
 		// *** 끝
 		//실행부분
-		//exe_cmd(cmd_line_list);
-		exe_builtin(cmd_line_list->cmd_heads[0]);
+		exe_cmd(cmd_line_list);
+		//exe_builtin(cmd_line_list->cmd_heads[0]);
 		// // *** 디버깅용 프린트 (OLDPWD, PWD)
 		// int i = -1;
 		// while(g_state.envp[++i])
