@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/04 10:13:38 by ejang             #+#    #+#              #
-#    Updated: 2022/06/15 13:21:59 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/15 15:43:09 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJS = $(SRCS:.c=.o)
 BOBJS = $(SRCS_B:.c=.o)
  AR := ar
  ARFLAGS := -rc
- CC := gcc
+ CC := cc
  CFLAGS := -Wall -Wextra -Werror
 
 ifdef WITH_BONUS
@@ -32,12 +32,15 @@ endif
 all:		$(NAME)
 $(NAME):	$(OBJECTS)
 	@ar -rc $@ $^
+	@printf "✅ \033[0;32m$(NAME) was created.\033[0m\n"
 bonus:
 	make WITH_BONUS=1 all
 %.o:	%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	@rm -f $(OBJS) $(BOBJS)
+	@printf "✅ \033[0;32mclean $(NAME)\033[0m\n"
 fclean:		clean
 	@rm -f $(NAME)
+	@printf "✅ \033[0;32mfclean $(NAME)\033[0m\n"
 re:			fclean all
