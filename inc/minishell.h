@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 18:27:02 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 19:34:06 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_state		g_state;
 /*
 	*** parse ***
 */
-
+int		parse_error(int option);
 int		parse_cmd(t_cmd_line_list **cmd_line_list);
 int		make_token_list(t_token_node **token_head, char *line);
 int		make_cmd_list(t_cmd_line_list **cmd_line_list, t_token_node *token_head, char *line);

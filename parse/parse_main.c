@@ -6,11 +6,22 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 16:02:08 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 20:32:38 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	parse_error(int option)
+{
+	if (option == 1)
+		printf("’(\") must be paired\n");
+	if (option == 2)
+		printf("Memory allocation failed\n");
+	if (option == 3)
+		printf("syntax error near unexpected token\n");
+	return (FALSE);
+}
 
 static void	free_token(t_token_node *head)
 {
@@ -61,17 +72,15 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 	add_history(line);
 	if (make_token_list(&token_head, line) == FALSE)
 	{
-		printf("token_error\n");
 		//free_token_list(token_head);
 		//free_cmd_line_list(cmd_line_list);
-		return (FALSE);
+		return (parse_error(2));
 	}
 	// 3. 토큰 리스트를 돌면서 합칠 수 있는건 합치고, 쪼개야 하는건 쪼개기
 	if (make_cmd_list(cmd_line_list, token_head, line) == FALSE)
 	{
 		//free_token_list(token_head);
 		//free_cmd_line_list(cmd_line_list);
-		printf("argument error\n");
 		return (FALSE);
 	}
 	// 4. 썼던 토큰 리스트 free

@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:03:54 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 20:47:44 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 19:41:18 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	cmd_check(t_cmd_line_list *cmd_line_list, t_token_node *token_head)
 				this_node = this_node->next;
 			}
 			if (this_node == NULL)
-				return (FALSE);
+				return (parse_error(1));
 		}
 		this_node = this_node->next;
 	}
@@ -79,7 +79,7 @@ int	make_cmd_list(t_cmd_line_list **cmd_line_list, \
 	(*cmd_line_list)->cmd_heads = (t_cmd_node **)malloc(sizeof(t_cmd_node *) * \
 		(*cmd_line_list)->size);
 	if ((*cmd_line_list)->cmd_heads == NULL)
-		return (FALSE);
+		return (parse_error(2));
 	ft_memset((*cmd_line_list)->cmd_heads, 0, sizeof(t_cmd_node *) * \
 		(*cmd_line_list)->size);
 	idx = 0;
@@ -88,7 +88,7 @@ int	make_cmd_list(t_cmd_line_list **cmd_line_list, \
 	{
 		if (cut_cmd_line(&((*cmd_line_list)->cmd_heads[idx]), \
 			&curr_token, line) == FALSE)
-			return (FALSE);
+			return (parse_error(2));
 		idx++;
 	}
 	if (check_cmd((*cmd_line_list)->cmd_heads, (*cmd_line_list)->size) == FALSE)

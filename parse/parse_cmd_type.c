@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:21:28 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 18:49:51 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 19:42:56 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	check_redir(t_cmd_node **curr_cmd)
 		(*curr_cmd)->type == APPEND)
 	{
 		if ((*curr_cmd)->next == NULL)
-			return (FALSE);
+			return (parse_error(3));
 		else
 		{
 			*curr_cmd = (*curr_cmd)->next;
