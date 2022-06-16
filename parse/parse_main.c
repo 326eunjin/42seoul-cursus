@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 20:32:38 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 21:31:19 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ static int	is_empty_line(char *line)
 	return (TRUE);
 }
 
+static int	shell_exit(t_cmd_line_list **cmd_line_list)
+{
+	// free(cmd_line_list)
+	printf("exit\n");
+	exit(0);
+}
+
 int	parse_cmd(t_cmd_line_list **cmd_line_list)
 {
 	char			*line;
@@ -62,7 +69,9 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 	token_head = NULL;
 	ft_memset(*cmd_line_list, 0, sizeof(t_cmd_line_list));
 	line = readline("\033[0;36mMinishell>> \033[0m");
-	if (line == NULL || is_empty_line(line) == TRUE)
+	if (line == NULL)
+		return (shell_exit(cmd_line_list));
+	if (is_empty_line(line) == TRUE)
 	{
 		printf("is empty line\n");
 		//free_token_list(token_head);
