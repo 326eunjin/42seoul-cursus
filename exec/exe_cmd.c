@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 17:22:25 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 16:21:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-//void	exe_cmd(t_cmd_line_list *cmd_line_list)
-void	exe_builtin(t_cmd_node	*node)
-{
-
-	if (ft_strcmp(node->cmd,"pwd") == 0)
-		func_pwd();
-	if (ft_strcmp(node->cmd, "env") == 0)
-		func_env();
-	if (ft_strcmp(node->cmd,"echo") == 0)
-		func_echo(node);
-	if (ft_strcmp(node->cmd,"export") == 0)
-		func_export(node);
-	if (ft_strcmp(node->cmd,"unset") == 0)
-		func_unset(node);
-	if (ft_strcmp(node->cmd, "cd") == 0)
-		func_cd(node);
-}
 
 void	exe_cmd(t_cmd_line_list *cmd_line_list)
 {
@@ -85,8 +67,17 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list)
 void	exe_single_cmd(t_cmd_node	*node)
 {
 	char **arg;
-	arg = string_array(node);
-	execve(arg[0],arg,g_state.envp);
+
+	// if (is_cmd_builtin(node) == TRUE)
+	// {
+	// 	exe_builtin(node);
+	// 	return ;
+	// }
+	// else
+	{
+		arg = string_array(node);
+		execve(arg[0],arg,g_state.envp);
+	}
 	//free는 도대체 어디서 해야할까,,,
 	//이거 pipex에서 했던 고민이랑 같음. 
 }
