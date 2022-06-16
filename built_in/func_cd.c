@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/16 16:27:41 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 17:18:54 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char *get_pwd(void)
 	return (current_dir);
 }
 
-void home_dir(char *str)//홈디렉토리로 이동
+void home_dir(char *str)//홈디렉토리로 이동//str = /user/ejang
 {//PWD 환경변수는 $HOME 으로 변경
 	char *tmp1;
 	if (chdir(str) <0)
@@ -35,9 +35,7 @@ void home_dir(char *str)//홈디렉토리로 이동
 	tmp1 = ft_strjoin(tmp1,str);//"PWD=/home/ejang"
 	export_str(tmp1);
 	free(tmp1);
-	free(str);
 	tmp1 = 0;
-	str = 0;
 }
 
 void old_dir()//OLDPWD 로 이동
@@ -56,16 +54,12 @@ void old_dir()//OLDPWD 로 이동
 	}
 	tmp = ft_strdup("PWD=");
 	tmp = ft_strjoin(tmp,str1);
-	free(str1);
 	export_str(tmp);
 	free(tmp);
 	tmp = ft_strdup("OLDPWD=");
 	tmp = ft_strjoin(tmp, str2);
 	export_str(tmp);
-	free(str2);
 	free(tmp);
-	str1 = 0;
-	str2 = 0;
 	tmp = 0;
 }
 
@@ -84,7 +78,7 @@ void change_dir(char *str)//디렉토리 이동
 	}
 	else
 	{
-		ret = ft_strdupp("PWD=");
+		ret = ft_strdup("PWD=");
 		ret = ft_strjoin(ret,get_pwd());
 		export_str(ret);
 		free(ret);
@@ -94,8 +88,6 @@ void change_dir(char *str)//디렉토리 이동
 		free(ret);
 		ret = 0;
 	}
-	free(tmp);
-	tmp = 0;
 }
 
 //void func_cd(int argc, char **argv)
@@ -107,7 +99,6 @@ void	func_cd(t_cmd_node *head)
 	int ret = 0;
 	char *str;
 	str = get_value("HOME");
-	
 	if (curr_node == NULL)//cd without no arguments
 		//go to home
 		home_dir(str);

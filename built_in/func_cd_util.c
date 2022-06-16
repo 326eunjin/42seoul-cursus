@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:27:12 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/16 16:26:21 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 17:17:44 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ void add_old_pwd(void)//OLDPWD 환경 변수 추가하기
 	tmp = get_pwd();
 	pwd = ft_strdup("OLDPWD=");
 	pwd = ft_strjoin(pwd,tmp);
-	free(tmp);
 	export_str(pwd);
 	free(pwd);
-	tmp = 0;
 	pwd = 0;
 }
 
