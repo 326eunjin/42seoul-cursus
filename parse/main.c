@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 17:19:18 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 21:25:24 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static void free_cmd(t_cmd_line_list *cmd_line_list)
 int main(int argc, char **argv, char **envp)
 {
 	t_cmd_line_list *cmd_line_list;
+
+	rl_catch_signals = 0;
+	set_signal();
 	g_state.envp = copy_envp(envp);
 	//환경 변수 불러오기
 	if (is_in_envp("OLDPWD") == -1)
