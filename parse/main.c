@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 20:29:21 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 16:22:13 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,29 @@
 // 디버깅용
 char *to_types[] = {"TO_COMMON", "TO_REDIRIN", "TO_REDIROUT", "TO_HEREDOC", "TO_APPEND", "PIPE", "DQUOTE", "QUOTE", "DOLLAR"};
 char *cmd_types[] = {"COMMON", "REDIRIN", "REDIROUT", "HEREDOC", "APPEND", "REDIRARG", "BUILTIN", "OPTION"};
+
+static void free_cmd(t_cmd_line_list *cmd_line_list)
+{
+	t_cmd_node	*curr;
+	int			idx;
+
+	idx = 0;
+	while (idx < cmd_line_list->size)
+	{
+		curr = cmd_line_list->cmd_heads[idx];
+		while (curr != NULL)
+		{
+			if (curr->cmd != 0)
+				free(curr->cmd);
+			free(curr);
+			curr = curr->next;
+		}
+		idx++;
+	}
+	free(cmd_line_list->cmd_heads);
+	free(cmd_line_list);
+	cmd_line_list = 0;
+}
 
 int main(int argc, char **argv, char **envp)
 {
@@ -53,6 +76,7 @@ int main(int argc, char **argv, char **envp)
 		// 	if(ft_strncmp(g_state.envp[i],"OLDPWD",6) == 0 || ft_strncmp(g_state.envp[i],"PWD",3)== 0)
 		// 		printf("%s\n",g_state.envp[i]);
 		// // *** 끝
+		free_cmd(cmd_line_list);
 	}
 	//ㄷ ㅏ실행하고 나서 전역 변수 환경변수 복사본 해제해줘야함.
 	return (0);

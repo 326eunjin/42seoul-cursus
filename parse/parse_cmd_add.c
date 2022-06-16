@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:07:42 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 15:28:14 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 16:13:40 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr, char *line)
 	if (need_join(*curr, line, 2) == TRUE)
 	{
 		join_cmd(cmd_head, str);
-		free(str);
 		if ((*curr)->next != NULL)
 			*curr = (*curr)->next;
 		return (TRUE);
@@ -82,7 +81,7 @@ int	add_common_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, \
 	if (new_cmd == NULL)
 		return (FALSE);
 	ft_memset(new_cmd, 0, sizeof(t_cmd_node));
-	new_cmd->cmd = (*curr_token)->token;
+	new_cmd->cmd = ft_strdup((*curr_token)->token);
 	new_cmd->type = (enum e_cmd_type)type;
 	add_cmd(cmd_head, new_cmd);
 	return (TRUE);

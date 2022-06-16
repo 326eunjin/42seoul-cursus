@@ -6,11 +6,24 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 20:41:33 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 16:02:08 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	free_token(t_token_node *head)
+{
+	t_token_node	*curr;
+
+	curr = head;
+	while (curr != NULL)
+	{
+		free(curr->token);
+		free(curr);
+		curr = curr->next;
+	}
+}
 
 static int	is_empty_line(char *line)
 {
@@ -62,7 +75,8 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 		return (FALSE);
 	}
 	// 4. 썼던 토큰 리스트 free
-	//free_token_list(token_head);
+	free_token(token_head);
+	free(line);
 	// 5. true 반환
 	return (TRUE);
 }

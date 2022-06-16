@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 15:45:20 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/15 21:14:21 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
 	else
 		str = replace_dollar((*curr)->next->token, (*curr)->next->idx, line);
 	*curr_str = ft_strjoin(*curr_str, str);
-	free(str);
 	if ((*curr)->next != NULL)
 		*curr = (*curr)->next;
 }

@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:22:14 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/14 15:38:34 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/15 21:13:28 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	join_dquote(t_cmd_node **cmd_head, \
 	while (last_cmd->next != NULL)
 		last_cmd = last_cmd->next;
 	last_cmd->cmd = ft_strjoin(last_cmd->cmd, new_str);
-	free(new_str);
 }
 
 static int	new_dquote(t_cmd_node **cmd_head, \
@@ -68,7 +67,6 @@ static void	join_quote(t_cmd_node **cmd_head, \
 	while (last_cmd->next != NULL)
 		last_cmd = last_cmd->next;
 	last_cmd->cmd = ft_strjoin(last_cmd->cmd, new_str);
-	free(new_str);
 }
 
 static int	new_quote(t_cmd_node **cmd_head, \
