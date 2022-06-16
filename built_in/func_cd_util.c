@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:27:12 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/15 13:16:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 16:26:21 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void add_old_pwd(void)//OLDPWD 환경 변수 추가하기
 	char *pwd;
 	char *tmp;
 	tmp = get_pwd();
-	pwd = ft_strjoin("OLDPWD=",tmp);
+	pwd = ft_strdup("OLDPWD=");
+	pwd = ft_strjoin(pwd,tmp);
 	free(tmp);
 	export_str(pwd);
 	free(pwd);
+	tmp = 0;
+	pwd = 0;
 }
 
 int key_len(char *str)//key값의 길이 리턴 

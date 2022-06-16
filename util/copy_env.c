@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   copy_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:06:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/15 16:27:59 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 15:56:54 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-// #include "libft/libft.h"
 
 char **copy_envp(char **envp)
 {

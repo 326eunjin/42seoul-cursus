@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/15 13:16:15 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 16:27:41 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ void home_dir(char *str)//홈디렉토리로 이동
 		printf("chdir erorr\n");
 		g_state.exit_status = 1;
 	}
-	tmp1 = ft_strjoin("PWD=",str);//"PWD=/home/ejang"
+	tmp1 = ft_strdup("PWD=");
+	tmp1 = ft_strjoin(tmp1,str);//"PWD=/home/ejang"
 	export_str(tmp1);
 	free(tmp1);
 	free(str);
+	tmp1 = 0;
+	str = 0;
 }
 
 void old_dir()//OLDPWD 로 이동
@@ -51,14 +54,19 @@ void old_dir()//OLDPWD 로 이동
 		printf("chdir error");
 		g_state.exit_status = 1;
 	}
-	tmp = ft_strjoin("PWD=",str1);
+	tmp = ft_strdup("PWD=");
+	tmp = ft_strjoin(tmp,str1);
 	free(str1);
 	export_str(tmp);
 	free(tmp);
-	tmp = ft_strjoin("OLDPWD=", str2);
+	tmp = ft_strdup("OLDPWD=");
+	tmp = ft_strjoin(tmp, str2);
 	export_str(tmp);
 	free(str2);
 	free(tmp);
+	str1 = 0;
+	str2 = 0;
+	tmp = 0;
 }
 
 void change_dir(char *str)//디렉토리 이동 
@@ -76,13 +84,18 @@ void change_dir(char *str)//디렉토리 이동
 	}
 	else
 	{
-		ret = ft_strjoin("PWD=",get_pwd());
+		ret = ft_strdupp("PWD=");
+		ret = ft_strjoin(ret,get_pwd());
 		export_str(ret);
 		free(ret);
-		ret = ft_strjoin("OLDPWD=",tmp);
+		ret = ft_strdup("OLDPWD=");
+		ret = ft_strjoin(ret,tmp);
 		export_str(ret);
 		free(ret);
+		ret = 0;
 	}
+	free(tmp);
+	tmp = 0;
 }
 
 //void func_cd(int argc, char **argv)
