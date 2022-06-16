@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:07:42 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 16:13:40 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 18:53:40 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	join_cmd(t_cmd_node **cmd_head, char *token)
 	last_cmd = (*cmd_head);
 	while (last_cmd->next != NULL)
 		last_cmd = last_cmd->next;
-	last_cmd->cmd = ft_strjoin(last_cmd->cmd, token);
+	last_cmd->cmd = ft_strjoin(last_cmd->cmd, ft_strdup(token));
 }
 
 int	add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr, char *line)
