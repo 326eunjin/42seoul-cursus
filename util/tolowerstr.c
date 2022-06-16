@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:38 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 18:37:27 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 18:48:17 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	tolower_str(char *str)
 		str[idx] = ft_tolower(str[idx]);
 		idx++;
 	}
-	printf("S : %s\n", str);
 }
 
 char	*get_lower_str(char *str)

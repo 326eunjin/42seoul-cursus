@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:21:28 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 18:27:56 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/16 18:49:51 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static int	is_builtin(t_cmd_node **curr)
 	char	*temp;
 
 	temp = get_lower_str((*curr)->cmd);
-	printf("temp : %s\n", temp);
 	ret = FALSE;
 	if (ft_strcmp(temp, "echo") == 0)
 	{
