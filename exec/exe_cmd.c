@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 17:46:59 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 18:20:34 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,15 @@ void	exe_single_cmd(t_cmd_node	*node)
 	else
 	{
 		tmp = is_valid_cmd(node);
+		
 		arg = string_array(node);
-		execve(tmp,arg,g_state.envp);
+		if (execve(tmp,arg,g_state.envp) == -1)
+		{
+			ft_putstr_fd("bash : ", STDERR_FILENO);
+			ft_putstr_fd(node->cmd, STDERR_FILENO);
+			ft_putstr_fd(": command not found\n", STDERR_FILENO);
+			exit(1);
+		}
 	}
 	//free는 도대체 어디서 해야할까,,,
 	//이거 pipex에서 했던 고민이랑 같음. 
@@ -131,7 +138,7 @@ char*	is_valid_cmd(t_cmd_node *node)
 		}
 		free(str2);
 	}
-	printf("bash: %s: command not found\n",node->cmd);
+	//printf("bash: %s: command not found\n",node->cmd);
 	free(tmp);
 	tmp = NULL;
 	return (NULL);
