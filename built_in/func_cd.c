@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/16 17:18:54 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/16 22:53:36 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void change_dir(char *str)//디렉토리 이동
 	char *ret;
 
 
-	tmp = get_value("PWD");
+	tmp = get_value("PWD");//이동할 주소
 	if (chdir(str) < 0)
 	{
 		printf("cd: no such file or directory: %s\n",str);

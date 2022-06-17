@@ -6,27 +6,11 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/15 13:16:29 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 17:08:31 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	free_split(char **tmp)//ft_split으로 할당한거 해제하기 
-{
-	int	i;
-	int	cnt;
-
-	i = -1;
-	cnt = 0;
-	while(tmp[++i])
-		cnt++;
-	i = -1;
-	while (++i < cnt)
-		free(tmp[i]);
-	free(tmp);
-	tmp = NULL;
-}
 
 int	is_in_envp(char *str)//환경변수 안에 해당 문자열이 있는지?! 있으면 해당 인덱스 반환, 아니면 -1 리턴 
 {

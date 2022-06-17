@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 16:21:45 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 17:46:59 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 void	exe_cmd(t_cmd_line_list *cmd_line_list)
 {
-	int idx = 0;
+	int idx = -1;
 	int j = 0;
-
 	int fd[cmd_line_list->size-1][2];
 	pid_t pid[cmd_line_list->size];
 	int status[cmd_line_list->size];
-	while(idx < cmd_line_list->size - 1)
-	{
+
+	while(++idx < cmd_line_list->size - 1)
 		pipe(fd[idx]);
-		idx++;
-	}
-	idx = 0;
-	while (idx < cmd_line_list->size)
+	idx = -1;
+	while (++idx < cmd_line_list->size)
 	{
 		pid[idx] = fork();
 		if (pid[idx] < 0)//fork error
@@ -58,8 +55,8 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list)
 				}
 			}
 		}
-		idx++;
 	}
+	//아마 close 다 하는 부분은 따로 함수로 빼야할듯 그럼 줄이 줄어들지 않을까싶다...
 	for(int j = 0;j<cmd_line_list->size;j++)
 		waitpid(pid[j],&status[j],0);
 }
@@ -67,16 +64,17 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list)
 void	exe_single_cmd(t_cmd_node	*node)
 {
 	char **arg;
-
-	// if (is_cmd_builtin(node) == TRUE)
-	// {
-	// 	exe_builtin(node);
-	// 	return ;
-	// }
-	// else
+	char *tmp;
+	if (is_cmd_builtin(node) == TRUE)
 	{
+		exe_builtin(node);
+		//return ;
+	}
+	else
+	{
+		tmp = is_valid_cmd(node);
 		arg = string_array(node);
-		execve(arg[0],arg,g_state.envp);
+		execve(tmp,arg,g_state.envp);
 	}
 	//free는 도대체 어디서 해야할까,,,
 	//이거 pipex에서 했던 고민이랑 같음. 
@@ -103,4 +101,38 @@ char	**string_array(t_cmd_node *node)
 	}
 	ret[cnt] = NULL;
 	return (ret);
+}
+
+char*	is_valid_cmd(t_cmd_node *node)
+{
+	//node->cmd 명령어
+	struct stat s;
+	char **tmp = ft_split(get_value("PATH"),':');
+	int i = -1;
+	char *str;
+	char *str2;
+	if (stat(node->cmd, &s) == 0)
+	{
+		free_split(tmp);
+		str = ft_strdup(node->cmd);
+		return (str);
+	}
+	while (tmp[++i])
+	{
+		str = ft_strdup("/");
+		str2 = ft_strdup(node->cmd);//ls
+		str = ft_strjoin(str,str2);// /ls
+		str2 = ft_strjoin(tmp[i],str);// /usr/bin/ls
+		if (stat(str2, &s) == 0)
+		{
+			free(tmp);
+			tmp = NULL;
+			return (str2);
+		}
+		free(str2);
+	}
+	printf("bash: %s: command not found\n",node->cmd);
+	free(tmp);
+	tmp = NULL;
+	return (NULL);
 }

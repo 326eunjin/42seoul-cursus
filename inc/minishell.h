@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 21:25:37 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 17:18:10 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
 
 # define FALSE 0
@@ -119,6 +120,8 @@ void	set_signal();
 */
 int		ft_strcmp(char *s1, char *s2);
 char	**copy_envp(char **envp);
+void	free_split(char **tmp);
+void	free_split_part(char **tmp, int idx);
 
 /*
 	*** execute commands ***
@@ -128,6 +131,7 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list);
 void	exe_single_cmd(t_cmd_node	*node);
 int		is_cmd_builtin(t_cmd_node *node);
 char	**string_array(t_cmd_node *node);
+char*	is_valid_cmd(t_cmd_node *node);
 /*
 	built-in
 */
