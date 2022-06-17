@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 17:00:36 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 20:34:58 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 int	parse_error(int option)
 {
 	if (option == 1)
-		printf("’(\") must be paired\n");
-	if (option == 2)
-		printf("Memory allocation failed\n");
-	if (option == 3)
+		printf("ERROR : ’(\") must be paired\n");
+	else if (option == 2)
+		printf("ERROR : Memory allocation failed\n");
+	else if (option == 3)
+	{
+		g_state.exit_status = 258;
 		printf("syntax error near unexpected token\n");
+	}
+	else if (option == 4)
+	{
+		printf("ERROR : invaild pipe\n");
+	}
 	return (FALSE);
 }
 

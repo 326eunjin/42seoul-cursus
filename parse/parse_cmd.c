@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:03:54 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 19:41:18 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 20:34:25 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	make_cmd_list(t_cmd_line_list **cmd_line_list, \
 			&curr_token, line) == FALSE)
 			return (parse_error(2));
 		idx++;
+		if (idx < (*cmd_line_list)->size && curr_token == NULL)
+			return (parse_error(4));
 	}
 	if (check_cmd((*cmd_line_list)->cmd_heads, (*cmd_line_list)->size) == FALSE)
 		return (FALSE);
