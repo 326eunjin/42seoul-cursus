@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 18:20:34 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 20:18:49 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,20 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list)
 	pid_t pid[cmd_line_list->size];
 	int status[cmd_line_list->size];
 
+	/////////////////cd exit 처리 부분
+	if (cmd_line_list->size == 1)
+	{
+		if (ft_strcmp(cmd_line_list->cmd_heads[0]->cmd,"cd") == 0)
+		{
+			func_cd(cmd_line_list->cmd_heads[0]);
+			return;
+		}
+	}
+	////////////////////
 	while(++idx < cmd_line_list->size - 1)
 		pipe(fd[idx]);
 	idx = -1;
+	//cd 
 	while (++idx < cmd_line_list->size)
 	{
 		pid[idx] = fork();
