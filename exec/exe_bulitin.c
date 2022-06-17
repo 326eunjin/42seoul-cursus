@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:33:31 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/17 20:21:40 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 21:22:15 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	exe_builtin(t_cmd_node	*node)
 		func_unset(node);
 	if (ft_strcmp(node->cmd, "cd") == 0)
 		func_cd(node);
+	if (ft_strcmp(node->cmd, "exit") == 0)
+		func_exit(node);
 	exit(0);
 }
 
@@ -42,6 +44,8 @@ int	is_cmd_builtin(t_cmd_node *node)
 	if (ft_strcmp(node->cmd, "unset") == 0)
 		return (TRUE);
 	if (ft_strcmp(node->cmd, "cd") == 0)
+		return (TRUE);
+	if (ft_strcmp(node->cmd, "exit") == 0)
 		return (TRUE);
 	return (FALSE);
 }

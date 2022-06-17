@@ -6,15 +6,15 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:17:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/15 13:15:52 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 21:45:59 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-long	ft_atol(char *str)
+long	long	ft_atoll(char *str)
 {
-	long		ret;
+	long	long	ret;
 	int			minus;
 	int			i;
 
@@ -31,6 +31,8 @@ long	ft_atol(char *str)
 	}
 	while (str[i])
 	{
+		if (ft_isdigit(str[i]) == 0)
+			return ((long long)INT_MAX + 1);
 		ret = ret * 10 + (str[i] - '0');
 		i++;
 	}
@@ -39,21 +41,32 @@ long	ft_atol(char *str)
 	return (ret);
 }
 
-void func_exit(int argc,char **argv)
+//void func_exit(int argc,char **argv)
+void	func_exit(t_cmd_node *head)
 {
 	int i = -1;
 	long long first_argv;
+	int cnt = 0;
 
-	first_argv = ft_atol(argv[1]);
-	if (argc == 1)
+	t_cmd_node *curr_node;//exit 
+	curr_node = head;
+	while(curr_node!=NULL)//exit cnt 1
+	{
+		cnt++;
+		curr_node = curr_node->next;
+	}
+	if (cnt > 1)
+		first_argv = ft_atoll(head->next->cmd);
+	curr_node = head;//exit 가리킴 
+	if (cnt == 1)//exit
 	{
 		printf("exit\n");
 		exit(g_state.exit_status);
 	}
-	else if (argc == 2 && first_argv >= -2147483648 && ft_atoi(argv[1]) <= 2147483647)
+	else if (cnt == 2 && first_argv >= INT_MIN && first_argv <= INT_MAX)//exit 숫자
 	{
 		printf("exit\n");
-		g_state.exit_status = ft_atoi(argv[1]);
+		g_state.exit_status = ft_atoi(curr_node->cmd);
 		if (g_state.exit_status >= 0)
 			g_state.exit_status = g_state.exit_status % 256;
 		else
@@ -63,17 +76,17 @@ void func_exit(int argc,char **argv)
 		}
 		exit(g_state.exit_status);
 	}
-	else if (argc > 2  && first_argv >= -2147483648 && ft_atoi(argv[1]) <= 2147483647)
+	else if (cnt > 2  && first_argv >= INT_MIN && first_argv <= INT_MAX)//exit 3 3 3 3 
 	{
 		printf("exit\n");
 		printf("bash: exit: too many arguments\n");
 		g_state.exit_status = 1;
 		return ;
 	}
-	else
+	else//숫자가 아닌게 하나라도 들어오면 
 	{
 		printf("exit\n");
-		printf("bash: exit: %s: numeric argument required\n",argv[1]);
+		printf("bash: exit: %s: numeric argument required\n",curr_node->cmd);
 		g_state.exit_status = 255;
 		exit(g_state.exit_status);
 	}

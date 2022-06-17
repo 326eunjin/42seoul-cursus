@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 20:18:49 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 21:21:56 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list)
 			func_cd(cmd_line_list->cmd_heads[0]);
 			return;
 		}
+		if (ft_strcmp(cmd_line_list->cmd_heads[0]->cmd,"exit") == 0)
+		{
+			func_exit(cmd_line_list->cmd_heads[0]);
+			return;
+		}
 	}
 	////////////////////
 	while(++idx < cmd_line_list->size - 1)
 		pipe(fd[idx]);
-	idx = -1;
-	//cd 
+	idx = -1; 
 	while (++idx < cmd_line_list->size)
 	{
 		pid[idx] = fork();

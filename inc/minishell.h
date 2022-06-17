@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 17:18:10 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/17 21:35:52 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 
 # define FALSE 0
 # define TRUE 1
-
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 // 디버깅용 배열
 extern char *to_types[];
 extern char *cmd_types[];
@@ -141,6 +142,7 @@ void	func_echo(t_cmd_node *head);
 void	func_export(t_cmd_node *head);
 void	func_unset(t_cmd_node *head);
 void	func_cd(t_cmd_node *head);
+void	func_exit(t_cmd_node *head);
 
 int		is_right_form(char *str);
 void	export_str(char *str);
