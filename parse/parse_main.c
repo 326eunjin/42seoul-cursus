@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 15:40:11 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 17:00:36 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parse_error(int option)
 	return (FALSE);
 }
 
-static void	free_token(t_token_node *head)
+static void	free_token_line(t_token_node *head, char *line)
 {
 	t_token_node	*curr;
 
@@ -34,6 +34,8 @@ static void	free_token(t_token_node *head)
 		free(curr);
 		curr = curr->next;
 	}
+	if (line != NULL)
+		free(line);
 }
 
 static int	is_empty_line(char *line)
@@ -51,11 +53,16 @@ static int	is_empty_line(char *line)
 	return (TRUE);
 }
 
-static int	shell_exit(t_cmd_line_list **cmd_line_list)
+static void	read_cmd_line(char **line)
 {
-	// free(cmd_line_list)
-	printf("exit\n");
-	exit(0);
+	*line = readline("\033[0;36mMinishell>> \033[0m");
+	if (*line == NULL)
+	{
+		ft_putstr_fd("\x1b[1A", 1);
+		ft_putstr_fd("\033[12C", 1);
+		ft_putstr_fd("exit\n", 1);
+		exit(0);
+	}
 }
 
 int	parse_cmd(t_cmd_line_list **cmd_line_list)
@@ -65,27 +72,23 @@ int	parse_cmd(t_cmd_line_list **cmd_line_list)
 
 	token_head = NULL;
 	ft_memset(*cmd_line_list, 0, sizeof(t_cmd_line_list));
-	line = readline("\033[0;36mMinishell>> \033[0m");
-	if (line == NULL)
-		return (shell_exit(cmd_line_list));
+	read_cmd_line(&line);
 	if (is_empty_line(line) == TRUE)
 	{
-		printf("is empty line\n");
-		free_token(token_head);
+		free_token_line(token_head, line);
 		return (FALSE);
 	}
 	add_history(line);
 	if (make_token_list(&token_head, line) == FALSE)
 	{
-		free_token(token_head);
+		free_token_line(token_head, line);
 		return (parse_error(2));
 	}
 	if (make_cmd_list(cmd_line_list, token_head, line) == FALSE)
 	{
-		free_token(token_head);
+		free_token_line(token_head, line);
 		return (FALSE);
 	}
-	free_token(token_head);
-	free(line);
+	free_token_line(token_head, line);
 	return (TRUE);
 }
