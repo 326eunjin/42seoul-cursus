@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 21:25:24 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 16:03:56 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 char *to_types[] = {"TO_COMMON", "TO_REDIRIN", "TO_REDIROUT", "TO_HEREDOC", "TO_APPEND", "PIPE", "DQUOTE", "QUOTE", "DOLLAR"};
 char *cmd_types[] = {"COMMON", "REDIRIN", "REDIROUT", "HEREDOC", "APPEND", "REDIRARG", "BUILTIN", "OPTION"};
 
-static void free_cmd(t_cmd_line_list *cmd_line_list)
+static void	free_cmd(t_cmd_line_list *cmd_line_list)
 {
 	t_cmd_node	*curr;
 	int			idx;
@@ -41,36 +41,23 @@ static void free_cmd(t_cmd_line_list *cmd_line_list)
 
 int main(int argc, char **argv, char **envp)
 {
-	t_cmd_line_list *cmd_line_list;
+	t_cmd_line_list	*cmd_line_list;
 
 	rl_catch_signals = 0;
 	set_signal();
 	g_state.envp = copy_envp(envp);
-	//환경 변수 불러오기
 	if (is_in_envp("OLDPWD") == -1)
 		add_old_pwd();// 만약에 OLDPWD 환경변수 없으면 추가하기
 	while (1)
 	{
+		cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
+		if (cmd_line_list == NULL)
+			return (parse_error(2));
 		if (parse_cmd(&cmd_line_list) == FALSE)
 		{
-			//return_error(cmd_line);
-			continue;
+			free_cmd(cmd_line_list);
+			continue ;
 		}
-		// *** 디버깅용 프린트
-		t_cmd_node *curr_cmd;
-		for(int i = 0; i < cmd_line_list->size; i++)
-		{
-			curr_cmd = cmd_line_list->cmd_heads[i];
-			printf("#%d\n", i);
-			while(curr_cmd != NULL)
-			{
-				printf("cmd : %s (type : %s)\n", curr_cmd->cmd, cmd_types[curr_cmd->type]);
-				curr_cmd = curr_cmd->next;
-			}
-			printf("----\n");
-		}
-		// *** 끝
-		//실행부분
 		//exe_cmd(cmd_line_list);
 		exe_builtin(cmd_line_list->cmd_heads[0]);
 		// // *** 디버깅용 프린트 (OLDPWD, PWD)
@@ -81,6 +68,6 @@ int main(int argc, char **argv, char **envp)
 		// // *** 끝
 		free_cmd(cmd_line_list);
 	}
-	//ㄷ ㅏ실행하고 나서 전역 변수 환경변수 복사본 해제해줘야함.
+	//free_envp(); // 환경변수 free
 	return (0);
 }
