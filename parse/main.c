@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/18 15:52:28 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/18 20:24:11 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int main(int argc, char **argv, char **envp)
 		// while(g_state.envp[++i])
 		// 	if(ft_strncmp(g_state.envp[i],"OLDPWD",6) == 0 || ft_strncmp(g_state.envp[i],"PWD",3)== 0)
 		// 		printf("%s\n",g_state.envp[i]);
-		// // *** 끝
+		// *** 끝
 		free_cmd(cmd_line_list);
 	}
 	//free_envp(); // 환경변수 free

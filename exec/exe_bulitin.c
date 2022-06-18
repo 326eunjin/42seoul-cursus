@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_bulitin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:33:31 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/17 21:22:15 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/18 16:17:37 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,4 @@ void	exe_builtin(t_cmd_node	*node)
 	if (ft_strcmp(node->cmd, "exit") == 0)
 		func_exit(node);
 	exit(0);
-}
-
-int	is_cmd_builtin(t_cmd_node *node)
-{
-	if (ft_strcmp(node->cmd, "pwd") == 0)
-		return (TRUE);
-	if (ft_strcmp(node->cmd, "env") == 0)
-		return (TRUE);
-	if (ft_strcmp(node->cmd, "echo") == 0)
-		return (TRUE);
-	if (ft_strcmp(node->cmd, "export") == 0)
-		return (TRUE);
-	if (ft_strcmp(node->cmd, "unset") == 0)
-		return (TRUE);
-	if (ft_strcmp(node->cmd, "cd") == 0)
-		return (TRUE);
-	if (ft_strcmp(node->cmd, "exit") == 0)
-		return (TRUE);
-	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/18 14:48:29 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/18 20:00:25 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 # define FALSE 0
@@ -125,12 +126,16 @@ void	free_split(char **tmp);
 void	free_split_part(char **tmp, int idx);
 
 /*
+	*** redirection ***
+*/
+char	*has_redir_in(t_cmd_node *node);
+
+/*
 	*** execute commands ***
 */
 void	exe_builtin(t_cmd_node	*node);
 void	exe_cmd(t_cmd_line_list *cmd_line_list);
-void	exe_single_cmd(t_cmd_node	*node);
-int		is_cmd_builtin(t_cmd_node *node);
+void	exe_single_cmd(t_cmd_node	*node, int idx, int ***fd);
 char	**string_array(t_cmd_node *node);
 char*	is_valid_cmd(t_cmd_node *node);
 /*
