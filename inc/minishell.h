@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 21:35:52 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/18 14:48:29 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,4 +153,5 @@ char	*get_value(char *key);
 char	**new_export(char *str);
 char	*get_pwd(void);
 void	add_old_pwd(void);
+void	func_exit_single_cmd(t_cmd_node *head);
 #endif

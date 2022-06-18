@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 21:21:56 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/18 14:47:50 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	exe_cmd(t_cmd_line_list *cmd_line_list)
 		}
 		if (ft_strcmp(cmd_line_list->cmd_heads[0]->cmd,"exit") == 0)
 		{
-			func_exit(cmd_line_list->cmd_heads[0]);
+			func_exit_single_cmd(cmd_line_list->cmd_heads[0]);
 			return;
 		}
 	}
