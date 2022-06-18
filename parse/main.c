@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 17:59:14 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/18 15:52:28 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ int main(int argc, char **argv, char **envp)
 			free_cmd(cmd_line_list);
 			continue ;
 		}
+		// *** 디버깅용 프린트
+ 		t_cmd_node *curr_cmd;
+ 		for(int i = 0; i < cmd_line_list->size; i++)
+ 		{
+ 			curr_cmd = cmd_line_list->cmd_heads[i];
+ 			printf("#%d\n", i);
+ 			while(curr_cmd != NULL)
+ 			{
+ 				printf("cmd : %s (type : %s)\n", curr_cmd->cmd, cmd_types[curr_cmd->type]);
+ 				curr_cmd = curr_cmd->next;
+ 			}
+ 			printf("----\n");
+ 		}
+ 		// *** 끝
 		exe_cmd(cmd_line_list);
 		//exe_builtin(cmd_line_list->cmd_heads[0]);
 		// // *** 디버깅용 프린트 (OLDPWD, PWD)
