@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:21:28 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 19:42:56 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/19 19:42:40 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	is_builtin(t_cmd_node **curr)
 		!ft_strcmp(temp, "export") || !ft_strcmp(temp, "unset") || \
 		!ft_strcmp(temp, "env") || !ft_strcmp(temp, "exit"))
 	{
+		printf("%s\n", temp);
 		(*curr)->type = BUILTIN;
 		ret = TRUE;
 	}
@@ -84,14 +85,16 @@ int	check_cmd(t_cmd_node **cmd_heads, int size)
 	char		*temp;
 
 	idx = 0;
-	cmd_flag = FALSE;
 	while (idx < size)
 	{
+		cmd_flag = FALSE;
 		curr = cmd_heads[idx];
 		while (curr != NULL)
 		{
+			printf("check: %s\n", curr->cmd);
 			if (check_redir(&curr) == FALSE)
 				return (FALSE);
+			printf("**********\n");
 			if (cmd_flag == FALSE && curr->type == COMMON && \
 				(is_builtin(&curr) == TRUE))
 			{
