@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/18 20:24:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/19 19:37:01 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv, char **envp)
  			}
  			printf("----\n");
  		}
- 		// *** 끝
+ 		//*** 끝
 		exe_cmd(cmd_line_list);
 		//exe_builtin(cmd_line_list->cmd_heads[0]);
 		// // *** 디버깅용 프린트 (OLDPWD, PWD)

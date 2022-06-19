@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:17:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/18 14:48:06 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/19 19:36:48 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	func_exit(t_cmd_node *head)
 	int i = -1;
 	long long first_argv;
 	int cnt = 0;
-
 	t_cmd_node *curr_node;//exit 
 	curr_node = head;
 	while(curr_node!=NULL)//exit cnt 1

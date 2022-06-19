@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/18 20:00:25 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/19 19:43:23 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char	*has_redir_in(t_cmd_node *node);
 */
 void	exe_builtin(t_cmd_node	*node);
 void	exe_cmd(t_cmd_line_list *cmd_line_list);
-void	exe_single_cmd(t_cmd_node	*node, int idx, int ***fd);
+void	exe_single_cmd(t_cmd_node	*node, int idx, int ***fd, int size);
 char	**string_array(t_cmd_node *node);
 char*	is_valid_cmd(t_cmd_node *node);
 /*

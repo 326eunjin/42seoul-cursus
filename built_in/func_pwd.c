@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:37:21 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/18 20:20:35 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/19 19:42:10 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	func_pwd(void)//현재 작업중인 절대경로 출력
 		printf("getcwd() cannot excute in fun_pwd\n");
 	else
 	{
+		// ft_putstr_fd(current_dir,fd);
 		printf("%s\n",current_dir);
 		free(current_dir);
 	}
