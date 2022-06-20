@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/20 22:16:53 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/21 01:21:30 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 	t_cmd_node *curr = node;
 	int in_fd;
 	int out_fd;
+	t_cmd_node	*cmd_list = NULL;
 
 	while (curr->type != BUILTIN && curr->type != COMMON)
 		curr = curr->next;
@@ -135,6 +136,23 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 	}
 	if (infile != NULL || outfile != NULL)
 		tmp = without_redir(node);
+	if (infile != NULL || outfile != NULL)
+		cmd_list = remove_redir(node);
+	// ************** 확인용 프린트 **************
+	t_cmd_node *haha;
+	int hoho = 1;
+	haha = cmd_list;
+	ft_putstr_fd("****** new_list ******\n", STDERR_FILENO);
+	while(haha != NULL)
+	{
+		ft_putnbr_fd(hoho, STDERR_FILENO);
+		ft_putstr_fd(" : ", STDERR_FILENO);
+		ft_putendl_fd(haha->cmd, STDERR_FILENO);
+		haha = haha->next;
+		hoho++;
+	}
+	ft_putstr_fd("**********************\n", STDERR_FILENO);
+	// *****************************************
 	for (int i = 0; i < size - 1; i++)
 	{
 		close((*fd)[i][0]);
