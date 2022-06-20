@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/19 19:37:01 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/21 01:28:15 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char *cmd_types[] = {"COMMON", "REDIRIN", "REDIROUT", "HEREDOC", "APPEND", "REDI
 static void	free_cmd(t_cmd_line_list *cmd_line_list)
 {
 	t_cmd_node	*curr;
+	t_cmd_node	*temp;
 	int			idx;
 
 	idx = 0;
@@ -27,10 +28,11 @@ static void	free_cmd(t_cmd_line_list *cmd_line_list)
 		curr = cmd_line_list->cmd_heads[idx];
 		while (curr != NULL)
 		{
+			temp = curr;
 			if (curr->cmd != 0)
 				free(curr->cmd);
-			free(curr);
 			curr = curr->next;
+			free(temp);
 		}
 		idx++;
 	}
