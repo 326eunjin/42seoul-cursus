@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/20 20:29:57 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/20 22:16:53 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,15 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 	char **arg;
 	char *tmp = NULL;
 	char *infile = NULL;
-	char *outfile = NULL;
+	t_cmd_node *outfile = NULL;
 	t_cmd_node *curr = node;
 	int in_fd;
+	int out_fd;
 
 	while (curr->type != BUILTIN && curr->type != COMMON)
 		curr = curr->next;
 	infile = has_redir_in(node);
+	outfile = has_redir_out(node);
 	if (infile != NULL) //노드에 REDIRIN이 있으면 <
 	{
 		in_fd = open(infile, O_RDWR | O_CREAT, 0644);
@@ -116,18 +118,27 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 		}
 		dup2(in_fd, STDIN_FILENO);
 		close(in_fd);
-		free(tmp);
-		tmp = without_redir(node);
-		//리다이렉션 빼고 명ㄹㅇ어를 만들어서 넘겨주면 되잖아요
 	}
-	// if (otufile != NULL)//노드에 REDIROUT이 있으면 >
-	//	dup2(output, fd_out);	if (size > 1)
+	if (outfile != NULL) //노드에 REDIROUT이 있으면 <
 	{
-		for (int i = 0; i < size - 1; i++)
+		if (outfile->type == REDIROUT)
+			out_fd = open(outfile->next->cmd, O_RDWR, 0644); //이미 위에서 생성 및 삭제를 다 했기 때문에 dup2로 바꿔주기만 하면 된다.
+		else
+			out_fd = open(outfile->next->cmd, O_RDWR | O_APPEND, 0644);
+		if (out_fd < 0)
 		{
-			close((*fd)[i][0]);
-			close((*fd)[i][1]);
+			ft_putstr_fd("fd error\n", STDERR_FILENO);
+			g_state.exit_status = 1;
 		}
+		dup2(out_fd, STDOUT_FILENO);
+		close(out_fd);
+	}
+	if (infile != NULL || outfile != NULL)
+		tmp = without_redir(node);
+	for (int i = 0; i < size - 1; i++)
+	{
+		close((*fd)[i][0]);
+		close((*fd)[i][1]);
 	}
 	if (curr->type == BUILTIN)
 	{
@@ -137,11 +148,11 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 	else
 	{
 
-		if (tmp == NULL)//redirection 없음 
+		if (tmp == NULL) // redirection 없음
 			tmp = is_valid_cmd(curr);
 		else
 			tmp = is_valid_cmd_redir(tmp);
-		arg = ft_split(without_redir(curr),' ');
+		arg = ft_split(without_redir(curr), ' ');
 		if (execve(tmp, arg, g_state.envp) == -1)
 		{
 			ft_putstr_fd("bash : ", STDERR_FILENO);
@@ -150,32 +161,8 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 			exit(1);
 		}
 	}
-	// free는 도대체 어디서 해야할까,,,
-	//이거 pipex에서 했던 고민이랑 같음.
+	// free는 도대체 어디서 해야할까,,,이거 pipex에서 했던 고민이랑 같음.
 }
-
-// char **string_array(t_cmd_node *node)
-// {
-// 	t_cmd_node *curr = node;
-// 	char **ret;
-// 	int cnt = 0;
-// 	int i = 0;
-// 	while (curr != NULL && curr->type != REDIROUT)
-// 	{
-// 		cnt++;
-// 		curr = curr->next;
-// 	}
-// 	ret = (char **)malloc(sizeof(char *) * (cnt + 1));
-// 	curr = node;
-// 	while (i < cnt)
-// 	{
-// 		ret[i] = ft_strdup(curr->cmd);
-// 		curr = curr->next;
-// 		i++;
-// 	}
-// 	ret[cnt] = NULL;
-// 	return (ret);
-// }
 
 char *is_valid_cmd(t_cmd_node *node)
 {
@@ -194,8 +181,8 @@ char *is_valid_cmd(t_cmd_node *node)
 	}
 	while (tmp[++i])
 	{
-		str = ft_strjoin(ft_strdup("/"),ft_strdup(node->cmd));	// /ls
-		str2 = ft_strjoin(ft_strdup(tmp[i]), str); // /usr/bin/ls
+		str = ft_strjoin(ft_strdup("/"), ft_strdup(node->cmd)); // /ls
+		str2 = ft_strjoin(ft_strdup(tmp[i]), str);				// /usr/bin/ls
 		if (stat(str2, &s) == 0)
 		{
 			free_split(tmp);

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/20 16:50:55 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/20 21:44:14 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	free_split_part(char **tmp, int idx);
 char	*has_redir_in(t_cmd_node *node);
 char	*without_redir(t_cmd_node *node);
 char	*is_valid_cmd_redir(char *ret);
+t_cmd_node	*has_redir_out(t_cmd_node *node);
 
 /*
 	*** execute commands ***
