@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/21 01:30:11 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/21 20:21:22 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parse_error(int option)
 static void	free_token_line(t_token_node *head, char *line)
 {
 	t_token_node	*curr;
-	t_toekn_node	*temp;
+	t_token_node	*temp;
 
 	curr = head;
 	while (curr != NULL)

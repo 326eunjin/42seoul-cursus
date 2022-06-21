@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/21 00:35:36 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/21 20:25:19 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	free_split_part(char **tmp, int idx);
 */
 char	*has_redir_in(t_cmd_node *node);
 char	*without_redir(t_cmd_node *node);
-char	*is_valid_cmd_redir(char *ret);
+//char	*is_valid_cmd_redir(char *ret);
 t_cmd_node	*has_redir_out(t_cmd_node *node);
 t_cmd_node *remove_redir(t_cmd_node *head);
 void	free_single_cmd_list(t_cmd_node *head);
@@ -141,7 +141,7 @@ void	free_single_cmd_list(t_cmd_node *head);
 void	exe_builtin(t_cmd_node	*node);
 void	exe_cmd(t_cmd_line_list *cmd_line_list);
 void	exe_single_cmd(t_cmd_node	*node,int ***fd, int size);
-//char	**string_array(t_cmd_node *node);
+char	**string_array(t_cmd_node *node);
 char	*is_valid_cmd(t_cmd_node *node);
 /*
 	built-in

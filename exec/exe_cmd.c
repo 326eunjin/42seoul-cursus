@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/21 01:21:30 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/21 20:25:56 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,25 +134,7 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 		dup2(out_fd, STDOUT_FILENO);
 		close(out_fd);
 	}
-	if (infile != NULL || outfile != NULL)
-		tmp = without_redir(node);
-	if (infile != NULL || outfile != NULL)
-		cmd_list = remove_redir(node);
-	// ************** 확인용 프린트 **************
-	t_cmd_node *haha;
-	int hoho = 1;
-	haha = cmd_list;
-	ft_putstr_fd("****** new_list ******\n", STDERR_FILENO);
-	while(haha != NULL)
-	{
-		ft_putnbr_fd(hoho, STDERR_FILENO);
-		ft_putstr_fd(" : ", STDERR_FILENO);
-		ft_putendl_fd(haha->cmd, STDERR_FILENO);
-		haha = haha->next;
-		hoho++;
-	}
-	ft_putstr_fd("**********************\n", STDERR_FILENO);
-	// *****************************************
+	cmd_list = remove_redir(node);
 	for (int i = 0; i < size - 1; i++)
 	{
 		close((*fd)[i][0]);
@@ -160,17 +142,13 @@ void exe_single_cmd(t_cmd_node *node, int ***fd, int size)
 	}
 	if (curr->type == BUILTIN)
 	{
-		exe_builtin(curr);
+		exe_builtin(cmd_list);
 		return;
 	}
 	else
 	{
-
-		if (tmp == NULL) // redirection 없음
-			tmp = is_valid_cmd(curr);
-		else
-			tmp = is_valid_cmd_redir(tmp);
-		arg = ft_split(without_redir(curr), ' ');
+		tmp = is_valid_cmd(cmd_list);
+		arg = string_array(cmd_list);
 		if (execve(tmp, arg, g_state.envp) == -1)
 		{
 			ft_putstr_fd("bash : ", STDERR_FILENO);
@@ -213,4 +191,27 @@ char *is_valid_cmd(t_cmd_node *node)
 	free(tmp);
 	tmp = NULL;
 	return (NULL);
+}
+
+char	**string_array(t_cmd_node *node)
+{
+	t_cmd_node *curr = node;
+	char **ret;
+	int cnt = 0;
+	int i = 0;
+	while (curr != NULL && curr->type != REDIROUT)
+	{
+		cnt++;
+		curr = curr->next;
+	}
+	ret = (char **)malloc(sizeof(char *) * (cnt + 1));
+	curr = node;
+	while (i < cnt)
+	{
+		ret[i] = ft_strdup(curr->cmd);
+		curr = curr->next;
+		i++;
+	}
+	ret[cnt] = NULL;
+	return (ret);
 }
