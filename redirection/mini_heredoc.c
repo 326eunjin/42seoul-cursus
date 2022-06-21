@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/22 02:14:47 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/22 02:21:50 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	write_heredoc(int fd, char *line)
 	idx = 0;
 	while (line[idx] != '\0')
 	{
-		if (line[idx] == '$')
+		if (line[idx] == '$' && line[idx + 1] != '\0' && line[idx + 1] != ' ')
 		{
 			temp = ++idx;
 			while (line[idx] != '\0' && !(line[idx] == ' ' || \
