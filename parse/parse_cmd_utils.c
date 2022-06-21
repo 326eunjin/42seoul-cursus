@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 21:14:21 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/21 17:16:25 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,10 @@ void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
 	*curr_str = ft_strjoin(*curr_str, str);
 	if ((*curr)->next != NULL)
 		*curr = (*curr)->next;
+}
+
+void	move_heredoc_curser(void)
+{
+	ft_putstr_fd("\x1b[1A", 1);
+	ft_putstr_fd("\033[2C", 1);
 }

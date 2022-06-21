@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/21 20:21:22 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/21 21:04:59 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	parse_error(int option)
 	}
 	else if (option == 4)
 	{
-		printf("ERROR : invaild pipe\n");
+		printf("ERROR : Invaild pipe\n");
+	}
+	else if (option == 5)
+	{
+		printf("ERROR : Failed to open file\n");
 	}
 	return (FALSE);
 }
