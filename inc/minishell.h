@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/21 23:42:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 01:31:29 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ char	*without_redir(t_cmd_node *node);
 t_cmd_node	*has_redir_out(t_cmd_node *node);
 t_cmd_node	*remove_redir(t_cmd_node *head);
 void	free_single_cmd_list(t_cmd_node *head);
-
+int	mini_heredoc(t_cmd_node **curr_cmd);
 /*
 	*** execute commands ***
 */
