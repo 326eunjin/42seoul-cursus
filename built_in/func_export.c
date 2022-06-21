@@ -6,20 +6,22 @@
 /*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/17 17:08:31 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/21 11:01:30 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	is_in_envp(char *str)//환경변수 안에 해당 문자열이 있는지?! 있으면 해당 인덱스 반환, 아니면 -1 리턴 
+int	is_in_envp(char *str)
 {
-	char **split;
-	int i = -1;
-	split = ft_split(str,'=');
+	char	**split;
+	int		i;
+
+	i = -1;
+	split = ft_split(str, '=');
 	while (g_state.envp[++i])
 	{
-		if(ft_strncmp(g_state.envp[i],split[0],ft_strlen(split[0])) == 0)
+		if (ft_strncmp(g_state.envp[i], split[0], ft_strlen(split[0])) == 0)
 		{
 			free_split(split);
 			return (i);
@@ -29,19 +31,21 @@ int	is_in_envp(char *str)//환경변수 안에 해당 문자열이 있는지?! �
 	return (-1);
 }
 
-void modify_envp(char *str, int loc)//인덱스 값 문자열로 바꾸기(치환)
+void	modify_envp(char *str, int loc)
 {
 	free(g_state.envp[loc]);
 	g_state.envp[loc] = ft_strdup(str);
 }
 
-char	**new_export(char *str)//새로운 문자열 추가
+char	**new_export(char *str)
 {
-	//기존 할당한 사이즈 + 1 만큼 할당하고 기존꺼 다 복사, 마지막에 새로운 문자열도 추가, 그리고 기존꺼 할당 해제하고 새로운 문자열배열 넘겨줌 
-	int i = -1;
-	int cnt = 0;
-	char **ret;
-	while(g_state.envp[++i])
+	int		i;
+	int		cnt;
+	char	**ret;
+
+	i = -1;
+	cnt = 0;
+	while (g_state.envp[++i])
 		cnt++;
 	ret = (char **)malloc(sizeof(char *) * (cnt + 2));
 	if (!ret)
@@ -55,10 +59,12 @@ char	**new_export(char *str)//새로운 문자열 추가
 	return (ret);
 }
 
-int has_equal_sign(char *str)//= 등호가 있는지 없는지
+int	has_equal_sign(char *str)
 {
-	int i = -1;
-	while(str[++i])
+	int	i;
+
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] == '=')
 			return (TRUE);
@@ -66,42 +72,42 @@ int has_equal_sign(char *str)//= 등호가 있는지 없는지
 	return (FALSE);
 }
 
-int	is_right_form(char *str)//key값만 확인 즉, = 까지 유효한지 확인
+int	is_right_form(char *str)
 {
-	int i = -1;
+	int	i;
 
-	if (ft_isalpha(str[0]) == FALSE && str[0] != '_')// 문자이거나 _
+	i = -1;
+	if (ft_isalpha(str[0]) == FALSE && str[0] != '_')
 		return (FALSE);
-	while(str[++i]!='=')
+	while (str[++i] != '=')
 	{
-		if (ft_isalnum(str[i]) == FALSE && str[i] != '_')//숫자 문자 _ 가 아니면 
+		if (ft_isalnum(str[i]) == FALSE && str[i] != '_')
 			return (FALSE);
 	}
 	return (TRUE);
 }
 
-//void func_export(char *str)
 void	func_export(t_cmd_node *head)
 {
-	int	idx;
-	//char **tmp;
-	int i = -1;
-	//int cnt = 0;
-	int j = -1;
-	// tmp = ft_split(str, ' ');//공백 기준으로 자르기
-	// cnt = get_count(str,' ');//공백 기준으로 몇개 인지 확인
-	t_cmd_node *curr_node;
+	int			idx;
+	int			i;
+	int			j;
+	t_cmd_node	*curr_node;
+
+	i = -1;
+	j = -1;
 	curr_node = head->next;
-	while(curr_node != NULL)
+	while (curr_node != NULL)
 	{
 		if (is_right_form(curr_node->cmd) == FALSE)
-			printf("bash: export: `%s': not a valid identifier\n",curr_node->cmd);
+			printf("bash: export: `%s': not a valid identifier\n", \
+			curr_node->cmd);
 		else if ((has_equal_sign(curr_node->cmd) == TRUE))
 		{
 			idx = is_in_envp(curr_node->cmd);
 			if (idx != -1)
 				modify_envp(curr_node->cmd, idx);
-			else// no key
+			else
 				g_state.envp = new_export(curr_node->cmd);
 		}
 		curr_node = curr_node->next;
