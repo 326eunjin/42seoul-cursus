@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   func_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/21 11:01:30 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 00:01:58 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	is_in_envp(char *str)
-{
-	char	**split;
-	int		i;
-
-	i = -1;
-	split = ft_split(str, '=');
-	while (g_state.envp[++i])
-	{
-		if (ft_strncmp(g_state.envp[i], split[0], ft_strlen(split[0])) == 0)
-		{
-			free_split(split);
-			return (i);
-		}
-	}
-	free_split(split);
-	return (-1);
-}
-
-void	modify_envp(char *str, int loc)
-{
-	free(g_state.envp[loc]);
-	g_state.envp[loc] = ft_strdup(str);
-}
 
 char	**new_export(char *str)
 {
@@ -55,7 +30,7 @@ char	**new_export(char *str)
 	while (g_state.envp[++i])
 		ret[i] = ft_strdup(g_state.envp[i]);
 	ret[cnt] = ft_strdup(str);
-	free(g_state.envp);
+	//free_array(g_state.envp);
 	return (ret);
 }
 
@@ -76,13 +51,25 @@ int	is_right_form(char *str)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	if (ft_isalpha(str[0]) == FALSE && str[0] != '_')
 		return (FALSE);
-	while (str[++i] != '=')
+	if (has_equal_sign(str) == TRUE)
+	{
+		while (str[i] != '=')
+		{
+			if (ft_isalnum(str[i]) == FALSE && str[i] != '_')
+				return (FALSE);
+			i++;
+		}
+		return (TRUE);
+	}
+	i = 0;
+	while (str[i] != '\0')
 	{
 		if (ft_isalnum(str[i]) == FALSE && str[i] != '_')
 			return (FALSE);
+		i++;
 	}
 	return (TRUE);
 }
@@ -90,18 +77,14 @@ int	is_right_form(char *str)
 void	func_export(t_cmd_node *head)
 {
 	int			idx;
-	int			i;
-	int			j;
 	t_cmd_node	*curr_node;
 
-	i = -1;
-	j = -1;
 	curr_node = head->next;
 	while (curr_node != NULL)
 	{
 		if (is_right_form(curr_node->cmd) == FALSE)
-			printf("bash: export: `%s': not a valid identifier\n", \
-			curr_node->cmd);
+			printf("bash: export: `%s': not a valid identifier\n",
+				curr_node->cmd);
 		else if ((has_equal_sign(curr_node->cmd) == TRUE))
 		{
 			idx = is_in_envp(curr_node->cmd);

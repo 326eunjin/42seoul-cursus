@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_split.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:08:49 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/21 11:07:34 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/21 23:58:15 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ void	free_split_part(char **tmp, int idx)
 
 	i = 0;
 	while (i < idx)
+	{
+		free(tmp[i]);
+		tmp[i] = NULL;
+		i++;
+	}
+	free(tmp);
+	tmp = NULL;
+}
+
+void	free_array(char **tmp)
+{
+	int	i;
+
+	while(tmp[i])
 	{
 		free(tmp[i]);
 		tmp[i] = NULL;

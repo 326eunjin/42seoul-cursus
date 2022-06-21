@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/21 21:05:17 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/21 23:42:11 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,15 @@ int		ft_strcmp(char *s1, char *s2);
 char	**copy_envp(char **envp);
 void	free_split(char **tmp);
 void	free_split_part(char **tmp, int idx);
+void	free_array(char **tmp);
 
 /*
 	*** redirection ***
 */
 char	*has_redir_in(t_cmd_node *node);
 char	*without_redir(t_cmd_node *node);
-//char	*is_valid_cmd_redir(char *ret);
 t_cmd_node	*has_redir_out(t_cmd_node *node);
-t_cmd_node *remove_redir(t_cmd_node *head);
+t_cmd_node	*remove_redir(t_cmd_node *head);
 void	free_single_cmd_list(t_cmd_node *head);
 
 /*
@@ -160,7 +160,6 @@ int		is_right_form(char *str);
 void	export_str(char *str);
 int		is_in_envp(char *str);
 void	modify_envp(char *str, int loc);
-void	free_split(char **tmp);
 char	*get_value(char *key);
 char	**new_export(char *str);
 char	*get_pwd(void);

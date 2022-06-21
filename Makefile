@@ -6,7 +6,7 @@
 #    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/20 21:54:02 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/21 23:40:29 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ REDIR_DIR = ./redirection/
 
 LIBFT_SRCS = ft_memset.c ft_substr.c ft_strdup.c ft_strlcpy.c ft_strlen.c ft_isalnum.c ft_isalpha.c ft_split.c ft_strncmp.c ft_isdigit.c ft_strjoin.c ft_itoa.c ft_tolower.c ft_putstr_fd.c ft_atoi.c ft_putnbr_fd.c ft_putendl_fd.c ft_strlcat.c ft_putchar_fd.c
 PARSE_SRCS = main.c parse_main.c parse_token.c parse_cmd.c parse_cmd_add.c parse_cmd_type.c parse_cmd_add_quote.c parse_cmd_utils.c
-BUILTIN_SRCS = func_pwd.c func_env.c func_echo.c func_export.c func_unset.c func_cd.c func_cd_util.c func_exit.c
-UTIL_SRCS = ft_strcmp.c copy_env.c tolowerstr.c set_signal.c free_split.c
+BUILTIN_SRCS = func_pwd.c func_env.c func_echo.c func_export.c func_unset.c func_cd.c func_cd_util.c func_exit.c func_export_util.c
+UTIL_SRCS = ft_strcmp.c copy_env.c tolowerstr.c set_signal.c free.c
 EXEC_SRCS = exe_bulitin.c exe_cmd.c
 REDIR_SRCS = redir_in.c without_redir.c redir_out.c
 
