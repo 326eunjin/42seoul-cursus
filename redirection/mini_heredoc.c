@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/22 02:21:50 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/22 20:17:47 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ static int	write_dollar_heredoc(char *line, int start, int len, int fd)
 	free(name);
 	free(value);
 	return (TRUE);
+}
+
+static void	finish_heredoc(char **line, int fd, int end_status)
+{
+	if (*line != NULL)
+		free(*line);
+	if (fd >= 0)
+		close(fd);
+	exit(end_status);
 }
 
 static int	write_heredoc(int fd, char *line)
@@ -65,39 +74,51 @@ static int	write_heredoc(int fd, char *line)
 	return (TRUE);
 }
 
-static void	finish_heredoc(t_cmd_node **curr_cmd, int fd)
+static int	heredoc_child(char *delimiter)
 {
-	(*curr_cmd)->prev->type = REDIRIN;
-	free((*curr_cmd)->cmd);
-	(*curr_cmd)->cmd = ft_strdup("heredoc");
-	close(fd);
-}
-
-int	mini_heredoc(t_cmd_node **curr_cmd)
-{
-	char	*line;
 	int		fd;
+	char	*line;
 
-	fd = open("heredoc", O_RDWR | O_CREAT | O_TRUNC, 0666);
+	line = NULL;
+	fd = open("ejang.jeyoon", O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (fd < 0)
-		return (parse_error(5));
+	{
+		parse_error(5);
+		finish_heredoc(&line, fd, 1);
+	}
 	while (1)
 	{
 		line = readline("> ");
 		if (line == NULL)
 			move_heredoc_curser();
-		if (line == NULL || ft_strcmp(line, (*curr_cmd)->cmd) == 0)
-		{
-			free(line);
-			break ;
-		}
+		if (line == NULL || ft_strcmp(line, delimiter) == 0)
+			finish_heredoc(&line, fd, 0);
 		if (write_heredoc(fd, line) == FALSE)
-		{
-			free(line);
-			return (FALSE);
-		}
+			finish_heredoc(&line, fd, 1);
 		free(line);
 	}
-	finish_heredoc(curr_cmd, fd);
+	line = NULL;
+	finish_heredoc(&line, fd, 0);
+}
+
+int	mini_heredoc(t_cmd_node **curr_cmd)
+{
+	pid_t	pid;
+	int		status;
+	int		ret;
+
+	pid = fork();
+	if (pid == 0)
+		heredoc_child((*curr_cmd)->cmd);
+	else
+	{
+		waitpid(pid, &status, 0);
+		ret = WEXITSTATUS(status);
+		if (ret == 1)
+			return (FALSE);
+		(*curr_cmd)->prev->type = REDIRIN;
+		free((*curr_cmd)->cmd);
+		(*curr_cmd)->cmd = ft_strdup("ejang.jeyoon");
+	}
 	return (TRUE);
 }
