@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/04 10:13:38 by ejang             #+#    #+#              #
-#    Updated: 2022/06/16 15:45:20 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/22 21:14:32 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ bonus:
 	@$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	@rm -f $(OBJS) $(BOBJS)
-	@printf "✅ \033[0;32mclean $(NAME)\033[0m\n"
+	@printf "🚮 $(NAME)'s object files were removed.\n"
 fclean:		clean
 	@rm -f $(NAME)
-	@printf "✅ \033[0;32mfclean $(NAME)\033[0m\n"
+	@printf "🚮 $(NAME) was removed.\n"
 re:			fclean all
