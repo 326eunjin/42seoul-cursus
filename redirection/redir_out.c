@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:25:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/20 21:58:46 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 22:37:41 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,26 @@ t_cmd_node *has_redir_out(t_cmd_node *node)
 		curr = curr->next;
 	}
 	return (last_redirout);
+}
+
+void	redir_out(t_cmd_node *node)
+{
+	t_cmd_node	*outfile;
+	int			out_fd;
+
+	outfile = has_redir_out(node);
+	if (outfile != NULL) //노드에 REDIROUT이 있으면 <
+	{
+		if (outfile->type == REDIROUT)
+			out_fd = open(outfile->next->cmd, O_RDWR, 0644); //이미 위에서 생성 및 삭제를 다 했기 때문에 dup2로 바꿔주기만 하면 된다.
+		else
+			out_fd = open(outfile->next->cmd, O_RDWR | O_APPEND, 0644);
+		if (out_fd < 0)
+		{
+			ft_putstr_fd("fd error\n", STDERR_FILENO);
+			g_state.exit_status = 1;
+		}
+		dup2(out_fd, STDOUT_FILENO);
+		close(out_fd);
+	}
 }

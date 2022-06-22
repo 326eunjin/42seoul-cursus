@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 22:52:30 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/21 20:25:25 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 22:36:16 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_cmd_node	*cmd_dup(t_cmd_node *src_node)
 	return (new_node);
 }
 
-t_cmd_node *remove_redir(t_cmd_node *head)
+t_cmd_node	*remove_redir(t_cmd_node *head)
 {
 	t_cmd_node	*new_list_head;
 	t_cmd_node	*new_node;
@@ -88,35 +88,3 @@ t_cmd_node *remove_redir(t_cmd_node *head)
 	}
 	return (new_list_head);
 }
-
-// char	*is_valid_cmd_redir(char *ret)//ret = ls -al
-// {
-// 	char* tmp;
-// 	struct stat s;
-// 	char **path = ft_split(get_value("PATH"), ':');
-// 	char **ret_arr;
-// 	int i = -1;
-	
-// 	tmp = ft_strdup(ret);//ls -al
-// 	free(ret);
-// 	ret_arr = ft_split(tmp, ' ');
-// 	free(tmp);
-// 	tmp = ft_strdup(ret_arr[0]);
-// 	if (stat(tmp, &s) == 0)
-// 		return (tmp);
-// 	while(path[++i])
-// 	{
-// 		tmp = ft_strjoin(ft_strdup("/"),tmp);
-// 		tmp = ft_strjoin(ft_strdup(path[i]),tmp);
-// 		if (stat(tmp, &s) == 0)
-// 		{
-// 			free_split(ret_arr);
-// 			free_split(path);
-// 			return (tmp);
-// 		}
-// 		tmp = ft_strdup(ret_arr[0]);
-// 	}
-// 	free_split(ret_arr);
-// 	free_split(path);
-// 	return (NULL);
-// }
