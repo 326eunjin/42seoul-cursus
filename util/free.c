@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:08:49 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 16:22:44 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 23:14:01 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	free_array(char **tmp)
 	int	i;
 
 	i = 0;
-	while(tmp[i])
+	while (tmp[i])
 	{
 		free(tmp[i]);
 		tmp[i] = NULL;
