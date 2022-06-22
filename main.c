@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/22 23:15:05 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 00:03:46 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "./inc/minishell.h"
 
 // 디버깅용
 char *to_types[] = {"TO_COMMON", "TO_REDIRIN", "TO_REDIROUT", "TO_HEREDOC", "TO_APPEND", "PIPE", "DQUOTE", "QUOTE", "DOLLAR"};
@@ -25,6 +25,8 @@ static void	free_cmd(t_cmd_line_list *cmd_line_list)
 	idx = 0;
 	while (idx < cmd_line_list->size)
 	{
+		if (cmd_line_list->cmd_heads == NULL)
+			break ;
 		curr = cmd_line_list->cmd_heads[idx];
 		while (curr != NULL)
 		{
@@ -41,7 +43,7 @@ static void	free_cmd(t_cmd_line_list *cmd_line_list)
 	cmd_line_list = 0;
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_cmd_line_list	*cmd_line_list;
 
@@ -55,32 +57,13 @@ int main(int argc, char **argv, char **envp)
 		cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
 		if (cmd_line_list == NULL)
 			return (parse_error(2));
+		ft_memset(cmd_line_list, 0, sizeof(t_cmd_line_list));
 		if (parse_cmd(&cmd_line_list) == FALSE)
 		{
 			free_cmd(cmd_line_list);
 			continue ;
 		}
-		// // *** 디버깅용 프린트
- 		// t_cmd_node *curr_cmd;
- 		// for(int i = 0; i < cmd_line_list->size; i++)
- 		// {
- 		// 	curr_cmd = cmd_line_list->cmd_heads[i];
- 		// 	printf("#%d\n", i);
- 		// 	while(curr_cmd != NULL)
- 		// 	{
- 		// 		printf("cmd : %s (type : %s)\n", curr_cmd->cmd, cmd_types[curr_cmd->type]);
- 		// 		curr_cmd = curr_cmd->next;
- 		// 	}
- 		// 	printf("----\n");
- 		// }
- 		// //*** 끝
 		exe_cmd(cmd_line_list);
-		//exe_builtin(cmd_line_list->cmd_heads[0]);
-		// // *** 디버깅용 프린트 (OLDPWD, PWD)
-		// while(g_state.envp[++i])
-		// 	if(ft_strncmp(g_state.envp[i],"OLDPWD",6) == 0 || ft_strncmp(g_state.envp[i],"PWD",3)== 0)
-		// 		printf("%s\n",g_state.envp[i]);
-		// *** 끝
 		free_cmd(cmd_line_list);
 	}
 	//free_envp(); // 환경변수 free

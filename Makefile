@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
+#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/22 21:53:53 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/23 00:05:44 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ UTIL_DIR = ./util/
 EXEC_DIR = ./exec/
 REDIR_DIR = ./redirection/
 
-PARSE_SRCS = main.c parse_main.c parse_token.c parse_cmd.c parse_cmd_add.c parse_cmd_type.c parse_cmd_add_quote.c parse_cmd_utils.c
+PARSE_SRCS = parse_main.c parse_token.c parse_cmd.c parse_cmd_add.c parse_cmd_type.c parse_cmd_add_quote.c parse_cmd_utils.c
 BUILTIN_SRCS = func_pwd.c func_env.c func_echo.c func_export.c func_unset.c func_cd.c func_cd_util.c func_exit.c func_export_util.c
 UTIL_SRCS = ft_strcmp.c copy_env.c tolowerstr.c set_signal.c free.c
 EXEC_SRCS = exe_bulitin.c exe_cmd_util.c exe_cmd_with_pipe.c exe_cmd_without_pipe.c
 REDIR_SRCS = redir_in.c without_redir.c redir_out.c mini_heredoc.c
 
-SRCS = $(addprefix $(PARSE_DIR), $(PARSE_SRCS)) $(addprefix $(BUILTIN_DIR), $(BUILTIN_SRCS)) $(addprefix $(UTIL_DIR), $(UTIL_SRCS)) $(addprefix $(EXEC_DIR), $(EXEC_SRCS)) $(addprefix $(REDIR_DIR), $(REDIR_SRCS))
+SRCS = main.c $(addprefix $(PARSE_DIR), $(PARSE_SRCS)) $(addprefix $(BUILTIN_DIR), $(BUILTIN_SRCS)) $(addprefix $(UTIL_DIR), $(UTIL_SRCS)) $(addprefix $(EXEC_DIR), $(EXEC_SRCS)) $(addprefix $(REDIR_DIR), $(REDIR_SRCS))
 OBJS	=	$(SRCS:.c=.o)
 
 all	:	$(NAME)
