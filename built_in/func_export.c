@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 00:01:58 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 16:36:42 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	**new_export(char *str)
 	while (g_state.envp[++i])
 		ret[i] = ft_strdup(g_state.envp[i]);
 	ret[cnt] = ft_strdup(str);
-	//free_array(g_state.envp);
+	ret[cnt + 1] = NULL;
+	free_array(g_state.envp);
 	return (ret);
 }
 

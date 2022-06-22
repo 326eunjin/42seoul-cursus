@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 17:04:10 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/21 10:44:05 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 19:59:02 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	func_echo(t_cmd_node *head)
 	int			flag;
 
 	curr_node = head->next;
+	if (curr_node == NULL)
+	{
+		printf("\n");
+		return ;
+	}
 	if (curr_node->type == OPTION)
 	{
 		flag = TRUE;
