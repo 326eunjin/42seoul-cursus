@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/21 11:03:47 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/22 20:06:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	home_dir(char *str)
 	tmp1 = ft_strdup("PWD=");
 	if (chdir(str) < 0)
 	{
+		free(str);
 		printf("chdir erorr\n");
 		g_state.exit_status = 1;
 	}
