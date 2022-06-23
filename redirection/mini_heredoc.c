@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 14:37:16 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 20:17:38 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	int		status;
 	int		ret;
 
+	rl_catch_signals = 1;
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)

@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 15:01:53 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 20:21:08 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_cmd_line_list	*cmd_line_list;
 
-	rl_catch_signals = 0;
 	g_state.envp = copy_envp(envp);
 	if (is_in_envp("OLDPWD") == -1)
 		add_old_pwd();// 만약에 OLDPWD 환경변수 없으면 추가하기
 	print_intro();
 	while (1)
 	{
+		rl_catch_signals = 0;
 		cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
 		if (cmd_line_list == NULL)
 			return (parse_error(2));
@@ -74,6 +74,7 @@ int	main(int argc, char **argv, char **envp)
 			free_cmd(cmd_line_list);
 			continue ;
 		}
+		rl_catch_signals = 0;
 		exe_cmd(cmd_line_list);
 		free_cmd(cmd_line_list);
 	}
