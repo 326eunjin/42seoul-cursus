@@ -1,72 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_cd.c                                          :+:      :+:    :+:   */
+/*   func_cd_single.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:33:21 by ejang            ###   ########.fr       */
+/*   Created: 2022/06/24 03:32:36 by ejang             #+#    #+#             */
+/*   Updated: 2022/06/24 03:37:29 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*get_pwd(void)
-{
-	char	*current_dir;
-
-	current_dir = getcwd(NULL, 0);
-	if (current_dir == NULL)
-	{
-		ft_putstr_fd("getcwd() cannot excute in fun_pwd\n", STDERR_FILENO);
-		exit(1);
-	}
-	return (current_dir);
-}
-
-void	home_dir(char *str)
-{
-	char	*tmp1;
-
-	tmp1 = ft_strdup("PWD=");
-	if (chdir(str) < 0)
-	{
-		free(str);
-		ft_putstr_fd("chdir error\n", STDERR_FILENO);
-		exit(1);
-	}
-	tmp1 = ft_strjoin(tmp1, str);
-	export_str(tmp1);
-	free(tmp1);
-	tmp1 = 0;
-}
-
-void	old_dir(void)
-{
-	char	*str1;
-	char	*str2;
-	char	*tmp;
-
-	str1 = get_value("OLDPWD");
-	str2 = get_value("PWD");
-	if (chdir(str1) < 0)
-	{
-		ft_putstr_fd("chdir error\n", STDERR_FILENO);
-		exit(1);
-	}
-	tmp = ft_strdup("PWD=");
-	tmp = ft_strjoin(tmp, str1);
-	export_str(tmp);
-	free(tmp);
-	tmp = ft_strdup("OLDPWD=");
-	tmp = ft_strjoin(tmp, str2);
-	export_str(tmp);
-	free(tmp);
-	tmp = 0;
-}
-
-static void	change_dir(char *str)
+static void	change_dir_single(char *str)
 {
 	char	*tmp;
 	char	*ret;
@@ -75,7 +21,7 @@ static void	change_dir(char *str)
 	if (chdir(str) < 0)
 	{
 		printf("cd: no such file or directory: %s\n", str);
-		exit(1);
+		g_state.exit_status = 1;
 	}
 	else
 	{
@@ -91,7 +37,7 @@ static void	change_dir(char *str)
 	}
 }
 
-void	func_cd(t_cmd_node *head)
+void	func_cd_single_cmd(t_cmd_node *head)
 {
 	t_cmd_node	*curr_node;
 	int			ret;
@@ -107,5 +53,5 @@ void	func_cd(t_cmd_node *head)
 	else if (ft_strcmp(curr_node->cmd, "-") == 0)
 		old_dir();
 	else
-		change_dir(curr_node->cmd);
+		change_dir_single(curr_node->cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:33:31 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 02:52:13 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:29:12 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	exe_builtin_single(t_cmd_node	*node)
 	if (ft_strcmp(node->cmd, "echo") == 0)
 		func_echo(node);
 	if (ft_strcmp(node->cmd, "export") == 0)
-		func_export(node);
+		func_export_single_cmd(node);
 	if (ft_strcmp(node->cmd, "unset") == 0)
-		func_unset(node);
+		func_unset_single_cmd(node);
 	if (ft_strcmp(node->cmd, "cd") == 0)
-		func_cd(node);
+		func_cd_single_cmd(node);
 	if (ft_strcmp(node->cmd, "exit") == 0)
 		func_exit_single_cmd(node);
 }

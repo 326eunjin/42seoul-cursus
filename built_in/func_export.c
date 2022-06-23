@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:17:49 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:56:26 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,35 @@ int	is_right_form(char *str)
 
 void	func_export(t_cmd_node *head)
 {
+	int			flag;
+	t_cmd_node	*curr_node;
+
+	curr_node = head->next;
+	flag = FALSE;
+	while (curr_node != NULL)
+	{
+		if (is_right_form(curr_node->cmd) == FALSE)
+		{
+			flag = TRUE;
+			ft_putstr_fd("bash : export : ", STDERR_FILENO);
+			ft_putstr_fd(curr_node->cmd, STDERR_FILENO);
+			ft_putstr_fd(": not a valid identifier\n", STDERR_FILENO);
+		}
+		else if ((has_equal_sign(curr_node->cmd) == TRUE))
+		{
+			if (is_in_envp(curr_node->cmd) != -1)
+				modify_envp(curr_node->cmd, iis_in_envp(curr_node->cmd));
+			else
+				g_state.envp = new_export(curr_node->cmd);
+		}
+		curr_node = curr_node->next;
+	}
+	if (flag == TRUE)
+		exit(1);//에러있으면 exit1 하기
+}
+
+void	func_export_single_cmd(t_cmd_node *head)
+{
 	int			idx;
 	t_cmd_node	*curr_node;
 
@@ -84,8 +113,12 @@ void	func_export(t_cmd_node *head)
 	while (curr_node != NULL)
 	{
 		if (is_right_form(curr_node->cmd) == FALSE)
-			printf("bash: export: `%s': not a valid identifier\n",
-				curr_node->cmd);
+		{
+			ft_putstr_fd("bash : export : ", STDERR_FILENO);
+			ft_putstr_fd(curr_node->cmd, STDERR_FILENO);
+			ft_putstr_fd(": not a valid identifier\n", STDERR_FILENO);
+			g_state.exit_status = 1;
+		}
 		else if ((has_equal_sign(curr_node->cmd) == TRUE))
 		{
 			idx = is_in_envp(curr_node->cmd);
