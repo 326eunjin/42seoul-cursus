@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 20:21:08 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 03:09:59 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,24 @@
 // 디버깅용
 char *to_types[] = {"TO_COMMON", "TO_REDIRIN", "TO_REDIROUT", "TO_HEREDOC", "TO_APPEND", "PIPE", "DQUOTE", "QUOTE", "DOLLAR"};
 char *cmd_types[] = {"COMMON", "REDIRIN", "REDIROUT", "HEREDOC", "APPEND", "REDIRARG", "BUILTIN", "OPTION"};
+
+static void	set_echoctl(void)
+{
+	struct termios	attr;
+
+	tcgetattr(STDIN_FILENO, &attr);
+	attr.c_lflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &attr);
+}
+
+static void	unset_echoctl(void)
+{
+	struct termios	attr;
+
+	tcgetattr(STDIN_FILENO, &attr);
+	attr.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &attr);
+}
 
 static void	free_cmd(t_cmd_line_list *cmd_line_list)
 {
@@ -52,6 +70,7 @@ static void	print_intro(void)
 	while (read(fd, &c, 1) > 0)
 		ft_putchar_fd(c, STDOUT_FILENO);
 	ft_putendl_fd("", STDOUT_FILENO);
+	close(fd);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -64,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 	print_intro();
 	while (1)
 	{
-		rl_catch_signals = 0;
+		unset_echoctl();
 		cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
 		if (cmd_line_list == NULL)
 			return (parse_error(2));
@@ -74,7 +93,7 @@ int	main(int argc, char **argv, char **envp)
 			free_cmd(cmd_line_list);
 			continue ;
 		}
-		rl_catch_signals = 0;
+		set_echoctl();
 		exe_cmd(cmd_line_list);
 		free_cmd(cmd_line_list);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 22:48:59 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 00:58:03 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	int		status;
 	int		ret;
 
-	rl_catch_signals = 1;
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
@@ -117,12 +116,11 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	{
 		waitpid(pid, &status, 0);
 		ret = status / 256;
-		if (ret == 130)
+		if (ret == 130 || ret == 1)
 		{
+			g_state.exit_status = 1;
 			return (FALSE);
 		}
-			//return (FALSE);
-		ft_putendl_fd("*******", STDERR_FILENO);
 		(*curr_cmd)->prev->type = REDIRIN;
 		free((*curr_cmd)->cmd);
 		(*curr_cmd)->cmd = ft_strdup("ejang.jeyoon");
