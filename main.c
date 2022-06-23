@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 00:36:52 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 03:09:59 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void	print_intro(void)
 	while (read(fd, &c, 1) > 0)
 		ft_putchar_fd(c, STDOUT_FILENO);
 	ft_putendl_fd("", STDOUT_FILENO);
+	close(fd);
 }
 
 int	main(int argc, char **argv, char **envp)
