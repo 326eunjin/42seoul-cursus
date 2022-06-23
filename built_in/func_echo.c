@@ -6,11 +6,26 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 17:04:10 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 00:32:41 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:08:36 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	print_echo(t_cmd_node *curr, int flag)
+{
+	t_cmd_node	*curr_node;
+
+	curr_node = curr;
+	while (curr_node->next != NULL)
+	{
+		printf("%s ", curr_node->cmd);
+		curr_node = curr_node->next;
+	}
+	printf("%s", curr_node->cmd);
+	if (flag == FALSE)
+		printf("\n");
+}
 
 void	func_echo(t_cmd_node *head)
 {
@@ -31,13 +46,6 @@ void	func_echo(t_cmd_node *head)
 	else
 		flag = FALSE;
 	if (curr_node == NULL)
-		return;
-	while (curr_node->next != NULL)
-	{
-		printf("%s ", curr_node->cmd);
-		curr_node = curr_node->next;
-	}
-	printf("%s", curr_node->cmd);
-	if (flag == FALSE)
-		printf("\n");
+		return ;
+	print_echo(curr_node, flag);
 }
