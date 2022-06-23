@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:03:51 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:15:51 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	exe_with_pipe(t_cmd_line_list *list)
 	{
 		pid[idx] = fork();
 		if (pid[idx] < 0)
-			g_state.exit_status = 1;
+			exit(1);
 		else if (pid[idx] == 0)
 		{
 			if (idx > 0)

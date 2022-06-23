@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:14:08 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 16:43:26 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:18:13 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**string_array(t_cmd_node *node)
 	}
 	ret = (char **)malloc(sizeof(char *) * (cnt + 1));
 	if (!ret)
-		return (NULL);
+		exit (1);
 	curr = node;
 	while (i < cnt)
 	{

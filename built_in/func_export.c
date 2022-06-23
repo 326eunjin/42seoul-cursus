@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 16:37:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:17:49 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**new_export(char *str)
 		cnt++;
 	ret = (char **)malloc(sizeof(char *) * (cnt + 2));
 	if (!ret)
-		return (NULL);
+		exit(1);
 	ret[cnt + 1] = NULL;
 	i = -1;
 	while (g_state.envp[++i])

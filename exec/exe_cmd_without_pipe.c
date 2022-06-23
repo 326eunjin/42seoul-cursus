@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:09:17 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:16:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void	exe_without_pipe(t_cmd_node *node)
 		set_exec_signal();
 		pid = fork();
 		if (pid < -1)
-			g_state.exit_status = 1;
+			exit(1);
 		if (pid == 0)
 		{
 			exec_single_cmd_without_pipe(node);
-			g_state.exit_status = 1;
+			exit(1);
 		}
 		else
 		{

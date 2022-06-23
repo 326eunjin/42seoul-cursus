@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 22:52:30 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 16:54:13 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:21:15 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_cmd_node	*cmd_dup(t_cmd_node *src_node)
 
 	new_node = (t_cmd_node *)malloc(sizeof(t_cmd_node));
 	if (new_node == NULL)
-		return (NULL);
+		exit (1);
 	ft_memset(new_node, 0, sizeof(t_cmd_node));
 	new_node->cmd = ft_strdup(src_node->cmd);
 	if (new_node->cmd == NULL)
