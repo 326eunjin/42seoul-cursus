@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
+#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/23 21:35:39 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/24 03:34:08 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ PARSE_SRCS = parse_main.c parse_token.c parse_cmd.c parse_cmd_add.c parse_cmd_ty
 BUILTIN_SRCS = func_pwd.c func_env.c func_echo.c func_export.c func_unset.c func_cd.c func_cd_util.c func_exit.c func_export_util.c
 UTIL_SRCS = ft_strcmp.c copy_env.c tolowerstr.c signal_set.c signal_handler.c free.c
 EXEC_SRCS = exe_bulitin.c exe_cmd_util.c exe_cmd_with_pipe.c exe_cmd_without_pipe.c exe_cmd_with_pipe_util.c
-REDIR_SRCS = redir_in.c without_redir.c redir_out.c mini_heredoc.c
+REDIR_SRCS = redir_in.c without_redir.c redir_out.c heredoc.c heredoc_utils.c
 
 SRCS = main.c $(addprefix $(PARSE_DIR), $(PARSE_SRCS)) $(addprefix $(BUILTIN_DIR), $(BUILTIN_SRCS)) $(addprefix $(UTIL_DIR), $(UTIL_SRCS)) $(addprefix $(EXEC_DIR), $(EXEC_SRCS)) $(addprefix $(REDIR_DIR), $(REDIR_SRCS))
 OBJS	=	$(SRCS:.c=.o)

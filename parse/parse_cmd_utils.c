@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:16:53 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:30:53 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,4 @@ void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
 	*curr_str = ft_strjoin(*curr_str, str);
 	if ((*curr)->next != NULL)
 		*curr = (*curr)->next;
-}
-
-void	move_heredoc_curser(int fd)
-{
-	close(fd);
-	ft_putstr_fd("\x1b[1A", 1);
-	ft_putstr_fd("\033[2C", 1);
-	exit(0);
 }

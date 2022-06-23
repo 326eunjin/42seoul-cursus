@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:09:59 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 03:21:05 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	main(int argc, char **argv, char **envp)
 		set_echoctl();
 		exe_cmd(cmd_line_list);
 		free_cmd(cmd_line_list);
+		remove_temp_file();
 	}
 	//free_envp(); // 환경변수 free
 	return (0);

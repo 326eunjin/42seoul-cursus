@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:14:54 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 03:23:01 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int			add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node);
 void		dquote_dollar(char **curr_str, t_token_node **curr, char *line);
 void		tolower_str(char *str);
 char		*get_lower_str(char *str);
-void		move_heredoc_curser(int fd);
 
 /*
 	*** utils ***
@@ -140,7 +139,8 @@ char		*has_redir_in(t_cmd_node *node);
 void		redir_out(t_cmd_node *node);
 t_cmd_node	*has_redir_out(t_cmd_node *node);
 t_cmd_node	*remove_redir(t_cmd_node *head);
-
+void		remove_temp_file(void);
+void		move_heredoc_curser(int fd);
 /*
 	*** execute commands ***
 */
