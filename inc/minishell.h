@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:53:53 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 04:02:03 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int			add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node);
 void		dquote_dollar(char **curr_str, t_token_node **curr, char *line);
 void		tolower_str(char *str);
 char		*get_lower_str(char *str);
-void		move_heredoc_curser(int fd);
 
 /*
 	*** utils ***
@@ -140,7 +139,8 @@ char		*has_redir_in(t_cmd_node *node);
 void		redir_out(t_cmd_node *node);
 t_cmd_node	*has_redir_out(t_cmd_node *node);
 t_cmd_node	*remove_redir(t_cmd_node *head);
-
+void		remove_temp_file(void);
+void		move_heredoc_curser(int fd);
 /*
 	*** execute commands ***
 */
@@ -158,13 +158,6 @@ void		exe_cmd(t_cmd_line_list *cmd_line_list);
 /*
 	built-in
 */
-void		func_cd_single_cmd(t_cmd_node *head);
-int			envp_cnt(void);
-void		func_unset_single_cmd(t_cmd_node *head);
-int			is_valid_env(char *str);
-int			is_str_in_envp(char *str);
-void		home_dir(char *str);
-void		old_dir(void);
 void		add_old_pwd(void);
 char		*get_value(char *key);
 void		export_str(char *str);
@@ -179,7 +172,6 @@ void		modify_envp(char *str, int loc);
 char		**new_export(char *str);
 int			is_right_form(char *str);
 void		func_export(t_cmd_node *head);
-void		func_export_single_cmd(t_cmd_node *head);
 void		func_pwd(void);
 void		func_unset(t_cmd_node *head);
 #endif
