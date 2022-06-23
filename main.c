@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 14:40:29 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 14:56:21 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ static void	free_cmd(t_cmd_line_list *cmd_line_list)
 	free(cmd_line_list->cmd_heads);
 	free(cmd_line_list);
 	cmd_line_list = 0;
+}
+
+static void	print_intro(void)
+{
+	int		fd;
+	char	c;
+
+	fd = open("intro.txt", O_RDONLY);
+	while (read(fd, &c, 1) > 0)
+		ft_putchar_fd(c, STDOUT_FILENO);
+	ft_putendl_fd("", STDOUT_FILENO);
 }
 
 int	main(int argc, char **argv, char **envp)
