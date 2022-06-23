@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:44:26 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 16:25:47 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 19:57:38 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,14 @@ int	malloc_status(int size, int **status)
 		return (FALSE);
 	ft_memset(*status, 0, sizeof(*status));
 	return (TRUE);
+}
+
+void	malloc_variables(int size, int ***fd, pid_t **pid, int **status)
+{
+	if (malloc_fd(size - 1, fd) == FALSE || malloc_pid \
+	(size, pid) == FALSE || malloc_status(size, status) == FALSE)
+	{
+		g_state.exit_status = 1;
+		exit(1);
+	}
 }

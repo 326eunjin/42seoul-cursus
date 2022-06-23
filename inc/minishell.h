@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 17:07:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 19:56:43 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,8 @@ char		**string_array(t_cmd_node *node);
 int			malloc_fd(int size, int ***fd);
 int			malloc_pid(int size, pid_t **pid);
 int			malloc_status(int size, int **status);
-void		exe_with_pipe(t_cmd_line_list	*cmd_line_list);
+void		malloc_variables(int size, int ***fd, pid_t **pid, int **status);
+void		exe_with_pipe(t_cmd_line_list	*list);
 void		exe_cmd(t_cmd_line_list *cmd_line_list);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 17:18:06 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 20:04:07 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,17 @@ static void	close_fd(int ***fd, int size)
 	}
 }
 
-static void	wait_pid(pid_t **pid, int **status, int size)
+static void	close_wait(int ***fd, pid_t **pid, int **status, int size)
 {
 	int	i;
 
+	i = 0;
+	while (i < size - 1)
+	{
+		close((*fd)[i][0]);
+		close((*fd)[i][1]);
+		i++;
+	}
 	i = 0;
 	while (i < size)
 	{
@@ -64,25 +71,30 @@ static void	exe_single_cmd_with_pipe(t_cmd_node *node, int ***fd, int size)
 	// free는 도대체 어디서 해야할까,,,이거 pipex에서 했던 고민이랑 같음.
 }
 
-void	exe_with_pipe(t_cmd_line_list *cmd_line_list)
+static void	pipe_process(int size, int ***fd)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		pipe((*fd)[i]);
+		i++;
+	}
+}
+
+void	exe_with_pipe(t_cmd_line_list *list)
 {
 	int		idx;
 	int		**fd;
 	pid_t	*pid;
 	int		*status;
 
-	idx = -1;
-	if (malloc_fd(cmd_line_list->size - 1, &fd) == FALSE || malloc_pid \
-	(cmd_line_list->size, &pid) == FALSE || malloc_status(cmd_line_list->size, &status) == FALSE)
-	{
-		g_state.exit_status = 1;
-		exit(1);
-	}
+	malloc_variables(list->size, &fd, &pid, &status);
 	set_exec_signal();
-	while (++idx < cmd_line_list->size - 1)
-		pipe(fd[idx]);
+	pipe_process(list->size, &fd);
 	idx = -1;
-	while (++idx < cmd_line_list->size)
+	while (++idx < list->size)
 	{
 		pid[idx] = fork();
 		if (pid[idx] < 0)
@@ -91,12 +103,11 @@ void	exe_with_pipe(t_cmd_line_list *cmd_line_list)
 		{
 			if (idx > 0)
 				dup2(fd[idx - 1][0], STDIN_FILENO);
-			if (idx < cmd_line_list->size - 1)
+			if (idx < list->size - 1)
 				dup2(fd[idx][1], STDOUT_FILENO);
-			exe_single_cmd_with_pipe(cmd_line_list->cmd_heads[idx], &fd, cmd_line_list->size);
+			exe_single_cmd_with_pipe(list->cmd_heads[idx], &fd, list->size);
 			g_state.exit_status = 1;
 		}
 	}
-	close_fd(&fd, cmd_line_list->size - 1);
-	wait_pid(&pid, &status, cmd_line_list->size);
+	close_wait(&fd, &pid, &status, list->size);
 }
