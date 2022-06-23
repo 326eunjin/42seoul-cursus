@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:04:20 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 20:20:08 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 21:12:54 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	redir_in(t_cmd_node *node)
 		if (in_fd < 0)
 		{
 			ft_putstr_fd("fd error\n", STDERR_FILENO);
-			g_state.exit_status = 1;
+			exit(1);
 		}
 		dup2(in_fd, STDIN_FILENO);
 		close(in_fd);

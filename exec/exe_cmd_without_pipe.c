@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 19:53:28 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 21:05:57 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	exec_single_cmd_without_pipe(t_cmd_node *node)
 		ft_putstr_fd("bash : ", STDERR_FILENO);
 		ft_putstr_fd(node->cmd, STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-		exit(1);
+		exit(127);
 	}
 }
 
@@ -51,7 +51,10 @@ static void	exe_without_pipe(t_cmd_node *node)
 			g_state.exit_status = 1;
 		}
 		else
+		{
 			waitpid(pid, &status, 0);
+			g_state.exit_status = WEXITSTATUS(status);
+		}
 	}
 }
 

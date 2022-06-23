@@ -6,7 +6,7 @@
 #    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/23 15:58:12 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/23 21:35:39 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(NAME)	:	$(OBJS)
 			@printf "✅ \033[0;32m$(NAME) was created.\033[0m\n"
 
 %.o	:	%.c
-		@$(CC) $(CFLAG) -I${HOME}/.brew/opt/readline/include -c $< -o $@
+		@$(CC) $(CFLAG) -I${HOME}/.brew/opt/readline/include -c $< -o $@ -g3
 
 clean	:
 			@rm -rf $(OBJS)

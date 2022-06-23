@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 20:04:07 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 21:49:36 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	close_fd(int ***fd, int size)
 	}
 }
 
-static void	close_wait(int ***fd, pid_t **pid, int **status, int size)
+static void	close_wait(int ***fd, pid_t **pid, int *status, int size)
 {
 	int	i;
 
@@ -39,7 +39,10 @@ static void	close_wait(int ***fd, pid_t **pid, int **status, int size)
 	i = 0;
 	while (i < size)
 	{
-		waitpid((*pid)[i], status[i], 0);
+		waitpid((*pid)[i], &status[i], 0);
+		ft_putstr_fd("EXIT STATUS :",STDERR_FILENO);
+		ft_putnbr_fd(WEXITSTATUS(status[i]), STDERR_FILENO);
+		ft_putendl_fd("",STDERR_FILENO);
 		i++;
 	}
 }
@@ -65,7 +68,7 @@ static void	exe_single_cmd_with_pipe(t_cmd_node *node, int ***fd, int size)
 			ft_putstr_fd("bash : ", STDERR_FILENO);
 			ft_putstr_fd(node->cmd, STDERR_FILENO);
 			ft_putstr_fd(": command not found\n", STDERR_FILENO);
-			exit(1);
+			exit(127);
 		}
 	}
 	// free는 도대체 어디서 해야할까,,,이거 pipex에서 했던 고민이랑 같음.
@@ -106,8 +109,7 @@ void	exe_with_pipe(t_cmd_line_list *list)
 			if (idx < list->size - 1)
 				dup2(fd[idx][1], STDOUT_FILENO);
 			exe_single_cmd_with_pipe(list->cmd_heads[idx], &fd, list->size);
-			g_state.exit_status = 1;
 		}
 	}
-	close_wait(&fd, &pid, &status, list->size);
+	close_wait(&fd, &pid, status, list->size);
 }
