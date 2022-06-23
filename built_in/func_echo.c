@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 17:04:10 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 19:59:02 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 00:32:41 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	func_echo(t_cmd_node *head)
 	}
 	else
 		flag = FALSE;
+	if (curr_node == NULL)
+		return;
 	while (curr_node->next != NULL)
 	{
 		printf("%s ", curr_node->cmd);
