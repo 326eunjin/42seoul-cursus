@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 16:36:42 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 16:37:11 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**new_export(char *str)
 	return (ret);
 }
 
-int	has_equal_sign(char *str)
+static int	has_equal_sign(char *str)
 {
 	int	i;
 

@@ -6,18 +6,51 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:25:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 23:12:33 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 17:20:36 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_cmd_node	*has_redir_out(t_cmd_node *node)
+static void	do_redir_out(char *cmd)
+{
+	int			fd;
+	struct stat	s;
+
+	if (stat(cmd, &s) == 0)
+	{
+		fd = open(cmd, O_RDWR | O_TRUNC, 0644);
+		if (fd < 0)
+			ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
+		close(fd);
+	}
+	else
+	{
+		fd = open(cmd, O_RDWR | O_CREAT, 0644);
+		if (fd < 0)
+			ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
+		close(fd);
+	}
+}
+
+static void	do_redir_append(char *cmd)
+{
+	int			fd;
+	struct stat	s;
+
+	if (stat(cmd, &s) != 0)
+	{
+		fd = open(cmd, O_RDWR | O_CREAT, 0644);
+		if (fd < 0)
+			ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
+		close(fd);
+	}
+}
+
+static t_cmd_node	*has_redir_out(t_cmd_node *node)
 {
 	t_cmd_node	*curr;
 	t_cmd_node	*last_redirout;
-	struct stat	s;
-	int			fd;
 
 	curr = node;
 	last_redirout = NULL;
@@ -25,32 +58,12 @@ t_cmd_node	*has_redir_out(t_cmd_node *node)
 	{
 		if (curr->type == REDIROUT)
 		{
-			if (stat(curr->next->cmd, &s) == 0)
-			{
-				fd = open(curr->next->cmd, O_RDWR | O_TRUNC, 0644);
-				ft_putchar_fd(fd, STDERR_FILENO);
-				if (fd < 0)
-					ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
-				close(fd);
-			}
-			else
-			{
-				fd = open(curr->next->cmd, O_RDWR | O_CREAT, 0644);
-				if (fd < 0)
-					ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
-				close(fd);
-			}
+			do_redir_out(curr->next->cmd);
 			last_redirout = curr;
 		}
 		else if (curr->type == APPEND)
 		{
-			if (stat(curr->next->cmd, &s) != 0)
-			{
-				fd = open(curr->next->cmd, O_RDWR | O_CREAT, 0644);
-				if (fd < 0)
-					ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
-				close(fd);
-			}
+			do_redir_append(curr->next->cmd);
 			last_redirout = curr;
 		}
 		curr = curr->next;

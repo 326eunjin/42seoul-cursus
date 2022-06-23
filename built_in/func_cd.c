@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 20:06:06 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 16:39:52 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_pwd(void)
 	return (current_dir);
 }
 
-void	home_dir(char *str)
+static void	home_dir(char *str)
 {
 	char	*tmp1;
 
@@ -42,7 +42,7 @@ void	home_dir(char *str)
 	tmp1 = 0;
 }
 
-void	old_dir(void)
+static void	old_dir(void)
 {
 	char	*str1;
 	char	*str2;
@@ -66,7 +66,7 @@ void	old_dir(void)
 	tmp = 0;
 }
 
-void	change_dir(char *str)
+static void	change_dir(char *str)
 {
 	char	*tmp;
 	char	*ret;

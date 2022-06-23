@@ -6,31 +6,32 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 22:52:30 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 22:36:16 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 16:54:13 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*without_redir(t_cmd_node *node)
+static char	*without_redir(t_cmd_node *node)
 {
-	t_cmd_node *curr = node;
-	char *ret;
+	t_cmd_node	*curr;
+	char		*ret;
 
 	ret = NULL;
-	while(curr!=NULL)
+	curr = node;
+	while (curr != NULL)
 	{
-		if (curr->type == COMMON)//ls -al
+		if (curr->type == COMMON)
 		{
-			ret = ft_strjoin(ret , ft_strdup(curr->cmd)); // "ls"
-			ret = ft_strjoin(ret, ft_strdup(" "));// "ls "
+			ret = ft_strjoin(ret, ft_strdup(curr->cmd));
+			ret = ft_strjoin(ret, ft_strdup(" "));
 		}
 		curr = curr->next;
 	}
 	return (ret);
 }
 
-void	free_single_cmd_list(t_cmd_node *head)
+static void	free_single_cmd_list(t_cmd_node *head)
 {
 	t_cmd_node	*curr;
 	t_cmd_node	*temp;

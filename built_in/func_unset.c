@@ -6,13 +6,13 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:04:58 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/21 22:22:41 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 16:38:15 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	envp_cnt(void)
+static int	envp_cnt(void)
 {
 	int	i;
 	int	ret;
@@ -24,7 +24,7 @@ int	envp_cnt(void)
 	return (ret);
 }
 
-int	is_valid_env(char *str)
+static int	is_valid_env(char *str)
 {
 	int	i;
 

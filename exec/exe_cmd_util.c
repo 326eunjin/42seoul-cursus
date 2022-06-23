@@ -6,13 +6,13 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:14:08 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 21:43:32 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 16:43:26 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*is_valid_cmd_path(t_cmd_node *node)
+static char	*is_valid_cmd_path(t_cmd_node *node)
 {
 	char		**tmp;
 	int			i;

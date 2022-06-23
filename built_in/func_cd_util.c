@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_cd_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:27:12 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/21 11:02:47 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 16:34:11 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	add_old_pwd(void)
 	pwd = 0;
 }
 
-int	key_len(char *str)
+static int	key_len(char *str)
 {
 	int	ret;
 	int	i;
@@ -41,7 +41,7 @@ int	key_len(char *str)
 	return (ret);
 }
 
-int	value_len(char *str)
+static int	value_len(char *str)
 {
 	int	ret;
 	int	i;

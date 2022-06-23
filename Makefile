@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/23 14:52:49 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/06/23 15:58:12 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ REDIR_DIR = ./redirection/
 PARSE_SRCS = parse_main.c parse_token.c parse_cmd.c parse_cmd_add.c parse_cmd_type.c parse_cmd_add_quote.c parse_cmd_utils.c
 BUILTIN_SRCS = func_pwd.c func_env.c func_echo.c func_export.c func_unset.c func_cd.c func_cd_util.c func_exit.c func_export_util.c
 UTIL_SRCS = ft_strcmp.c copy_env.c tolowerstr.c signal_set.c signal_handler.c free.c
-EXEC_SRCS = exe_bulitin.c exe_cmd_util.c exe_cmd_with_pipe.c exe_cmd_without_pipe.c
+EXEC_SRCS = exe_bulitin.c exe_cmd_util.c exe_cmd_with_pipe.c exe_cmd_without_pipe.c exe_cmd_with_pipe_util.c
 REDIR_SRCS = redir_in.c without_redir.c redir_out.c mini_heredoc.c
 
 SRCS = main.c $(addprefix $(PARSE_DIR), $(PARSE_SRCS)) $(addprefix $(BUILTIN_DIR), $(BUILTIN_SRCS)) $(addprefix $(UTIL_DIR), $(UTIL_SRCS)) $(addprefix $(EXEC_DIR), $(EXEC_SRCS)) $(addprefix $(REDIR_DIR), $(REDIR_SRCS))
