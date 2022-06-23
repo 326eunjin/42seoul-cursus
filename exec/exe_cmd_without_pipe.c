@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd_without_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 14:50:27 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 15:34:43 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	exec_single_cmd_without_pipe(t_cmd_node *node)
 	redir_in(node);
 	redir_out(node);
 	cmd_list = remove_redir(node);
-	tmp = is_valid_cmd(node);
-	arg = string_array(node);
+	tmp = is_valid_cmd(cmd_list);
+	arg = string_array(cmd_list);
 	if (execve(tmp, arg, g_state.envp) == -1)
 	{
 		ft_putstr_fd("bash : ", STDERR_FILENO);
