@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:04:20 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 17:20:04 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 20:20:08 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	do_redir(char *cmd, int flag)
 {
 	struct stat	file_info;
 
-	if ((stat(cmd, &file_info) == -1) && (flag == TRUE))
+	if ((stat(cmd, &file_info) == -1) && (flag == FALSE))
 	{
 		flag = TRUE;
 		ft_putstr_fd("bash: ", STDERR_FILENO);
