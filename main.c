@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 14:56:21 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 15:01:53 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	g_state.envp = copy_envp(envp);
 	if (is_in_envp("OLDPWD") == -1)
 		add_old_pwd();// 만약에 OLDPWD 환경변수 없으면 추가하기
+	print_intro();
 	while (1)
 	{
 		cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
