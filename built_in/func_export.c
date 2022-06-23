@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:56:26 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 04:17:03 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	func_export(t_cmd_node *head)
 		else if ((has_equal_sign(curr_node->cmd) == TRUE))
 		{
 			if (is_in_envp(curr_node->cmd) != -1)
-				modify_envp(curr_node->cmd, iis_in_envp(curr_node->cmd));
+				modify_envp(curr_node->cmd, is_in_envp(curr_node->cmd));
 			else
 				g_state.envp = new_export(curr_node->cmd);
 		}

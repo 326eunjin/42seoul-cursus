@@ -6,13 +6,13 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:04:58 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:57:27 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 04:18:35 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	envp_cnt(void)
+int	envp_cnt(void)
 {
 	int	i;
 	int	ret;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 04:09:49 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 04:19:49 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,8 @@ void		add_old_pwd(void);
 char		*get_value(char *key);
 void		export_str(char *str);
 char		*get_pwd(void);
+void		home_dir(char *str);
+void		old_dir(void);
 void		func_cd(t_cmd_node *head);
 void		func_echo(t_cmd_node *head);
 void		func_env(void);
@@ -173,5 +175,11 @@ char		**new_export(char *str);
 int			is_right_form(char *str);
 void		func_export(t_cmd_node *head);
 void		func_pwd(void);
+int			envp_cnt(void);
+int			is_valid_env(char *str);
+int			is_str_in_envp(char *str);
 void		func_unset(t_cmd_node *head);
+void		func_export_single_cmd(t_cmd_node *head);
+void		func_unset_single_cmd(t_cmd_node *head);
+void		func_cd_single_cmd(t_cmd_node *head);
 #endif
