@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:25:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 20:40:19 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 02:55:47 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	do_redir_append(char *cmd)
 	}
 }
 
-static t_cmd_node	*has_redir_out(t_cmd_node *node)
+t_cmd_node	*has_redir_out(t_cmd_node *node)
 {
 	t_cmd_node	*curr;
 	t_cmd_node	*last_redirout;

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 21:05:57 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 03:09:17 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ static void	exec_single_cmd_without_pipe(t_cmd_node *node)
 	redir_in(node);
 	redir_out(node);
 	cmd_list = remove_redir(node);
+	if (cmd_list->type == BUILTIN)
+		exe_builtin(cmd_list);
 	tmp = is_valid_cmd(cmd_list);
 	arg = string_array(cmd_list);
 	if (execve(tmp, arg, g_state.envp) == -1)
 	{
 		ft_putstr_fd("bash : ", STDERR_FILENO);
-		ft_putstr_fd(node->cmd, STDERR_FILENO);
+		ft_putstr_fd(cmd_list->cmd, STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		exit(127);
 	}
@@ -34,10 +36,11 @@ static void	exec_single_cmd_without_pipe(t_cmd_node *node)
 
 static void	exe_without_pipe(t_cmd_node *node)
 {
-	pid_t	pid;
-	int		status;
+	pid_t		pid;
+	int			status;
 
-	if (node->type == BUILTIN)
+	if ((node->type == BUILTIN) && (has_redir_in(node) \
+	== NULL) && (has_redir_out(node) == NULL))
 		exe_builtin_single(node);
 	else
 	{
@@ -53,7 +56,7 @@ static void	exe_without_pipe(t_cmd_node *node)
 		else
 		{
 			waitpid(pid, &status, 0);
-			g_state.exit_status = WEXITSTATUS(status);
+			g_state.exit_status = status / 256;
 		}
 	}
 }

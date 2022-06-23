@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:04:20 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 21:12:54 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 02:54:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	do_redir(char *cmd, int flag)
 	}
 }
 
-static char	*has_redir_in(t_cmd_node *node)
+char	*has_redir_in(t_cmd_node *node)
 {
 	t_cmd_node	*last_redirin;
 	int			flag;
