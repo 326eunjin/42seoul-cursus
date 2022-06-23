@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/22 20:17:47 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 14:37:16 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static int	heredoc_child(char *delimiter)
 	int		fd;
 	char	*line;
 
+	set_heredoc_signal();
 	line = NULL;
 	fd = open("ejang.jeyoon", O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (fd < 0)
@@ -90,8 +91,8 @@ static int	heredoc_child(char *delimiter)
 	{
 		line = readline("> ");
 		if (line == NULL)
-			move_heredoc_curser();
-		if (line == NULL || ft_strcmp(line, delimiter) == 0)
+			move_heredoc_curser(fd);
+		if (ft_strcmp(line, delimiter) == 0)
 			finish_heredoc(&line, fd, 0);
 		if (write_heredoc(fd, line) == FALSE)
 			finish_heredoc(&line, fd, 1);
@@ -107,6 +108,7 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	int		status;
 	int		ret;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 		heredoc_child((*curr_cmd)->cmd);
@@ -114,8 +116,12 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	{
 		waitpid(pid, &status, 0);
 		ret = WEXITSTATUS(status);
-		if (ret == 1)
+		if (ret == 130)
+		{
 			return (FALSE);
+		}
+			//return (FALSE);
+		ft_putendl_fd("*******", STDERR_FILENO);
 		(*curr_cmd)->prev->type = REDIRIN;
 		free((*curr_cmd)->cmd);
 		(*curr_cmd)->cmd = ft_strdup("ejang.jeyoon");

@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/21 21:04:59 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 11:08:49 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	is_empty_line(char *line)
 
 static void	read_cmd_line(char **line)
 {
+	set_main_signal();
 	*line = readline("\033[0;36mMinishell>> \033[0m");
 	if (*line == NULL)
 	{

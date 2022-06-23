@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/22 23:05:51 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 10:13:08 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,20 @@ int		add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node);
 void	dquote_dollar(char **curr_str, t_token_node **curr, char *line);
 void	tolower_str(char *str);
 char	*get_lower_str(char *str);
-void	move_heredoc_curser(void);
+void	move_heredoc_curser(int fd);
 
 
 /*
 	*** utils ***
 */
 
-void	set_signal();
+void	set_main_signal(void);
+void	set_heredoc_signal(void);
+void	set_exec_signal(void);
+void	sig_main_handler(int sig);
+void	sigint_exec_handler(int sig);
+void	sigquit_exec_handler(int sig);
+void	sig_heredoc_handler(int sig);
 
 /*
 	*** utils ***

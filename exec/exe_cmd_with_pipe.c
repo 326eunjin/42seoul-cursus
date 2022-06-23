@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd_with_pipe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 23:09:05 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 11:28:39 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	exe_with_pipe(t_cmd_line_list *cmd_line_list)
 		g_state.exit_status = 1;
 		exit(1);
 	}
+	set_exec_signal();
 	while (++idx < cmd_line_list->size - 1)
 		pipe(fd[idx]);
 	idx = -1;

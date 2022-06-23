@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd_without_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:55:31 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/22 22:44:10 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 14:50:27 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	exe_without_pipe(t_cmd_node *node)
 		exe_builtin_single(node);
 	else
 	{
+		set_exec_signal();
 		pid = fork();
 		if (pid < -1)
 			g_state.exit_status = 1;
