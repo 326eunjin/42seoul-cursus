@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 11:43:26 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 00:50:43 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ void	move_heredoc_curser(int fd)
 	close(fd);
 	ft_putstr_fd("\x1b[1A", 1);
 	ft_putstr_fd("\033[2C", 1);
-	exit(1);
+	exit(0);
 }
