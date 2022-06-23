@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 21:49:36 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/23 22:48:30 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	close_wait(int ***fd, pid_t **pid, int *status, int size)
 	{
 		waitpid((*pid)[i], &status[i], 0);
 		ft_putstr_fd("EXIT STATUS :",STDERR_FILENO);
-		ft_putnbr_fd(WEXITSTATUS(status[i]), STDERR_FILENO);
+		ft_putnbr_fd(status[i]/256, STDERR_FILENO);
 		ft_putendl_fd("",STDERR_FILENO);
 		i++;
 	}

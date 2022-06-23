@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/23 20:17:38 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/23 22:48:59 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	else
 	{
 		waitpid(pid, &status, 0);
-		ret = WEXITSTATUS(status);
+		ret = status / 256;
 		if (ret == 130)
 		{
 			return (FALSE);
