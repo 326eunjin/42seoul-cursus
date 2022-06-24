@@ -6,17 +6,11 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 21:21:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 04:02:22 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 04:15:20 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	set_exec_signal(void)
-{
-	// signal(SIGINT, sigint_exec_handler);
-	// signal(SIGQUIT, sigquit_exec_handler);
-}
 
 void	set_heredoc_signal(void)
 {
@@ -26,8 +20,6 @@ void	set_heredoc_signal(void)
 
 void	set_main_signal(void)
 {
-	// signal(SIGINT, sig_main_handler);
-	// signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);
 }

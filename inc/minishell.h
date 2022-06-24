@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 03:56:49 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 04:15:00 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,6 @@ void		set_main_signal(void);
 void		set_heredoc_signal(void);
 void		sigint_handler(int sig);
 void		sigquit_handler(int sig);
-// void		set_exec_signal(void);
-// void		sig_main_handler(int sig);
-// void		sigint_exec_handler(int sig);
-// void		sigquit_exec_handler(int sig);
 void		sig_heredoc_handler(int sig);
 
 /*
@@ -160,7 +156,6 @@ void		free_variables(int size, int ***fd, pid_t **pid, int **status);
 /*
 	built-in
 */
-//void		add_old_pwd(void);
 char		*get_value(char *key);
 void		export_str(char *str);
 char		*get_pwd(void);

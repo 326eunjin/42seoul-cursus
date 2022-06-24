@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/25 03:47:51 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 04:19:17 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void	close_wait(int ***fd, pid_t **pid, int *status, int size)
 	while (i < size)
 	{
 		waitpid((*pid)[i], &status[i], 0);
-		g_state.exit_status = status[i] / 256;
+		if (!WIFSIGNALED(status))
+			g_state.exit_status = status[i] / 256;
 		i++;
 	}
 }
@@ -86,7 +87,6 @@ void	exe_with_pipe(t_cmd_line_list *list)
 	int		*status;
 
 	malloc_variables(list->size, &fd, &pid, &status);
-	//signal(SIGINT, SIG_IGN);set_exec_signal();
 	pipe_process(list->size, &fd);
 	idx = -1;
 	while (++idx < list->size)
