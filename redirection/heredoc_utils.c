@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 03:20:34 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:31:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 16:48:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	remove_temp_file(void)
 {
 	struct stat	s;
 
-	if (stat("ejang.jeyoon", &s) ==0)
+	if (stat("ejang.jeyoon", &s) == 0)
 		unlink("ejang.jeyoon");
 }
 

@@ -6,11 +6,23 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 03:43:30 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:53:23 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 17:04:16 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	envp_cnt(void)
+{
+	int	i;
+	int	ret;
+
+	i = -1;
+	ret = 0;
+	while (g_state.envp[++i])
+		ret++;
+	return (ret);
+}
 
 static void	unset_error_single(char *cmd)
 {

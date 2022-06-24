@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 04:19:49 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 17:03:54 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 # define TRUE 1
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
-
-extern char	*to_types[];
-extern char	*cmd_types[];
 
 enum	e_token_type
 {
@@ -182,4 +179,5 @@ void		func_unset(t_cmd_node *head);
 void		func_export_single_cmd(t_cmd_node *head);
 void		func_unset_single_cmd(t_cmd_node *head);
 void		func_cd_single_cmd(t_cmd_node *head);
+void		export_wihtout_arg(t_cmd_node *head);
 #endif

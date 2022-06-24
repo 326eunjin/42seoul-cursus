@@ -6,23 +6,11 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:04:58 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 04:18:35 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 17:04:50 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	envp_cnt(void)
-{
-	int	i;
-	int	ret;
-
-	i = -1;
-	ret = 0;
-	while (g_state.envp[++i])
-		ret++;
-	return (ret);
-}
 
 int	is_valid_env(char *str)
 {
@@ -60,14 +48,12 @@ static int	unset_error(char *cmd)
 	return (TRUE);
 }
 
-void	func_unset(t_cmd_node *head)
+static int	func_unset_2(t_cmd_node *head, int flag)
 {
-	int			loc;
-	int			flag;
 	t_cmd_node	*curr_node;
+	int			loc;
 
 	curr_node = head->next;
-	flag = FALSE;
 	while (curr_node != NULL)
 	{
 		if (is_valid_env(curr_node->cmd) == TRUE)
@@ -86,8 +72,16 @@ void	func_unset(t_cmd_node *head)
 		}
 		else if (is_right_form(curr_node->cmd) == FALSE)
 			flag = unset_error(curr_node->cmd);
-		curr_node = curr_node->next;
+		curr_node = curr_node -> next;
 	}
+	return (flag);
+}
+
+void	func_unset(t_cmd_node *head)
+{
+	int			flag;
+
+	flag = func_unset_2(head, FALSE);
 	if (flag == TRUE)
 		exit(1);
 }
