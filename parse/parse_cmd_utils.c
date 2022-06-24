@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 18:19:35 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 20:58:21 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	need_join(t_token_node *curr_token, char *line, int option)
 	}
 	else if (option == 2)
 	{
-		if( c != '\0' && (c == '\'' || c == '"' || !(c == ' ' || c >= 9 && c <= 13)))
+		if (c != '\0' && (c == '\'' || c == '"' || \
+			!(c == ' ' || c >= 9 && c <= 13)))
 			return (TRUE);
 		return (FALSE);
 	}
@@ -67,21 +68,73 @@ void	make_new_str(char **new_str, t_token_node **curr, char *line)
 	int			start;
 	int			end;
 
-	start = (*curr)->idx;
-	while ((*curr)->type != DQUOTE)
+	while (*curr != NULL)
 	{
 		if ((*curr)->type == DOLLAR)
+		{
 			dquote_dollar(new_str, curr, line);
+			if ((*curr)->next->type == DQUOTE)
+			{
+				start = (*curr)->idx + ft_strlen((*curr)->token);
+				printf("here start : %d\n", start);
+				*new_str = ft_strjoin(*new_str, \
+				ft_substr(line, start, (*curr)->next->idx - start));
+			}
+		}
 		else
 		{
-			end = (*curr)->idx + ft_strlen((*curr)->token);
+			if ((*curr)->prev != NULL && (*curr)->type != DQUOTE)
+			start = (*curr)->prev->idx + ft_strlen((*curr)->prev->token);
+			else
+				start = (*curr)->idx + 1;
+			printf("start : %d\n", start);
+			while ((*curr)->next != NULL && !((*curr)->next->type == DOLLAR || (*curr)->next->type == DQUOTE))
+				*curr = (*curr)->next;
+			if ((*curr)->next == NULL)
+				end = (*curr)->idx + ft_strlen((*curr)->token);
+			else
+				end = (*curr)->next->idx;
+			printf("end : %d\n", end);
 			*new_str = ft_strjoin(*new_str, \
 				ft_substr(line, start, end - start));
-			start = (*curr)->next->idx;
 		}
 		*curr = (*curr)->next;
+		if ((*curr)->type == DQUOTE)
+			return ;
 	}
 }
+
+// void	make_new_str(char **new_str, t_token_node **curr, char *line)
+// {
+// 	int			start;
+// 	int			end;
+
+// 	while (*curr != NULL)
+// 	{
+// 		if ((*curr)->type == DOLLAR)
+// 			dquote_dollar(new_str, curr, line);
+// 		else
+// 		{
+// 			if ((*curr)->prev != NULL && (*curr)->type != DQUOTE)
+// 				start = (*curr)->prev->idx + ft_strlen((*curr)->prev->token);
+// 			else
+// 				start = (*curr)->idx + 1;
+// 			printf("start : %d\n", start);
+// 			while ((*curr)->next != NULL && !((*curr)->next->type == DOLLAR || (*curr)->next->type == DQUOTE))
+// 				*curr = (*curr)->next;
+// 			if ((*curr)->next == NULL)
+// 				end = (*curr)->idx + ft_strlen((*curr)->token);
+// 			else
+// 				end = (*curr)->next->idx;
+// 			printf("end : %d\n", end);
+// 			*new_str = ft_strjoin(*new_str, \
+// 				ft_substr(line, start, end - start));
+// 		}
+// 		*curr = (*curr)->next;
+// 		if ((*curr)->type == DQUOTE)
+// 			return ;
+// 	}
+// }
 
 void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
 {

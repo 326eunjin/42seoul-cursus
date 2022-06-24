@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:22:14 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 21:13:28 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 20:21:36 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	join_dquote(t_cmd_node **cmd_head, \
 	char		*new_str;
 	t_cmd_node	*last_cmd;
 
-	*curr = (*curr)->next;
 	new_str = ft_strdup("");
 	make_new_str(&new_str, curr, line);
 	last_cmd = (*cmd_head);
@@ -33,7 +32,6 @@ static int	new_dquote(t_cmd_node **cmd_head, \
 	char		*new_str;
 	t_cmd_node	*new_cmd;
 
-	*curr = (*curr)->next;
 	new_str = ft_strdup("");
 	make_new_str(&new_str, curr, line);
 	new_cmd = (t_cmd_node *)malloc(sizeof(t_cmd_node));
@@ -57,8 +55,8 @@ static void	join_quote(t_cmd_node **cmd_head, \
 	char		*new_str;
 	t_cmd_node	*last_cmd;
 
+	start = (*curr_token)->idx + 1;
 	*curr_token = (*curr_token)->next;
-	start = (*curr_token)->idx;
 	while ((*curr_token)->type != QUOTE)
 		*curr_token = (*curr_token)->next;
 	end = (*curr_token)->idx;
@@ -81,8 +79,8 @@ static int	new_quote(t_cmd_node **cmd_head, \
 	if (new_cmd == NULL)
 		return (FALSE);
 	ft_memset(new_cmd, 0, sizeof(t_cmd_node));
+	start = (*curr_token)->idx + 1;
 	*curr_token = (*curr_token)->next;
-	start = (*curr_token)->idx;
 	while ((*curr_token)->type != QUOTE)
 		*curr_token = (*curr_token)->next;
 	end = (*curr_token)->idx;
