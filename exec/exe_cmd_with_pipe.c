@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 19:35:45 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 20:28:09 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,7 @@ static void	exe_single_cmd_with_pipe(t_cmd_node *node, int ***fd, int size)
 		tmp = is_valid_cmd(cmd_list);
 		arg = string_array(cmd_list);
 		if (execve(tmp, arg, g_state.envp) == -1)
-		{
-			ft_putstr_fd("bash : ", STDERR_FILENO);
-			ft_putstr_fd(node->cmd, STDERR_FILENO);
-			ft_putstr_fd(": command not found\n", STDERR_FILENO);
-			exit(127);
-		}
+			execve_error(strerror(errno),cmd_list);
 	}
 }
 
