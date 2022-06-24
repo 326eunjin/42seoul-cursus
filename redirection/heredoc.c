@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:21:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 12:05:13 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 		if (ret == 130 || ret == 1)
 		{
 			g_state.exit_status = 1;
+			remove_temp_file();
 			return (FALSE);
 		}
 		(*curr_cmd)->prev->type = REDIRIN;
