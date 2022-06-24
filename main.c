@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 22:09:12 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/25 01:52:01 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd_line_list	*cmd_line_list;
 
 	g_state.envp = copy_envp(envp);
-	//if (is_in_envp("OLDPWD") == -1)
-		//add_old_pwd();
 	print_intro();
 	while (1)
 	{
@@ -87,14 +85,12 @@ int	main(int argc, char **argv, char **envp)
 		if (parse_cmd(&cmd_line_list) == FALSE)
 		{
 			free_cmd(cmd_line_list);
-			//system("leaks minishell");
 			continue ;
 		}
 		set_echoctl();
 		exe_cmd(cmd_line_list);
 		free_cmd(cmd_line_list);
 		remove_temp_file();
-		system("leaks minishell");
 	}
 	//free_envp(); // 환경변수 free
 	return (0);
