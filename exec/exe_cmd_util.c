@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:14:08 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 18:10:52 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 19:35:08 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*is_valid_cmd_path(t_cmd_node *node)
 	i = -1;
 	str = get_value("PATH");
 	path_error(str, node);
-	tmp = ft_split(str, ':');//get_value 프리 어찌하지...
+	tmp = ft_split(str, ':');
 	free(str);
 	while (tmp[++i])
 	{

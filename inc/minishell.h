@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 17:03:54 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 20:27:34 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <termios.h>
+# include <errno.h>
 # include "../libft/libft.h"
 
 # define FALSE 0
@@ -151,7 +152,7 @@ int			malloc_status(int size, int **status);
 void		malloc_variables(int size, int ***fd, pid_t **pid, int **status);
 void		exe_with_pipe(t_cmd_line_list	*list);
 void		exe_cmd(t_cmd_line_list *cmd_line_list);
-
+void		execve_error(char *strerror, t_cmd_node *cmd_list);
 /*
 	built-in
 */

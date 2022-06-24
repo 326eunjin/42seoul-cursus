@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:44:26 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:19:19 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 20:27:15 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,23 @@ void	malloc_variables(int size, int ***fd, pid_t **pid, int **status)
 	{
 		g_state.exit_status = 1;
 		exit(1);
+	}
+}
+
+void	execve_error(char *strerror, t_cmd_node *cmd_list)
+{
+	if (ft_strcmp(strerror, "Bad address") == 0)
+	{
+		ft_putstr_fd("bash : ", STDERR_FILENO);
+		ft_putstr_fd(cmd_list->cmd, STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
+		exit(127);
+	}
+	else if (ft_strcmp(strerror, "Permission denied") == 0)
+	{
+		ft_putstr_fd("bash : ", STDERR_FILENO);
+		ft_putstr_fd(cmd_list->cmd, STDERR_FILENO);
+		ft_putendl_fd(": Permission denied", STDERR_FILENO);
+		exit(126);
 	}
 }

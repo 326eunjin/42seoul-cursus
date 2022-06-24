@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:25:50 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 02:55:47 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 20:04:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	do_redir_out(char *cmd)
 	{
 		fd = open(cmd, O_RDWR | O_TRUNC, 0644);
 		if (fd < 0)
-			ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
+			ft_putendl_fd(strerror(errno), STDERR_FILENO);
 		close(fd);
 	}
 	else
 	{
 		fd = open(cmd, O_RDWR | O_CREAT, 0644);
 		if (fd < 0)
-			ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
+			ft_putendl_fd(strerror(errno), STDERR_FILENO);
 		close(fd);
 	}
 }
@@ -42,7 +42,7 @@ static void	do_redir_append(char *cmd)
 	{
 		fd = open(cmd, O_RDWR | O_CREAT, 0644);
 		if (fd < 0)
-			ft_putstr_fd("FD ERROR\n", STDERR_FILENO);
+			ft_putendl_fd(strerror(errno), STDERR_FILENO);
 		close(fd);
 	}
 }
@@ -85,7 +85,7 @@ void	redir_out(t_cmd_node *node)
 			out_fd = open(outfile->next->cmd, O_RDWR | O_APPEND, 0644);
 		if (out_fd < 0)
 		{
-			ft_putstr_fd("fd error\n", STDERR_FILENO);
+			ft_putendl_fd(strerror(errno), STDERR_FILENO);
 			exit(1);
 		}
 		dup2(out_fd, STDOUT_FILENO);

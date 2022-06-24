@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:15:51 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 20:28:09 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,8 @@ static void	exe_single_cmd_with_pipe(t_cmd_node *node, int ***fd, int size)
 		tmp = is_valid_cmd(cmd_list);
 		arg = string_array(cmd_list);
 		if (execve(tmp, arg, g_state.envp) == -1)
-		{
-			ft_putstr_fd("bash : ", STDERR_FILENO);
-			ft_putstr_fd(node->cmd, STDERR_FILENO);
-			ft_putstr_fd(": command not found\n", STDERR_FILENO);
-			exit(127);
-		}
+			execve_error(strerror(errno),cmd_list);
 	}
-	// free는 도대체 어디서 해야할까,,,이거 pipex에서 했던 고민이랑 같음.
 }
 
 static void	pipe_process(int size, int ***fd)

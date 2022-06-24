@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 16:51:43 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 19:35:28 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	func_export(t_cmd_node *head)
 		}
 	}
 	if (flag == TRUE)
-		exit(1);//에러있으면 exit1 하기
+		exit(1);
 }
 
 void	func_export_single_cmd(t_cmd_node *head)

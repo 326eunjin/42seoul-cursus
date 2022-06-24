@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:33:21 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 20:03:32 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_pwd(void)
 	current_dir = getcwd(NULL, 0);
 	if (current_dir == NULL)
 	{
-		ft_putstr_fd("getcwd() cannot excute in fun_pwd\n", STDERR_FILENO);
+		ft_putendl_fd(strerror(errno), STDERR_FILENO);
 		exit(1);
 	}
 	return (current_dir);
@@ -33,7 +33,7 @@ void	home_dir(char *str)
 	if (chdir(str) < 0)
 	{
 		free(str);
-		ft_putstr_fd("chdir error\n", STDERR_FILENO);
+		ft_putendl_fd(strerror(errno), STDERR_FILENO);
 		exit(1);
 	}
 	tmp1 = ft_strjoin(tmp1, str);
@@ -52,7 +52,7 @@ void	old_dir(void)
 	str2 = get_value("PWD");
 	if (chdir(str1) < 0)
 	{
-		ft_putstr_fd("chdir error\n", STDERR_FILENO);
+		ft_putendl_fd(strerror(errno), STDERR_FILENO);
 		exit(1);
 	}
 	tmp = ft_strdup("PWD=");

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:27:12 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/23 16:34:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 19:35:20 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*get_value(char *key)
 			1, value_len(g_state.envp[i]));
 	}
 	return (ret);
-}//ret은 호출함수에서 나중에 free해줘야함. 
+}
 
 void	export_str(char *str)
 {
