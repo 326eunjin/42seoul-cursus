@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd_with_pipe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 22:19:10 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/25 03:47:51 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	exe_with_pipe(t_cmd_line_list *list)
 	int		*status;
 
 	malloc_variables(list->size, &fd, &pid, &status);
-	set_exec_signal();
+	//signal(SIGINT, SIG_IGN);set_exec_signal();
 	pipe_process(list->size, &fd);
 	idx = -1;
 	while (++idx < list->size)

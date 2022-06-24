@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 12:05:13 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 03:47:24 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	{
 		waitpid(pid, &status, 0);
 		ret = status / 256;
+		set_main_signal();
 		if (ret == 130 || ret == 1)
 		{
 			g_state.exit_status = 1;
