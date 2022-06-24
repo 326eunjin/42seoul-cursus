@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 22:19:47 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/25 01:26:28 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <termios.h>
 # include <errno.h>
+# include <string.h>
 # include "../libft/libft.h"
 
 # define FALSE 0
