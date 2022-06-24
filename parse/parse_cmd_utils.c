@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 01:25:29 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 02:37:06 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
 	if ((*curr)->next->type == DQUOTE)
 	{
 		start = (*curr)->idx + ft_strlen((*curr)->token);
-		printf("here start : %d\n", start);
 		*curr_str = ft_strjoin(*curr_str, \
 		ft_substr(line, start, (*curr)->next->idx - start));
 	}
