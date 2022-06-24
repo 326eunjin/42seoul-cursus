@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:35:33 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 15:11:43 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 04:29:59 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ int	parse_error(int option)
 {
 	g_state.exit_status = 1;
 	if (option == 1)
+	{
+		g_state.exit_status = 258;
 		printf("ERROR : ’(\") must be paired\n");
+	}
 	else if (option == 2)
 		printf("ERROR : Memory allocation failed\n");
 	else if (option == 3)
