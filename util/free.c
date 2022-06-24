@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:08:49 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/22 23:14:01 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 21:35:58 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	free_split_part(char **tmp, int idx)
 	tmp = NULL;
 }
 
-void	free_array(char **tmp)
+void	free_array(int **tmp, int idx)
 {
 	int	i;
 
 	i = 0;
-	while (tmp[i])
+	while (i < idx)
 	{
 		free(tmp[i]);
 		tmp[i] = NULL;

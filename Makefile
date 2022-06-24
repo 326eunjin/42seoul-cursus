@@ -6,13 +6,13 @@
 #    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/24 04:15:17 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/24 21:13:25 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 NAME = minishell
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror 
 
 LIBFT_DIR = ./libft/
 PARSE_DIR = ./parse/

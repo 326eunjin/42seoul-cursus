@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:44:26 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 20:27:15 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 21:32:17 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ int	malloc_fd(int size, int ***fd)
 	i = 0;
 	*fd = (int **)malloc(sizeof(int *) * size);
 	if (*fd == NULL)
-		exit (1);
+		return (FALSE);
 	ft_memset(*fd, 0, sizeof(*fd));
 	while (i < size)
 	{
 		(*fd)[i] = (int *)malloc(sizeof(int) * 2);
 		if ((*fd)[i] == NULL)
-			exit (1);
+		{
+			free_array((*fd), i);
+			return (FALSE);
+		}
 		ft_memset((*fd)[i], 0, sizeof((*fd)[i]));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 20:27:34 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 21:30:59 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char		*get_lower_str(char *str);
 char		**copy_envp(char **envp);
 void		free_split(char **tmp);
 void		free_split_part(char **tmp, int idx);
-void		free_array(char **tmp);
+void		free_array(int **tmp, int idx);
 int			ft_strcmp(char *s1, char *s2);
 void		set_main_signal(void);
 void		set_heredoc_signal(void);
