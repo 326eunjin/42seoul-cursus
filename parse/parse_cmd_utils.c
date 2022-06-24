@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 03:30:53 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/24 18:19:35 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	need_join(t_token_node *curr_token, char *line, int option)
 	}
 	else if (option == 2)
 	{
-		if (c == '\'' || c == '"' || !(c == ' ' || c >= 9 && c <= 13))
+		if( c != '\0' && (c == '\'' || c == '"' || !(c == ' ' || c >= 9 && c <= 13)))
 			return (TRUE);
 		return (FALSE);
 	}
 	else
 	{
-		if (c == '\'' || c == '"')
+		if (c != '\0' && (c == '\'' || c == '"'))
 			return (TRUE);
 		return (FALSE);
 	}
