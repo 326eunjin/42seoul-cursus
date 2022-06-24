@@ -6,11 +6,22 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:14:08 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:18:13 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 18:10:52 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	path_error(char *str, t_cmd_node *node)
+{
+	if (str == NULL)
+	{
+		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd(node->cmd, STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		exit(1);
+	}
+}
 
 static char	*is_valid_cmd_path(t_cmd_node *node)
 {
@@ -21,7 +32,10 @@ static char	*is_valid_cmd_path(t_cmd_node *node)
 	struct stat	s;
 
 	i = -1;
-	tmp = ft_split(get_value("PATH"), ':');//get_value 프리 어찌하지...
+	str = get_value("PATH");
+	path_error(str, node);
+	tmp = ft_split(str, ':');//get_value 프리 어찌하지...
+	free(str);
 	while (tmp[++i])
 	{
 		str = ft_strjoin(ft_strdup("/"), ft_strdup(node->cmd));
