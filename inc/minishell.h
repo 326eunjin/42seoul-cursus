@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 21:30:59 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 21:53:58 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void		execve_error(char *strerror, t_cmd_node *cmd_list);
 /*
 	built-in
 */
-void		add_old_pwd(void);
+//void		add_old_pwd(void);
 char		*get_value(char *key);
 void		export_str(char *str);
 char		*get_pwd(void);

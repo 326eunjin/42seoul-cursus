@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 21:35:44 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:12:55 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	exe_single_cmd_with_pipe(t_cmd_node *node, int ***fd, int size)
 		tmp = is_valid_cmd(cmd_list);
 		arg = string_array(cmd_list);
 		if (execve(tmp, arg, g_state.envp) == -1)
-			execve_error(strerror(errno),cmd_list);
+			execve_error(strerror(errno), cmd_list);
 	}
 }
 

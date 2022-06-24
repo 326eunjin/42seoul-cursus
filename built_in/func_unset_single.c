@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 03:43:30 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 17:04:16 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:08:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	func_unset_single_cmd(t_cmd_node *head)
 					g_state.envp[loc] = ft_strdup(g_state.envp[loc + 1]);
 					loc++;
 				}
+				free(g_state.envp[envp_cnt() - 1]);
 				g_state.envp[envp_cnt() - 1] = NULL;
 			}
 		}

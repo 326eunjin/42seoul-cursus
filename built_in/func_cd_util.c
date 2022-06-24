@@ -6,24 +6,11 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:27:12 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 19:35:20 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:10:22 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	add_old_pwd(void)
-{
-	char	*pwd;
-	char	*tmp;
-
-	tmp = get_pwd();
-	pwd = ft_strdup("OLDPWD=");
-	pwd = ft_strjoin(pwd, tmp);
-	export_str(pwd);
-	free(pwd);
-	pwd = 0;
-}
 
 static int	key_len(char *str)
 {
