@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 22:12:55 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:19:10 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,5 @@ void	exe_with_pipe(t_cmd_line_list *list)
 		}
 	}
 	close_wait(&fd, &pid, status, list->size);
-	free_array(fd, list->size - 1);
-	free(pid);
-	pid = NULL;
-	free(status);
-	status = NULL;
+	free_variables(list->size, &fd, &pid, &status);
 }

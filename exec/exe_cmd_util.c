@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:14:08 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 19:35:08 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:19:29 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,13 @@ char	**string_array(t_cmd_node *node)
 	}
 	ret[cnt] = NULL;
 	return (ret);
+}
+
+void	free_variables(int size, int ***fd, pid_t **pid, int **status)
+{
+	free_array(*fd, size - 1);
+	free(*pid);
+	pid = NULL;
+	free(*status);
+	status = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 21:53:58 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:19:47 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void		malloc_variables(int size, int ***fd, pid_t **pid, int **status);
 void		exe_with_pipe(t_cmd_line_list	*list);
 void		exe_cmd(t_cmd_line_list *cmd_line_list);
 void		execve_error(char *strerror, t_cmd_node *cmd_list);
+void		free_variables(int size, int ***fd, pid_t **pid, int **status);
 /*
 	built-in
 */
