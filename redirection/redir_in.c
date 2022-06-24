@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:04:20 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 02:54:06 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 20:02:25 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void	redir_in(t_cmd_node *node)
 		in_fd = open(infile, O_RDWR | O_CREAT, 0644);
 		if (in_fd < 0)
 		{
-			ft_putstr_fd("fd error\n", STDERR_FILENO);
+			ft_putstr_fd("bash: ", STDERR_FILENO);
+			ft_putstr_fd(infile, STDERR_FILENO);
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putendl_fd(strerror(errno), STDERR_FILENO);
 			exit(1);
 		}
 		dup2(in_fd, STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 17:03:54 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 19:46:49 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <termios.h>
+# include <errno.h>
 # include "../libft/libft.h"
 
 # define FALSE 0
