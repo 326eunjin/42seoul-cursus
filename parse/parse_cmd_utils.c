@@ -6,11 +6,22 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 22:23:27 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 01:25:29 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static int	get_end_index(t_token_node **curr)
+{
+	int	end;
+
+	if ((*curr)->next == NULL)
+		end = (*curr)->idx + ft_strlen((*curr)->token);
+	else
+		end = (*curr)->next->idx;
+	return (end);
+}
 
 int	need_join(t_token_node *curr_token, char *line, int option)
 {
@@ -110,15 +121,4 @@ void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
 		*curr_str = ft_strjoin(*curr_str, \
 		ft_substr(line, start, (*curr)->next->idx - start));
 	}
-}
-
-int	get_end_index(t_token_node **curr)
-{
-	int	end;
-
-	if ((*curr)->next == NULL)
-		end = (*curr)->idx + ft_strlen((*curr)->token);
-	else
-		end = (*curr)->next->idx;
-	return (end);
 }
