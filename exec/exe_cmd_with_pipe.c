@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:15:51 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/24 19:35:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void	exe_single_cmd_with_pipe(t_cmd_node *node, int ***fd, int size)
 			exit(127);
 		}
 	}
-	// free는 도대체 어디서 해야할까,,,이거 pipex에서 했던 고민이랑 같음.
 }
 
 static void	pipe_process(int size, int ***fd)
