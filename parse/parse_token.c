@@ -6,62 +6,18 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 22:38:23 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 00:01:26 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-enum e_token_type	get_token_type(char *line, int idx)
+static int	add_quote_token(t_token_node **this_node, \
+	int *idx, enum e_token_type type, char *line)
 {
-	if (line[idx] == '"')
-		return (DQUOTE);
-	else if (line[idx] == '\'')
-		return (QUOTE);
-	else if (line[idx] == '|')
-		return (PIPE);
-	else if (line[idx] == '$')
-		return (DOLLAR);
-	else if (line[idx] == '<')
-	{
-		if (line[idx + 1] != '\0' && line[idx + 1] == '<')
-			return (TO_HEREDOC);
-		return (TO_REDIRIN);
-	}
-	else if (line[idx] == '>')
-	{
-		if (line[idx + 1] != '\0' && line[idx + 1] == '>')
-			return (TO_APPEND);
-		return (TO_REDIROUT);
-	}
-	return (TO_COMMON);
-}
+	char	quote;
+	int		start;
 
-static int	add_token(t_token_node **token_head, t_token_node **new_node, \
-	enum e_token_type type, int idx)
-{
-	t_token_node	*last_node;
-
-	(*new_node)->type = type;
-	(*new_node)->idx = idx;
-	if (*token_head == NULL)
-		*token_head = *new_node;
-	else
-	{
-		last_node = *token_head;
-		while (last_node->next != NULL)
-			last_node = last_node->next;
-		last_node->next = *new_node;
-		(*new_node)->prev = last_node;
-	}
-	return (TRUE);
-}
-
-int	add_quote_token(t_token_node **this_node, int *idx, enum e_token_type type, char *line)
-{
-	char quote;
-	int	start;
-	
 	quote = line[*idx];
 	(*this_node)->type = type;
 	(*idx)++;
@@ -74,7 +30,21 @@ int	add_quote_token(t_token_node **this_node, int *idx, enum e_token_type type, 
 	return (TRUE);
 }
 
-int	add_spacial_token(t_token_node **token_head, \
+static void	add_spacial_token2(t_token_node **this_node, enum e_token_type type)
+{
+	if (type == TO_REDIRIN)
+		(*this_node)->token = ft_strdup("<");
+	else if (type == TO_REDIROUT)
+		(*this_node)->token = ft_strdup(">");
+	else if (type == TO_HEREDOC)
+		(*this_node)->token = ft_strdup("<<");
+	else if (type == TO_APPEND)
+		(*this_node)->token = ft_strdup(">>");
+	else if (type == PIPE)
+		(*this_node)->token = ft_strdup("|");
+}
+
+static int	add_spacial_token(t_token_node **token_head, \
 	enum e_token_type type, int *idx, char *line)
 {
 	t_token_node	*this_node;
@@ -84,17 +54,8 @@ int	add_spacial_token(t_token_node **token_head, \
 	if (this_node == NULL)
 		return (FALSE);
 	ft_memset(this_node, 0, sizeof(t_cmd_node));
-	if (type == TO_REDIRIN)
-		this_node->token = ft_strdup("<");
-	else if (type == TO_REDIROUT)
-		this_node->token = ft_strdup(">");
-	else if (type == TO_HEREDOC)
-		this_node->token = ft_strdup("<<");
-	else if (type == TO_APPEND)
-		this_node->token = ft_strdup(">>");
-	else if (type == PIPE)
-		this_node->token = ft_strdup("|");
-	else if (type == DQUOTE || type == QUOTE)
+	add_spacial_token2(&this_node, type);
+	if (type == DQUOTE || type == QUOTE)
 	{
 		temp = *idx;
 		if (add_quote_token(&this_node, idx, type, line) == FALSE)
@@ -108,7 +69,7 @@ int	add_spacial_token(t_token_node **token_head, \
 	return (add_token(token_head, &this_node, type, *idx));
 }
 
-int	add_common_token(t_token_node **token_head, char *line, int *idx)
+static int	add_common_token(t_token_node **token_head, char *line, int *idx)
 {
 	t_token_node	*this_node;
 	int				start;

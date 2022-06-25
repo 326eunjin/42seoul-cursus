@@ -6,7 +6,7 @@
 #    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/25 22:51:27 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/06/26 00:04:15 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,9 @@ UTIL_DIR = ./util/
 EXEC_DIR = ./exec/
 REDIR_DIR = ./redirection/
 
-PARSE_SRCS = parse_main.c parse_token.c parse_cmd.c parse_cmd_add.c parse_cmd_type.c parse_cmd_add_quote.c parse_cmd_utils.c
+PARSE_SRCS = parse_cmd_utils2.c parse_main.c parse_token.c parse_cmd.c parse_cmd_add.c parse_cmd_type.c parse_cmd_add_quote.c parse_cmd_utils.c
 BUILTIN_SRCS = func_pwd.c func_env.c func_echo.c func_export.c func_unset.c func_cd.c func_cd_util.c func_exit.c func_export_util.c func_cd_single.c func_unset_single.c
-UTIL_SRCS = ft_strcmp.c copy_env.c tolowerstr.c signal_set.c signal_handler.c free.c
+UTIL_SRCS = ft_strcmp.c copy_env.c tolowerstr.c signal_set.c signal_handler.c free.c parse_utils.c
 EXEC_SRCS = exe_bulitin.c exe_cmd_util.c exe_cmd_with_pipe.c exe_cmd_without_pipe.c exe_cmd_with_pipe_util.c
 REDIR_SRCS = redir_in.c without_redir.c redir_out.c heredoc.c heredoc_utils.c
 

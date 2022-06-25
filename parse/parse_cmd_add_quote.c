@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:22:14 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 22:50:02 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 00:10:16 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,9 @@ int	add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, \
 	if (type == QUOTE)
 	{
 		if (need_join(*curr_token, line, 1) == TRUE)
-		{
-			printf("11111\n");
 			join_quote(cmd_head, curr_token, line);
-		}
 		else
 		{
-			printf("22222\n");
 			if (new_quote(cmd_head, curr_token, line) == FALSE)
 				return (FALSE);
 		}

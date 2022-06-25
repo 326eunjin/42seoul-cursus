@@ -6,18 +6,11 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 22:55:11 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 23:59:56 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-static int is_white_space(char c)
-{
-	if (c == ' ' || c >= 9 && c <= 13)
-		return(TRUE);
-	return (FALSE);
-}
 
 static int	get_end_index(t_token_node **curr)
 {
@@ -28,35 +21,6 @@ static int	get_end_index(t_token_node **curr)
 	else
 		end = (*curr)->next->idx;
 	return (end);
-}
-
-int	need_join(t_token_node *curr_token, char *line, int option)
-{
-	char	c;
-
-	if (curr_token->idx - 1 > 0)
-		c = line[curr_token->idx - 1];
-	else
-		c = '\0';
-	if (option == 1)
-	{
-		if (c != '\0' && !(c == ' ' || c >= 9 && c <= 13))
-			return (TRUE);
-		return (FALSE);
-	}
-	else if (option == 2)
-	{
-		if (c != '\0' && (c == '\'' || c == '"' || \
-			!(c == ' ' || c >= 9 && c <= 13)))
-			return (TRUE);
-		return (FALSE);
-	}
-	else
-	{
-		if (c != '\0' && (c == '\'' || c == '"'))
-			return (TRUE);
-		return (FALSE);
-	}
 }
 
 char	*replace_dollar(char *str, int idx, char *line)
@@ -83,7 +47,7 @@ char	*replace_dollar(char *str, int idx, char *line)
 	return (ret);
 }
 
-void dquote_dollar(char **new_str, char *key)
+static void	dquote_dollar(char **new_str, char *key)
 {
 	int		envp_idx;
 	char	**split;
@@ -92,7 +56,7 @@ void dquote_dollar(char **new_str, char *key)
 	if (ft_strcmp(key, "?") == 0)
 	{
 		*new_str = ft_strjoin(*new_str, ft_itoa(g_state.exit_status));
-		return;
+		return ;
 	}
 	envp_idx = is_in_envp(key);
 	if (envp_idx == -1)
@@ -105,45 +69,41 @@ void dquote_dollar(char **new_str, char *key)
 	*new_str = ft_strjoin(*new_str, ret);
 }
 
-char	*char_to_string(char c)
+static void	make_new_dollar_string(int \
+	*idx, t_token_node **curr, char **new_str)
 {
-	char *ret;
+	char	*tmp_str;
+	int		tmp_idx;
 
-	ret = (char *)malloc(sizeof(char) * 2);
-	if (ret == NULL)
-		exit(1);
-	ret[0] = c;
-	ret[1] = '\0';
-	return (ret);
+	tmp_idx = ++(*idx);
+	while (((*curr)->token[*idx] != '\0') && ((*curr)->token[*idx] != '$') && \
+		(is_white_space((*curr)->token[*idx]) == FALSE))
+		(*idx)++;
+	tmp_str = ft_substr((*curr)->token, tmp_idx, *idx - tmp_idx);
+	if (ft_strcmp(tmp_str, "") != 0)
+		dquote_dollar(new_str, tmp_str);
+	else
+		*new_str = ft_strjoin(*new_str, ft_strdup("$"));
+	free(tmp_str);
 }
 
 void	make_new_str(char **new_str, t_token_node **curr, char *line)
 {
-	int		idx;
-	int		len;
-	char	*tmp_str;
-	int		tmp_idx;
+	int	idx;
+	int	len;
+
 	idx = 0;
 	len = ft_strlen((*curr)->token);
 	if (len == 0)
-		return;
+		return ;
 	while (idx < len)
 	{
-		if((*curr)->token[idx] == '$')
-		{
-			tmp_idx = ++idx;
-			while(((*curr)->token[idx] != '\0') && ((*curr)->token[idx] != '$') && (is_white_space((*curr)->token[idx]) == FALSE))
-				idx++;
-			tmp_str = ft_substr((*curr)->token, tmp_idx, idx - tmp_idx);
-			if (ft_strcmp(tmp_str,"") != 0)
-				dquote_dollar(new_str, tmp_str);
-			else
-				*new_str = ft_strjoin(*new_str, ft_strdup("$"));
-			free(tmp_str);
-		}
+		if ((*curr)->token[idx] == '$')
+			make_new_dollar_string(&idx, curr, new_str);
 		else
 		{
-			*new_str = ft_strjoin(*new_str, char_to_string((*curr)->token[idx]));
+			*new_str = ft_strjoin(*new_str, \
+				char_to_string((*curr)->token[idx]));
 			idx++;
 		}
 	}
