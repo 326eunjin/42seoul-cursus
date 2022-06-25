@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:04:58 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 22:12:19 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/25 15:56:16 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,12 @@ static int	func_unset_2(t_cmd_node *head, int flag)
 	t_cmd_node	*curr_node;
 	int			loc;
 
-	curr_node = head->next->next;
-	while (curr_node->next != NULL)
+	curr_node = head->next;
+	while (curr_node != NULL)
 	{
-		if (is_valid_env(curr_node->cmd) == TRUE)
-		{
-			loc = is_str_in_envp(curr_node->cmd);
-			if (loc != FALSE)
-			{
-				while (loc < envp_cnt() - 1)
-				{
-					free(g_state.envp[loc]);
-					g_state.envp[loc] = ft_strdup(g_state.envp[loc + 1]);
-					loc++;
-				}
-				free(g_state.envp[envp_cnt() - 1]);
-				g_state.envp[envp_cnt() - 1] = NULL;
-			}
-		}
-		else if (is_right_form(curr_node->cmd) == FALSE)
+		if (is_right_form(curr_node->cmd) == FALSE)
 			flag = unset_error(curr_node->cmd);
+		curr_node = curr_node->next;
 	}
 	return (flag);
 }
