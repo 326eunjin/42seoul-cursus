@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/26 00:01:26 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 00:55:31 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ static int	add_spacial_token(t_token_node **token_head, \
 	{
 		temp = *idx;
 		if (add_quote_token(&this_node, idx, type, line) == FALSE)
+		{
+			free(this_node);
+			this_node = 0;
 			return (FALSE);
+		}
 		return (add_token(token_head, &this_node, type, temp));
 	}
 	else if (type == DOLLAR)
