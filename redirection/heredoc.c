@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 23:10:12 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 23:26:42 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	write_dollar_heredoc(char *line, int start, int len, int fd)
 	if (name == NULL)
 	{
 		write(fd, "\n", 1);
-		return (parse_error(2));
+		return (FALSE);
 	}
 	value = replace_dollar(name, start, line);
 	if (value == NULL)
@@ -59,7 +59,7 @@ static int	write_heredoc(int fd, char *line)
 		{
 			temp = ++idx;
 			while (line[idx] != '\0' && !(line[idx] == ' ' || \
-				line[idx] >= 9 && line[idx] <= 13))
+				line[idx] >= 9 && line[idx] <= 13) && line[idx] != '$')
 				idx++;
 			if (write_dollar_heredoc(line, temp, idx - temp, fd) == FALSE)
 				return (FALSE);
