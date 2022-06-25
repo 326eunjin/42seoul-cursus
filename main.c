@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 01:52:01 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 15:12:07 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,15 @@ int	main(int argc, char **argv, char **envp)
 		if (parse_cmd(&cmd_line_list) == FALSE)
 		{
 			free_cmd(cmd_line_list);
+			//system("leaks minishell");
 			continue ;
 		}
 		set_echoctl();
 		exe_cmd(cmd_line_list);
 		free_cmd(cmd_line_list);
 		remove_temp_file();
+		//system("leaks minishell");
 	}
-	//free_envp(); // 환경변수 free
+	free_split(g_state.envp);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 20:07:54 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 21:36:48 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/25 15:31:14 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ void	func_export(t_cmd_node *head)
 	int			flag;
 	t_cmd_node	*curr_node;
 
-	curr_node = head;
+	curr_node = head->next;
 	flag = FALSE;
 	export_wihtout_arg(head);
-	while (curr_node->next != NULL)
+	while (curr_node != NULL)
 	{
 		if (is_right_form(curr_node->cmd) == FALSE)
 		{
@@ -92,13 +92,7 @@ void	func_export(t_cmd_node *head)
 			ft_putstr_fd(curr_node->cmd, STDERR_FILENO);
 			ft_putstr_fd(": not a valid identifier\n", STDERR_FILENO);
 		}
-		else if ((has_equal_sign(curr_node->cmd) == TRUE))
-		{
-			if (is_in_envp(curr_node->cmd) != -1)
-				modify_envp(curr_node->cmd, is_in_envp(curr_node->cmd));
-			else
-				g_state.envp = new_export(curr_node->cmd);
-		}
+		curr_node = curr_node->next;
 	}
 	if (flag == TRUE)
 		exit(1);
