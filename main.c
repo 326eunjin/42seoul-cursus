@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 23:56:04 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 00:51:30 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,19 @@ int	main(int argc, char **argv, char **envp)
 		unset_echoctl();
 		cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
 		if (cmd_line_list == NULL)
-			return (parse_error(2));
+			return (FALSE);
 		ft_memset(cmd_line_list, 0, sizeof(t_cmd_line_list));
 		if (parse_cmd(&cmd_line_list) == FALSE)
 		{
 			free_cmd(cmd_line_list);
+			//system("leaks minishell");
 			continue ;
 		}
 		set_echoctl();
 		exe_cmd(cmd_line_list);
 		free_cmd(cmd_line_list);
 		remove_temp_file();
+		//system("leaks minishell");
 	}
 	free_split(g_state.envp);
 	return (0);

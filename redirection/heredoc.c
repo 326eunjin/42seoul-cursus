@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 23:26:42 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 00:27:54 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	write_dollar_heredoc(char *line, int start, int len, int fd)
 	{
 		free(name);
 		write(fd, "\n", 1);
-		return (parse_error(2));
+		return (FALSE);
 	}
 	ft_putstr_fd(value, fd);
 	free(name);
