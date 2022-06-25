@@ -6,11 +6,20 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:21:28 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/22 01:29:23 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 16:16:01 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static int	is_not_common(enum e_cmd_type type)
+{
+	if (type == REDIRIN || type == REDIROUT \
+		|| type == HEREDOC || type == APPEND)
+		return (TRUE);
+	else
+		return (FALSE);
+}
 
 static int	is_echo_option(t_cmd_node *node)
 {
@@ -66,7 +75,8 @@ static int	check_redir(t_cmd_node **curr_cmd)
 	if (type == REDIRIN || type == REDIROUT || type == HEREDOC || \
 		type == APPEND)
 	{
-		if ((*curr_cmd)->next == NULL)
+		if ((*curr_cmd)->next == NULL || \
+			is_not_common((*curr_cmd)->next->type) == TRUE)
 			return (parse_error(3));
 		else
 		{

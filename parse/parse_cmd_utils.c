@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 02:37:06 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 16:46:47 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	*replace_dollar(char *str, int idx, char *line)
 
 	if (idx < 1 || line[idx - 1] != '$')
 		return (ft_strdup("$"));
+	if (ft_strcmp(str, "\"") == 0)
+		return (ft_strdup("$"));
 	if (ft_strcmp(str, "?") == 0)
 		return (ft_itoa(g_state.exit_status));
 	envp_idx = is_in_envp(str);
@@ -108,10 +110,12 @@ void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
 	int		start;
 
 	if ((*curr)->next == NULL)
-		str = ft_strdup("$");
+		str = ft_strdup(" ");
 	else
 		str = replace_dollar((*curr)->next->token, (*curr)->next->idx, line);
 	*curr_str = ft_strjoin(*curr_str, str);
+	if ((*curr)->next->type == DQUOTE)
+		return ;
 	if ((*curr)->next != NULL)
 		*curr = (*curr)->next;
 	if ((*curr)->next->type == DQUOTE)
