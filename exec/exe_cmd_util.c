@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_cmd_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:14:08 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 22:19:29 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/25 15:48:57 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	path_error(char *str, t_cmd_node *node)
 		ft_putstr_fd("bash: ", STDERR_FILENO);
 		ft_putstr_fd(node->cmd, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		exit(1);
+		exit(127);
 	}
 }
 

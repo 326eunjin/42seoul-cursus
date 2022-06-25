@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:35:45 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/25 04:19:17 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 16:06:15 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	close_wait(int ***fd, pid_t **pid, int *status, int size)
 	while (i < size)
 	{
 		waitpid((*pid)[i], &status[i], 0);
-		if (!WIFSIGNALED(status))
+		if (!WIFSIGNALED(status[i]))
 			g_state.exit_status = status[i] / 256;
 		i++;
 	}

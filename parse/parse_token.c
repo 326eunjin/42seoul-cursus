@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:37:09 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/15 18:48:31 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 15:43:58 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ enum e_token_type	get_token_type(char *line, int idx)
 			return (TO_APPEND);
 		return (TO_REDIROUT);
 	}
-	else
-		return (TO_COMMON);
+	return (TO_COMMON);
 }
 
 static int	add_token(t_token_node **token_head, t_token_node **new_node, \
