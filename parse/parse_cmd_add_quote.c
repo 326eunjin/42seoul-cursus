@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:22:14 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/24 20:21:36 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 22:50:02 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,7 @@ static void	join_quote(t_cmd_node **cmd_head, \
 	char		*new_str;
 	t_cmd_node	*last_cmd;
 
-	start = (*curr_token)->idx + 1;
-	*curr_token = (*curr_token)->next;
-	while ((*curr_token)->type != QUOTE)
-		*curr_token = (*curr_token)->next;
-	end = (*curr_token)->idx;
-	new_str = ft_substr(line, start, end - start);
+	new_str = ft_strdup((*curr_token)->token);
 	last_cmd = (*cmd_head);
 	while (last_cmd->next != NULL)
 		last_cmd = last_cmd->next;
@@ -79,12 +74,7 @@ static int	new_quote(t_cmd_node **cmd_head, \
 	if (new_cmd == NULL)
 		return (FALSE);
 	ft_memset(new_cmd, 0, sizeof(t_cmd_node));
-	start = (*curr_token)->idx + 1;
-	*curr_token = (*curr_token)->next;
-	while ((*curr_token)->type != QUOTE)
-		*curr_token = (*curr_token)->next;
-	end = (*curr_token)->idx;
-	new_str = ft_substr(line, start, end - start);
+	new_str = ft_strdup((*curr_token)->token);
 	new_cmd->cmd = new_str;
 	new_cmd->type = COMMON;
 	add_cmd(cmd_head, new_cmd);
@@ -97,10 +87,16 @@ int	add_quote_cmd(t_cmd_node **cmd_head, t_token_node **curr_token, \
 	if (type == QUOTE)
 	{
 		if (need_join(*curr_token, line, 1) == TRUE)
+		{
+			printf("11111\n");
 			join_quote(cmd_head, curr_token, line);
+		}
 		else
+		{
+			printf("22222\n");
 			if (new_quote(cmd_head, curr_token, line) == FALSE)
 				return (FALSE);
+		}
 	}
 	else
 	{

@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
+#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/24 21:13:25 by ejang            ###   ########.fr        #
+#    Updated: 2022/06/25 22:51:27 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 NAME = minishell
-CFLAGS	=	-Wall -Wextra -Werror 
+CFLAGS	=	-Wall -Wextra -Werror
 
 LIBFT_DIR = ./libft/
 PARSE_DIR = ./parse/
@@ -38,7 +38,7 @@ $(NAME)	:	$(OBJS)
 			@printf "✅ \033[0;32m$(NAME) was created.\033[0m\n"
 
 %.o	:	%.c
-		@$(CC) $(CFLAG) -I${HOME}/.brew/opt/readline/include -c $< -o $@ -g3
+		@$(CC) $(CFLAG) -I${HOME}/.brew/opt/readline/include -c $< -o $@
 
 clean	:
 			@rm -rf $(OBJS)

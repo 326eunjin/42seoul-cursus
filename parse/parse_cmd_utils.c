@@ -6,11 +6,18 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:22:53 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 16:46:47 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 22:55:11 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static int is_white_space(char c)
+{
+	if (c == ' ' || c >= 9 && c <= 13)
+		return(TRUE);
+	return (FALSE);
+}
 
 static int	get_end_index(t_token_node **curr)
 {
@@ -57,7 +64,7 @@ char	*replace_dollar(char *str, int idx, char *line)
 	char	**split;
 	char	*ret;
 	char	*name;
-	char	envp_idx;
+	int		envp_idx;
 
 	if (idx < 1 || line[idx - 1] != '$')
 		return (ft_strdup("$"));
@@ -76,52 +83,68 @@ char	*replace_dollar(char *str, int idx, char *line)
 	return (ret);
 }
 
-void	make_new_str(char **new_str, t_token_node **curr, char *line)
+void dquote_dollar(char **new_str, char *key)
 {
-	int			start;
-	int			end;
+	int		envp_idx;
+	char	**split;
+	char	*ret;
 
-	while (*curr != NULL)
+	if (ft_strcmp(key, "?") == 0)
 	{
-		if ((*curr)->type == DOLLAR)
-			dquote_dollar(new_str, curr, line);
-		else
-		{
-			if ((*curr)->prev != NULL && (*curr)->type != DQUOTE)
-			start = (*curr)->prev->idx + ft_strlen((*curr)->prev->token);
-			else
-				start = (*curr)->idx + 1;
-			while ((*curr)->next != NULL && !((*curr)->next->type == DOLLAR \
-				|| (*curr)->next->type == DQUOTE))
-				*curr = (*curr)->next;
-			end = get_end_index(curr);
-			*new_str = ft_strjoin(*new_str, \
-				ft_substr(line, start, end - start));
-		}
-		*curr = (*curr)->next;
-		if ((*curr)->type == DQUOTE)
-			return ;
+		*new_str = ft_strjoin(*new_str, ft_itoa(g_state.exit_status));
+		return;
 	}
+	envp_idx = is_in_envp(key);
+	if (envp_idx == -1)
+		return ;
+	split = ft_split(g_state.envp[envp_idx], '=');
+	if (split == 0)
+		exit(1);
+	ret = ft_strdup(split[1]);
+	free_split(split);
+	*new_str = ft_strjoin(*new_str, ret);
 }
 
-void	dquote_dollar(char **curr_str, t_token_node **curr, char *line)
+char	*char_to_string(char c)
 {
-	char	*str;
-	int		start;
+	char *ret;
 
-	if ((*curr)->next == NULL)
-		str = ft_strdup(" ");
-	else
-		str = replace_dollar((*curr)->next->token, (*curr)->next->idx, line);
-	*curr_str = ft_strjoin(*curr_str, str);
-	if ((*curr)->next->type == DQUOTE)
-		return ;
-	if ((*curr)->next != NULL)
-		*curr = (*curr)->next;
-	if ((*curr)->next->type == DQUOTE)
+	ret = (char *)malloc(sizeof(char) * 2);
+	if (ret == NULL)
+		exit(1);
+	ret[0] = c;
+	ret[1] = '\0';
+	return (ret);
+}
+
+void	make_new_str(char **new_str, t_token_node **curr, char *line)
+{
+	int		idx;
+	int		len;
+	char	*tmp_str;
+	int		tmp_idx;
+	idx = 0;
+	len = ft_strlen((*curr)->token);
+	if (len == 0)
+		return;
+	while (idx < len)
 	{
-		start = (*curr)->idx + ft_strlen((*curr)->token);
-		*curr_str = ft_strjoin(*curr_str, \
-		ft_substr(line, start, (*curr)->next->idx - start));
+		if((*curr)->token[idx] == '$')
+		{
+			tmp_idx = ++idx;
+			while(((*curr)->token[idx] != '\0') && ((*curr)->token[idx] != '$') && (is_white_space((*curr)->token[idx]) == FALSE))
+				idx++;
+			tmp_str = ft_substr((*curr)->token, tmp_idx, idx - tmp_idx);
+			if (ft_strcmp(tmp_str,"") != 0)
+				dquote_dollar(new_str, tmp_str);
+			else
+				*new_str = ft_strjoin(*new_str, ft_strdup("$"));
+			free(tmp_str);
+		}
+		else
+		{
+			*new_str = ft_strjoin(*new_str, char_to_string((*curr)->token[idx]));
+			idx++;
+		}
 	}
 }

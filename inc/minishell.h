@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:20:55 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 04:15:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 22:49:44 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int			check_cmd(t_cmd_node **cmd_heads, int size);
 int			add_quote_cmd(t_cmd_node **cmd_head, \
 	t_token_node **curr_token, enum e_token_type type, char *line);
 int			add_cmd(t_cmd_node **cmd_head, t_cmd_node *new_node);
-void		dquote_dollar(char **curr_str, t_token_node **curr, char *line);
+void		dquote_dollar(char **new_str, char *key);
 void		tolower_str(char *str);
 char		*get_lower_str(char *str);
 

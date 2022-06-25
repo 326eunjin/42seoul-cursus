@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:03:54 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/17 20:34:25 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/25 22:50:21 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,6 @@ static int	cmd_check(t_cmd_line_list *cmd_line_list, t_token_node *token_head)
 	{
 		if (this_node->type == PIPE)
 			cmd_line_list->size++;
-		else if (this_node->type == DQUOTE || this_node->type == QUOTE)
-		{
-			type = this_node->type;
-			this_node = this_node->next;
-			while (this_node != NULL)
-			{
-				if (this_node->type == type)
-					break ;
-				this_node = this_node->next;
-			}
-			if (this_node == NULL)
-				return (parse_error(1));
-		}
 		this_node = this_node->next;
 	}
 	return (TRUE);
