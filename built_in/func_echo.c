@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 17:04:10 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 03:08:36 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/26 17:18:34 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	func_echo(t_cmd_node *head)
 	if (curr_node == NULL)
 	{
 		printf("\n");
+		g_state.exit_status = 0;
 		return ;
 	}
 	if (curr_node->type == OPTION)
@@ -45,6 +46,7 @@ void	func_echo(t_cmd_node *head)
 	}
 	else
 		flag = FALSE;
+	g_state.exit_status = 0;
 	if (curr_node == NULL)
 		return ;
 	print_echo(curr_node, flag);
