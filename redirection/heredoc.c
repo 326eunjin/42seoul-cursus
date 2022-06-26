@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 00:35:18 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/26 00:27:54 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 13:56:38 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	mini_heredoc(t_cmd_node **curr_cmd)
 	int		status;
 	int		ret;
 
-	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 		heredoc_child((*curr_cmd)->cmd);
