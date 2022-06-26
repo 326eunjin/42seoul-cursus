@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:03:54 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 22:50:21 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 00:27:40 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	make_cmd_list(t_cmd_line_list **cmd_line_list, \
 	(*cmd_line_list)->cmd_heads = (t_cmd_node **)malloc(sizeof(t_cmd_node *) * \
 		(*cmd_line_list)->size);
 	if ((*cmd_line_list)->cmd_heads == NULL)
-		return (parse_error(2));
+		return (FALSE);
 	ft_memset((*cmd_line_list)->cmd_heads, 0, sizeof(t_cmd_node *) * \
 		(*cmd_line_list)->size);
 	idx = 0;
@@ -75,7 +75,7 @@ int	make_cmd_list(t_cmd_line_list **cmd_line_list, \
 	{
 		if (cut_cmd_line(&((*cmd_line_list)->cmd_heads[idx]), \
 			&curr_token, line) == FALSE)
-			return (parse_error(2));
+			return (FALSE);
 		idx++;
 		if (idx < (*cmd_line_list)->size && curr_token == NULL)
 			return (parse_error(4));

@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/25 23:56:04 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 00:56:38 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char **argv, char **envp)
 		unset_echoctl();
 		cmd_line_list = (t_cmd_line_list *)malloc(sizeof(t_cmd_line_list));
 		if (cmd_line_list == NULL)
-			return (parse_error(2));
+			return (FALSE);
 		ft_memset(cmd_line_list, 0, sizeof(t_cmd_line_list));
 		if (parse_cmd(&cmd_line_list) == FALSE)
 		{
