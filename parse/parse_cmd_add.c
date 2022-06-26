@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:07:42 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/16 18:53:40 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 13:35:03 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	add_dollar_cmd(t_cmd_node **cmd_head, t_token_node **curr, char *line)
 	if (need_join(*curr, line, 2) == TRUE)
 	{
 		join_cmd(cmd_head, str);
+		free(str);
 		if ((*curr)->next != NULL)
 			*curr = (*curr)->next;
 		return (TRUE);
