@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:06:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 22:11:29 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/26 14:58:12 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ char	**copy_envp(char **envp)
 	cnt = 0;
 	while (envp[++i])
 		cnt++;
-	ret = (char **)malloc(sizeof(char *) * (cnt + 2));
+	ret = (char **)malloc(sizeof(char *) * (cnt + 1));
 	if (!ret)
 		return (NULL);
 	i = -1;
 	while (envp[++i])
 		ret[i] = ft_strdup(envp[i]);
-	pwd = ft_strjoin(ft_strdup("OLDPWD="), get_pwd());
-	ret[cnt] = pwd;
+	//pwd = ft_strjoin(ft_strdup("OLDPWD="), get_pwd());
+	//ret[cnt] = pwd;
 	ret[cnt + 1] = NULL;
 	return (ret);
 }

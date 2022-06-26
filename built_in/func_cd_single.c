@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 03:32:36 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/24 19:48:26 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/26 15:06:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	change_dir_single(char *str)
 	tmp = get_value("PWD");
 	if (chdir(str) < 0)
 	{
+		free(tmp);
 		printf("cd: no such file or directory: %s\n", str);
 		g_state.exit_status = 1;
 	}
@@ -51,7 +52,13 @@ void	func_cd_single_cmd(t_cmd_node *head)
 	else if (ft_strcmp(curr_node->cmd, "~") == 0)
 		home_dir(str);
 	else if (ft_strcmp(curr_node->cmd, "-") == 0)
+	{
+		free(str);
 		old_dir();
+	}
 	else
+	{
+		free(str);
 		change_dir_single(curr_node->cmd);
+	}
 }
