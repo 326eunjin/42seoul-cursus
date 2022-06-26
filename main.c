@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/26 00:56:38 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/06/26 15:14:17 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd_line_list	*cmd_line_list;
 
 	g_state.envp = copy_envp(envp);
+	if (is_in_envp("OLDPWD") == -1)
+		export_str(ft_strjoin(ft_strdup("OLDPWD="), get_pwd()));
 	print_intro();
 	while (1)
 	{
