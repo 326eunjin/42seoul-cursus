@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 21:04:07 by ejang             #+#    #+#             */
-/*   Updated: 2022/06/26 15:05:06 by ejang            ###   ########.fr       */
+/*   Updated: 2022/06/26 15:17:59 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	old_dir(void)
 	char	*str2;
 	char	*tmp;
 
-	str1 = get_value("OLDPWD");//해제해줘야함
-	str2 = get_value("PWD");//해제해줘야함
+	str1 = get_value("OLDPWD");
+	str2 = get_value("PWD");
 	if (chdir(str1) < 0)
 	{
 		ft_putendl_fd(strerror(errno), STDERR_FILENO);
 		exit(1);
 	}
-	tmp = ft_strdup("PWD=");//해제필요
+	tmp = ft_strdup("PWD=");
 	tmp = ft_strjoin(tmp, str1);
 	export_str(tmp);
 	free(tmp);
