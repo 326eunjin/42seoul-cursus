@@ -1,7 +1,5 @@
 [fract-ol.pdf](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8b1e52dd-507d-46fa-848e-ee71ac725137/fract-ol.pdf)
 
-[326eunjin/fract-ol](https://github.com/326eunjin/fract-ol.git)
-
 *“This project is meant to create graphically beautiful fractals”*
 
 ---
