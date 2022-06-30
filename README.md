@@ -33,7 +33,7 @@ optimized data sorting”*
 
 - 말이 스택이지만, rrr와 rr을 생각해서 deque라는 자료구조를 사용했다.(double ended queue)
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/24e76aee-1f45-4c10-8a84-a807dd7405e6/Untitled.png)
+![image](https://user-images.githubusercontent.com/50578785/176637911-da8fafef-81ab-4cab-b88b-c2f9ae08c51c.png)
     
 - 알고리즘은 모래 시계를 이용했다.
     - 큰 틀
