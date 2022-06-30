@@ -584,6 +584,7 @@ int	main(int argc, char **argv)
 
 ## 구현 결과
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9782428a-99e3-4b24-955f-98ed3ab183e1/Untitled.png)
+![image](https://user-images.githubusercontent.com/50578785/176637303-d1a69d30-ffa9-4d8a-85b4-4f25f31ff93c.png)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/06551090-f689-4952-98a9-316e44fee105/Untitled.png)
+![image](https://user-images.githubusercontent.com/50578785/176637336-08514fc1-3132-49e8-b083-6990ffb78dd0.png)
+
