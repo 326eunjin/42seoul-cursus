@@ -92,7 +92,7 @@ mlx란 : **학생을 위한 간단한 window 인터페이스 라이브러리**
 - 다음과 같은 그림을 바탕으로 복소좌표와 mlx 창을 맞춰주었다.
 - ex. (800,400) == (2,0)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/18dd63d1-ec7f-471b-9bfc-74558b4fd3a2/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/50578785/176636985-d8a17e26-2e2d-4781-ac90-9ce15fa24258.png)
 
 ## **코드**
 
