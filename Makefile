@@ -1,33 +1,51 @@
-PROG	= fractol
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
+#    Updated: 2022/06/30 15:46:30 by ejang            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS 	= src/draw.c src/error.c src/event.c src/ft_atod.c src/init_fractol.c \
-src/julia_mandelbrot.c src/main.c 
-OBJS 	= ${SRCS:.c=.o}
-MAIN	= src/main.c
+CC	 = cc
+NAME = fractol
+CFLAGS	=	-Wall -Wextra -Werror
+MLX_FLAGS = -lmlx -framework OpenGL -framework Appkit
+LIBFT_DIR = ./libft/
+MLX_DIR = ./mlx/
+SRC_DIR = ./src/
+HEADER = -Iincludes
+SRC_SRCS= draw.c error.c event.c ft_atod.c init_fractol.c julia_mandelbrot.c main.c
 
-HEADER	= -Iincludes
+SRCS = $(addprefix $(SRC_DIR), $(SRC_SRCS)) 
+OBJS	=	$(SRCS:.c=.o)
 
-CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror -g
+all	:	$(NAME)
 
-.c.o:		%.o : %.c
-					@gcc ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+$(NAME)	:	$(OBJS)
+			@make -C $(LIBFT_DIR) all
+			@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) -o $@ $(OBJS)
+			@printf "✅ \033[0;32m$(NAME) was created.\033[0m\n"
 
-all: 		${PROG}
+%.o	:	%.c
+		@$(CC) $(CFLAG) $(HEADER) -c $< -o $@
 
-${PROG}:	${OBJS}
-					@make re -C ./libft
-					@$(CC) ${OBJS} -Llibft -lft -lmlx -framework OpenGL -framework AppKit -o ${PROG}
+clean	:
+			@rm -rf $(OBJS)
+			@make -C $(LIBFT_DIR) clean
+			@make -C $(MLX_DIR) clean
+			@printf "🚮 $(NAME)'s object files were removed.\n"
 
-clean:
-					@make clean -C ./libft
-					@rm -f ${OBJS}
 
-fclean: 	clean
-					@make fclean -C ./libft
-					@rm -f $(NAME)
-					@rm -f ${PROG}
+fclean	:	clean
+			@rm -rf $(NAME)
+			@make -C $(LIBFT_DIR) fclean
+			@make -C $(MLX_DIR) clean
+			@printf "🚮 $(NAME) was removed.\n"
 
-re:			fclean all
+re	:	fclean all
 
-.PHONY: all clean fclean re 
+.PHONY	:	all, clean, fclean, re
