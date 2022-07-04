@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:33:03 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/06/26 15:17:20 by ejang            ###   ########.fr       */
+/*   Updated: 2022/07/04 16:54:39 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	if (is_in_envp("OLDPWD") == -1)
 		export_str(ft_strjoin(ft_strdup("OLDPWD="), get_pwd()));
 	print_intro();
+	int i = -1;
 	while (1)
 	{
 		unset_echoctl();

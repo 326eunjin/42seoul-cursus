@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 20:10:08 by jeyoon            #+#    #+#              #
-#    Updated: 2022/06/26 00:04:15 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/07/04 16:51:35 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 NAME = minishell
-CFLAGS	=	-Wall -Wextra -Werror
-
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
 LIBFT_DIR = ./libft/
 PARSE_DIR = ./parse/
 BUILTIN_DIR = ./built_in/
