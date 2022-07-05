@@ -1,6 +1,5 @@
 #include <iostream>
-
-using namespace std;
+#include <cctype>
 
 void	print_in_upper_case(char *str);
 
@@ -8,7 +7,7 @@ int main(int argc, char **argv)
 {
 	int i = 1;
 	if(argc == 1)
-		cout<< "* LOUD AND UNBEARABLE FEEDBACK NOISE *"<< endl;
+		std::cout<< "* LOUD AND UNBEARABLE FEEDBACK NOISE *"<< std::endl;
 	else
 	{
 		while(i < argc)
@@ -16,6 +15,7 @@ int main(int argc, char **argv)
 			print_in_upper_case(argv[i]);
 			i++;
 		}
+		std::cout<<std::endl;
 	}
 }
 
@@ -25,8 +25,8 @@ void	print_in_upper_case(char *str)
 	while(str[i])
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i]-=32;
-		cout<<str[i];
+			toupper(str[i]);
+		std::cout<<str[i];
 		i++;
 	}
 }
