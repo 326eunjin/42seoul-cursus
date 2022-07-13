@@ -4,14 +4,22 @@
 #include <iostream>
 #include <string>
 
-class Contact
-{
-	private : 
-		int index;
-		std::string first_name;
-		std::string last_name;
-		std::string nickname;
-	public : 
+class Contact {
+  private:
+    std::string first_name;
+    std::string last_name;
+    std::string nickname;
+    std::string phone_number;
+
+  public:
+    std::string getFirstName();
+    std::string getLastName();
+    std::string getNickName();
+    std::string getPhoneNumber();
+    void setFirstName(std::string first_name);
+    void setLastName(std::string last_name);
+    void setNickName(std::string nickname);
+    void setPhoneNumber(std::string phone_number);
 };
 
 #endif

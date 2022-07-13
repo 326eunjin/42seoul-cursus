@@ -1,21 +1,24 @@
+#include "PhoneBook.hpp"
 #include <iostream>
-#include "Contact.hpp"
 #include <string>
 
-int main()
-{
-	Contact contact[8];
-	std::string command;
-
-	while(1)
-	{
-		if(command.compare("ADD") == 0)
-			//add
-		else if(command.compare("SEARCH") == 0)
-			//search
-		else if (command.compare("EXIT") == 0)
-			//exit
-		else
-			std::cout<< "INVALID INPUT" << std::endl;
-	}
+int main() {
+    PhoneBook phonebook;
+    Contact contact;
+    std::string command;
+    std::cout << "PLEASE INSERT SEARCH/ADD/EXIT" << std::endl;
+    std::cout << "ANY OTHER INPUT IS INVALID" << std::endl;
+    while (getline(std::cin, command)) {
+        if (command.compare("ADD") == 0)
+            phonebook.add();
+        else if (command.compare("SEARCH") == 0)
+            phonebook.search();
+        else if (command.compare("EXIT") == 0)
+            exit(0);
+        else {
+            std::cout << "INVALID INPUT " << std::endl;
+            std::cout << "PLEASE INSERT SEARCH/ADD/EXIT" << std::endl;
+            std::cout << "ANY OTHER INPUT IS INVALID" << std::endl;
+        }
+    }
 }
