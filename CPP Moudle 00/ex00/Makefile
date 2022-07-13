@@ -6,13 +6,13 @@ OBJ 	= ${SRC:.cpp=.o}
 CC 		= c++
 CFLAGS 	= -Wall -Werror -Wextra -std=c++98
 
-%.o: %.cpp
-		@$(CC) ${CFLAGS} -c $< -o $(<:.cpp=.o)
-
 all: 	${PROG}
 
 ${PROG}: ${OBJ}
-		@$(CC) ${OBJ} -o ${PROG}
+		@$(CC) ${CFLAGS} ${OBJ} -o ${PROG}
+
+%.o: %.cpp
+		@$(CC) ${CFLAGS} -c $< -o $@
 
 clean:
 		@rm -f ${OBJ}
