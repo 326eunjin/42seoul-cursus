@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/ejang/Desktop/42/CPP-Module'
+make: Leaving directory `/Users/ejang/Desktop/42/CPP-Module'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
