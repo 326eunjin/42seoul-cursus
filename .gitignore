@@ -4,6 +4,8 @@
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
+!.vscode/*.log
+!.vscode/dryrun.log
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
