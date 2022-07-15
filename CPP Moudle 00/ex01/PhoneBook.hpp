@@ -13,7 +13,6 @@ class PhoneBook {
     bool is_right_form(std::string string);
     bool is_str_number(std::string string);
     void without_whitespace(std::string &string);
-    int is_right_form();
     std::string in_form(std::string string);
     void display_single(int index);
     void display_whole();

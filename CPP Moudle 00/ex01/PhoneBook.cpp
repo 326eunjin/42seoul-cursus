@@ -52,28 +52,29 @@ void PhoneBook::display_whole() {
     }
 }
 void PhoneBook::display_single(int index) {
-    std::cout << std::setw(11) << "INDEX|" << std::right << std::setw(11)
-              << "FIRST NAME|" << std::right << std::setw(11) << "LAST NAME|"
-              << std::right << std::setw(11) << "NICK NAME|" << std::right
-              << std::setw(11) << "PHONE NUM|" << std::right << std::setw(11)
-              << "SECRET|" << std::endl;
-    std::cout << std::right << std::setw(10) << index << "|" << std::right
-              << std::setw(11) << in_form(contact[index - 1].getFirstName())
-              << std::right << std::setw(11)
-              << in_form(contact[index - 1].getLastName()) << std::right
-              << std::setw(11) << in_form(contact[index - 1].getNickName())
-              << std::right << std::setw(11)
-              << in_form(contact[index - 1].getPhoneNumber()) << std::right
-              << std::setw(11) << in_form(contact[index - 1].getDarkestSecret())
+    std::cout << "------------------------------------------------------"
+              << std::endl;
+    std::cout << "Index is " << index << std::endl;
+    std::cout << "First name is " << contact[index - 1].getFirstName()
+              << std::endl;
+    std::cout << "Last name is " << contact[index - 1].getLastName()
+              << std::endl;
+    std::cout << "Nickname is " << contact[index - 1].getNickName()
+              << std::endl;
+    std::cout << "Phone number is " << contact[index - 1].getPhoneNumber()
+              << std::endl;
+    std::cout << "Darkest secret is " << contact[index - 1].getDarkestSecret()
+              << std::endl;
+    std::cout << "------------------------------------------------------"
               << std::endl;
 }
 
 void PhoneBook::search() {
     display_whole();
-    int index;
+    char index;
     std::cout << "INPUT INDEX(1~8) >> ";
-    std::cin >> index;
-    while (std::cin.fail() || index < 1 || index > 8) {
+    index = std::cin.get();
+    while (std::cin.fail() || index < '1' || index > '8') {
         if (std::cin.eof() == true)
             exit(0);
         std::cin.clear();
@@ -83,11 +84,11 @@ void PhoneBook::search() {
         //(실질적으로 한 줄을 모두 버리는 코드)
         std::cout << "INVALID INPUT" << std::endl;
         std::cout << "INPUT INDEX(1~8) >> ";
-        std::cin >> index;
+        index = std::cin.get();
     }
     std::cin.clear();
     std::cin.ignore(LLONG_MAX, '\n'); //입력버퍼 비우기
-    display_single(index);
+    display_single(index - 48);
 }
 
 void PhoneBook::add() {
