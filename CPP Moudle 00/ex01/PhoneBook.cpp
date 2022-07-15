@@ -37,6 +37,7 @@ std::string PhoneBook::in_form(std::string string) {
     return (string);
 }
 void PhoneBook::display_single(int index) {
+    // std::cout << std::right << std::setw(11) << " |     INDEX|" << std::endl;
     std::cout << std::right << std::setw(11) << "|         " << index << "|"
               << std::right << std::setw(11)
               << in_form(contact[index - 1].getFirstName()) << std::right
