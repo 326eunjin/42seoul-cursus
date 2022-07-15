@@ -28,26 +28,48 @@ void PhoneBook::without_whitespace(std::string &string) {
 PhoneBook::PhoneBook() { this->index = -1; }
 
 std::string PhoneBook::in_form(std::string string) {
-    string.append("|");
-    if (string.length() > 11) {
-        string.at(9) = '.';
-        string.erase(10);
-        string.append("|");
+    std::string ret;
+    ret = string;
+    if (ret.length() > 11) {
+        ret.at(9) = '.'; // 9번째 문자를 .로 바꿈
+        ret = ret.substr(0, 10);
     }
-    return (string);
+    ret.append("|");
+    return (ret);
+}
+
+void PhoneBook::display_whole() {
+    std::cout << std::setw(11) << "INDEX|" << std::right << std::setw(11)
+              << "FIRST NAME|" << std::right << std::setw(11) << "LAST NAME|"
+              << std::right << std::setw(11) << "NICK NAME|" << std::endl;
+    for (int i = 1; i <= 8; i++) {
+        std::cout << std::right << std::setw(10) << i << "|" << std::right
+                  << std::setw(11) << in_form(contact[i - 1].getFirstName())
+                  << std::right << std::setw(11)
+                  << in_form(contact[i - 1].getLastName()) << std::right
+                  << std::setw(11) << in_form(contact[i - 1].getNickName())
+                  << std::endl;
+    }
 }
 void PhoneBook::display_single(int index) {
-    // std::cout << std::right << std::setw(11) << " |     INDEX|" << std::endl;
-    std::cout << std::right << std::setw(11) << "|         " << index << "|"
+    std::cout << std::setw(11) << "INDEX|" << std::right << std::setw(11)
+              << "FIRST NAME|" << std::right << std::setw(11) << "LAST NAME|"
+              << std::right << std::setw(11) << "NICK NAME|" << std::right
+              << std::setw(11) << "PHONE NUM|" << std::right << std::setw(11)
+              << "SECRET|" << std::endl;
+    std::cout << std::right << std::setw(10) << index << "|" << std::right
+              << std::setw(11) << in_form(contact[index - 1].getFirstName())
               << std::right << std::setw(11)
-              << in_form(contact[index - 1].getFirstName()) << std::right
-              << std::setw(11) << in_form(contact[index - 1].getLastName())
+              << in_form(contact[index - 1].getLastName()) << std::right
+              << std::setw(11) << in_form(contact[index - 1].getNickName())
               << std::right << std::setw(11)
-              << in_form(contact[index - 1].getNickName()) << std::endl;
+              << in_form(contact[index - 1].getPhoneNumber()) << std::right
+              << std::setw(11) << in_form(contact[index - 1].getDarkestSecret())
+              << std::endl;
 }
+
 void PhoneBook::search() {
-    for (int i = 0; i < 8; i++)
-        display_single(i + 1);
+    display_whole();
     int index;
     std::cout << "INPUT INDEX(1~8) >> ";
     std::cin >> index;
@@ -55,13 +77,16 @@ void PhoneBook::search() {
         if (std::cin.eof() == true)
             exit(0);
         std::cin.clear();
-        std::cin.ignore(256, '\n'); //입력버퍼 비우기
+        std::cin.ignore(LLONG_MAX, '\n');
+        //입력버퍼 비우기 /최대 문자 수를 버림. 단,
+        //그전에 뉴라인 문자를 버리면 곧바로 멈춤
+        //(실질적으로 한 줄을 모두 버리는 코드)
         std::cout << "INVALID INPUT" << std::endl;
         std::cout << "INPUT INDEX(1~8) >> ";
         std::cin >> index;
     }
     std::cin.clear();
-    std::cin.ignore(256, '\n'); //입력버퍼 비우기
+    std::cin.ignore(LLONG_MAX, '\n'); //입력버퍼 비우기
     display_single(index);
 }
 
@@ -73,6 +98,7 @@ void PhoneBook::add() {
     std::string last_name;
     std::string nickname;
     std::string phone_number;
+    std::string darkest_secret;
     std::cout << "first name : ";
     while (true) {
         std::getline(std::cin, first_name);
@@ -122,8 +148,21 @@ void PhoneBook::add() {
         std::cout << "invalid input" << std::endl;
         std::cout << "phone number : ";
     }
+    std::cout << "darkest secret : ";
+    while (true) {
+        std::getline(std::cin, darkest_secret);
+        if (std::cin.eof() == true)
+            exit(0);
+        if (nickname.empty() == false) {
+            without_whitespace(darkest_secret);
+            break;
+        }
+        std::cout << "invalid input" << std::endl;
+        std::cout << "darkest secret : ";
+    }
     contact[size].setFirstName(first_name);
     contact[size].setLastName(last_name);
     contact[size].setNickName(nickname);
     contact[size].setPhoneNumber(phone_number);
+    contact[size].setDarkestSecret(darkest_secret);
 }

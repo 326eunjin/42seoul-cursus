@@ -15,10 +15,11 @@ class PhoneBook {
     void without_whitespace(std::string &string);
     int is_right_form();
     std::string in_form(std::string string);
+    void display_single(int index);
+    void display_whole();
 
   public:
     PhoneBook();
-    void display_single(int index);
     void search();
     void add();
 };
