@@ -20,11 +20,6 @@ bool PhoneBook::is_str_number(std::string string) {
     return true;
 }
 
-void PhoneBook::without_whitespace(std::string &string) {
-    string.erase(std::remove_if(string.begin(), string.end(), ::isspace),
-                 string.end());
-}
-
 PhoneBook::PhoneBook() { this->index = -1; }
 
 std::string PhoneBook::in_form(std::string string) {
@@ -104,10 +99,8 @@ void PhoneBook::add() {
         std::getline(std::cin, first_name);
         if (std::cin.eof())
             exit(0);
-        if (is_right_form(first_name) == true) {
-            without_whitespace(first_name);
+        if (is_right_form(first_name) == true)
             break;
-        }
         std::cout << "invalid input" << std::endl;
         std::cout << "first name : ";
     }
@@ -117,10 +110,8 @@ void PhoneBook::add() {
         std::getline(std::cin, last_name);
         if (std::cin.eof() == true)
             exit(0);
-        if (is_right_form(last_name) == true) {
-            without_whitespace(last_name);
+        if (is_right_form(last_name) == true)
             break;
-        }
         std::cout << "invalid input" << std::endl;
         std::cout << "last name : ";
     }
@@ -129,10 +120,8 @@ void PhoneBook::add() {
         std::getline(std::cin, nickname);
         if (std::cin.eof() == true)
             exit(0);
-        if (nickname.empty() == false) {
-            without_whitespace(nickname);
+        if (nickname.empty() == false)
             break;
-        }
         std::cout << "invalid input" << std::endl;
         std::cout << "nickname : ";
     }
@@ -141,10 +130,8 @@ void PhoneBook::add() {
         std::getline(std::cin, phone_number);
         if (std::cin.eof() == true)
             exit(0);
-        if (is_str_number(phone_number) == true) {
-            without_whitespace(phone_number);
+        if (is_str_number(phone_number) == true)
             break;
-        }
         std::cout << "invalid input" << std::endl;
         std::cout << "phone number : ";
     }
@@ -153,10 +140,8 @@ void PhoneBook::add() {
         std::getline(std::cin, darkest_secret);
         if (std::cin.eof() == true)
             exit(0);
-        if (nickname.empty() == false) {
-            without_whitespace(darkest_secret);
+        if (nickname.empty() == false)
             break;
-        }
         std::cout << "invalid input" << std::endl;
         std::cout << "darkest secret : ";
     }
