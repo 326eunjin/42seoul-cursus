@@ -4,8 +4,10 @@
 void replacement(char **argv);
 
 int main(int argc, char **argv) {
-    if (argc != 4)
+    if (argc != 4) {
+        std::cout << "ARGC MUST BE FOUR" << std::endl;
         return 0;
+    }
     replacement(argv);
 }
 

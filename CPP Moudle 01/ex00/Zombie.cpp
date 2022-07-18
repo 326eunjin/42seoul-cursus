@@ -5,3 +5,7 @@ void Zombie::announce(void) {
 }
 
 void Zombie::setName(std::string name) { this->name = name; }
+
+Zombie::Zombie(std::string name) { this->name = name; }
+
+Zombie::Zombie() {}

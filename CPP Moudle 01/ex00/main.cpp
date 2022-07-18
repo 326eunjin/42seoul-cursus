@@ -2,7 +2,7 @@
 
 int main() {
     Zombie zombie;
-    zombie.setName("zombie1");
+    zombie.setName("zombie");
     zombie.announce();
     zombie.randomChump("random zombie");
     Zombie *newZombie;
