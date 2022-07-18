@@ -1,8 +1,8 @@
 #include "HumanA.hpp"
 #include <iostream>
 
-HumanA::HumanA(std::string name, Weapon &weapon) : name(name) { //참조자
-    // this->name = name;
+HumanA::HumanA(std::string name, Weapon &weapon) { //참조자
+    this->name = name;
     this->weapon = &weapon; //포인터
 }
 
