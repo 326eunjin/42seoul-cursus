@@ -54,7 +54,6 @@ void PhoneBook::display_whole() {
 void PhoneBook::display_single(int index) {
     std::cout << "------------------------------------------------------"
               << std::endl;
-    std::cout << "Index is " << index << std::endl;
     std::cout << "First name is " << contact[index - 1].getFirstName()
               << std::endl;
     std::cout << "Last name is " << contact[index - 1].getLastName()
