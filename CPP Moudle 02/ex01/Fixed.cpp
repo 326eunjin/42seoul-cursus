@@ -19,14 +19,13 @@ Fixed::Fixed(const Fixed &fixed_new) {
 Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
 
 Fixed &Fixed::operator=(const Fixed &fixed) {
-    //*this = fixed;
-    this->fixed_point = fixed.fixed_point;
     std::cout << "Copy assignment operator called" << std::endl;
+    this->fixed_point = fixed.getRawBits();
     return (*this);
 }
 
 Fixed::Fixed(const int i) {
-    fixed_point = i << bits_num;
+    fixed_point = i * (1 << bits_num);
     std::cout << "Int constructor called" << std::endl;
 }
 
@@ -36,7 +35,7 @@ Fixed::Fixed(float i) {
 }
 
 int Fixed::toInt() const {
-    int ret = fixed_point >> bits_num;
+    int ret = fixed_point / (1 << bits_num);
     return (ret);
 }
 

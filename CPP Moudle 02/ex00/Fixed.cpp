@@ -18,15 +18,12 @@ Fixed::Fixed() {
 Fixed::Fixed(const Fixed &fixed_new) {
     std::cout << "Copy constructor called" << std::endl;
     *this = fixed_new; //세번째 줄!
-    // this->fixed_point = fixed_new.fixed_point;
-    //  this->bits_num = fixed_new.bits_num; static const int
 }
 
 Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
 
 Fixed &Fixed::operator=(const Fixed &fixed) {
-    //*this = fixed;
-    this->fixed_point = fixed.getRawBits();
     std::cout << "Copy assignment operator called" << std::endl;
+    this->fixed_point = fixed.getRawBits();
     return (*this);
 }
