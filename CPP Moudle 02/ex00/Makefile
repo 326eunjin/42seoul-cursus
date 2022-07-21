@@ -22,4 +22,4 @@ fclean: clean
 
 re:		fclean all
 
-.PHONY: all clean fclean re PROG	= ref
+.PHONY: all clean fclean re 
