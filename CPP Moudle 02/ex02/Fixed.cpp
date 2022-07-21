@@ -71,9 +71,8 @@ Fixed Fixed::operator*(const Fixed &fixed) {
 }
 
 Fixed Fixed::operator/(const Fixed &fixed) {
-    if (fixed.getRawBits() == 0)
-    {
-        std::cout<<"cannot be divded to zero"<<std::endl;
+    if (fixed.getRawBits() == 0) {
+        std::cout << "cannot be divded to zero" << std::endl;
         std::exit(0);
     }
     Fixed ret(this->toFloat() / fixed.toFloat());
