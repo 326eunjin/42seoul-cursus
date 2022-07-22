@@ -22,12 +22,12 @@ FragTrap::~FragTrap() {
 }
 
 FragTrap::FragTrap(const FragTrap &fragtrap) {
-    std::cout << "Copy constructor is called" << std::endl;
+    std::cout << "FragTrap Copy constructor is called" << std::endl;
     *this = fragtrap;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &fragtrap) {
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "FragTrap Copy assignment operator called" << std::endl;
     if (this != &fragtrap) {
         this->name = fragtrap.getName();
         this->hit = fragtrap.getHitPoints();
@@ -38,5 +38,5 @@ FragTrap &FragTrap::operator=(const FragTrap &fragtrap) {
 }
 
 void FragTrap::highFivesGuys() {
-    std::cout << "HIGH FIVES GUYS^^!" << std::endl;
+    std::cout << "HIGH FIVES GUYS:>!" << std::endl;
 }
