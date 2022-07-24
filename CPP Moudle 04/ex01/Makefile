@@ -1,6 +1,6 @@
 PROG	= Animal
 
-SRC 	= main.cpp Animal.cpp WrongAnimal.cpp Dog.cpp Cat.cpp WrongCat.cpp
+SRC 	= main.cpp Animal.cpp WrongAnimal.cpp Dog.cpp Cat.cpp WrongCat.cpp Brain.cpp
 OBJ 	= ${SRC:.cpp=.o}
 
 CXX 		= c++
