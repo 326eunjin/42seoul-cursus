@@ -11,12 +11,6 @@ WrongCat::~WrongCat() {
     std::cout << "WrongCat destructor is called" << std::endl;
 }
 
-WrongCat::WrongCat(std::string name) {
-    std::cout << "WrongCat constrcutor that initialized type is called"
-              << std::endl;
-    type = name;
-}
-
 WrongCat::WrongCat(const WrongCat &wrongcat) {
     std::cout << "WrongCat copy constructor is called" << std::endl;
     *this = wrongcat;

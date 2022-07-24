@@ -8,9 +8,9 @@
 int main() {
     const Animal *meta = new Animal();
     const Animal *j = new Dog();
-    const Animal *i = new Cat("meme");
+    const Animal *i = new Cat();
     const WrongAnimal *z = new WrongAnimal();
-    const WrongAnimal *z2 = new WrongCat("nene");
+    const WrongAnimal *z2 = new WrongCat();
     std::cout << j->getType() << " " << std::endl;
     std::cout << i->getType() << " " << std::endl;
     std::cout << z->getType() << " " << std::endl;
@@ -25,4 +25,5 @@ int main() {
     delete i;
     delete z;
     delete z2;
+    system("leaks Animal");
 }

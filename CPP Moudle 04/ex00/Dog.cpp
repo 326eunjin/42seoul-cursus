@@ -9,11 +9,6 @@ Dog::Dog() {
 
 Dog::~Dog() { std::cout << "Dog destructor is called" << std::endl; }
 
-Dog::Dog(std::string name) {
-    std::cout << "Dog constrcutor that initialized type is called" << std::endl;
-    type = name;
-}
-
 Dog::Dog(const Dog &dog) {
     std::cout << "Dog copy constructor is called" << std::endl;
     *this = dog;

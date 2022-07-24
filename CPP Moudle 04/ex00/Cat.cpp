@@ -9,11 +9,6 @@ Cat::Cat() {
 
 Cat::~Cat() { std::cout << "Cat destructor is called" << std::endl; }
 
-Cat::Cat(std::string name) {
-    std::cout << "Cat constrcutor that initialized type is called" << std::endl;
-    type = name;
-}
-
 Cat::Cat(const Cat &cat) {
     std::cout << "Cat copy constructor is called" << std::endl;
     *this = cat;
