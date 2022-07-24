@@ -13,7 +13,7 @@ class WrongAnimal {
     WrongAnimal &operator=(const WrongAnimal &wronganimal);
 
     std::string getType() const;
-    virtual void makeSound() const;
+    void makeSound() const;
 };
 
 #endif
