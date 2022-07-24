@@ -23,12 +23,12 @@ ClapTrap::~ClapTrap() {
 }
 
 ClapTrap::ClapTrap(const ClapTrap &claptrap) {
-    std::cout << "Copy constructor is called" << std::endl;
+    std::cout << "ClapTrap Copy constructor is called" << std::endl;
     *this = claptrap;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &claptrap) {
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "ClapTrap Copy assignment operator called" << std::endl;
     if (this != &claptrap) {
         this->name = claptrap.getName();
         this->hit = claptrap.getHitPoints();
@@ -41,7 +41,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &claptrap) {
 // ANCHOR member function
 void ClapTrap::attack(const std::string &target) {
     if (energy <= 0 || hit <= 0) {
-        std::cout << "No energy or hit point is left" << std::endl;
+        std::cout << "ClapTrap -> No energy or hit point is left" << std::endl;
         return;
     }
     std::cout << "ClapTrap " << name << " attacks " << target << ", causing "
@@ -52,11 +52,12 @@ void ClapTrap::attack(const std::string &target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-    if (energy <= 0 || hit <= 0) {
-        std::cout << "No energy or hit point is left" << std::endl;
+    if (hit <= 0) {
+        std::cout << "ClapTrap -> No energy or hit point is left" << std::endl;
         return;
     } else if (amount >= hit) {
-        std::cout << "DIED" << std::endl;
+        hit = 0;
+        std::cout << "ClapTrap DIED" << std::endl;
         return;
     }
     hit -= amount;
@@ -68,7 +69,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 
 void ClapTrap::beRepaired(unsigned int amount) {
     if (energy <= 0 || hit <= 0) {
-        std::cout << "No energy or hit point is left" << std::endl;
+        std::cout << "ClapTrap -> No energy or hit point is left" << std::endl;
         return;
     }
     std::cout << "ClapTrap " << name << " took " << amount

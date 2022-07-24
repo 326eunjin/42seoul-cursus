@@ -22,12 +22,12 @@ ScavTrap::~ScavTrap() {
 }
 
 ScavTrap::ScavTrap(const ScavTrap &Scavtrap) {
-    std::cout << "Copy constructor is called" << std::endl;
+    std::cout << "ScavTrap Copy constructor is called" << std::endl;
     *this = Scavtrap;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &Scavtrap) {
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "ScavTrap Copy assignment operator called" << std::endl;
     if (this != &Scavtrap) {
         this->name = Scavtrap.getName();
         this->hit = Scavtrap.getHitPoints();
@@ -43,7 +43,7 @@ void ScavTrap::guardGate() {
 
 void ScavTrap::attack(const std::string &target) {
     if (energy <= 0 || hit <= 0) {
-        std::cout << "No energy or hit point is left" << std::endl;
+        std::cout << "ScavTrap -> No energy or hit point is left" << std::endl;
         return;
     }
     std::cout << "ScavTrap " << name << " attacks " << target << ", causing "
