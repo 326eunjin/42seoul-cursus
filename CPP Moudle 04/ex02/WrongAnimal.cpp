@@ -4,7 +4,7 @@
 // ANCHOR WrongAnimal Canonical Form
 WrongAnimal::WrongAnimal() {
     std::cout << "WrongAnimal default constrcutor is called" << std::endl;
-    type = "animal";
+    type = "wrong animal";
 }
 
 WrongAnimal::~WrongAnimal() {
