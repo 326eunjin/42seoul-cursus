@@ -50,12 +50,13 @@ void Bureaucrat::decrementGrade() {
         throw Bureaucrat::GradeTooLowException();
     grade++;
 }
-
+// ANCHOR operator <<
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat) {
     out << bureaucrat.getName() << ", bureaucrat grade "
         << bureaucrat.getGrade();
     return out;
 }
+// ANCHOR exception
 
 const char *Bureaucrat::GradeTooHighException::what(void) const throw() {
     return "Grade maxium is 1";
@@ -63,4 +64,16 @@ const char *Bureaucrat::GradeTooHighException::what(void) const throw() {
 
 const char *Bureaucrat::GradeTooLowException::what(void) const throw() {
     return "Grade minimum is 150";
+}
+
+// ANCHOR signform()
+void Bureaucrat::signForm(Form &f) {
+    try {
+        f.beSigned(*this);
+        std::cout << getName() << " signed " << f.getName() << std::endl;
+    } catch (const std::exception &e) {
+        //<bureaucrat> couldn’t sign <form> because <reason>.
+        std::cout << getName() << " couldn't sign " << f.getName()
+                  << " because " << e.what() << std::endl;
+    }
 }

@@ -1,6 +1,6 @@
-PROG	= Bureaucrat
+PROG	= Form
 
-SRC 	= main.cpp Bureaucrat.cpp
+SRC 	= main.cpp Bureaucrat.cpp Form.cpp
 OBJ 	= ${SRC:.cpp=.o}
 
 CXX 		= c++

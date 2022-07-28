@@ -1,8 +1,12 @@
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
+#include "Form.hpp"
 #include <exception>
 #include <string>
+
+class Form;
+
 class Bureaucrat {
   private:
     const std::string name;
@@ -31,6 +35,9 @@ class Bureaucrat {
       public:
         const char *what() const throw();
     };
+
+    void signForm(Form &f);
+    void executeForm(Form const &form);
 };
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureacurat);
 #endif // !BUREAUCRAT_HPP
