@@ -1,6 +1,6 @@
-PROG	= Shrubbery
+PROG	= Intern
 
-SRC 	= main.cpp Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
+SRC 	= main.cpp Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
 OBJ 	= ${SRC:.cpp=.o}
 
 CXX 		= c++

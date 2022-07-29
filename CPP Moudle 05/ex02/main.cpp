@@ -6,20 +6,20 @@
 #include <iostream>
 
 int main(void) {
-    Bureaucrat b1("Master", 1);
-    Bureaucrat b2("Gold", 10);
-    Bureaucrat b3("Silver", 60);
-    Bureaucrat b4("Bronze", 140);
-    Bureaucrat b5("UnRanked", 150);
+    std::srand(std::time(NULL));
+    Bureaucrat b1("b1", 1);
+    Bureaucrat b2("b2", 10);
+    Bureaucrat b3("b3", 60);
+    Bureaucrat b4("b4", 140);
+    Bureaucrat b5("b5", 150);
 
-    std::cout << "\n";
-
-    std::cout << "\n---------- ShrubberyCreationForm test ----------"
-              << std::endl;
-    ShrubberyCreationForm s("green");
-    b3.executeForm(s); // cannot execute (not signed)
-    b5.signForm(s);    // cannot sign (low grade)
-    b4.signForm(s);    // sign
+    std::cout << "Shrubbery Test" << std::endl;
+    ShrubberyCreationForm s("shub");
+    b1.signForm(s); // sign
+    b2.signForm(s); // sign
+    b3.signForm(s); // sign
+    b4.signForm(s); // sign
+    b5.signForm(s); // no sign
     std::cout << s << std::endl;
     b1.executeForm(s); // execute
     b2.executeForm(s); // execute
@@ -27,12 +27,13 @@ int main(void) {
     b4.executeForm(s); // cannot execute
     b5.executeForm(s); // cannot execute
 
-    std::cout << "\n----------- RobotomyRequestForm test -----------"
-              << std::endl;
+    std::cout << "\nRobotomyRequestForm test" << std::endl;
     RobotomyRequestForm r("robo");
-    b2.executeForm(r); // cannot execute (not signed)
-    b4.signForm(r);    // cannot sign (low grade)
-    b3.signForm(r);    // sign
+    b1.signForm(r);
+    b2.signForm(r);
+    b3.signForm(r);
+    b4.signForm(r); // no sign
+    b5.signForm(r); // no sign
     std::cout << r << std::endl;
     b1.executeForm(r); // execute
     b2.executeForm(r); // execute
@@ -40,12 +41,13 @@ int main(void) {
     b4.executeForm(r); // cannot execute
     b5.executeForm(r); // cannot execute
 
-    std::cout << "\n--------- PresidentialPardonForm test ----------"
-              << std::endl;
+    std::cout << "\nPresidentialPardonForm test" << std::endl;
     PresidentialPardonForm p("bye");
-    b1.executeForm(p); // cannot execute (not signed)
-    b3.signForm(p);    // cannot sign (low grade)
-    b2.signForm(p);    // sign
+    b1.signForm(p); // sign
+    b2.signForm(p); // sign
+    b3.signForm(p); // no sign
+    b4.signForm(p); // no sign
+    b5.signForm(p); // no sign
     std::cout << p << std::endl;
     b1.executeForm(p); // execute
     b2.executeForm(p); // cannot execute

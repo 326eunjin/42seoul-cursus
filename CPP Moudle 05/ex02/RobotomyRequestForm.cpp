@@ -19,8 +19,10 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &robot)
 
 RobotomyRequestForm &
 RobotomyRequestForm::operator=(const RobotomyRequestForm &robot) {
-    if (this != &robot)
+    if (this != &robot) {
         this->target = robot.getTarget();
+        this->setSign(robot.getSign());
+    }
     return (*this);
 }
 
@@ -29,7 +31,6 @@ std::string RobotomyRequestForm::getTarget() const { return target; }
 
 // ANCHOR random
 void RobotomyRequestForm::printRobotomized() const {
-    srand(time(NULL));
     int a = rand() % 2;
     if (a == 0)
         std::cout << target << " has been robotized" << std::endl;

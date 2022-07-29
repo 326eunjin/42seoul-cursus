@@ -19,8 +19,10 @@ PresidentialPardonForm::PresidentialPardonForm(
 
 PresidentialPardonForm &
 PresidentialPardonForm::operator=(const PresidentialPardonForm &pre) {
-    if (this != &pre)
+    if (this != &pre) {
         this->target = pre.getTarget();
+        this->setSign(pre.getSign());
+    }
     return (*this);
 }
 

@@ -26,7 +26,7 @@ class Form {
     int getExecuteGrade() const;
 
     void setSign(bool sign);
-    void beSigned(Bureaucrat b);
+    void beSigned(Bureaucrat &b);
 
     virtual void execute(Bureaucrat const &executor) const = 0;
 

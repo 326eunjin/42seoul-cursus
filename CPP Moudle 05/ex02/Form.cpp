@@ -62,7 +62,7 @@ const char *Form::NotSigned::what(void) const throw() {
 }
 
 // ANCHOR besigned()
-void Form::beSigned(Bureaucrat b) {
+void Form::beSigned(Bureaucrat &b) {
     if (b.getGrade() <= getSignGrade())
         setSign(true);
     else

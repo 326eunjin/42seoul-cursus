@@ -20,8 +20,10 @@ ShrubberyCreationForm::ShrubberyCreationForm(
 
 ShrubberyCreationForm &
 ShrubberyCreationForm::operator=(const ShrubberyCreationForm &shubbery) {
-    if (this != &shubbery)
+    if (this != &shubbery) {
         this->target = shubbery.getTarget();
+        this->setSign(shubbery.getSign());
+    }
     return (*this);
 }
 
