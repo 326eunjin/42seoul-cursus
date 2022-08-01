@@ -1,5 +1,5 @@
 PROG	= Base
-SRC 	= main.cpp C.cpp Base.cpp B.cpp A.cpp
+SRC 	= main.cpp Base.cpp
 OBJ 	= ${SRC:.cpp=.o}
 
 CXX 		= c++

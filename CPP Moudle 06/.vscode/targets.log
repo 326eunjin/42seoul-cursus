@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Mon Aug  1 01:22:16 2022
+# Make data base, printed on Mon Aug  1 15:43:03 2022
 
 # Variables
 
@@ -31,7 +31,7 @@ CURDIR := /Users/ejang/Desktop/42/CPP-Module/CPP Moudle 06
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"26f3b44ea4f1e942cca002e9545643cc.ko","_translationsConfigFile":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/tcf.json","_cacheRoot":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko","_resolvedLanguagePackCoreLocation":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5","_corruptedFile":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"26f3b44ea4f1e942cca002e9545643cc.ko","_translationsConfigFile":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/tcf.json","_cacheRoot":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko","_resolvedLanguagePackCoreLocation":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/4af164ea3a06f701fe3e89a2bcbb421d2026b68f","_corruptedFile":"/Users/ejang/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile
@@ -39,7 +39,7 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cktc0034pl/T/vscode-ipc-ea77fbd9-bc6d-49bc-a7b6-252349608344.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cktc0034pl/T/vscode-ipc-e73a2c03-cda2-4f56-bf58-26359df740a8.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -53,7 +53,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.QX16AVBhvw/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.vcujTEgoo4/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -69,7 +69,7 @@ HOME = /Users/ejang
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/ejang/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = /Users/ejang/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
 # environment
 LOGNAME = ejang
 # environment
@@ -107,7 +107,7 @@ TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cktc0034pl/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/ejang/Library/Application Support/Code/1.67.2-main.sock
+VSCODE_IPC_HOOK = /Users/ejang/Library/Application Support/Code/1.68.0-main.sock
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -115,7 +115,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.5016
+XPC_SERVICE_NAME = com.microsoft.VSCode.2352
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -141,7 +141,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 11084
+VSCODE_PID = 13609
 # variable set hash-table stats:
 # Load=64/1024=6%, Rehash=0, Collisions=1/85=1%
 
@@ -196,6 +196,7 @@ makefile:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+ 
 # Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
@@ -225,6 +226,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Mon Aug  1 01:22:16 2022
+# Finished Make data base on Mon Aug  1 15:43:03 2022
 
  
