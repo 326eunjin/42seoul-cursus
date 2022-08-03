@@ -20,6 +20,7 @@ class Span {
     unsigned int getN() const;
     std::vector<int> getVector() const;
     void addNumber(int add);
+    template <typename T> void addNumber(T begin, T end);
     int shortestSpan();
     int longestSpan();
 
@@ -34,4 +35,10 @@ class Span {
     };
 };
 
+template <typename T> void Span::addNumber(T begin, T end) {
+    if (std::distance(begin, end) + Span::v.size() > n)
+        throw Span::FullVector();
+    for (T t = begin; t != end; t++)
+        Span::v.push_back(*t);
+}
 #endif // !SPAN_HPP

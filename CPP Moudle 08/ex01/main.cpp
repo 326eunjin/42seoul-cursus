@@ -40,4 +40,18 @@ int main() {
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }
+    // overloading
+    std::vector<int> tmp;
+    for (int i = 0; i < 5; i++)
+        tmp.push_back(i);
+    Span sp4 = Span(10);
+    try {
+        sp4.addNumber(tmp.begin(), tmp.end());
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    std::vector<int>::iterator it;
+    for (it = sp4.getVector().begin(); it != sp4.getVector().end(); it++) {
+        std::cout << "Sp4 element is " << *it << std::endl;
+    }
 }
