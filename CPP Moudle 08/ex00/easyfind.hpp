@@ -4,9 +4,17 @@
 #include <algorithm>
 #include <vector>
 
-int easyfind(const std::vector<int> &a, int b) {
+class NotInArray : public std::exception {
+  public:
+    const char *what() const throw();
+};
 
-    int ret = std::find(a.begin(), a.end(), b);
-    // throw std::exception();
+template <typename T> int easyfind(T &a, int b) {
+    typename T::iterator iter;
+    iter = std::find(a.begin(), a.end(), b);
+    if (iter == a.end())
+        throw NotInArray();
+    return (iter - a.begin());
 }
+
 #endif
