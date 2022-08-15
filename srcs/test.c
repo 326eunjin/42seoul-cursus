@@ -8,6 +8,13 @@
 #define mapHeight 24
 #define screenWidth 640
 #define screenHeight 480
+#define KEYPRESS 2
+#define KEY_W 13	  // MacOS의 키보드 코드들이다.
+#define KEY_A 0		  //
+#define KEY_S 1		  // 위에서 부터 차례대로
+#define KEY_D 2		  //
+#define KEY_LEFT 123  //왼쪽
+#define KEY_RIGHT 124 //오른쪽
 
 int map[mapWidth][mapHeight] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -35,31 +42,14 @@ int map[mapWidth][mapHeight] = {
 	{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
-int main(void)
+double posX = 22, posY = 12;
+double dirX = -1, dirY = 0;	   // 플레이어 방향은 W
+double planeX = 0, planeY = 1; //	플레이어 방향벡터와 수직인 카메라 평면
+void *mlx_ptr;				   // mlx 연결 포인터
+void *win_ptr;
+
+void drawScreen(void)
 {
-	/*
-		1. main 시작에서의 변수 초기화
-	*/
-	double posX = 22, posY = 12;
-	double dirX = -1, dirY = 0;	   // 플레이어 방향은 W
-	double planeX = 0, planeY = 1; //	플레이어 방향벡터와 수직인 카메라 평면,
-	// 길이는 동일하게 했다.
-	// // 어떻게 써야할지 모르겠으니까 일단 주석처리
-	// double time = 0;
-	// double oldTime = 0;
-
-	/*
-		2. 화면 생성 (mlx)
-	*/
-	void *mlx_ptr; // mlx 연결 포인터
-	void *win_ptr;
-
-	mlx_ptr = mlx_init();
-	if (mlx_ptr == 0)
-		exit(1);
-	win_ptr = mlx_new_window(mlx_ptr, screenWidth, screenHeight, "test");
-	if (win_ptr == 0)
-		exit(1);
 	/*
 		3 ~ 7. 게임 루프
 	*/
@@ -171,11 +161,93 @@ int main(void)
 			color = 0x00F9D71C;
 			break; // yellow
 		}
+		// give x and y sides different brightness
+		if (side == 1)
+		{
+			color = color / 2;
+		}
 		// 선 그리기
-		for (int i = drawStart; i < drawEnd; i++)
-			mlx_pixel_put(mlx_ptr, win_ptr, x, i, color);
+		for (int i = 0; i < screenHeight; i++)
+		{
+			if (i < drawStart) // 바닥
+				mlx_pixel_put(mlx_ptr, win_ptr, x, i, 0x00FFC0CB);
+			else if (i >= drawStart && i < drawEnd)
+				mlx_pixel_put(mlx_ptr, win_ptr, x, i, color);
+			else // 천장
+				mlx_pixel_put(mlx_ptr, win_ptr, x, i, 0x00E6E6FA);
+		}
 		x++;
 	}
+}
+
+void movePlayer(int x, int y)
+{
+
+	if (map[(int)floor(posX) + x][(int)floor(posY) + y] != 0)
+		return;
+	posX += x;
+	posY += y;
+	drawScreen();
+}
+
+/*
+cosθ * x− sinθ * y = x'
+sinθ * x + cosθ * y = y'
+*/
+
+void rotatePlayer(double angle)
+{
+	double dist;
+
+	dirX = dirX * cos(angle) - dirY * sin(angle);
+	dirY = dirY * cos(angle) + dirX * sin(angle);
+	dist = hypot(dirX, dirY);
+	dirX /= dist;
+	dirY /= dist;
+	drawScreen();
+}
+
+int key_press(int keycode, void *temp)
+{
+	(void)temp;
+	if (keycode == KEY_W) //위로
+		movePlayer(-1, 0);
+	else if (keycode == KEY_A) //왼쪽
+		movePlayer(0, -1);
+	else if (keycode == KEY_S) //아래
+		movePlayer(1, 0);
+	else if (keycode == KEY_D) //오른쪽
+		movePlayer(0, 1);
+	else if (keycode == KEY_LEFT) //왼
+		rotatePlayer(0.05);
+	else if (keycode == KEY_RIGHT) //오
+		rotatePlayer(-0.05);
+	return (0);
+}
+
+int main(void)
+{
+	/*
+		1. main 시작에서의 변수 초기화
+	*/
+	// 길이는 동일하게 했다.
+	// // 어떻게 써야할지 모르겠으니까 일단 주석처리
+	// double time = 0;
+	// double oldTime = 0;
+
+	/*
+		2. 화면 생성 (mlx)
+	*/
+
+	mlx_ptr = mlx_init();
+	if (mlx_ptr == 0)
+		exit(1);
+	win_ptr = mlx_new_window(mlx_ptr, screenWidth, screenHeight, "test");
+	if (win_ptr == 0)
+		exit(1);
+	drawScreen();
+	// KEYHOOK
+	mlx_hook(win_ptr, KEYPRESS, 0, &key_press, NULL);
 	mlx_loop(mlx_ptr);
 	//}
 
