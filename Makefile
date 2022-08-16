@@ -1,7 +1,7 @@
 NAME		=	test_cub
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
 RM			=	rm -rf
 
 MLX_DIR		=	./mlx/
