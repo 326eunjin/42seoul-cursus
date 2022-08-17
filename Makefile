@@ -8,8 +8,8 @@ MLX_DIR		=	./mlx/
 MLX_LIB		=	libmlx.dylib
 MLX_FLAGS	=	-L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
-SRCS		=	./srcs/test.c
-OBJS		=	./srcs/test.o
+SRCS		=	test.c
+OBJS		=	test.o
 
 all			:	$(NAME)
 
