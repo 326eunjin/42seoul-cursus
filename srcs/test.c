@@ -219,8 +219,6 @@ void calMap(t_info *info)
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
 			int color = info->texture[texNum][texHeight * texY + texX];
-			if (side == 2 || side == 3)
-				color = (color >> 1) & 8355711;
 			info->buf[i][x] = color;
 		}
 		x++;
@@ -306,10 +304,10 @@ void load_image(t_info *info, int *texture, char *path, t_img *img)
 void load_texture(t_info *info)
 {
 	t_img img;
-	load_image(info, info->texture[0], "textures/wall1.xpm", &img);
-	load_image(info, info->texture[1], "textures/wall2.xpm", &img);
-	load_image(info, info->texture[2], "textures/wall3.xpm", &img);
-	load_image(info, info->texture[3], "textures/wall4.xpm", &img);
+	load_image(info, info->texture[0], "textures/wall_e.xpm", &img);
+	load_image(info, info->texture[1], "textures/wall_w.xpm", &img);
+	load_image(info, info->texture[2], "textures/wall_n.xpm", &img);
+	load_image(info, info->texture[3], "textures/wall_s.xpm", &img);
 }
 
 int main(void)
