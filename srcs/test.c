@@ -1,4 +1,5 @@
 #include "../mlx/mlx.h"
+#include "cub3d.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -43,33 +44,6 @@ int map[24][24] = {
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-
-typedef struct s_img
-{
-	void *img;
-	int *data;
-
-	int size_l;
-	int bpp;
-	int endian;
-
-	int img_width;
-	int img_height;
-} t_img;
-
-typedef struct s_info
-{
-	double posX, posY;	   // 플레이어의 실제 위치
-	double dirX, dirY;	   // 플레이어의 시선
-	double planeX, planeY; // 카메라 평면
-	double moveSpeed;
-	double rotSpeed;
-	void *mlx_ptr; // mlx 연결 포인터
-	void *win_ptr;
-	int **buf;
-	int texture[4][texHeight * texWidth];
-	t_img img;
-} t_info;
 
 void calMap(t_info *info);
 void draw(t_info *info)
@@ -289,13 +263,15 @@ int key_press(int keycode, t_info *info)
 
 void load_image(t_info *info, int *texture, char *path, t_img *img)
 {
-	img->img = mlx_xpm_file_to_image(info->mlx_ptr, path, &img->img_width, &img->img_height);
+	int img_width;
+	int img_height;
+	img->img = mlx_xpm_file_to_image(info->mlx_ptr, path, &img_width, &img_height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	for (int y = 0; y < img->img_height; y++)
+	for (int y = 0; y < img_height; y++)
 	{
-		for (int x = 0; x < img->img_width; x++)
+		for (int x = 0; x < img_width; x++)
 		{
-			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			texture[img_width * y + x] = img->data[img_width * y + x];
 		}
 	}
 	mlx_destroy_image(info->mlx_ptr, img->img);
