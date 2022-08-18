@@ -1,4 +1,4 @@
-#include "mlx/mlx.h"
+#include "../mlx/mlx.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -16,7 +16,7 @@
 #define KEY_S 1
 #define KEY_D 2
 #define KEY_LEFT 123  //왼쪽
-#define KEY_RIGHT 120 //오른쪽
+#define KEY_RIGHT 124 //오른쪽
 
 int map[24][24] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -56,6 +56,7 @@ typedef struct s_img
 	int img_width;
 	int img_height;
 } t_img;
+
 typedef struct s_info
 {
 	double posX, posY;	   // 플레이어의 실제 위치
@@ -112,8 +113,9 @@ void calMap(t_info *info)
 	{
 		for (int y = 0; y < screenHeight; y++)
 		{
-			info->buf[y][x] = 0xFFFFFF;
-			info->buf[screenHeight - y - 1][x] = 0x000000;
+			// info->buf[y][x] = 0;
+			info->buf[y][x] = 0xFFFFAA;
+			info->buf[screenHeight - y - 1][x] = 0x00FFAB;
 		}
 	}
 	x = 0;
@@ -233,14 +235,19 @@ void movePlayer(t_info *info, int x, int y)
 		info->posY += y * info->dirY * info->moveSpeed;
 }
 
-void rotatePlayer(t_info *info, double angle)
+void rotatePlayer(t_info *info, int i)
 {
+	double tmp;
+	if (i == 0)
+		tmp = info->rotSpeed;
+	else
+		tmp = info->rotSpeed * (-1);
 	double olddirX = info->dirX;
-	info->dirX = info->dirX * cos(angle) - info->dirY * sin(angle);
-	info->dirY = olddirX * sin(angle) + info->dirY * cos(angle);
+	info->dirX = info->dirX * cos(tmp) - info->dirY * sin(tmp);
+	info->dirY = olddirX * sin(tmp) + info->dirY * cos(tmp);
 	double oldPlaneX = info->planeX;
-	info->planeX = info->planeX * cos(angle) - info->planeY * sin(angle);
-	info->planeY = oldPlaneX * sin(angle) + info->planeY * cos(angle);
+	info->planeX = info->planeX * cos(tmp) - info->planeY * sin(tmp);
+	info->planeY = oldPlaneX * sin(tmp) + info->planeY * cos(tmp);
 }
 
 int key_press(int keycode, t_info *info)
@@ -274,9 +281,9 @@ int key_press(int keycode, t_info *info)
 			info->posY += info->planeY * info->moveSpeed;
 	}
 	else if (keycode == KEY_LEFT) //왼
-		rotatePlayer(info, 0.05);
+		rotatePlayer(info, 0);
 	else if (keycode == KEY_RIGHT) //오
-		rotatePlayer(info, -0.05);
+		rotatePlayer(info, 1);
 	// printf("posX : %f | posY : %f\n", posX, posY);
 	// printf("dirX : %f | dirY : %f\n", dirX, dirY);
 	return (0);
@@ -299,10 +306,10 @@ void load_image(t_info *info, int *texture, char *path, t_img *img)
 void load_texture(t_info *info)
 {
 	t_img img;
-	load_image(info, info->texture[0], "textures/eagle.xpm", &img);
-	load_image(info, info->texture[1], "textures/greystone.xpm", &img);
-	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
-	load_image(info, info->texture[3], "textures/redbrick.xpm", &img);
+	load_image(info, info->texture[0], "textures/wall1.xpm", &img);
+	load_image(info, info->texture[1], "textures/wall2.xpm", &img);
+	load_image(info, info->texture[2], "textures/wall3.xpm", &img);
+	load_image(info, info->texture[3], "textures/wall4.xpm", &img);
 }
 
 int main(void)
@@ -331,12 +338,12 @@ int main(void)
 	for (int i = 0; i < screenHeight; i++)
 		for (int j = 0; j < screenWidth; j++)
 			info.buf[i][j] = 0;
-	// 이미지 초기화
-	load_texture(&info);
 	// texture 초기화
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < texHeight * texWidth; j++)
 			info.texture[i][j] = 0;
+	// 이미지 초기화
+	load_texture(&info);
 	// // generate some textures
 	// for (int x = 0; x < texWidth; x++)
 	// 	for (int y = 0; y < texHeight; y++)
