@@ -12,7 +12,25 @@
 
 #include "../inc/get_next_line.h"
 
-char *mem_free(char **backup, char **buffer)
+char	*ft_strndup(char *str, int n)
+{
+	char	*new_string;
+	int		i;
+
+	i = 0;
+	new_string = (char *)malloc(n + 1);
+	if (!new_string)
+		return (NULL);
+	while (i < n)
+	{
+		new_string[i] = str[i];
+		i++;
+	}
+	new_string[n] = '\0';
+	return (new_string);
+}
+
+char	*mem_free(char **backup, char **buffer)
 {
 	if (backup != NULL)
 	{
@@ -27,9 +45,9 @@ char *mem_free(char **backup, char **buffer)
 	return (NULL);
 }
 
-int is_newline(char *str)
+int	is_newline(char *str)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while (str[idx] != '\0')
@@ -41,11 +59,11 @@ int is_newline(char *str)
 	return (-1);
 }
 
-char *cut_line(char **backup, char **buffer, int cut_idx)
+char	*cut_line(char **backup, char **buffer, int cut_idx)
 {
-	char *new_backup;
-	int idx;
-	char *result;
+	char	*new_backup;
+	int		idx;
+	char	*result;
 
 	if (cut_idx == -1)
 	{
@@ -59,8 +77,8 @@ char *cut_line(char **backup, char **buffer, int cut_idx)
 	}
 	idx = 0;
 	result = ft_strndup(*backup, cut_idx + 1);
-	new_backup = ft_strndup(*backup + cut_idx + 1,
-							ft_strlen(*backup) - cut_idx - 1);
+	new_backup = ft_strndup(*backup + cut_idx + 1, \
+		ft_strlen(*backup) - cut_idx - 1);
 	if (!result || !new_backup)
 		mem_free(backup, buffer);
 	free(*buffer);
@@ -69,12 +87,12 @@ char *cut_line(char **backup, char **buffer, int cut_idx)
 	return (result);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *backup;
-	char *buffer;
-	ssize_t read_size;
-	int cut_idx;
+	static char	*backup;
+	char		*buffer;
+	ssize_t		read_size;
+	int			cut_idx;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
