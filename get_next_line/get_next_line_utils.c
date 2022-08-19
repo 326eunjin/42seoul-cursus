@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 13:07:12 by jeyoon            #+#    #+#             */
-/*   Updated: 2021/10/28 18:43:08 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 16:40:18 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../inc/get_next_line.h"
 
-int	ft_strlen(char *str)
+int ft_strlen(char *str)
 {
-	int	len;
+	int len;
 
 	len = 0;
 	if (!str)
@@ -24,11 +24,11 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char *ft_strjoin(char *s1, char *s2)
 {
-	int		s1_len;
-	int		s2_len;
-	char	*temp;
+	int s1_len;
+	int s2_len;
+	char *temp;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -48,10 +48,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (temp);
 }
 
-int	ft_strlcpy(char *dst, char *src, int dstsize)
+int ft_strlcpy(char *dst, char *src, int dstsize)
 {
-	int	i;
-	int	len;
+	int i;
+	int len;
 
 	i = 0;
 	len = ft_strlen(src);
@@ -66,10 +66,10 @@ int	ft_strlcpy(char *dst, char *src, int dstsize)
 	return (len);
 }
 
-char	*ft_strndup(char *str, int n)
+char *ft_strndup(char *str, int n)
 {
-	char	*new_string;
-	int		i;
+	char *new_string;
+	int i;
 
 	i = 0;
 	new_string = (char *)malloc(n + 1);

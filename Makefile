@@ -1,36 +1,60 @@
-NAME		=	test_cub
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/08/19 16:26:52 by ejang             #+#    #+#              #
+#    Updated: 2022/08/19 16:39:31 by ejang            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME		=	cub3d
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
 RM			=	rm -rf
 
 MLX_DIR		=	./mlx/
-MLX_LIB		=	libmlx.dylib
+MLX_LIB		=	./srcs/libmlx.dylib
 MLX_FLAGS	=	-L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
-SRCS		=	srcs/test.c
-OBJS		=	srcs/test.o
+LIBFT_DIR 	=  ./libft/
+GNL_DIR 	=  ./get_next_line/
+SRCS_DIR	=  ./srcs/
+
+GNL_SRCS	= get_next_line_utils.c get_next_line.c
+SRCS_SRCS	= a.c
+SRCS		=	$(addprefix $(GNL_DIR), $(GNL_SRCS)) $(addprefix $(SRCS_DIR), $(SRCS_SRCS))
+OBJS		=	$(SRCS:.c=.o)
 
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS)
-			make -C $(MLX_DIR) all
-			$(CC) $(CFLAGS)	$(MLX_FLAGS) -o $(NAME) $(OBJS)
+				@make -C $(MLX_DIR) all
+				@make -C $(LIBFT_DIR) all
+				@$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(MLX_FLAGS) -o $(NAME) $(OBJS)
+				@printf "✅ \033[0;32m$(NAME) was created.\033[0m\n"
 
 %.o			:	%.c
-			$(CC) $(CFLAGS) -c $< -o $@
+				@$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:
-			$(RM) $(OBJS)
-			make -C $(MLX_DIR) clean
+				@$(RM) $(OBJS)
+				@make -C $(MLX_DIR) clean
+				@make -C $(LIBFT_DIR) clean
+				@printf "🚮 $(NAME)'s object files were removed.\n"
 
 fclean		:	clean
-			$(RM) $(NAME)
-			$(RM) $(MLX_LIB)
+				@$(RM) $(NAME)
+				@$(RM) $(MLX_LIB)
+				@make -C $(LIBFT_DIR) fclean
+				@printf "🚮 $(NAME) was removed.\n"
 
 re			:	fclean all
 
 norm		:
-			norminette $(SRCS) so_long.h
+			norminette $(SRCS) inc/cub3d.h
 
 .PHONY		:	all clean fclean re norm
