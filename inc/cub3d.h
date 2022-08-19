@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/18 21:21:58 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 20:33:23 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_map
 	unsigned int	f;
 	unsigned int	c;
 	char			**map;
+	int				map_height;
+	int				map_width;
 }	t_map;
 
 typedef struct s_img
@@ -54,5 +56,22 @@ typedef struct s_info
 	double	move_speed;
 	double	rot_speed;
 }	t_info;
+
+/*
+	ANCHOR map
+*/
+
+void	parse_main(t_map *map, char *file_name);
+
+void	parse_map_size(int fd, int *map_loc, int *max_width, int *max_height);
+
+void	map_content(char *file_name, \
+	t_map *map, unsigned int map_loc);
+
+/*
+	ANCHOR utils
+*/
+
+void	print_error(char *msg);
 
 #endif
