@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
+#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 16:26:52 by ejang             #+#    #+#              #
-#    Updated: 2022/08/19 16:39:31 by ejang            ###   ########.fr        #
+#    Updated: 2022/08/19 20:54:19 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ LIBFT_DIR 	=  ./libft/
 GNL_DIR 	=  ./get_next_line/
 SRCS_DIR	=  ./srcs/
 
-GNL_SRCS	= get_next_line_utils.c get_next_line.c
-SRCS_SRCS	= a.c
+GNL_SRCS	= get_next_line.c get_next_line_utils.c
+SRCS_SRCS	= main.c parse_main.c parse_map.c
 SRCS		=	$(addprefix $(GNL_DIR), $(GNL_SRCS)) $(addprefix $(SRCS_DIR), $(SRCS_SRCS))
 OBJS		=	$(SRCS:.c=.o)
 
@@ -34,7 +34,7 @@ all			:	$(NAME)
 $(NAME)		:	$(OBJS)
 				@make -C $(MLX_DIR) all
 				@make -C $(LIBFT_DIR) all
-				@$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(MLX_FLAGS) -o $(NAME) $(OBJS)
+				@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -o $(NAME) $(OBJS)
 				@printf "✅ \033[0;32m$(NAME) was created.\033[0m\n"
 
 %.o			:	%.c

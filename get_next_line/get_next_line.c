@@ -10,25 +10,8 @@
 /*																			*/
 /* ************************************************************************** */
 
+# include "../libft/libft.h"
 #include "../inc/get_next_line.h"
-
-char	*ft_strndup(char *str, int n)
-{
-	char	*new_string;
-	int		i;
-
-	i = 0;
-	new_string = (char *)malloc(n + 1);
-	if (!new_string)
-		return (NULL);
-	while (i < n)
-	{
-		new_string[i] = str[i];
-		i++;
-	}
-	new_string[n] = '\0';
-	return (new_string);
-}
 
 char	*mem_free(char **backup, char **buffer)
 {
@@ -107,7 +90,7 @@ char	*get_next_line(int fd)
 		if (read_size == -1)
 			return (mem_free(&backup, &buffer));
 		buffer[read_size] = '\0';
-		backup = ft_strjoin(backup, buffer);
+		backup = gnl_strjoin(backup, buffer);
 		if (!backup)
 			return (mem_free(&backup, &buffer));
 		cut_idx = is_newline(backup);
