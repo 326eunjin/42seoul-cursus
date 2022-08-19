@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:54:17 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/19 21:28:23 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 21:47:01 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,21 @@
 
 #include <stdio.h>
 
-void	parse_map_size(int fd, int *map_loc, int *max_height, int *max_width)
+void	parse_map_size(int fd, unsigned int *map_loc, int *max_height, int *max_width)
 {
 	char	*line;
 
 	line = get_next_line(fd);
+	// while (1)//빈 문자열이거나 공백으로만 이어진 문자열은 패스...
+	// {
+	// 	line = get_next_line(fd);
+	// 	split_line = ft_split(line, ' ');
+	// 	if (split_line != NULL && line != NULL)
+	// 		break ;
+	// 	free_split(split_line);
+	// 	free(line);
+	// 	map_loc++;
+	// }
 	while (line != NULL && ft_strncmp(line, "\n", ft_strlen("\n")) == 0)
 	{
 		*map_loc = *map_loc + 1;

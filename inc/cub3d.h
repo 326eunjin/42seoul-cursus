@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/19 20:33:23 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 21:40:19 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 typedef struct s_map
 {
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-	unsigned int	f;
-	unsigned int	c;
-	char			**map;
-	int				map_height;
-	int				map_width;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
+	char	**map;
+	int		map_height;
+	int		map_width;
 }	t_map;
 
 typedef struct s_img
@@ -63,7 +63,7 @@ typedef struct s_info
 
 void	parse_main(t_map *map, char *file_name);
 
-void	parse_map_size(int fd, int *map_loc, int *max_width, int *max_height);
+void	parse_map_size(int fd, unsigned int *map_loc, int *max_width, int *max_height);
 
 void	map_content(char *file_name, \
 	t_map *map, unsigned int map_loc);
@@ -73,5 +73,6 @@ void	map_content(char *file_name, \
 */
 
 void	print_error(char *msg);
+void	free_split(char **tmp);
 
 #endif

@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 16:26:52 by ejang             #+#    #+#              #
-#    Updated: 2022/08/19 20:54:19 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/08/19 22:10:05 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3d
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
 RM			=	rm -rf
 
 MLX_DIR		=	./mlx/
@@ -25,7 +25,7 @@ GNL_DIR 	=  ./get_next_line/
 SRCS_DIR	=  ./srcs/
 
 GNL_SRCS	= get_next_line.c get_next_line_utils.c
-SRCS_SRCS	= main.c parse_main.c parse_map.c
+SRCS_SRCS	= main.c parse_main.c parse_map.c util.c
 SRCS		=	$(addprefix $(GNL_DIR), $(GNL_SRCS)) $(addprefix $(SRCS_DIR), $(SRCS_SRCS))
 OBJS		=	$(SRCS:.c=.o)
 
