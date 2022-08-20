@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/19 22:14:05 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/20 15:56:32 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,29 @@
 #include "../inc/get_next_line.h"
 #include "../libft/libft.h"
 
+void	remove_new_line(char **line)
+{
+	int		len;
+	char	*tmp;
+
+	len = ft_strlen(*line);
+	if((*line)[len - 1] == '\n')
+	{
+		tmp = ft_strdup(*line);
+		free(*line);
+		(*line) = ft_substr(tmp, 0, len - 1);
+		free(tmp);
+	}
+	return ;
+}
+
 void	check_elements(int fd, t_map *map)
 {
 	char	**split_line;
 	char	*line;
 
 	line = get_next_line(fd);
+	remove_new_line(&line);
 	if (ft_strncmp(line, "\n", ft_strlen("\n")) == 0)
 		return (free(line));
 	split_line = ft_split(line, ' ');
