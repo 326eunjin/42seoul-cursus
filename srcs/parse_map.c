@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:54:17 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/19 21:47:01 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/20 16:21:00 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,35 @@
 
 #include <stdio.h>
 
-void	parse_map_size(int fd, unsigned int *map_loc, int *max_height, int *max_width)
+int	is_space_line(char **line)
+{
+	unsigned int	i;
+
+	remove_new_line(line);
+	i = 0;
+	while (i < ft_strlen(*line))
+	{
+		if ((*line)[(int)i] != ' ')
+			return (1); // space 외의 문자가 있음
+		i++;
+	}
+	return (0);	// space 외의 문자가 없음
+}
+
+void	parse_map_size(int fd, unsigned int *map_loc, \
+	int *max_height, int *max_width)
 {
 	char	*line;
 
 	line = get_next_line(fd);
-	// while (1)//빈 문자열이거나 공백으로만 이어진 문자열은 패스...
-	// {
-	// 	line = get_next_line(fd);
-	// 	split_line = ft_split(line, ' ');
-	// 	if (split_line != NULL && line != NULL)
-	// 		break ;
-	// 	free_split(split_line);
-	// 	free(line);
-	// 	map_loc++;
-	// }
-	while (line != NULL && ft_strncmp(line, "\n", ft_strlen("\n")) == 0)
+	while (line != NULL && ft_strncmp(line, "\n", ft_strlen("\n")) == 0 && \
+		is_space_line(&line) == 0)
 	{
 		*map_loc = *map_loc + 1;
 		free(line);
 		line = get_next_line(fd);
 	}
+	printf("%d\n", *map_loc);
 	if (line == NULL)
 	{
 		close(fd);
@@ -102,7 +110,7 @@ void	map_content(char *file_name, \
 		i++;
 	}
 	if (line == NULL)
-		print_error("3. Memory allocation failed");
+		print_error("Memory allocation failed");
 	fill_map(line, fd, map);
 	close(fd);
 }
