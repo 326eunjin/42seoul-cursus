@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:54:17 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/20 16:21:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/20 16:35:02 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,29 @@ int	is_space_line(char **line)
 	return (0);	// space 외의 문자가 없음
 }
 
+void	pass_empty_line(int fd, char **line, unsigned int *map_loc)
+{
+	*line = get_next_line(fd);
+	// 읽기 실패하지 않고, 개행만 있거나, 공백만 있는 문자열의 경우, map_loc 증가시키고 다시 읽는다.
+	while (*line != NULL && (ft_strncmp(*line, "\n", ft_strlen("\n")) == 0 \
+		|| is_space_line(line) == 0))
+	{
+		*map_loc = *map_loc + 1;
+		free(*line);
+		*line = get_next_line(fd);
+	}
+}
+
 void	parse_map_size(int fd, unsigned int *map_loc, \
 	int *max_height, int *max_width)
 {
 	char	*line;
 
-	line = get_next_line(fd);
-	while (line != NULL && ft_strncmp(line, "\n", ft_strlen("\n")) == 0 && \
-		is_space_line(&line) == 0)
-	{
-		*map_loc = *map_loc + 1;
-		free(line);
-		line = get_next_line(fd);
-	}
-	printf("%d\n", *map_loc);
+	pass_empty_line(fd, &line, map_loc);
 	if (line == NULL)
 	{
 		close(fd);
 		print_error("Missing map content\n");
-		return ;
 	}
 	while (line != NULL)
 	{

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/20 16:27:23 by ejang            ###   ########.fr       */
+=======
+/*   Updated: 2022/08/20 16:37:44 by jeyoon           ###   ########seoul.kr  */
+>>>>>>> 75f1931b55d7c570f5befc279743b1fb903bae0c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +66,19 @@ typedef struct s_info
 */
 
 void	parse_main(t_map *map, char *file_name);
+<<<<<<< HEAD
 
 void	parse_map_size(int fd, unsigned int \
 	*map_loc, int *max_width, int *max_height);
 
+=======
+void	parse_map_size(int fd, \
+	unsigned int *map_loc, int *max_width, int *max_height);
+>>>>>>> 75f1931b55d7c570f5befc279743b1fb903bae0c
 void	map_content(char *file_name, \
 	t_map *map, unsigned int map_loc);
+void	remove_new_line(char **line);
+void	pass_empty_line(int fd, char **line, unsigned int *map_loc);
 
 int		is_space_line(char **line);
 
