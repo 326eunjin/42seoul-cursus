@@ -6,12 +6,22 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/20 17:38:33 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/20 17:53:31 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define SCREEN_WIDTH 600
+# define SCREEN_HEIGHT 480
+# define KEYPRESS 2
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
 
 typedef struct s_map
 {
