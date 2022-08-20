@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/19 21:40:19 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/20 16:27:23 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,15 @@ typedef struct s_info
 
 void	parse_main(t_map *map, char *file_name);
 
-void	parse_map_size(int fd, unsigned int *map_loc, int *max_width, int *max_height);
+void	parse_map_size(int fd, unsigned int \
+	*map_loc, int *max_width, int *max_height);
 
 void	map_content(char *file_name, \
 	t_map *map, unsigned int map_loc);
 
+int		is_space_line(char **line);
+
+void	remove_new_line(char **line);
 /*
 	ANCHOR utils
 */

@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:49:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/19 21:59:58 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/20 15:57:14 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	main(int argc, char **argv)
 	}
 	init_struct(&map, &info);
 	parse_main(&map, argv[1]);
-	printf("%s\n",map.no);
-	printf("%s\n",map.so);
-	printf("%s\n",map.we);
-	printf("%s\n",map.ea);
-	printf("%s\n",map.f);
-	printf("%s\n",map.c);
+	printf("%s*\n",map.no);
+	printf("%s*\n",map.so);
+	printf("%s*\n",map.we);
+	printf("%s*\n",map.ea);
+	printf("%s*\n",map.f);
+	printf("%s*\n",map.c);
 	printf("---\n");
 	for(int i = 0; i < (int)map.map_height; i++)
 	{
