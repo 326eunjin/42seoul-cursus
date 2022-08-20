@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/20 17:36:05 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/20 20:31:17 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@
 
 void	remove_new_line(char **line)
 {
-	int		len;
-	char	*tmp;
+	unsigned int	len;
+	char			*tmp;
 
+	if (*line == NULL)
+		return ;
 	len = ft_strlen(*line);
 	if ((*line)[len - 1] == '\n')
 	{
@@ -107,6 +109,7 @@ void	parse_main(t_map *map, char *file_name)
 		print_error("File open failed\n");
 	parse_map_info(fd, &map_loc, map);
 	parse_map_size(fd, &map_loc, &(map->map_height), &(map->map_width));
+	//printf("%d | %d\n", map->map_height, map->map_width);
 	map->map = (char **)malloc(sizeof (char *) * map->map_height);
 	if (map->map == NULL)
 		print_error("Memory allocation failed");
