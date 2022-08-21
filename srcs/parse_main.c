@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/20 20:31:17 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/21 15:43:31 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,21 @@ void	parse_map_info(int fd, unsigned int *map_loc, t_map *map)
 	}
 }
 
-void	parse_main(t_map *map, char *file_name)
+void	parse_main(t_map *map, char *file)
 {
 	int				fd;
 	unsigned int	map_loc;
 	int				i;
 
-	fd = open(file_name, O_RDONLY);
+	if (ft_strlen(file) < 4 || !(file[ft_strlen(file) - 4] == '.' \
+		&& file[ft_strlen(file) - 3] == 'c' && file[ft_strlen(file) - 2] == 'u' \
+			&& file[ft_strlen(file) - 1] == 'b'))
+		print_error("Wrong file name");
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		print_error("File open failed\n");
+		print_error("File open failed");
 	parse_map_info(fd, &map_loc, map);
 	parse_map_size(fd, &map_loc, &(map->map_height), &(map->map_width));
-	//printf("%d | %d\n", map->map_height, map->map_width);
 	map->map = (char **)malloc(sizeof (char *) * map->map_height);
 	if (map->map == NULL)
 		print_error("Memory allocation failed");
@@ -121,5 +124,5 @@ void	parse_main(t_map *map, char *file_name)
 			print_error("Memory allocation failed");
 		i++;
 	}
-	map_content(file_name, map, map_loc);
+	map_content(file, map, map_loc);
 }
