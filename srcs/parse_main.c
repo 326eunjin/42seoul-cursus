@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/21 15:43:31 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/21 19:12:44 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,33 @@ void	remove_new_line(char **line)
 	return ;
 }
 
-int	set_elements(char **line, char ***split_line, t_map *map)
+int	set_elements(char **line, char ***split_line, t_cub *cub)
 {
 	*split_line = ft_split(*line, ' ');
 	if (ft_strncmp((*split_line)[0], "NO", ft_strlen("NO")) \
-		== 0 && map->no == NULL)
-		map->no = ft_strdup((*split_line)[1]);
+		== 0 && cub->map->no == NULL)
+		cub->map->no = ft_strdup((*split_line)[1]);
 	else if (ft_strncmp((*split_line)[0], "SO", ft_strlen("SO")) \
-		== 0 && map->so == NULL)
-		map->so = ft_strdup((*split_line)[1]);
+		== 0 && cub->map->so == NULL)
+		cub->map->so = ft_strdup((*split_line)[1]);
 	else if (ft_strncmp((*split_line)[0], "WE", ft_strlen("WE")) \
-		== 0 && map->we == NULL)
-		map->we = ft_strdup((*split_line)[1]);
+		== 0 && cub->map->we == NULL)
+		cub->map->we = ft_strdup((*split_line)[1]);
 	else if (ft_strncmp((*split_line)[0], "EA", ft_strlen("EA")) \
-		== 0 && map->ea == NULL)
-		map->ea = ft_strdup((*split_line)[1]);
+		== 0 && cub->map->ea == NULL)
+		cub->map->ea = ft_strdup((*split_line)[1]);
 	else if (ft_strncmp((*split_line)[0], "C", ft_strlen("C")) \
-		== 0 && map->c == NULL)
-		map->c = ft_strdup((*split_line)[1]);
+		== 0 && cub->map->c == NULL)
+		cub->map->c = ft_strdup((*split_line)[1]);
 	else if (ft_strncmp((*split_line)[0], "F", ft_strlen("F")) \
-		== 0 && map->f == NULL)
-		map->f = ft_strdup((*split_line)[1]);
+		== 0 && cub->map->f == NULL)
+		cub->map->f = ft_strdup((*split_line)[1]);
 	else
 		return (1);
 	return (0);
 }
 
-void	check_elements(int fd, t_map *map)
+void	check_elements(int fd, t_cub *cub)
 {
 	char	**split_line;
 	char	*line;
@@ -73,7 +73,7 @@ void	check_elements(int fd, t_map *map)
 		free(line);
 		print_error("INVALID MAP");
 	}
-	if (set_elements(&line, &split_line, map) == 0)
+	if (set_elements(&line, &split_line, cub) == 0)
 	{
 		free(line);
 		free_split(split_line);
@@ -86,19 +86,20 @@ void	check_elements(int fd, t_map *map)
 	}
 }
 
-void	parse_map_info(int fd, unsigned int *map_loc, t_map *map)
+void	parse_map_info(int fd, unsigned int *map_loc, t_cub *cub)
 {
 	*map_loc = 1;
-	check_elements(fd, map);
-	while (map->no == NULL || map->so == NULL || map->we == NULL || \
-		map->ea == NULL || map->c == NULL || map->f == NULL)
+	check_elements(fd, cub);
+	while (cub->map->no == NULL || cub->map->so == NULL || cub->map->we \
+		== NULL || cub->map->ea == NULL || cub->map->c == NULL \
+		|| cub->map->f == NULL)
 	{
-		check_elements(fd, map);
+		check_elements(fd, cub);
 		(*map_loc)++;
 	}
 }
 
-void	parse_main(t_map *map, char *file)
+void	parse_main(t_cub *cub, char *file)
 {
 	int				fd;
 	unsigned int	map_loc;
@@ -111,18 +112,18 @@ void	parse_main(t_map *map, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		print_error("File open failed");
-	parse_map_info(fd, &map_loc, map);
-	parse_map_size(fd, &map_loc, &(map->map_height), &(map->map_width));
-	map->map = (char **)malloc(sizeof (char *) * map->map_height);
-	if (map->map == NULL)
+	parse_map_info(fd, &map_loc, cub);
+	parse_map_size(fd, &map_loc, cub);
+	cub->map->map = (char **)malloc(sizeof (char *) * cub->map->map_height);
+	if (cub->map->map == NULL)
 		print_error("Memory allocation failed");
 	i = 0;
-	while (i < (int)map->map_height)
+	while (i < (int)cub->map->map_height)
 	{
-		map->map[i] = (char *)malloc(sizeof(char) * map->map_width);
-		if (map->map[i] == NULL)
+		cub->map->map[i] = (char *)malloc(sizeof(char) * cub->map->map_width);
+		if (cub->map->map[i] == NULL)
 			print_error("Memory allocation failed");
 		i++;
 	}
-	map_content(file, map, map_loc);
+	map_content(file, cub, map_loc);
 }

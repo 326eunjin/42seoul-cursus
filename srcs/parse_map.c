@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:54:17 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/20 20:41:42 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/21 21:22:46 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "../inc/cub3d.h"
 #include "../inc/get_next_line.h"
 #include "../libft/libft.h"
-
-#include <stdio.h>
 
 int	is_space_line(char **line)
 {
@@ -32,8 +30,7 @@ int	is_space_line(char **line)
 	return (0);
 }
 
-void	parse_map_size(int fd, unsigned int *map_loc, \
-	int *max_height, int *max_width)
+void	parse_map_size(int fd, unsigned int *map_loc, t_cub *cub)
 {
 	char			*line;
 	int				ret;
@@ -47,9 +44,9 @@ void	parse_map_size(int fd, unsigned int *map_loc, \
 	while (line != NULL)
 	{
 		remove_new_line(&line);
-		*max_height = *max_height + 1;
-		if (*max_width < (int)ft_strlen(line))
-			*max_width = (int)ft_strlen(line);
+		cub->map->map_height++;
+		if (cub->map->map_width < (int)ft_strlen(line))
+			cub->map->map_width = (int)ft_strlen(line);
 		free(line);
 		ret = pass_empty_line_map(fd, &line);
 		if (ret == 1)
@@ -62,7 +59,7 @@ void	parse_map_size(int fd, unsigned int *map_loc, \
 	close(fd);
 }
 
-void	fill_map(char *line, int fd, t_map *map)
+void	fill_map(char *line, int fd, t_cub *cub)
 {
 	int	h;
 	int	w;
@@ -73,11 +70,11 @@ void	fill_map(char *line, int fd, t_map *map)
 		w = 0;
 		while (w < (int)ft_strlen(line))
 		{
-			map->map[h][w] = line[w];
+			cub->map->map[h][w] = line[w];
 			w++;
 		}
-		while (w < map->map_width)
-			map->map[h][w++] = ' ';
+		while (w < cub->map->map_width)
+			(cub->map->map)[h][w++] = ' ';
 		free(line);
 		line = get_next_line(fd);
 		if (line != NULL && (ft_strncmp(line, "\n", ft_strlen("\n")) == 0 \
@@ -91,7 +88,7 @@ void	fill_map(char *line, int fd, t_map *map)
 }
 
 void	map_content(char *file_name, \
-	t_map *map, unsigned int map_loc)
+	t_cub *cub, unsigned int map_loc)
 {
 	unsigned int	i;
 	int				fd;
@@ -115,6 +112,6 @@ void	map_content(char *file_name, \
 	}
 	if (line == NULL)
 		print_error("Memory allocation failed");
-	fill_map(line, fd, map);
+	fill_map(line, fd, cub);
 	close(fd);
 }

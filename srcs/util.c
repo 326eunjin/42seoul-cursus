@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:05:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/20 20:39:18 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/21 19:31:57 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+#include "../inc/get_next_line.h"
+#include "../libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 

@@ -333,6 +333,6 @@ int main(void)
 	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
 	mlx_loop_hoo(mlx->mlx_ptr, &main_loop, &info);
 	mlx_hook(mlx.win_ptr, KEYPRESS, 0, &key_press, &info);
-	mlx_loo(mlx->mlx_ptr);
+	mlx_loop(mlx->mlx_ptr);
 	return (0);
 }

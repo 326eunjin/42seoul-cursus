@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/20 20:40:08 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/21 21:31:57 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define SCREEN_WIDTH 600
 # define SCREEN_HEIGHT 480
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 # define KEYPRESS 2
 # define KEY_W 13
 # define KEY_A 0
@@ -51,7 +53,6 @@ typedef struct s_mlx
 	void	*win_ptr;
 	int		**buf;
 	int		*texture[4];
-	//int		texture[4][tex_height * tex_width];
 	t_img	img;
 }	t_mlx;
 
@@ -67,25 +68,71 @@ typedef struct s_info
 	double	rot_speed;
 }	t_info;
 
+typedef struct s_cub
+{
+	t_mlx	*mlx;
+	t_map	*map;
+	t_info	*info;
+}	t_cub;
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	double	perp_wall_dist;
+}	t_ray;
+
+typedef struct s_draw
+{
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+	int	tex_num;
+	int	tex_x;
+}	t_draw;
 /*
-	ANCHOR map
+	ANCHOR init.c
 */
+void			init_struct(t_cub *cub);
+void			mlx_struct_init(t_cub *cub);
 
-void	parse_main(t_map *map, char *file_name);
-int		is_space_line(char **line);
-void	remove_new_line(char **line);
-void	parse_map_size(int fd, unsigned int *map_loc, \
-	int *max_height, int *max_width);
-void	map_content(char *file_name, \
-	t_map *map, unsigned int map_loc);
+/*
+	ANCHOR parse_main.c parse_map.c
+*/
+void			parse_main(t_cub *cub, char *file_name);
+int				is_space_line(char **line);
+void			remove_new_line(char **line);
+void			parse_map_size(int fd, unsigned int *map_loc, t_cub *cub);
+void			map_content(char *file_name, \
+	t_cub *cub, unsigned int map_loc);
 
+/*
+	ANCHOR raycasting_*.c
+*/
+unsigned int	ft_cal_color(char *str);
+void			init_ray(t_ray *ray, t_cub *cub, int x);
+void			dda(t_ray *ray, t_cub *cub);
+void			cal_ray(t_ray *ray, t_cub *cub, t_draw *draw);
+void			draw_line(t_cub *cub, t_draw draw, int x);
+int				main_loop(t_cub *cub);
 /*
 	ANCHOR utils
 */
 
-void	print_error(char *msg);
-void	free_split(char **tmp);
-void	pass_empty_line(int fd, char **line, unsigned int *map_loc);
-int		pass_empty_line_map(int fd, char **line);
+void			print_error(char *msg);
+void			free_split(char **tmp);
+void			pass_empty_line(int fd, char **line, unsigned int *map_loc);
+int				pass_empty_line_map(int fd, char **line);
 
 #endif
