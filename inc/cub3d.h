@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/21 21:31:57 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/23 16:13:52 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define KEY_D 2
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define X_EVENT_KEY_EXIT   17
+# define KEY_ESC			53
 
 typedef struct s_map
 {
@@ -126,6 +128,12 @@ void			dda(t_ray *ray, t_cub *cub);
 void			cal_ray(t_ray *ray, t_cub *cub, t_draw *draw);
 void			draw_line(t_cub *cub, t_draw draw, int x);
 int				main_loop(t_cub *cub);
+
+/*
+	ANCHOR key_press.c
+*/
+int				key_press(int keycode, t_cub *cub);
+int				press_x_button(void);
 /*
 	ANCHOR utils
 */
