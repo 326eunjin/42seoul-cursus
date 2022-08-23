@@ -1,5 +1,4 @@
 #include "../mlx/mlx.h"
-#include "cub3d.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -19,31 +18,62 @@
 #define KEY_LEFT 123  //왼쪽
 #define KEY_RIGHT 124 //오른쪽
 
+typedef struct	s_img
+{
+	void	*img;
+	int		*data;
+
+	int		size_l;
+	int		bpp;
+	int		endian;
+	int		img_width;
+	int		img_height;
+}				t_img;
+
+typedef struct	s_info
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+	int		buf[screenHeight][screenWidth];
+	int		*texture[4];
+	double	moveSpeed;
+	double	rotSpeed;
+	int		re_buf;
+
+}				t_info;
+
 int map[24][24] = {
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+{1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+{1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+{1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+{1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+{1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,0,1,1,1},
+{1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
+{1,1,1,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1},
+{1,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0,1},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,1,0,1},
+{1,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,1,1,1,1,0,1,1,1},
+{1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1},
+{1,1,1,1,0,1,1,1,1,1,1,1,0,0,1,0,1,1,0,0,0,0,0,1},
+{1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,1},
+{1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,1},
+{1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,1,0,0,0,1,1},
+{1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,1,0,1},
+{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,1,0,0,0,1,1},
+{1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,0,1,0,1},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+{1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,0,1,0,1},
+{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,1,0,0,0,1,1},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 void calMap(t_info *info);
 void draw(t_info *info)
@@ -55,7 +85,7 @@ void draw(t_info *info)
 			info->img.data[y * screenWidth + x] = info->buf[y][x];
 		}
 	}
-	mlx_put_image_to_window(mlx->mlx_ptr, imlx.win_ptr, info->img.img, 0, 0);
+	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.img, 0, 0);
 }
 
 int main_loop(t_info *info)
@@ -165,7 +195,8 @@ void calMap(t_info *info)
 		int drawEnd = lineHeight / 2 + screenHeight / 2;
 		if (drawEnd >= screenHeight)
 			drawEnd = screenHeight - 1;
-		mlx->textured version int texNum = side; // 맵의 요소에 해당하는 텍스쳐의 인덱스
+		//tetured version 
+		int texNum = side; // 맵의 요소에 해당하는 텍스쳐의 인덱스
 		// calculate value of wallX
 		double wallX;
 		if (side == 0 || side == 1)
@@ -173,7 +204,7 @@ void calMap(t_info *info)
 		else
 			wallX = info->posX + perpWallDist * rayDirX;
 		wallX -= floor(wallX);
-		// x coordinate omlx->texture
+		// x coordinate oinfo->texture
 		int texX = (int)(wallX * (double)texWidth);
 
 		if ((side == 0 || side == 1) && rayDirX > 0)
@@ -181,17 +212,17 @@ void calMap(t_info *info)
 		if ((side == 2 || side == 3) && rayDirY < 0)
 			texX = texWidth - texX - 1;
 		// 선 그리기 (aka verLine)
-		// How much to increasmlx->texture coordinate perscreen pixel
+		// How much to increasinfo->texture coordinate perscreen pixel
 		double step = 1.0 * texHeight / lineHeight;
-		// Stamlx->texture coordinate
+		// Stainfo->texture coordinate
 		double texPos = (drawStart - screenHeight / 2 + lineHeight / 2) * step;
 		// 고쳐야함
 		for (int i = drawStart; i < drawEnd; i++)
 		{
-			// Casmlx->texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+			// Casinfo->texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
-			int color = mlx->texture[texNum][texHeight * texY + texX];
+			int color = info->texture[texNum][texHeight * texY + texX];
 			info->buf[i][x] = color;
 		}
 		x++;
@@ -260,35 +291,33 @@ int key_press(int keycode, t_info *info)
 	return (0);
 }
 
-void load_image(t_info *info, mlx->texture, char *path, t_img *img)
+void load_image(t_info *info, int *texture, char *path, t_img *img)
 {
 	int img_width;
 	int img_height;
-	img->img = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &img_width, &img_height);
+	img->img = mlx_xpm_file_to_image(info->mlx_ptr, path, &img_width, &img_height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
 	for (int y = 0; y < img_height; y++)
 	{
 		for (int x = 0; x < img_width; x++)
-			mlx->texture[img_width * y + x] = img->data[img_width * y + x];
+			texture[img_width * y + x] = img->data[img_width * y + x];
 	}
-}
-mlx_destroy_image(mlx->mlx_ptr, img->img);
+	mlx_destroy_image(info->mlx_ptr, img->img);
 }
 
-voidmlx->texture(t_info *info)
+void load_texture(t_info *info)
 {
 	t_img img;
-	load_image(info, mlx->texturemlx->textures/wall_e.xpm", &img);
-	load_image(info, mlx->texturemlx->textures/wall_w.xpm", &img);
-	load_image(info, mlx->texturemlx->textures/wall_n.xpm", &img);
-	load_image(info, mlx->texturemlx->textures/wall_s.xpm", &img);
+	load_image(info, info->texture[0],"textures/wall_e.xpm", &img);
+	load_image(info, info->texture[1],"textures/wall_w.xpm", &img);
+	load_image(info, info->texture[2],"textures/wall_n.xpm", &img);
+	load_image(info, info->texture[3],"textures/wall_s.xpm", &img);
 }
 
 int main(void)
 {
 	t_info info;
-	t_mlx mlx;
-	mlx->mlx_ptr = mlx_init();
+	info.mlx_ptr = mlx_init();
 	// 변수들 초기화
 	info.posX = 22.0;
 	info.posY = 11.5;
@@ -299,40 +328,24 @@ int main(void)
 	// planeY = 1;
 	info.moveSpeed = 0.3;
 	info.rotSpeed = 0.05;
-	mlx.win_ptr = mlx_new_window(mlx->mlx_ptr, screenWidth, screenHeight, "test");
-	mlx->texture 버전에 추가되는 부분 시작
-			* /
-		info.buf = (int **)malloc(sizeof(int *) * screenHeight);
-	for (int i = 0; i < screenHeight; i++)
-		info.buf[i] = (int *)malloc(sizeof(int) * screenWidth);
-	// buffer 초기화
+	info.win_ptr = mlx_new_window(info.mlx_ptr, screenWidth, screenHeight, "test");
+	for(int i = 0; i < 4; i++)
+	{
+		info.texture[i] = (int *)malloc(sizeof(int) * texHeight * texWidth);
+	}
 	for (int i = 0; i < screenHeight; i++)
 		for (int j = 0; j < screenWidth; j++)
-			info.buf[i][j] = mlx->texture 초기화 for (int i = 0; i < 4; i++) for (int j = 0; j < texHeight * texWidth; j++)
-								 mlx->texture[i][j] = 0;
+			info.buf[i][j] = 0;
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < texHeight * texWidth; j++)
+			info.texture[i][j] = 0;
+
 	// 이미지 초기화
-	mlx->texture(&info);
-	// // generatemlx->textures
-	// for (int x = 0; x < texWidth; x++)
-	// 	for (int y = 0; y < texHeight; y++)
-	// 	{
-	// 		int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
-	// 		// int xcolor = x * 256 / texWidth;
-	// 		int ycolor = y * 256 / texHeight;
-	// 		int xycolor = y * 128 / texHeight + x * 128 / texWidth;
-	mlx->texture[0][texWidth * y + x] = 65536 * 250 * (x != y && x != texWidth - y);  // flamlx->texture with black cross
-	mlx->texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor;	  // sloped greyscale
-	mlx->texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor;			  // sloped yellow gradient
-	mlx->texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; // xor greyscale
-	mlx->texture[0][texWidth * y + x] = 256 * xorcolor;								  // xor green
-	mlx->texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16);			  // red bricks
-	mlx->texture[6][texWidth * y + x] = 65536 * ycolor;								  // red gradient
-	mlx->texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128;				  // flatmlx->texture
-	// 	}
-	info.img.img = mlx_new_imag(mlx->mlx_ptr, screenWidth, screenHeight);
+	load_texture(&info);
+	info.img.img = mlx_new_image(info.mlx_ptr, screenWidth, screenHeight);
 	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
-	mlx_loop_hoo(mlx->mlx_ptr, &main_loop, &info);
-	mlx_hook(mlx.win_ptr, KEYPRESS, 0, &key_press, &info);
-	mlx_loop(mlx->mlx_ptr);
+	mlx_loop_hook(info.mlx_ptr, &main_loop, &info);
+	mlx_hook(info.win_ptr, KEYPRESS, 0, &key_press, &info);
+	mlx_loop(info.mlx_ptr);
 	return (0);
 }
