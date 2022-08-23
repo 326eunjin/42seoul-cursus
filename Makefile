@@ -6,7 +6,7 @@
 #    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 16:26:52 by ejang             #+#    #+#              #
-#    Updated: 2022/08/23 16:12:58 by ejang            ###   ########.fr        #
+#    Updated: 2022/08/23 16:31:48 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ GNL_DIR 	=  ./get_next_line/
 SRCS_DIR	=  ./srcs/
 
 GNL_SRCS	= get_next_line.c get_next_line_utils.c
-SRCS_SRCS	= main.c init.c parse_main.c parse_map.c raycasting_map.c raycasting_util.c raycasting.c util.c key_press.c
+SRCS_SRCS	= main.c init.c parse_main.c parse_map.c raycasting_map.c raycasting_util.c raycasting.c util.c key_press.c check_map.c
 SRCS		=	$(addprefix $(GNL_DIR), $(GNL_SRCS)) $(addprefix $(SRCS_DIR), $(SRCS_SRCS))
 OBJS		=	$(SRCS:.c=.o)
 

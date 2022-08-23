@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:49:44 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/21 21:30:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/23 16:31:48 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	cal_map(t_cub *cub)
 		y = -1;
 		while (++y < SCREEN_HEIGHT)
 		{
-			cub->mlx->buf[y][x] = ft_cal_color(cub->map->c);
-			cub->mlx->buf[SCREEN_HEIGHT - y - 1][x] = ft_cal_color(cub->map->f);
+			cub->mlx->buf[y][x] = cub->map->c_color;
+			cub->mlx->buf[SCREEN_HEIGHT - y - 1][x] = cub->map->f_color;
 		}
 	}
 	x = -1;

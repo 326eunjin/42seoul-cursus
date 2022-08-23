@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/23 16:13:52 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/23 16:33:26 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ typedef struct s_map
 	char	*we;
 	char	*ea;
 	char	*f;
+	int		f_color;
 	char	*c;
+	int		c_color;
 	char	**map;
 	int		map_height;
 	int		map_width;
@@ -134,13 +136,18 @@ int				main_loop(t_cub *cub);
 */
 int				key_press(int keycode, t_cub *cub);
 int				press_x_button(void);
+
 /*
 	ANCHOR utils
 */
-
 void			print_error(char *msg);
 void			free_split(char **tmp);
 void			pass_empty_line(int fd, char **line, unsigned int *map_loc);
 int				pass_empty_line_map(int fd, char **line);
+
+/*
+	ANCHOR check_map.c
+*/
+void			check_map(t_cub *cub);
 
 #endif

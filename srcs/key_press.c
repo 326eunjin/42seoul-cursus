@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:17:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 16:13:32 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/23 16:37:48 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	rotate_player(t_info *info, int option)
 
 void	move_front_back(t_map *map, t_info *info, int option)
 {
-	if (map->map[(int)(info->pos_x + info->dir_x * \
+	if (map->map[(int)(info->pos_x + option * info->dir_x * \
 		info->move_speed)][(int)info->pos_y] == '0')
 		info->pos_x += option * (info->dir_x * info->move_speed);
 	if (map->map[(int)(info->pos_x)][(int)(info->pos_x + \
-		info->dir_y * info->move_speed)] == '0')
+		option * info->dir_y * info->move_speed)] == '0')
 		info->pos_y += option * (info->dir_y * info->move_speed);
 }
 
