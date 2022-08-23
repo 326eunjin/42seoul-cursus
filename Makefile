@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
+#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 16:26:52 by ejang             #+#    #+#              #
-#    Updated: 2022/08/23 16:58:12 by ejang            ###   ########.fr        #
+#    Updated: 2022/08/23 21:37:32 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ GNL_DIR 	=  ./get_next_line/
 SRCS_DIR	=  ./srcs/
 
 GNL_SRCS	= get_next_line.c get_next_line_utils.c
-SRCS_SRCS	= main.c init.c parse_main.c parse_map.c raycasting_map.c raycasting_util.c raycasting.c util.c key_press.c check_map.c
+SRCS_SRCS	= main.c init.c parse_main.c parse_map.c raycasting_map.c raycasting_util.c raycasting.c util.c key_press.c check_cub.c
 SRCS		=	$(addprefix $(GNL_DIR), $(GNL_SRCS)) $(addprefix $(SRCS_DIR), $(SRCS_SRCS))
 OBJS		=	$(SRCS:.c=.o)
 

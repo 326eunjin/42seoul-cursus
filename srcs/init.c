@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 16:58:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/23 21:36:42 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	init_struct(t_cub *cub)
 	cub->map->f_color = -1;
 	cub->map->c = NULL;
 	cub->map->c_color = -1;
-	cub->info->pos_x = 22.0;
-	cub->info->pos_y = 11.5;
+	// cub->info->pos_x = 22.0;
+	// cub->info->pos_y = 11.5;
 	cub->info->dir_x = -1;
 	cub->info->dir_y = 0;
 	cub->info->plane_x = 0;

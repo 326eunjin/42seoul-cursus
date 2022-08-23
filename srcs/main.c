@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:49:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 16:58:10 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/23 21:48:01 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	}
 	init_struct(&cub);
 	parse_main(&cub, argv[1]);
-	check_map(&cub);
+	check_cub(&cub);
 	mlx_struct_init(&cub);
 	mlx_loop_hook(cub.mlx->mlx_ptr, &main_loop, &cub);
 	mlx_hook(cub.mlx->win_ptr, KEYPRESS, 0, &key_press, &cub);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/23 16:58:12 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/23 21:36:59 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ void			pass_empty_line(int fd, char **line, unsigned int *map_loc);
 int				pass_empty_line_map(int fd, char **line);
 
 /*
-	ANCHOR check_map.c
+	ANCHOR check_cub.c
 */
-void			check_map(t_cub *cub);
+void			check_cub(t_cub *cub);
 
 #endif
