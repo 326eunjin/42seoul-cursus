@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:25:47 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/24 21:26:34 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/24 21:27:08 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	check_map(t_cub *cub)
 		for(int j = 0; j <cub->map->map_width;j++)
 			if (cub->map->map[i][j] == 'N')
 			{
-				cub->info->pos_x = (double) j;
-				cub->info->pos_y = (double) i;
+				cub->info->pos_x = (double) j + 0.1;
+				cub->info->pos_y = (double) i + 0.1;
 				cub->map->map[i][j] = '0';
 			}
 }
