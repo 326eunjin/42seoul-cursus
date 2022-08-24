@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:25:47 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 21:36:29 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 21:18:42 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	check_map(t_cub *cub)
 		for(int j = 0; j <cub->map->map_width;j++)
 			if (cub->map->map[i][j] == 'N')
 			{
-				cub->info->pos_x = (double) j;
-				cub->info->pos_y = (double) i;
+				cub->info->pos_x = (double) j + 0.1;
+				cub->info->pos_y = (double) i + 0.1;
 			}
 }
 
