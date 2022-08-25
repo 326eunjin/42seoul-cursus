@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 21:36:42 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 19:41:46 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	init_struct(t_cub *cub)
 	cub->map->c_color = -1;
 	// cub->info->pos_x = 22.0;
 	// cub->info->pos_y = 11.5;
-	cub->info->dir_x = -1;
+	cub->info->dir_x = 0;
 	cub->info->dir_y = 0;
 	cub->info->plane_x = 0;
-	cub->info->plane_y = 0.66;
+	cub->info->plane_y = 0;
 	cub->info->move_speed = 0.3;
 	cub->info->rot_speed = 0.05;
 }
