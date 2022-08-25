@@ -3,28 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:25:47 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/24 21:27:08 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/25 12:31:15 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	check_map(t_cub *cub)
-{
-	for(int i = 0 ;i< cub->map->map_height;i++)
-		for(int j = 0; j <cub->map->map_width;j++)
-			if (cub->map->map[i][j] == 'N')
-			{
-				cub->info->pos_x = (double) j + 0.1;
-				cub->info->pos_y = (double) i + 0.1;
-				cub->map->map[i][j] = '0';
-			}
-}
-
-#include <stdio.h>
 void	check_cub(t_cub *cub)
 {
 	// check_info(cub);
