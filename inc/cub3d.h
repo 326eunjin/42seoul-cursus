@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/25 12:33:04 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 22:36:28 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,13 @@ void			remove_new_line(char **line);
 void			parse_map_size(int fd, unsigned int *map_loc, t_cub *cub);
 void			map_content(char *file_name, \
 	t_cub *cub, unsigned int map_loc);
-
+unsigned int	cal_color(char *str);
+char			*chop_space(char *str);
+int				is_space_in_str(char *str);
 /*
 	ANCHOR raycasting_*.c
 */
-unsigned int	ft_cal_color(char *str);
+// unsigned int	ft_cal_color(char *str);
 void			init_ray(t_ray *ray, t_cub *cub, int x);
 void			dda(t_ray *ray, t_cub *cub);
 void			cal_ray(t_ray *ray, t_cub *cub, t_draw *draw);

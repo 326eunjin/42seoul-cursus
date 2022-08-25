@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 17:15:23 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/25 22:31:33 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,8 @@
 #include "../inc/get_next_line.h"
 #include "../libft/libft.h"
 
-void	remove_new_line(char **line)
-{
-	unsigned int	len;
-	char			*tmp;
-
-	if (*line == NULL)
-		return ;
-	len = ft_strlen(*line);
-	if ((*line)[len - 1] == '\n')
-	{
-		tmp = ft_strdup(*line);
-		free(*line);
-		(*line) = ft_substr(tmp, 0, len - 1);
-		free(tmp);
-	}
-	return ;
-}
-
 int	set_elements(char **line, char ***split_line, t_cub *cub)
 {
-	*split_line = ft_split(*line, ' ');
 	if (ft_strncmp((*split_line)[0], "NO", ft_strlen("NO")) \
 		== 0 && cub->map->no == NULL)
 		cub->map->no = ft_strdup((*split_line)[1]);
@@ -51,10 +32,12 @@ int	set_elements(char **line, char ***split_line, t_cub *cub)
 		cub->map->ea = ft_strdup((*split_line)[1]);
 	else if (ft_strncmp((*split_line)[0], "C", ft_strlen("C")) \
 		== 0 && cub->map->c == NULL)
-		cub->map->c = ft_strdup((*split_line)[1]);
+		cub->map->c_color = cal_color(*line);
+		//cub->map->c = ft_strdup(*line);//c 빼고 그 이후부터 넣을 수 있는 방법?
 	else if (ft_strncmp((*split_line)[0], "F", ft_strlen("F")) \
 		== 0 && cub->map->f == NULL)
-		cub->map->f = ft_strdup((*split_line)[1]);
+		cub->map->f_color = cal_color(*line);
+		// cub->map->f = ft_strdup((*split_line)[1]);
 	else
 		return (1);
 	return (0);
@@ -68,11 +51,14 @@ void	check_elements(int fd, t_cub *cub)
 	line = get_next_line(fd);
 	if (ft_strncmp(line, "\n", ft_strlen("\n")) == 0 || is_space_line(&line) == 0)
 		return (free(line));
-	if (get_count(line, ' ') != 2)
-	{
-		free(line);
-		print_error("INVALID MAP");
-	}
+	split_line = ft_split(line, ' ');
+	if (ft_strncmp(split_line[0],"NO",2) == 0 || ft_strncmp(split_line[0],"SO",2) == 0 || ft_strncmp(split_line[0],"WE",2) == 0|| ft_strncmp(split_line[0],"EA",2) == 0)
+		if (get_count(line, ' ') != 2 )
+		{
+			free(line);
+			free_split(split_line);
+			print_error("INVALID TEXTURE");
+		}
 	if (set_elements(&line, &split_line, cub) == 0)
 	{
 		free(line);
@@ -82,7 +68,7 @@ void	check_elements(int fd, t_cub *cub)
 	{
 		free(line);
 		free_split(split_line);
-		print_error("INVALID MAP");
+		print_error("INVALID ARGUMENT");
 	}
 }
 
@@ -91,8 +77,8 @@ void	parse_map_info(int fd, unsigned int *map_loc, t_cub *cub)
 	*map_loc = 1;
 	check_elements(fd, cub);
 	while (cub->map->no == NULL || cub->map->so == NULL || cub->map->we \
-		== NULL || cub->map->ea == NULL || cub->map->c == NULL \
-		|| cub->map->f == NULL)
+		== NULL || cub->map->ea == NULL || cub->map->c_color == -1 \
+		|| cub->map->f_color == -1)
 	{
 		check_elements(fd, cub);
 		(*map_loc)++;

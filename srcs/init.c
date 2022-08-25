@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/25 19:41:46 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 22:36:01 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void	load_image(t_cub *cub, int idx, char *path, t_img *img)
 	y = 0;
 	img->img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, \
 		path, &img_width, &img_height);
+	if (img->img == NULL)
+	{
+		//free
+		//error msg : Invalid xpm path
+		exit(1);
+	}
 	img->data = (int *)mlx_get_data_addr(img->img, \
 		&img->bpp, &img->size_l, &img->endian);
 	while (y < img_height)
