@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 12:30:34 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/25 19:43:19 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 19:45:54 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,25 @@ void	init_pos_dir(int y, int x, t_cub *cub, int *player_flag)
 	*player_flag = 1;
 }
 
+void	check_closed(t_cub *cub, int y, int x)
+{
+	if (cub->map->map[y][x] == '0')
+	{
+		if (y <= 0 || y >= cub->map->map_height - 1 \
+			|| x <= 0 || x >= cub->map->map_width - 1)
+			print_error("Map must be closed/surrounded by walls");
+		if (cub->map->map[y - 1][x] == ' ')
+			print_error("Map must be closed/surrounded by walls");
+		if (cub->map->map[y + 1][x] == ' ')
+			print_error("Map must be closed/surrounded by walls");
+		if (cub->map->map[y][x - 1] == ' ')
+			print_error("Map must be closed/surrounded by walls");
+		if (cub->map->map[y][x + 1] == ' ')
+			print_error("Map must be closed/surrounded by walls");
+	}
+	return ;
+}
+
 void	check_map(t_cub *cub)
 {
 	int	i;
@@ -57,7 +76,7 @@ void	check_map(t_cub *cub)
 		{
 			if (ft_strchr("10 NSEW", cub->map->map[i][j]) == NULL)
 				print_error("Map can contain N, S, E, W, 1, 0, space");
-			//check_closed(cub, i, j);
+			check_closed(cub, i, j);
 			if (ft_strchr("NSEW", cub->map->map[i][j]) != NULL)
 			{	
 				if (player_flag == 1)
