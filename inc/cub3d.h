@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/23 21:36:59 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 12:33:04 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,8 @@ int				pass_empty_line_map(int fd, char **line);
 */
 void			check_cub(t_cub *cub);
 
+/*
+	ANCHOR check_map.c
+*/
+void			check_map(t_cub *cub);
 #endif
