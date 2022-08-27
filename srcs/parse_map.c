@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:54:17 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/21 21:22:46 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 21:18:11 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_map_size(int fd, unsigned int *map_loc, t_cub *cub)
 	if (line == NULL)
 	{
 		close(fd);
-		print_error("Missing map contents");
+		print_error("Missing map contents", cub);
 	}
 	while (line != NULL)
 	{
@@ -48,12 +48,14 @@ void	parse_map_size(int fd, unsigned int *map_loc, t_cub *cub)
 		if (cub->map->map_width < (int)ft_strlen(line))
 			cub->map->map_width = (int)ft_strlen(line);
 		free(line);
+		line = NULL;
 		ret = pass_empty_line_map(fd, &line);
 		if (ret == 1)
 		{
 			close(fd);
 			free(line);
-			print_error("Invalid map contents");
+			line = NULL;
+			print_error("Invalid map contents", cub);
 		}
 	}
 	close(fd);
@@ -76,11 +78,13 @@ void	fill_map(char *line, int fd, t_cub *cub)
 		while (w < cub->map->map_width)
 			(cub->map->map)[h][w++] = ' ';
 		free(line);
+		line = NULL;
 		line = get_next_line(fd);
 		if (line != NULL && (ft_strncmp(line, "\n", ft_strlen("\n")) == 0 \
 			|| is_space_line(&line) == 0))
 		{
 			free (line);
+			line = NULL;
 			return ;
 		}
 		h++;
@@ -98,7 +102,7 @@ void	map_content(char *file_name, \
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		print_error("File open failed\n");
+		print_error("File open failed", cub);
 		return ;
 	}
 	line = get_next_line(fd);
@@ -106,12 +110,13 @@ void	map_content(char *file_name, \
 	while (line != NULL && i != map_loc)
 	{
 		free(line);
+		line = NULL;
 		line = get_next_line(fd);
 		remove_new_line(&line);
 		i++;
 	}
 	if (line == NULL)
-		print_error("Memory allocation failed");
+		print_error("Memory allocation failed", cub);
 	fill_map(line, fd, cub);
 	close(fd);
 }

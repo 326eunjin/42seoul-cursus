@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 17:05:45 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 20:02:18 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../inc/cub3d.h"
 #include "../mlx/mlx.h"
-#include <stdlib.h>
+#include "../libft/libft.h"
 
 void	load_image(t_cub *cub, int idx, char *path, t_img *img)
 {
@@ -26,7 +27,7 @@ void	load_image(t_cub *cub, int idx, char *path, t_img *img)
 	img->img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, \
 		path, &img_width, &img_height);
 	if (img->img == NULL)
-		print_error("Invalid xpm path");
+		print_error("Invalid xpm path", cub);
 	img->data = (int *)mlx_get_data_addr(img->img, \
 		&img->bpp, &img->size_l, &img->endian);
 	while (y < img_height)
@@ -45,12 +46,20 @@ void	load_image(t_cub *cub, int idx, char *path, t_img *img)
 
 void	init_struct(t_cub *cub)
 {
-	cub->map->map_height = 0;
-	cub->map->map_width = 0;
-	cub->map->no = NULL;
-	cub->map->so = NULL;
-	cub->map->we = NULL;
-	cub->map->ea = NULL;
+	ft_memset(cub->info, 0, sizeof(*cub->info));
+	ft_memset(cub->map, 0, sizeof(*cub->map));
+	ft_memset(cub->mlx, 0, sizeof(*cub->mlx));
+	// cub->mlx->buf = NULL;
+	// cub->mlx->img = NULL;
+	// cub->mlx->mlx_ptr = NULL;
+	// cub->mlx->texture = NULL;
+	// cub->mlx->win_ptr = NULL;
+	// cub->map->map_height = 0;
+	// cub->map->map_width = 0;
+	// cub->map->no = NULL;
+	// cub->map->so = NULL;
+	// cub->map->we = NULL;
+	// cub->map->ea = NULL;
 	cub->map->f_color = -1;
 	cub->map->c_color = -1;
 	cub->info->dir_x = 0;
@@ -73,7 +82,7 @@ void	texture_init(t_cub *cub)
 		cub->mlx->texture[i] = (int *)malloc(sizeof(int) * \
 			(TEX_HEIGHT * TEX_WIDTH));
 		if (cub->mlx->texture[i] == NULL)
-			print_error("Memory allocation failed");
+			print_error("Memory allocation failed", cub);
 	}
 		i = -1;
 	while (++i < 4)
@@ -95,13 +104,13 @@ void	buffer_init(t_cub *cub)
 
 	cub->mlx->buf = (int **)malloc(sizeof(int *) * SCREEN_HEIGHT);
 	if (cub->mlx->buf == NULL)
-		print_error("Memory allocation failed");
+		print_error("Memory allocation failed", cub);
 	i = -1;
 	while (++i < SCREEN_HEIGHT)
 	{
 		cub->mlx->buf[i] = (int *)malloc(sizeof(int) * SCREEN_WIDTH);
 		if (cub->mlx->buf[i] == NULL)
-			print_error("Memory allocation failed");
+			print_error("Memory allocation failed", cub);
 	}
 	i = -1;
 	while (++i < SCREEN_HEIGHT)
@@ -116,11 +125,11 @@ void	mlx_struct_init(t_cub *cub)
 {
 	cub->mlx->mlx_ptr = mlx_init();
 	if (cub->mlx->mlx_ptr == NULL)
-		print_error("MLX INIT FAILED");
+		print_error("MLX INIT FAILED", cub);
 	cub->mlx->win_ptr = mlx_new_window(cub->mlx->mlx_ptr, \
 		SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	if (cub->mlx->win_ptr == NULL)
-		print_error("MLX INIT FAILED");
+		print_error("MLX INIT FAILED", cub);
 	buffer_init(cub);
 	texture_init(cub);
 	cub->mlx->img.img = mlx_new_image(cub->mlx->mlx_ptr, \

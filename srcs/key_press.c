@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:17:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 17:01:19 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 20:56:08 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include "../inc/cub3d.h"
 #include <stdlib.h>
 
-int	press_x_button(void)
+int	press_x_button(t_cub *cub)
 {
-	//free
+	free_map(cub);
+	free_mlx(cub);
+	// system("leaks cub3d");
 	exit(0);
 	return (0);
 }
@@ -76,7 +78,9 @@ int	key_press(int keycode, t_cub *cub)
 		rotate_player(cub->info, 1);
 	else if (keycode == KEY_ESC)
 	{
-		//free
+		free_map(cub);
+		free_mlx(cub);
+		// system("leaks cub3d");
 		exit(0);
 	}
 	return (0);

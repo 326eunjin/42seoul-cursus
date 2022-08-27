@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:49:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 17:00:50 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 20:56:08 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		printf("Argc must be two\n");
+		// system("leaks cub3d");
 		exit(1);
 	}
 	init_struct(&cub);
@@ -36,7 +37,10 @@ int	main(int argc, char **argv)
 	mlx_struct_init(&cub);
 	mlx_loop_hook(cub.mlx->mlx_ptr, &main_loop, &cub);
 	mlx_hook(cub.mlx->win_ptr, KEYPRESS, 0, &key_press, &cub);
-	mlx_hook(cub.mlx->win_ptr, 17, 0, press_x_button, &mlx);
+	mlx_hook(cub.mlx->win_ptr, 17, 0, press_x_button, &cub);
 	mlx_loop(cub.mlx->mlx_ptr);
+	free_map(&cub);
+	free_mlx(&cub);
+	// system("leaks cub3d");
 	return (0);
 }

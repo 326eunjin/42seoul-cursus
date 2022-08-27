@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 17:00:37 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 19:43:19 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,12 @@ void			remove_new_line(char **line);
 void			parse_map_size(int fd, unsigned int *map_loc, t_cub *cub);
 void			map_content(char *file_name, \
 	t_cub *cub, unsigned int map_loc);
-unsigned int	cal_color(char *str);
+unsigned int	cal_color(char *str, t_cub *cub);
 char			*chop_space(char *str);
 int				is_space_in_str(char *str);
 /*
 	ANCHOR raycasting_*.c
 */
-// unsigned int	ft_cal_color(char *str);
 void			init_ray(t_ray *ray, t_cub *cub, int x);
 void			dda(t_ray *ray, t_cub *cub);
 void			cal_ray(t_ray *ray, t_cub *cub, t_draw *draw);
@@ -135,12 +134,12 @@ int				main_loop(t_cub *cub);
 	ANCHOR key_press.c
 */
 int				key_press(int keycode, t_cub *cub);
-int				press_x_button(void);
+int				press_x_button(t_cub *cub);
 
 /*
 	ANCHOR utils
 */
-void			print_error(char *msg);
+void			print_error(char *msg, t_cub *cub);
 void			free_split(char **tmp);
 void			pass_empty_line(int fd, char **line, unsigned int *map_loc);
 int				pass_empty_line_map(int fd, char **line);
@@ -149,4 +148,11 @@ int				pass_empty_line_map(int fd, char **line);
 	ANCHOR check_map.c
 */
 void			check_map(t_cub *cub);
+
+/*
+	ANCHOR free.c
+*/
+void	free_map(t_cub *cub);
+void	free_mlx(t_cub *cub);
+
 #endif

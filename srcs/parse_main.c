@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 17:15:30 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 21:18:46 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	set_elements(char **line, char ***split_line, t_cub *cub)
 		cub->map->ea = ft_strdup((*split_line)[1]);
 	else if (ft_strncmp(first_element, "C", ft_strlen(first_element)) \
 		== 0 && cub->map->c_color == -1)
-		cub->map->c_color = cal_color(*line);
+		cub->map->c_color = cal_color(*line, cub);
 	else if (ft_strncmp(first_element, "F", ft_strlen(first_element)) \
 		== 0 && cub->map->f_color == -1)
-		cub->map->f_color = cal_color(*line);
+		cub->map->f_color = cal_color(*line, cub);
 	else
 		return (1);
 	return (0);
@@ -68,7 +68,7 @@ void	check_elements(int fd, t_cub *cub)
 	{
 		free(line);
 		free_split(split_line);
-		print_error("INVALID TEXTURE");
+		print_error("INVALID TEXTURE", cub);
 	}
 	if (set_elements(&line, &split_line, cub) == 0)
 	{
@@ -79,7 +79,7 @@ void	check_elements(int fd, t_cub *cub)
 	{
 		free(line);
 		free_split(split_line);
-		print_error("INVALID ARGUMENT");
+		print_error("INVALID ARGUMENT", cub);
 	}
 }
 
@@ -105,21 +105,21 @@ void	parse_main(t_cub *cub, char *file)
 	if (ft_strlen(file) < 4 || !(file[ft_strlen(file) - 4] == '.' \
 		&& file[ft_strlen(file) - 3] == 'c' && file[ft_strlen(file) - 2] == 'u' \
 			&& file[ft_strlen(file) - 1] == 'b'))
-		print_error("Wrong file name");
+		print_error("Wrong file name", cub);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		print_error("File open failed");
+		print_error("File open failed", cub);
 	parse_map_info(fd, &map_loc, cub);
 	parse_map_size(fd, &map_loc, cub);
 	cub->map->map = (char **)malloc(sizeof (char *) * cub->map->map_height);
 	if (cub->map->map == NULL)
-		print_error("Memory allocation failed");
+		print_error("Memory allocation failed", cub);
 	i = 0;
 	while (i < (int)cub->map->map_height)
 	{
 		cub->map->map[i] = (char *)malloc(sizeof(char) * cub->map->map_width);
 		if (cub->map->map[i] == NULL)
-			print_error("Memory allocation failed");
+			print_error("Memory allocation failed", cub);
 		i++;
 	}
 	map_content(file, cub, map_loc);
