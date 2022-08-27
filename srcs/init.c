@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 15:59:09 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:05:45 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ void	load_image(t_cub *cub, int idx, char *path, t_img *img)
 	img->img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, \
 		path, &img_width, &img_height);
 	if (img->img == NULL)
-	{
-		//free
-		//error msg : Invalid xpm path
-		exit(1);
-	}
+		print_error("Invalid xpm path");
 	img->data = (int *)mlx_get_data_addr(img->img, \
 		&img->bpp, &img->size_l, &img->endian);
 	while (y < img_height)
@@ -38,7 +34,8 @@ void	load_image(t_cub *cub, int idx, char *path, t_img *img)
 		x = 0;
 		while (x < img_width)
 		{
-			cub->mlx->texture[idx][img_width * y + x] = img->data[img_width * y + x]; // ?
+			cub->mlx->texture[idx][img_width * y + x] = \
+				img->data[img_width * y + x];
 			x++;
 		}
 		y++;
@@ -56,8 +53,6 @@ void	init_struct(t_cub *cub)
 	cub->map->ea = NULL;
 	cub->map->f_color = -1;
 	cub->map->c_color = -1;
-	// cub->info->pos_x = 22.0;
-	// cub->info->pos_y = 11.5;
 	cub->info->dir_x = 0;
 	cub->info->dir_y = 0;
 	cub->info->plane_x = 0;

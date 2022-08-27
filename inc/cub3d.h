@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 15:59:30 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:00:37 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,6 @@ void			print_error(char *msg);
 void			free_split(char **tmp);
 void			pass_empty_line(int fd, char **line, unsigned int *map_loc);
 int				pass_empty_line_map(int fd, char **line);
-
-/*
-	ANCHOR check_cub.c
-*/
-void			check_cub(t_cub *cub);
 
 /*
 	ANCHOR check_map.c

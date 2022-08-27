@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 15:57:53 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:15:30 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,23 @@ int	set_elements(char **line, char ***split_line, t_cub *cub)
 	else if (ft_strncmp(first_element, "C", ft_strlen(first_element)) \
 		== 0 && cub->map->c_color == -1)
 		cub->map->c_color = cal_color(*line);
-		//cub->map->c = ft_strdup(*line);//c 빼고 그 이후부터 넣을 수 있는 방법?
 	else if (ft_strncmp(first_element, "F", ft_strlen(first_element)) \
 		== 0 && cub->map->f_color == -1)
 		cub->map->f_color = cal_color(*line);
-		// cub->map->f = ft_strdup((*split_line)[1]);
 	else
 		return (1);
 	return (0);
+}
+
+int	is_nswe(char *first_element)
+{
+	if (!ft_strncmp(first_element, "NO", 2) \
+		|| !ft_strncmp(first_element, "SO", 2) \
+		|| !ft_strncmp(first_element, "WE", 2) \
+		|| !ft_strncmp(first_element, "EA", 2))
+		return (0);
+	else
+		return (1);
 }
 
 void	check_elements(int fd, t_cub *cub)
@@ -55,13 +64,12 @@ void	check_elements(int fd, t_cub *cub)
 	if (ft_strncmp(line, "\n", ft_strlen("\n")) == 0 || is_space_line(&line) == 0)
 		return (free(line));
 	split_line = ft_split(line, ' ');
-	if (ft_strncmp(split_line[0],"NO",2) == 0 || ft_strncmp(split_line[0],"SO",2) == 0 || ft_strncmp(split_line[0],"WE",2) == 0|| ft_strncmp(split_line[0],"EA",2) == 0)
-		if (get_count(line, ' ') != 2 )
-		{
-			free(line);
-			free_split(split_line);
-			print_error("INVALID TEXTURE");
-		}
+	if (is_nswe(split_line[0]) == 0 && (get_count(line, ' ') != 2))
+	{
+		free(line);
+		free_split(split_line);
+		print_error("INVALID TEXTURE");
+	}
 	if (set_elements(&line, &split_line, cub) == 0)
 	{
 		free(line);

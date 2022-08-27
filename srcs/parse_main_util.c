@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:45:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/25 22:32:52 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:08:47 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../libft/libft.h"
 #include "../inc/get_next_line.h"
 
-int		is_space_in_str(char *str)
+int	is_space_in_str(char *str)
 {
 	int	i;
 
@@ -39,11 +39,7 @@ char	*chop_space(char *str)
 		front++;
 	while (str[back] == ' ')
 		back--;
-	//ret = (char *)malloc(sizeof(char) * (back - front + 2));
-	// if (!ret)
-	// 	return (NULL);
 	ret = ft_strndup(str + front, back - front + 1);
-	// ft_strlcpy(ret, str + front, (back - front + 3));
 	return (ret);
 }
 
