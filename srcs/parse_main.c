@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/25 22:31:33 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 15:57:53 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,27 @@
 
 int	set_elements(char **line, char ***split_line, t_cub *cub)
 {
-	if (ft_strncmp((*split_line)[0], "NO", ft_strlen("NO")) \
+	char	*first_element;
+
+	first_element = (*split_line)[0];
+	if (ft_strncmp(first_element, "NO", ft_strlen(first_element)) \
 		== 0 && cub->map->no == NULL)
 		cub->map->no = ft_strdup((*split_line)[1]);
-	else if (ft_strncmp((*split_line)[0], "SO", ft_strlen("SO")) \
+	else if (ft_strncmp(first_element, "SO", ft_strlen(first_element)) \
 		== 0 && cub->map->so == NULL)
 		cub->map->so = ft_strdup((*split_line)[1]);
-	else if (ft_strncmp((*split_line)[0], "WE", ft_strlen("WE")) \
+	else if (ft_strncmp(first_element, "WE", ft_strlen(first_element)) \
 		== 0 && cub->map->we == NULL)
 		cub->map->we = ft_strdup((*split_line)[1]);
-	else if (ft_strncmp((*split_line)[0], "EA", ft_strlen("EA")) \
+	else if (ft_strncmp(first_element, "EA", ft_strlen(first_element)) \
 		== 0 && cub->map->ea == NULL)
 		cub->map->ea = ft_strdup((*split_line)[1]);
-	else if (ft_strncmp((*split_line)[0], "C", ft_strlen("C")) \
-		== 0 && cub->map->c == NULL)
+	else if (ft_strncmp(first_element, "C", ft_strlen(first_element)) \
+		== 0 && cub->map->c_color == -1)
 		cub->map->c_color = cal_color(*line);
 		//cub->map->c = ft_strdup(*line);//c 빼고 그 이후부터 넣을 수 있는 방법?
-	else if (ft_strncmp((*split_line)[0], "F", ft_strlen("F")) \
-		== 0 && cub->map->f == NULL)
+	else if (ft_strncmp(first_element, "F", ft_strlen(first_element)) \
+		== 0 && cub->map->f_color == -1)
 		cub->map->f_color = cal_color(*line);
 		// cub->map->f = ft_strdup((*split_line)[1]);
 	else
