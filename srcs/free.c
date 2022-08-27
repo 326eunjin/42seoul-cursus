@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:29:25 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 21:09:06 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 22:15:37 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,9 @@ void	free_map(t_cub *cub)
 		while (i < cub->map->map_height && cub->map->map[i] != NULL)
 		{
 			free(cub->map->map[i]);
-			cub->map->map[i] = NULL;
 			i++;
 		}
-		cub->map->map = NULL;
 	}
-	cub->map->no = NULL;
-	cub->map->so = NULL;
-	cub->map->we = NULL;
-	cub->map->ea = NULL;
 }
 
 void	free_mlx(t_cub *cub)
@@ -53,19 +47,14 @@ void	free_mlx(t_cub *cub)
 		while (i < SCREEN_HEIGHT && cub->mlx->buf[i] != NULL)
 		{
 			free(cub->mlx->buf[i]);
-			cub->mlx->buf[i] = NULL;
 			i++;
 		}
-		cub->mlx->buf = NULL;
 	}
 	i = 0;
 	while (i < 4)
 	{
 		if (cub->mlx->texture[i] != NULL)
-		{
 			free(cub->mlx->texture[i]);
-			cub->mlx->texture[i] = NULL;
-		}
 		i++;
 	}
 	if (cub->mlx->win_ptr != NULL)
@@ -83,10 +72,6 @@ void	free_split(char **tmp)
 		cnt++;
 	i = -1;
 	while (++i < cnt)
-	{
 		free(tmp[i]);
-		tmp[i] = NULL;
-	}
 	free(tmp);
-	tmp = NULL;
 }

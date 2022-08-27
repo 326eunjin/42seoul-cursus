@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main_util.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:45:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 21:17:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 21:50:02 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ void	remove_new_line(char **line)
 	{
 		tmp = ft_strdup(*line);
 		free(*line);
-		*line = NULL;
 		(*line) = ft_substr(tmp, 0, len - 1);
 		free(tmp);
-		tmp = NULL;
 	}
 	return ;
 }

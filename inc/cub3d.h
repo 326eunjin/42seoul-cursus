@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 19:43:19 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 22:04:36 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void			check_map(t_cub *cub);
 /*
 	ANCHOR free.c
 */
-void	free_map(t_cub *cub);
-void	free_mlx(t_cub *cub);
+void			free_map(t_cub *cub);
+void			free_mlx(t_cub *cub);
 
 #endif

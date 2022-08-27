@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 20:02:18 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 22:15:06 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,6 @@ void	init_struct(t_cub *cub)
 	ft_memset(cub->info, 0, sizeof(*cub->info));
 	ft_memset(cub->map, 0, sizeof(*cub->map));
 	ft_memset(cub->mlx, 0, sizeof(*cub->mlx));
-	// cub->mlx->buf = NULL;
-	// cub->mlx->img = NULL;
-	// cub->mlx->mlx_ptr = NULL;
-	// cub->mlx->texture = NULL;
-	// cub->mlx->win_ptr = NULL;
-	// cub->map->map_height = 0;
-	// cub->map->map_width = 0;
-	// cub->map->no = NULL;
-	// cub->map->so = NULL;
-	// cub->map->we = NULL;
-	// cub->map->ea = NULL;
 	cub->map->f_color = -1;
 	cub->map->c_color = -1;
 	cub->info->dir_x = 0;
@@ -84,7 +73,7 @@ void	texture_init(t_cub *cub)
 		if (cub->mlx->texture[i] == NULL)
 			print_error("Memory allocation failed", cub);
 	}
-		i = -1;
+	i = -1;
 	while (++i < 4)
 	{
 		j = -1;

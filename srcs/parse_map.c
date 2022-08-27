@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:54:17 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 21:18:11 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 22:15:22 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,11 @@ void	parse_map_size(int fd, unsigned int *map_loc, t_cub *cub)
 		if (cub->map->map_width < (int)ft_strlen(line))
 			cub->map->map_width = (int)ft_strlen(line);
 		free(line);
-		line = NULL;
 		ret = pass_empty_line_map(fd, &line);
 		if (ret == 1)
 		{
 			close(fd);
 			free(line);
-			line = NULL;
 			print_error("Invalid map contents", cub);
 		}
 	}
@@ -78,13 +76,11 @@ void	fill_map(char *line, int fd, t_cub *cub)
 		while (w < cub->map->map_width)
 			(cub->map->map)[h][w++] = ' ';
 		free(line);
-		line = NULL;
 		line = get_next_line(fd);
 		if (line != NULL && (ft_strncmp(line, "\n", ft_strlen("\n")) == 0 \
 			|| is_space_line(&line) == 0))
 		{
 			free (line);
-			line = NULL;
 			return ;
 		}
 		h++;
@@ -110,7 +106,6 @@ void	map_content(char *file_name, \
 	while (line != NULL && i != map_loc)
 	{
 		free(line);
-		line = NULL;
 		line = get_next_line(fd);
 		remove_new_line(&line);
 		i++;
