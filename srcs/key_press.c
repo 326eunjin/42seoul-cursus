@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:17:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 20:53:47 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 16:47:38 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,35 @@ void	rotate_player(t_info *info, int option)
 
 void	move_front_back(t_map *map, t_info *info, int option)
 {
-	if (map->map[(int)(info->pos_x + option * info->dir_x * \
-		info->move_speed)][(int)info->pos_y] == '0')
+	// if (map->map[(int)(info->pos_x + option * info->dir_x * \
+	// 	info->move_speed)][(int)info->pos_y] == '0')
+	// 	info->pos_x += option * (info->dir_x * info->move_speed);
+	// if (map->map[(int)(info->pos_x)][(int)(info->pos_y + \
+	// 	option * info->dir_y * info->move_speed)] == '0')
+	// 	info->pos_y += option * (info->dir_y * info->move_speed);
+	if (map->map[(int)info->pos_y][(int)(info->pos_x + option * info->dir_x * \
+		info->move_speed)] == '0')
 		info->pos_x += option * (info->dir_x * info->move_speed);
-	if (map->map[(int)(info->pos_x)][(int)(info->pos_y + \
-		option * info->dir_y * info->move_speed)] == '0')
+	if (map->map[(int)(info->pos_y + \
+		option * info->dir_y * info->move_speed)][(int)(info->pos_x)] == '0')
 		info->pos_y += option * (info->dir_y * info->move_speed);
 }
 
 void	move_left_right(t_map *map, t_info *info, int option)
 {
-	if (map->map[(int)(info->pos_x + (option * info->plane_x) \
-		* info->move_speed)][(int)info->pos_y] == '0')
+	// if (map->map[(int)(info->pos_x + (option * info->plane_x) \
+	// 	* info->move_speed)][(int)info->pos_y] == '0')
+	// 		info->pos_x = info->pos_x + option * \
+	// 			(info->plane_x * info->move_speed);
+	// if (map->map[(int)(info->pos_x)][(int)(info->pos_y + \
+	// 	(option * info->plane_y) * info->move_speed)] == '0')
+	// 	info->pos_y = info->pos_y + option * (info->plane_y * info->move_speed);
+	if (map->map[(int)info->pos_y][(int)(info->pos_x + (option * info->plane_x) \
+		* info->move_speed)] == '0')
 			info->pos_x = info->pos_x + option * \
 				(info->plane_x * info->move_speed);
-	if (map->map[(int)(info->pos_x)][(int)(info->pos_y + \
-		(option * info->plane_y) * info->move_speed)] == '0')
+	if (map->map[(int)(info->pos_y + \
+		(option * info->plane_y) * info->move_speed)][(int)(info->pos_x)] == '0')
 		info->pos_y = info->pos_y + option * (info->plane_y * info->move_speed);
 }
 

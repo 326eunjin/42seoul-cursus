@@ -6,13 +6,14 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:18:52 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/21 21:30:14 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 16:46:14 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 #include <math.h>
 #include "../mlx/mlx.h"
+#include <stdio.h>
 
 void	init_ray2(t_ray *ray, t_cub *cub)
 {
@@ -75,8 +76,8 @@ void	dda(t_ray *ray, t_cub *cub)
 			else
 				ray->side = 3;
 		}
-		if (cub->map->map[ray->map_x][ray->map_y] > '0')
-			ray->hit = 1;// 왜 여기선 [x][y] 인지 ?
+		if (cub->map->map[ray->map_y][ray->map_x] > '0')
+			ray->hit = 1;
 	}
 }
 
