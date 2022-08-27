@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/25 22:36:01 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 15:59:09 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ void	init_struct(t_cub *cub)
 	cub->map->so = NULL;
 	cub->map->we = NULL;
 	cub->map->ea = NULL;
-	cub->map->f = NULL;
 	cub->map->f_color = -1;
-	cub->map->c = NULL;
 	cub->map->c_color = -1;
 	// cub->info->pos_x = 22.0;
 	// cub->info->pos_y = 11.5;

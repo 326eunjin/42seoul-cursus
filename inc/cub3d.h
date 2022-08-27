@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/25 22:36:28 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/27 15:59:30 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*f;
 	int		f_color;
-	char	*c;
 	int		c_color;
 	char	**map;
 	int		map_height;
