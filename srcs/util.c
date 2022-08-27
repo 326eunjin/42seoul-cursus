@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:05:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 21:17:39 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 22:13:55 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	pass_empty_line(int fd, char **line, unsigned int *map_loc)
 	{
 		*map_loc = *map_loc + 1;
 		free(*line);
-		*line = NULL;
 		*line = get_next_line(fd);
 	}
 }
@@ -50,9 +49,7 @@ int	pass_empty_line_map(int fd, char **line)
 		|| is_space_line(line) == 0))
 	{
 		flag = 1;
-		printf("%s\n", *line);
 		free(*line);
-		*line = NULL;
 		*line = get_next_line(fd);
 	}
 	if (*line != NULL && flag == 1)
