@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:49:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 20:56:08 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 15:19:25 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	cub.info = &info;
 	if (argc != 2)
 	{
-		printf("Argc must be two\n");
+		printf("Error\nArgc must be two\n");
 		// system("leaks cub3d");
 		exit(1);
 	}
