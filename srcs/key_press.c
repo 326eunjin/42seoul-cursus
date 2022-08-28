@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:17:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/28 16:19:12 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 16:55:27 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,23 @@ void	rotate_player(t_info *info, int option)
 void	move_front_back(t_map *map, t_info *info, int option)
 {
 	if (map->map[(int)info->pos_y][(int)(info->pos_x + option * info->dir_x * \
-		info->move_speed)] == '0')
-		info->pos_x += option * (info->dir_x * info->move_speed);
-	if (map->map[(int)(info->pos_y + \
-		option * info->dir_y * info->move_speed)][(int)(info->pos_x)] == '0')
-		info->pos_y += option * (info->dir_y * info->move_speed);
+		2 * info->move_speed)] == '0')
+		info->pos_x += option * (info->dir_x * 2 * info->move_speed);
+	if (map->map[(int)(info->pos_y + option * info->dir_y \
+		* 2 * info->move_speed)][(int)(info->pos_x)] == '0')
+		info->pos_y += option * (info->dir_y * 2 * info->move_speed);
 }
 
 void	move_left_right(t_map *map, t_info *info, int option)
 {
 	if (map->map[(int)info->pos_y][(int)(info->pos_x + (option * info->plane_x) \
-		* info->move_speed)] == '0')
+		* 2 * info->move_speed)] == '0')
 			info->pos_x = info->pos_x + option * \
-				(info->plane_x * info->move_speed);
+				(info->plane_x * 2 * info->move_speed);
 	if (map->map[(int)(info->pos_y + (option * info->plane_y) \
-		* info->move_speed)][(int)(info->pos_x)] == '0')
-		info->pos_y = info->pos_y + option * (info->plane_y * info->move_speed);
+		* 2 * info->move_speed)][(int)(info->pos_x)] == '0')
+		info->pos_y = info->pos_y + option * \
+		(info->plane_y * 2 * info->move_speed);
 }
 
 int	key_press(int keycode, t_cub *cub)
