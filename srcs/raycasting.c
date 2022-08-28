@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:49:44 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/23 16:58:11 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/28 16:02:45 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	draw(t_cub *cub)
 int	main_loop(t_cub *cub)
 {
 	cal_map(cub);
+	//mini_map(cub);
 	draw(cub);
 	return (0);
 }
