@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: ejang <ejang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 16:26:52 by ejang             #+#    #+#              #
-#    Updated: 2022/08/27 20:39:43 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/08/28 17:06:39 by ejang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	cub3d
+NAME		=	cub3D
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -g3
