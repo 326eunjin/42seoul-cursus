@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:22:22 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 22:15:06 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/28 17:02:26 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_struct(t_cub *cub)
 	cub->info->dir_y = 0;
 	cub->info->plane_x = 0;
 	cub->info->plane_y = 0;
-	cub->info->move_speed = 0.3;
+	cub->info->move_speed = 0.07;
 	cub->info->rot_speed = 0.05;
 }
 
