@@ -6,14 +6,14 @@
 #    By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 16:26:52 by ejang             #+#    #+#              #
-#    Updated: 2022/08/27 20:39:43 by jeyoon           ###   ########seoul.kr   #
+#    Updated: 2022/08/28 16:27:43 by jeyoon           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	cub3d
+NAME		=	cub3D
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
 RM			=	rm -rf
 
 MLX_DIR		=	./mlx/
