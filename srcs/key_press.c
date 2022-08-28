@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:17:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 20:56:08 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 16:19:12 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	press_x_button(t_cub *cub)
 {
 	free_map(cub);
 	free_mlx(cub);
-	// system("leaks cub3d");
 	exit(0);
 	return (0);
 }
@@ -80,7 +79,6 @@ int	key_press(int keycode, t_cub *cub)
 	{
 		free_map(cub);
 		free_mlx(cub);
-		// system("leaks cub3d");
 		exit(0);
 	}
 	return (0);

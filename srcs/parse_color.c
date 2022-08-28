@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:47:41 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 20:56:54 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 16:21:19 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ unsigned int	convert_rgb(char	*str, char	***tmp, int idx, t_cub *cub)
 		chopped_str = chopping_str(str + 1, tmp, cub);
 	else
 		chopped_str = chopping_str(str, tmp, cub);
-	rgb = ft_atoi(chopped_str); 
+	rgb = ft_atoi(chopped_str);
 	if (rgb < 0 || rgb > 255)
 	{
 		free(chopped_str);

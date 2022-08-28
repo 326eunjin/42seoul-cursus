@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 15:59:00 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/28 16:04:00 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 16:21:02 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	draw_sqaure(t_cub *cub, int y, int x, int option)
 {
 	unsigned int	color;
+	int				i;
+	int				j;
 
 	if (option == 0)
 		color = 0X000000;
@@ -22,10 +24,16 @@ void	draw_sqaure(t_cub *cub, int y, int x, int option)
 		color = 0Xffffff;
 	else
 		color = 0x00fd00;
-	for(int i = 0; i < 3; i++)
+	i = 0;
+	while (i < 3)
 	{
-		for(int j = 0; j < 3; j++)
+		j = 0;
+		while (j < 3)
+		{
 			cub->mlx->buf[y * 3 + i][x * 3 + j] = color;
+			j++;
+		}
+		i++;
 	}
 }
 
@@ -35,7 +43,7 @@ void	mini_map(t_cub *cub)
 	int	j;
 
 	i = 0;
-	while(i < cub->map->map_height)
+	while (i < cub->map->map_height)
 	{
 		j = 0;
 		while (j < cub->map->map_width)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:05:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 22:13:55 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/28 16:21:45 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	print_error(char *msg, t_cub *cub)
 	free_mlx(cub);
 	printf("%s", "Error\n");
 	printf("%s\n", msg);
-	// system("leaks cub3d");
 	exit(1);
 }
 

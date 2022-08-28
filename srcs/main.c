@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:49:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/28 15:19:25 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 16:19:28 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		printf("Error\nArgc must be two\n");
-		// system("leaks cub3d");
 		exit(1);
 	}
 	init_struct(&cub);
@@ -41,6 +40,5 @@ int	main(int argc, char **argv)
 	mlx_loop(cub.mlx->mlx_ptr);
 	free_map(&cub);
 	free_mlx(&cub);
-	// system("leaks cub3d");
 	return (0);
 }
