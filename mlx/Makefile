@@ -20,8 +20,6 @@ all: $(NAME)
 
 $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 	swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
-	mv $(NAME) ../srcs
-
 
 
 %.o: %.swift
