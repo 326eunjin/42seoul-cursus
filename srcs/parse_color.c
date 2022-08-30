@@ -6,13 +6,13 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:47:41 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/28 16:21:19 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:40:19 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "../inc/cub3d.h"
 #include "../libft/libft.h"
-#include <math.h>
 
 char	*chopping_str(char	*str, char ***tmp, t_cub *cub)
 {

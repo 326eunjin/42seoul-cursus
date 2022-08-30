@@ -6,13 +6,12 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 12:30:34 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 19:35:02 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:39:48 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 #include "../libft/libft.h"
-#include <stdio.h>
 
 void	init_pos_dir(int y, int x, t_cub *cub, int *player_flag)
 {

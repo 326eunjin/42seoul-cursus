@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:18:52 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 16:46:14 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/30 16:40:37 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-#include <math.h>
-#include "../mlx/mlx.h"
 #include <stdio.h>
+#include <math.h>
+#include "../inc/cub3d.h"
+#include "../mlx/mlx.h"
 
 void	init_ray2(t_ray *ray, t_cub *cub)
 {

@@ -6,13 +6,13 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:17:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/28 16:19:12 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:39:31 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math.h"
-#include "../inc/cub3d.h"
 #include <stdlib.h>
+#include <math.h>
+#include "../inc/cub3d.h"
 
 int	press_x_button(t_cub *cub)
 {
