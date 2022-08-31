@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 12:30:34 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/30 16:39:48 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 20:43:48 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	init_pos_dir(int y, int x, t_cub *cub, int *player_flag)
 	}
 	else if (cub->map->map[y][x] == 'E')
 	{
-		cub->info->plane_y = -0.66;
-		cub->info->dir_x = 1;
+		cub->info->plane_y = 0.66;
+		cub->info->dir_x = -1;
 	}
 	else
 	{
-		cub->info->plane_y = 0.66;
-		cub->info->dir_x = -1;
+		cub->info->plane_y = -0.66;
+		cub->info->dir_x = 1;
 	}
 	cub->map->map[y][x] = '0';
 	*player_flag = 1;
