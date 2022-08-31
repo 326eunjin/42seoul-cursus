@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:48:02 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/27 21:18:46 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 16:14:03 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,19 @@ int	set_elements(char **line, char ***split_line, t_cub *cub)
 	return (0);
 }
 
-int	is_nswe(char *first_element)
+void	check_set_elements(char **line, char ***split_line, t_cub *cub)
 {
-	if (!ft_strncmp(first_element, "NO", 2) \
-		|| !ft_strncmp(first_element, "SO", 2) \
-		|| !ft_strncmp(first_element, "WE", 2) \
-		|| !ft_strncmp(first_element, "EA", 2))
-		return (0);
+	if (set_elements(line, split_line, cub) == 0)
+	{
+		free(*line);
+		free_split(*split_line);
+	}
 	else
-		return (1);
+	{
+		free(*line);
+		free_split(*split_line);
+		print_error("INVALID ARGUMENT", cub);
+	}
 }
 
 void	check_elements(int fd, t_cub *cub)
@@ -61,6 +65,8 @@ void	check_elements(int fd, t_cub *cub)
 	char	*line;
 
 	line = get_next_line(fd);
+	if (line == NULL)
+		print_error("NOT ENOUGH INFOMRATION", cub);
 	if (ft_strncmp(line, "\n", ft_strlen("\n")) == 0 || is_space_line(&line) == 0)
 		return (free(line));
 	split_line = ft_split(line, ' ');
@@ -70,17 +76,7 @@ void	check_elements(int fd, t_cub *cub)
 		free_split(split_line);
 		print_error("INVALID TEXTURE", cub);
 	}
-	if (set_elements(&line, &split_line, cub) == 0)
-	{
-		free(line);
-		free_split(split_line);
-	}
-	else
-	{
-		free(line);
-		free_split(split_line);
-		print_error("INVALID ARGUMENT", cub);
-	}
+	check_set_elements(&line, &split_line, cub);
 }
 
 void	parse_map_info(int fd, unsigned int *map_loc, t_cub *cub)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main_util_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:45:11 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/28 17:35:49 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 16:13:03 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,15 @@ void	remove_new_line(char **line)
 		free(tmp);
 	}
 	return ;
+}
+
+int	is_nswe(char *first_element)
+{
+	if (!ft_strncmp(first_element, "NO", 2) \
+		|| !ft_strncmp(first_element, "SO", 2) \
+		|| !ft_strncmp(first_element, "WE", 2) \
+		|| !ft_strncmp(first_element, "EA", 2))
+		return (0);
+	else
+		return (1);
 }

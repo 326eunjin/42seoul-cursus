@@ -6,7 +6,7 @@
 /*   By: ejang <ejang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:17:23 by jeyoon            #+#    #+#             */
-/*   Updated: 2022/08/27 22:04:36 by ejang            ###   ########.fr       */
+/*   Updated: 2022/08/31 16:14:31 by ejang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void			map_content(char *file_name, \
 unsigned int	cal_color(char *str, t_cub *cub);
 char			*chop_space(char *str);
 int				is_space_in_str(char *str);
+int				is_nswe(char *first_element);
 /*
 	ANCHOR raycasting_*.c
 */
