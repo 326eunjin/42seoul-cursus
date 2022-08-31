@@ -6,7 +6,7 @@
 /*   By: jeyoon <jeyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:49:33 by ejang             #+#    #+#             */
-/*   Updated: 2022/08/28 16:19:28 by jeyoon           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 16:49:45 by jeyoon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	mlx_struct_init(&cub);
 	mlx_loop_hook(cub.mlx->mlx_ptr, &main_loop, &cub);
 	mlx_hook(cub.mlx->win_ptr, KEYPRESS, 0, &key_press, &cub);
-	mlx_hook(cub.mlx->win_ptr, 17, 0, press_x_button, &cub);
+	mlx_hook(cub.mlx->win_ptr, 17, 0, &press_x_button, &cub);
 	mlx_loop(cub.mlx->mlx_ptr);
 	free_map(&cub);
 	free_mlx(&cub);
